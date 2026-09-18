@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio de Dhiaa Mezni — Développeur Full Stack & Formateur IT. Laravel, PHP, ReactJS." />
+  <title>Dhiaa Mezni — Développeur Full Stack & Formateur IT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="logo">Dhiaa<span>.</span></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#skills">Compétences</a></li>
+          <li><a href="#experience">Parcours</a></li>
+          <li><a href="#projects">Projets</a></li>
+          <li><a href="#contact" class="btn-nav">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero" class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="hero-greeting">👋 Salut, je suis</p>
+        <h1>Dhiaa Mezni</h1>
+        <h2>Développeur Full Stack <span class="accent">&</span> Formateur IT</h2>
+        <p class="hero-desc">
+          Je conçois des applications web scalables avec <strong>Laravel</strong>, <strong>PHP</strong> et
+          <strong>ReactJS</strong>, et je transmets ces compétences à la nouvelle génération de développeurs.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+          <a href="#contact" class="btn btn-outline">Me contacter</a>
+        </div>
+        <ul class="hero-meta">
+          <li>📍 Jendouba, Tunisie</li>
+          <li>🌐 FR · EN · AR</li>
+        </ul>
+      </div>
+      <div class="hero-card">
+        <div class="card-glow"></div>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="code-title">dhiaa.php</span>
+          </div>
+          <pre><code><span class="k">class</span> <span class="c">Developer</span> {
+  <span class="k">public</span> <span class="v">$name</span> = <span class="s">"Dhiaa Mezni"</span>;
+  <span class="k">public</span> <span class="v">$role</span> = <span class="s">"Full Stack & Teacher"</span>;
+  <span class="k">public</span> <span class="v">$stack</span> = [
+    <span class="s">"Laravel"</span>, <span class="s">"React"</span>, <span class="s">"Node.js"</span>
+  ];
+  <span class="k">public function</span> <span class="f">build</span>() {
+    <span class="k">return</span> <span class="s">"clean & scalable apps"</span>;
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== À PROPOS ===== -->
+  <section id="about" class="section">
+    <div class="container">
+      <p class="section-tag">01 — À propos</p>
+      <h2 class="section-title">Un développeur qui aime transmettre</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Développeur Full Stack et enseignant en informatique, je cumule plus de
+            <strong>15 ans d'expérience</strong> entre développement web, formation et
+            direction d'équipes techniques.
+          </p>
+          <p>
+            J'ai conçu des plateformes e-learning, des marketplaces, des portails de
+            réservation et des applications métiers — toujours avec la même exigence :
+            du code clair, performant et maintenable.
+          </p>
+          <p>
+            Côté pédagogie, j'ai formé des dizaines d'étudiants aux fondamentaux de la
+            programmation et accompagné leurs premiers projets réels.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-num">15+</span>
+            <span class="stat-label">Années d'expérience</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">5+</span>
+            <span class="stat-label">Projets livrés</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">4</span>
+            <span class="stat-label">Ans d'enseignement</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">3</span>
+            <span class="stat-label">Langues parlées</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPÉTENCES ===== -->
+  <section id="skills" class="section section-alt">
+    <div class="container">
+      <p class="section-tag">02 — Compétences</p>
+      <h2 class="section-title">Stack technique</h2>
+      <div class="skills-grid">
+
+        <div class="skill-card">
+          <div class="skill-icon">⚙️</div>
+          <h3>Backend</h3>
+          <ul class="tag-list">
+            <li>PHP</li><li>Laravel</li><li>Symfony</li>
+            <li>Node.js</li><li>Django</li><li>REST API</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🎨</div>
+          <h3>Frontend</h3>
+          <ul class="tag-list">
+            <li>React.js</li><li>JavaScript</li><li>HTML5</li>
+            <li>CSS3</li><li>Bootstrap</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🗄️</div>
+          <h3>Bases de données</h3>
+          <ul class="tag-list">
+            <li>MySQL</li><li>PostgreSQL</li><li>SQL</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🛠️</div>
+          <h3>Outils & Méthodes</h3>
+          <ul class="tag-list">
+            <li>Git</li><li>Power BI</li><li>SAP</li>
+            <li>Agile</li><li>MVC</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXPÉRIENCE ===== -->
+  <section id="experience" class="section">
+    <div class="container">
+      <p class="section-tag">03 — Parcours</p>
+      <h2 class="section-title">Expérience professionnelle</h2>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">Juin 2023 — Jan 2024</span>
+            <h3>Coordinateur Logistique</h3>
+            <p class="timeline-company">SEBN-TN · Bullaregia, Tunisie</p>
+            <ul>
+              <li>Mise en place de procédures logistiques et de KPI pour améliorer les livraisons.</li>
+              <li>Gestion des flux opérationnels et collaboration cross-fonctionnelle.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">Jan 2023 — Juin 2023</span>
+            <h3>Développeur Web Senior</h3>
+            <p class="timeline-company">TF-Teleconnection · Jendouba, Tunisie</p>
+            <ul>
+              <li>Définition des besoins système et utilisateurs pour de nouvelles applications.</li>
+              <li>Encadrement d'équipes Agile et développement de plateformes Laravel + ReactJS.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">Juil 2021 — Déc 2022</span>
+            <h3>Développeur Full Stack Freelance</h3>
+            <p class="timeline-company">Indépendant · Jendouba, Tunisie</p>
+            <ul>
+              <li>Développement de sites et applications sur mesure (Laravel, ReactJS).</li>
+              <li>Gestion complète des projets clients, du cahier des charges à la livraison.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">Jan 2017 — Juil 2021</span>
+            <h3>Enseignant en Informatique</h3>
+            <p class="timeline-company">Smart Formation School · Jendouba, Tunisie</p>
+            <ul>
+              <li>Enseignement de la programmation, des bases de données et des fondamentaux de l'informatique.</li>
+              <li>Accompagnement des étudiants en pédagogie par projets.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">Fév 2010 — Juin 2012</span>
+            <h3>Directeur Développement Web</h3>
+            <p class="timeline-company">Prima Call Center · Jendouba, Tunisie</p>
+            <ul>
+              <li>Analyse des besoins clients et conception de solutions web sur mesure.</li>
+              <li>Direction d'une équipe de développeurs.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJETS ===== -->
+  <section id="projects" class="section section-alt">
+    <div class="container">
+      <p class="section-tag">04 — Projets</p>
+      <h2 class="section-title">Réalisations sélectionnées</h2>
+
+      <div class="projects-grid">
+
+        <article class="project-card">
+          <div class="project-header gradient-1">
+            <span class="project-badge">Marketplace</span>
+          </div>
+          <div class="project-body">
+            <h3>Wafed Proxi</h3>
+            <p>Plateforme marketplace dynamique avec suivi des commandes en temps réel.</p>
+            <ul class="project-stack">
+              <li>Laravel</li><li>API REST</li><li>MySQL</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header gradient-2">
+            <span class="project-badge">Travel</span>
+          </div>
+          <div class="project-body">
+            <h3>Almaine Travel</h3>
+            <p>Plateforme de voyage et de réservation responsive intégrant services API.</p>
+            <ul class="project-stack">
+              <li>Laravel</li><li>JavaScript</li><li>API</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header gradient-3">
+            <span class="project-badge">E-Learning</span>
+          </div>
+          <div class="project-body">
+            <h3>SmartFormation</h3>
+            <p>Portail éducatif moderne pour l'apprentissage en ligne et le suivi étudiant.</p>
+            <ul class="project-stack">
+              <li>Laravel</li><li>ReactJS</li><li>MySQL</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header gradient-4">
+            <span class="project-badge">Services</span>
+          </div>
+          <div class="project-body">
+            <h3>ENjazClick</h3>
+            <p>Plateforme interactive de gestion de services en ligne.</p>
+            <ul class="project-stack">
+              <li>Laravel</li><li>ReactJS</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header gradient-5">
+            <span class="project-badge">Interne</span>
+          </div>
+          <div class="project-body">
+            <h3>SEBN-TN Onboarding</h3>
+            <p>Application web interne pour automatiser les workflows d'intégration.</p>
+            <ul class="project-stack">
+              <li>Laravel</li><li>MySQL</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="section">
+    <div class="container">
+      <p class="section-tag">05 — Contact</p>
+      <h2 class="section-title">Travaillons ensemble</h2>
+      <p class="contact-lead">
+        Un projet en tête, une mission freelance, ou une opportunité d'enseignement ?
+        Écrivez-moi, je réponds rapidement.
+      </p>
+
+      <div class="contact-grid">
+        <a href="mailto:mezni.dhiao@gmail.com" class="contact-card">
+          <span class="contact-icon">✉️</span>
+          <h4>Email</h4>
+          <p>mezni.dhiao@gmail.com</p>
+        </a>
+        <a href="tel:+21652829452" class="contact-card">
+          <span class="contact-icon">📞</span>
+          <h4>Téléphone</h4>
+          <p>+216 52 829 452</p>
+        </a>
+        <a href="https://linkedin.com/in/dhiao-mezni-2ab82554" target="_blank" rel="noopener" class="contact-card">
+          <span class="contact-icon">💼</span>
+          <h4>LinkedIn</h4>
+          <p>dhiao-mezni</p>
+        </a>
+        <a href="https://dhiaamezni.onrender.com/" target="_blank" rel="noopener" class="contact-card">
+          <span class="contact-icon">🌐</span>
+          <h4>Site actuel</h4>
+          <p>dhiaamezni.onrender.com</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© 2026 Dhiaa Mezni — Développeur Full Stack & Formateur IT</p>
+      <p class="footer-loc">Jendouba, Tunisie 🇹🇳</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
