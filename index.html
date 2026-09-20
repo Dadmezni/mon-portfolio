@@ -433,7 +433,9 @@
       <div class="projects-grid">
 
         <article class="project-card">
-          <div class="project-image">
+          <div class="project-image lightbox-trigger"
+               data-full="assets/images/project-wafed.jpg"
+               data-caption="Wafed Proxi">
             <img src="assets/images/project-wafed.jpg" alt="Wafed Proxi" loading="lazy" />
             <span class="project-badge" data-i18n="proj.p1.badge">Marketplace</span>
           </div>
@@ -447,7 +449,9 @@
         </article>
 
         <article class="project-card">
-          <div class="project-image">
+          <div class="project-image lightbox-trigger"
+               data-full="assets/images/project-almaine.png"
+               data-caption="Almaine Travel">
             <img src="assets/images/project-almaine.png" alt="Almaine Travel" loading="lazy" />
             <span class="project-badge" data-i18n="proj.p2.badge">Travel</span>
           </div>
@@ -461,7 +465,9 @@
         </article>
 
         <article class="project-card">
-          <div class="project-image">
+          <div class="project-image lightbox-trigger"
+               data-full="assets/images/project-smart.jpg"
+               data-caption="SmartFormation">
             <img src="assets/images/project-smart.jpg" alt="SmartFormation" loading="lazy" />
             <span class="project-badge" data-i18n="proj.p3.badge">E-Learning</span>
           </div>
@@ -475,7 +481,9 @@
         </article>
 
         <article class="project-card">
-          <div class="project-image">
+          <div class="project-image lightbox-trigger"
+               data-full="assets/images/project-enjaz.png"
+               data-caption="ENjazClick">
             <img src="assets/images/project-enjaz.png" alt="ENjazClick" loading="lazy" />
             <span class="project-badge" data-i18n="proj.p4.badge">Services</span>
           </div>
@@ -489,7 +497,9 @@
         </article>
 
         <article class="project-card">
-          <div class="project-image">
+          <div class="project-image lightbox-trigger"
+               data-full="assets/images/project-sebn.jpg"
+               data-caption="SEBN-TN Onboarding">
             <img src="assets/images/project-sebn.jpg" alt="SEBN-TN Onboarding" loading="lazy" />
             <span class="project-badge" data-i18n="proj.p5.badge">Internal</span>
           </div>
@@ -605,7 +615,17 @@
       <p class="footer-loc" data-i18n="footer.loc">Jendouba, Tunisia 🇹🇳</p>
     </div>
   </footer>
+  <!-- ===== LIGHTBOX ===== -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous image">&#10094;</button>
+    <button class="lightbox-next" aria-label="Next image">&#10095;</button>
 
+    <figure class="lightbox-content">
+      <img src="" alt="" id="lightbox-img" />
+      <figcaption class="lightbox-caption" id="lightbox-caption"></figcaption>
+    </figure>
+  </div>
   <script src="js/i18n.js"></script>
   <script src="js/script.js"></script>
 </body>
