@@ -16,15 +16,23 @@
   <header class="navbar">
     <div class="container nav-inner">
       <a href="#hero" class="logo">Dhiaa<span>.</span></a>
+
       <nav>
         <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact" class="btn-nav">Contact</a></li>
+          <li><a href="#about" data-i18n="nav.about">About</a></li>
+          <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+          <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+          <li><a href="#services" data-i18n="nav.services">Services</a></li>
+          <li><a href="#certifications" data-i18n="nav.certifications">Certifications</a></li>
+          <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#contact" class="btn-nav" data-i18n="nav.contact">Contact</a></li>
         </ul>
       </nav>
+
+      <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+        <span class="lang-current">FR</span>
+      </button>
+
       <button class="burger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -36,25 +44,27 @@
     <div class="container hero-inner">
       <div class="hero-text">
 
-        <!-- ✅ Photo de profil AVANT le nom -->
+        <!-- Profile photo -->
         <div class="hero-avatar">
-          <img src="assets/images/profile.png" alt="Dhiaa Mezni" />
+          <img src="assets/images/profile.jpg" alt="Dhiaa Mezni" />
         </div>
 
-        <p class="hero-greeting">👋 Hi, I'm</p>
+        <p class="hero-greeting" data-i18n="hero.greeting">👋 Hi, I'm</p>
         <h1>Dhiaa Mezni</h1>
-        <h2>Full Stack Developer <span class="accent">&</span> IT Teacher</h2>
-        <p class="hero-desc">
+        <h2 data-i18n-html="hero.role">Full Stack Developer <span class="accent">&</span> IT Teacher</h2>
+        <p class="hero-desc" data-i18n-html="hero.desc">
           I build scalable web applications with <strong>Laravel</strong>, <strong>PHP</strong>
           and <strong>ReactJS</strong>, and I teach these skills to the next generation of developers.
         </p>
+
         <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">View my projects</a>
-          <a href="#contact" class="btn btn-outline">Get in touch</a>
+          <a href="#projects" class="btn btn-primary" data-i18n="hero.ctaProjects">View my projects</a>
+          <a href="#contact" class="btn btn-outline" data-i18n="hero.ctaContact">Get in touch</a>
         </div>
+
         <ul class="hero-meta">
-          <li>📍 Jendouba, Tunisia</li>
-          <li>🌐 EN · FR · AR</li>
+          <li data-i18n="hero.location">📍 Jendouba, Tunisia</li>
+          <li data-i18n="hero.languages">🌐 EN · FR · AR</li>
         </ul>
       </div>
 
@@ -85,41 +95,43 @@
   <!-- ===== ABOUT ===== -->
   <section id="about" class="section">
     <div class="container">
-      <p class="section-tag">01 — About</p>
-      <h2 class="section-title">A developer who loves to teach</h2>
+      <p class="section-tag" data-i18n="about.tag">01 — About</p>
+      <h2 class="section-title" data-i18n="about.title">A developer who loves to teach</h2>
+
       <div class="about-grid">
         <div class="about-text">
-          <p>
+          <p data-i18n-html="about.p1">
             Full Stack Developer and Computer Science Teacher with over
             <strong>15 years of experience</strong> across web development, teaching,
             and technical team leadership.
           </p>
-          <p>
+          <p data-i18n-html="about.p2">
             I've designed e-learning platforms, marketplaces, booking portals and
             internal business apps — always with the same standard: clean, performant,
             maintainable code.
           </p>
-          <p>
+          <p data-i18n-html="about.p3">
             On the teaching side, I've trained dozens of students in programming
             fundamentals and guided their first real-world projects.
           </p>
         </div>
+
         <div class="about-stats">
           <div class="stat">
             <span class="stat-num">15+</span>
-            <span class="stat-label">Years of experience</span>
+            <span class="stat-label" data-i18n="about.stat1">Years of experience</span>
           </div>
           <div class="stat">
             <span class="stat-num">5+</span>
-            <span class="stat-label">Projects delivered</span>
+            <span class="stat-label" data-i18n="about.stat2">Projects delivered</span>
           </div>
           <div class="stat">
             <span class="stat-num">4</span>
-            <span class="stat-label">Years teaching</span>
+            <span class="stat-label" data-i18n="about.stat3">Years teaching</span>
           </div>
           <div class="stat">
             <span class="stat-num">3</span>
-            <span class="stat-label">Languages spoken</span>
+            <span class="stat-label" data-i18n="about.stat4">Languages spoken</span>
           </div>
         </div>
       </div>
@@ -129,13 +141,14 @@
   <!-- ===== SKILLS ===== -->
   <section id="skills" class="section section-alt">
     <div class="container">
-      <p class="section-tag">02 — Skills</p>
-      <h2 class="section-title">Technical stack</h2>
+      <p class="section-tag" data-i18n="skills.tag">02 — Skills</p>
+      <h2 class="section-title" data-i18n="skills.title">Technical stack</h2>
+
       <div class="skills-grid">
 
         <div class="skill-card">
           <div class="skill-icon">⚙️</div>
-          <h3>Backend</h3>
+          <h3 data-i18n="skills.backend">Backend</h3>
           <ul class="tag-list">
             <li>PHP</li><li>Laravel</li><li>Symfony</li>
             <li>Node.js</li><li>Django</li><li>REST API</li>
@@ -144,7 +157,7 @@
 
         <div class="skill-card">
           <div class="skill-icon">🎨</div>
-          <h3>Frontend</h3>
+          <h3 data-i18n="skills.frontend">Frontend</h3>
           <ul class="tag-list">
             <li>React.js</li><li>JavaScript</li><li>HTML5</li>
             <li>CSS3</li><li>Bootstrap</li>
@@ -153,7 +166,7 @@
 
         <div class="skill-card">
           <div class="skill-icon">🗄️</div>
-          <h3>Databases</h3>
+          <h3 data-i18n="skills.databases">Databases</h3>
           <ul class="tag-list">
             <li>MySQL</li><li>PostgreSQL</li><li>SQL</li>
           </ul>
@@ -161,7 +174,7 @@
 
         <div class="skill-card">
           <div class="skill-icon">🛠️</div>
-          <h3>Tools & Methods</h3>
+          <h3 data-i18n="skills.tools">Tools & Methods</h3>
           <ul class="tag-list">
             <li>Git</li><li>Power BI</li><li>SAP</li>
             <li>Agile</li><li>MVC</li>
@@ -175,20 +188,20 @@
   <!-- ===== EXPERIENCE ===== -->
   <section id="experience" class="section">
     <div class="container">
-      <p class="section-tag">03 — Experience</p>
-      <h2 class="section-title">Professional experience</h2>
+      <p class="section-tag" data-i18n="exp.tag">03 — Experience</p>
+      <h2 class="section-title" data-i18n="exp.title">Professional experience</h2>
 
       <div class="timeline">
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <span class="timeline-date">Jun 2023 — Jan 2024</span>
-            <h3>Logistics Coordinator</h3>
-            <p class="timeline-company">SEBN-TN · Bullaregia, Tunisia</p>
+            <span class="timeline-date" data-i18n="exp.j1.date">Jun 2023 — Jan 2024</span>
+            <h3 data-i18n="exp.j1.title">Logistics Coordinator</h3>
+            <p class="timeline-company" data-i18n="exp.j1.company">SEBN-TN · Bullaregia, Tunisia</p>
             <ul>
-              <li>Implemented logistics procedures and KPIs to improve delivery performance.</li>
-              <li>Managed operational workflows and cross-functional collaboration.</li>
+              <li data-i18n="exp.j1.li1">Implemented logistics procedures and KPIs to improve delivery performance.</li>
+              <li data-i18n="exp.j1.li2">Managed operational workflows and cross-functional collaboration.</li>
             </ul>
           </div>
         </div>
@@ -196,12 +209,12 @@
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <span class="timeline-date">Jan 2023 — Jun 2023</span>
-            <h3>Senior Web Developer</h3>
-            <p class="timeline-company">TF-Teleconnection · Jendouba, Tunisia</p>
+            <span class="timeline-date" data-i18n="exp.j2.date">Jan 2023 — Jun 2023</span>
+            <h3 data-i18n="exp.j2.title">Senior Web Developer</h3>
+            <p class="timeline-company" data-i18n="exp.j2.company">TF-Teleconnection · Jendouba, Tunisia</p>
             <ul>
-              <li>Defined system and user requirements for new web applications.</li>
-              <li>Led Agile teams and built high-performance Laravel + ReactJS platforms.</li>
+              <li data-i18n="exp.j2.li1">Defined system and user requirements for new web applications.</li>
+              <li data-i18n="exp.j2.li2">Led Agile teams and built high-performance Laravel + ReactJS platforms.</li>
             </ul>
           </div>
         </div>
@@ -209,12 +222,12 @@
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <span class="timeline-date">Jul 2021 — Dec 2022</span>
-            <h3>Full Stack Developer (Freelance)</h3>
-            <p class="timeline-company">Self-employed · Jendouba, Tunisia</p>
+            <span class="timeline-date" data-i18n="exp.j3.date">Jul 2021 — Dec 2022</span>
+            <h3 data-i18n="exp.j3.title">Full Stack Developer (Freelance)</h3>
+            <p class="timeline-company" data-i18n="exp.j3.company">Self-employed · Jendouba, Tunisia</p>
             <ul>
-              <li>Built custom websites and apps for various clients (Laravel, ReactJS).</li>
-              <li>Handled full project lifecycle, from requirements to delivery.</li>
+              <li data-i18n="exp.j3.li1">Built custom websites and apps for various clients (Laravel, ReactJS).</li>
+              <li data-i18n="exp.j3.li2">Handled full project lifecycle, from requirements to delivery.</li>
             </ul>
           </div>
         </div>
@@ -222,12 +235,12 @@
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <span class="timeline-date">Jan 2017 — Jul 2021</span>
-            <h3>Computer Science Teacher</h3>
-            <p class="timeline-company">Smart Formation School · Jendouba, Tunisia</p>
+            <span class="timeline-date" data-i18n="exp.j4.date">Jan 2017 — Jul 2021</span>
+            <h3 data-i18n="exp.j4.title">Computer Science Teacher</h3>
+            <p class="timeline-company" data-i18n="exp.j4.company">Smart Formation School · Jendouba, Tunisia</p>
             <ul>
-              <li>Taught programming, databases and computer science fundamentals.</li>
-              <li>Mentored students through project-based learning.</li>
+              <li data-i18n="exp.j4.li1">Taught programming, databases and computer science fundamentals.</li>
+              <li data-i18n="exp.j4.li2">Mentored students through project-based learning.</li>
             </ul>
           </div>
         </div>
@@ -235,12 +248,12 @@
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <span class="timeline-date">Feb 2010 — Jun 2012</span>
-            <h3>Director of Web Development</h3>
-            <p class="timeline-company">Prima Call Center · Jendouba, Tunisia</p>
+            <span class="timeline-date" data-i18n="exp.j5.date">Feb 2010 — Jun 2012</span>
+            <h3 data-i18n="exp.j5.title">Director of Web Development</h3>
+            <p class="timeline-company" data-i18n="exp.j5.company">Prima Call Center · Jendouba, Tunisia</p>
             <ul>
-              <li>Analyzed client needs and designed custom web solutions.</li>
-              <li>Led a team of developers to deliver user-centric products.</li>
+              <li data-i18n="exp.j5.li1">Analyzed client needs and designed custom web solutions.</li>
+              <li data-i18n="exp.j5.li2">Led a team of developers to deliver user-centric products.</li>
             </ul>
           </div>
         </div>
@@ -249,22 +262,184 @@
     </div>
   </section>
 
+  <!-- ===== SERVICES ===== -->
+  <section id="services" class="section section-alt">
+    <div class="container">
+      <p class="section-tag" data-i18n="services.tag">04 — Services</p>
+      <h2 class="section-title" data-i18n="services.title">What I can do for you</h2>
+      <p class="section-lead" data-i18n="services.lead">
+        Whether you need a full web application, a custom platform, or training for your team —
+        I bring 15+ years of experience to every project.
+      </p>
+
+      <div class="services-grid">
+
+        <article class="service-card">
+          <div class="service-icon">🚀</div>
+          <h3 data-i18n="services.s1.title">Web Application Development</h3>
+          <p data-i18n="services.s1.desc">
+            Custom full-stack applications built with Laravel, ReactJS and MySQL.
+            From MVP to production-ready platforms.
+          </p>
+          <ul class="service-list">
+            <li data-i18n="services.s1.li1">SaaS platforms</li>
+            <li data-i18n="services.s1.li2">Internal business tools</li>
+            <li data-i18n="services.s1.li3">Marketplaces</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🌐</div>
+          <h3 data-i18n="services.s2.title">Website Design & Development</h3>
+          <p data-i18n="services.s2.desc">
+            Modern, responsive websites — from landing pages to complex corporate sites.
+            Fast, SEO-friendly and built to last.
+          </p>
+          <ul class="service-list">
+            <li data-i18n="services.s2.li1">Corporate websites</li>
+            <li data-i18n="services.s2.li2">Portfolios & landing pages</li>
+            <li data-i18n="services.s2.li3">E-commerce</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🔌</div>
+          <h3 data-i18n="services.s3.title">API Development & Integration</h3>
+          <p data-i18n="services.s3.desc">
+            REST APIs, third-party integrations, payment gateways, and data sync
+            between your systems.
+          </p>
+          <ul class="service-list">
+            <li data-i18n="services.s3.li1">REST API design</li>
+            <li data-i18n="services.s3.li2">Third-party integrations</li>
+            <li data-i18n="services.s3.li3">Payment gateways</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🎓</div>
+          <h3 data-i18n="services.s4.title">IT Training & Teaching</h3>
+          <p data-i18n="services.s4.desc">
+            Custom training for students, teams or companies — from programming
+            fundamentals to advanced Laravel & React.
+          </p>
+          <ul class="service-list">
+            <li data-i18n="services.s4.li1">1-on-1 mentoring</li>
+            <li data-i18n="services.s4.li2">Team workshops</li>
+            <li data-i18n="services.s4.li3">Corporate training</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🧭</div>
+          <h3 data-i18n="services.s5.title">Technical Consulting</h3>
+          <p data-i18n="services.s5.desc">
+            Architecture reviews, tech stack choices, code audits and help
+            scaling your existing projects.
+          </p>
+          <ul class="service-list">
+            <li data-i18n="services.s5.li1">Code audits</li>
+            <li data-i18n="services.s5.li2">Architecture reviews</li>
+            <li data-i18n="services.s5.li3">Tech stack advice</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🛠️</div>
+          <h3 data-i18n="services.s6.title">Maintenance & Support</h3>
+          <p data-i18n="services.s6.desc">
+            Bug fixing, performance optimization, security updates and ongoing
+            maintenance for existing apps.
+          </p>
+          <ul class="service-list">
+            <li data-i18n="services.s6.li1">Bug fixing</li>
+            <li data-i18n="services.s6.li2">Performance tuning</li>
+            <li data-i18n="services.s6.li3">Security updates</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <div class="services-cta">
+        <p data-i18n="services.ctaText">Need something custom? Let's talk about your project.</p>
+        <a href="#contact" class="btn btn-primary" data-i18n="services.ctaBtn">Start a project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CERTIFICATIONS ===== -->
+  <section id="certifications" class="section">
+    <div class="container">
+      <p class="section-tag" data-i18n="cert.tag">05 — Certifications</p>
+      <h2 class="section-title" data-i18n="cert.title">Training & Certificates</h2>
+
+      <div class="certifications-grid">
+
+        <article class="cert-card">
+          <div class="cert-icon">🎓</div>
+          <div class="cert-body">
+            <h3 data-i18n="cert.c1.title">Soft Skills Training</h3>
+            <p class="cert-issuer" data-i18n="cert.c1.issuer">Jendouba Business Incubator</p>
+            <span class="cert-badge" data-i18n="cert.badge">Certificate of Completion</span>
+          </div>
+        </article>
+
+        <article class="cert-card">
+          <div class="cert-icon">💻</div>
+          <div class="cert-body">
+            <h3 data-i18n="cert.c2.title">Full Stack Web Development</h3>
+            <p class="cert-issuer" data-i18n="cert.c2.issuer">WeCode Land</p>
+            <span class="cert-badge" data-i18n="cert.badge">Certificate of Completion</span>
+          </div>
+        </article>
+
+        <article class="cert-card">
+          <div class="cert-icon">🎓</div>
+          <div class="cert-body">
+            <h3 data-i18n="cert.c3.title">Master's Degree — Applied Computer Science for Management</h3>
+            <p class="cert-issuer" data-i18n="cert.c3.issuer">Faculty of Legal, Economic and Management, Jendouba</p>
+            <span class="cert-badge" data-i18n="cert.badgeDiploma">Diploma</span>
+          </div>
+        </article>
+
+        <article class="cert-card">
+          <div class="cert-icon">📜</div>
+          <div class="cert-body">
+            <h3 data-i18n="cert.c4.title">National Diploma — E-Commerce Mastery</h3>
+            <p class="cert-issuer" data-i18n="cert.c4.issuer">Faculty of Legal, Economic and Management, Jendouba</p>
+            <span class="cert-badge" data-i18n="cert.badgeDiploma">Diploma</span>
+          </div>
+        </article>
+
+        <article class="cert-card">
+          <div class="cert-icon">🏫</div>
+          <div class="cert-body">
+            <h3 data-i18n="cert.c5.title">Baccalaureate Diploma — Technical Section</h3>
+            <p class="cert-issuer" data-i18n="cert.c5.issuer">9 Avril School, Jendouba</p>
+            <span class="cert-badge" data-i18n="cert.badgeDiploma">Diploma</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ===== PROJECTS ===== -->
   <section id="projects" class="section section-alt">
     <div class="container">
-      <p class="section-tag">04 — Projects</p>
-      <h2 class="section-title">Selected work</h2>
+      <p class="section-tag" data-i18n="proj.tag">06 — Projects</p>
+      <h2 class="section-title" data-i18n="proj.title">Selected work</h2>
 
       <div class="projects-grid">
 
         <article class="project-card">
           <div class="project-image">
             <img src="assets/images/project-wafed.jpg" alt="Wafed Proxi" loading="lazy" />
-            <span class="project-badge">Marketplace</span>
+            <span class="project-badge" data-i18n="proj.p1.badge">Marketplace</span>
           </div>
           <div class="project-body">
             <h3>Wafed Proxi</h3>
-            <p>Dynamic marketplace platform with real-time order tracking.</p>
+            <p data-i18n="proj.p1.desc">Dynamic marketplace platform with real-time order tracking.</p>
             <ul class="project-stack">
               <li>Laravel</li><li>REST API</li><li>MySQL</li>
             </ul>
@@ -273,12 +448,12 @@
 
         <article class="project-card">
           <div class="project-image">
-            <img src="assets/images/project-almaine.png" alt="Almaine Travel" loading="lazy" />
-            <span class="project-badge">Travel</span>
+            <img src="assets/images/project-almaine.jpg" alt="Almaine Travel" loading="lazy" />
+            <span class="project-badge" data-i18n="proj.p2.badge">Travel</span>
           </div>
           <div class="project-body">
             <h3>Almaine Travel</h3>
-            <p>Responsive travel and booking platform with integrated API services.</p>
+            <p data-i18n="proj.p2.desc">Responsive travel and booking platform with integrated API services.</p>
             <ul class="project-stack">
               <li>Laravel</li><li>JavaScript</li><li>API</li>
             </ul>
@@ -288,24 +463,25 @@
         <article class="project-card">
           <div class="project-image">
             <img src="assets/images/project-smart.jpg" alt="SmartFormation" loading="lazy" />
-            <span class="project-badge">E-Learning</span>
+            <span class="project-badge" data-i18n="proj.p3.badge">E-Learning</span>
           </div>
           <div class="project-body">
             <h3>SmartFormation</h3>
-            <p>Modern educational portal for online learning and student tracking.</p>
+            <p data-i18n="proj.p3.desc">Modern educational portal for online learning and student tracking.</p>
             <ul class="project-stack">
               <li>Laravel</li><li>ReactJS</li><li>MySQL</li>
             </ul>
           </div>
         </article>
+
         <article class="project-card">
           <div class="project-image">
-            <img src="assets/images/project-enjaz.png" alt="ENjazClick" loading="lazy" />
-            <span class="project-badge">Services</span>
+            <img src="assets/images/project-enjaz.jpg" alt="ENjazClick" loading="lazy" />
+            <span class="project-badge" data-i18n="proj.p4.badge">Services</span>
           </div>
           <div class="project-body">
             <h3>ENjazClick</h3>
-            <p>Interactive platform for online services management.</p>
+            <p data-i18n="proj.p4.desc">Interactive platform for online services management.</p>
             <ul class="project-stack">
               <li>Laravel</li><li>ReactJS</li>
             </ul>
@@ -315,11 +491,11 @@
         <article class="project-card">
           <div class="project-image">
             <img src="assets/images/project-sebn.jpg" alt="SEBN-TN Onboarding" loading="lazy" />
-            <span class="project-badge">Internal</span>
+            <span class="project-badge" data-i18n="proj.p5.badge">Internal</span>
           </div>
           <div class="project-body">
             <h3>SEBN-TN Onboarding</h3>
-            <p>Internal web app automating employee onboarding workflows.</p>
+            <p data-i18n="proj.p5.desc">Internal web app automating employee onboarding workflows.</p>
             <ul class="project-stack">
               <li>Laravel</li><li>MySQL</li>
             </ul>
@@ -333,34 +509,91 @@
   <!-- ===== CONTACT ===== -->
   <section id="contact" class="section">
     <div class="container">
-      <p class="section-tag">05 — Contact</p>
-      <h2 class="section-title">Let's work together</h2>
-      <p class="contact-lead">
+      <p class="section-tag" data-i18n="contact.tag">07 — Contact</p>
+      <h2 class="section-title" data-i18n="contact.title">Let's work together</h2>
+      <p class="contact-lead" data-i18n="contact.lead">
         Got a project in mind, a freelance mission, or a teaching opportunity?
         Drop me a line — I reply fast.
       </p>
 
-      <div class="contact-grid">
-        <a href="mailto:mezni.dhiao@gmail.com" class="contact-card">
-          <span class="contact-icon">✉️</span>
-          <h4>Email</h4>
-          <p>mezni.dhiao@gmail.com</p>
-        </a>
-        <a href="tel:+21652829452" class="contact-card">
-          <span class="contact-icon">📞</span>
-          <h4>Phone</h4>
-          <p>+216 52 829 452</p>
-        </a>
-        <a href="https://linkedin.com/in/dhiao-mezni-2ab82554" target="_blank" rel="noopener" class="contact-card">
-          <span class="contact-icon">💼</span>
-          <h4>LinkedIn</h4>
-          <p>dhiao-mezni</p>
-        </a>
-        <a href="https://dhiaa.smartformation.tn" target="_blank" rel="noopener" class="contact-card">
-          <span class="contact-icon">🌐</span>
-          <h4>Current site</h4>
-          <p>dhiaa.smartformation.tn</p>
-        </a>
+      <div class="contact-layout">
+
+        <!-- Contact info cards -->
+        <div class="contact-info">
+          <a href="mailto:mezni.dhiao@gmail.com" class="contact-card">
+            <span class="contact-icon">✉️</span>
+            <div>
+              <h4 data-i18n="contact.email">Email</h4>
+              <p>mezni.dhiao@gmail.com</p>
+            </div>
+          </a>
+          <a href="tel:+21652829452" class="contact-card">
+            <span class="contact-icon">📞</span>
+            <div>
+              <h4 data-i18n="contact.phone">Phone</h4>
+              <p>+216 52 829 452</p>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/dhiao-mezni-2ab82554" target="_blank" rel="noopener" class="contact-card">
+            <span class="contact-icon">💼</span>
+            <div>
+              <h4 data-i18n="contact.linkedin">LinkedIn</h4>
+              <p>dhiao-mezni</p>
+            </div>
+          </a>
+          <a href="https://dhiaamezni.onrender.com/" target="_blank" rel="noopener" class="contact-card">
+            <span class="contact-icon">🌐</span>
+            <div>
+              <h4 data-i18n="contact.site">Current site</h4>
+              <p>dhiaamezni.onrender.com</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Contact form -->
+        <form
+          id="contact-form"
+          class="contact-form"
+          action="https://formspree.io/f/VOTRE-ID-FORMSPREE"
+          method="POST"
+        >
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name" data-i18n="contact.formName">Name</label>
+              <input type="text" id="name" name="name" required
+                     data-i18n-placeholder="contact.formNamePh" placeholder="Your name" />
+            </div>
+            <div class="form-group">
+              <label for="email" data-i18n="contact.formEmail">Email</label>
+              <input type="email" id="email" name="email" required
+                     data-i18n-placeholder="contact.formEmailPh" placeholder="you@example.com" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject" data-i18n="contact.formSubject">Subject</label>
+            <input type="text" id="subject" name="subject" required
+                   data-i18n-placeholder="contact.formSubjectPh" placeholder="What is this about?" />
+          </div>
+
+          <div class="form-group">
+            <label for="message" data-i18n="contact.formMessage">Message</label>
+            <textarea id="message" name="message" rows="5" required
+                      data-i18n-placeholder="contact.formMessagePh"
+                      placeholder="Tell me about your project..."></textarea>
+          </div>
+
+          <!-- Anti-spam honeypot -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <button type="submit" class="btn btn-primary btn-submit">
+            <span class="btn-text" data-i18n="contact.formSubmit">Send message</span>
+            <span class="btn-loading" data-i18n="contact.formSending" hidden>Sending…</span>
+          </button>
+
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+
       </div>
     </div>
   </section>
@@ -368,11 +601,12 @@
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container footer-inner">
-      <p>© <span class="footer-year">2026</span> Dhiaa Mezni — Full Stack Developer & IT Teacher</p>
-      <p class="footer-loc">Jendouba, Tunisia 🇹🇳</p>
+      <p>© <span class="footer-year">2026</span> Dhiaa Mezni — <span data-i18n="footer.text">Full Stack Developer & IT Teacher</span></p>
+      <p class="footer-loc" data-i18n="footer.loc">Jendouba, Tunisia 🇹🇳</p>
     </div>
   </footer>
 
+  <script src="js/i18n.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

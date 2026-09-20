@@ -113,4 +113,55 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEls = document.querySelectorAll('.footer-year');
   const currentYear = new Date().getFullYear();
   yearEls.forEach(el => (el.textContent = currentYear));
+    /* --------------------------------------------
+     6. CONTACT FORM (Formspree AJAX submit)
+     -------------------------------------------- */
+  const contactForm = document.getElementById('contact-form');
+  const formStatus = document.querySelector('.form-status');
+
+  if (contactForm && formStatus) {
+    const submitBtn = contactForm.querySelector('.btn-submit');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Show loading state
+      submitBtn.disabled = true;
+      btnText.hidden = true;
+      btnLoading.hidden = false;
+      formStatus.textContent = '';
+      formStatus.className = 'form-status';
+
+      try {
+        const formData = new FormData(contactForm);
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' },
+        });
+
+        if (response.ok) {
+          contactForm.reset();
+          formStatus.textContent = '✅ Message sent! I will get back to you soon.';
+          formStatus.classList.add('success');
+        } else {
+          const data = await response.json().catch(() => ({}));
+          const errorMsg =
+            data.errors?.map(err => err.message).join(', ') ||
+            'Something went wrong. Please try again.';
+          formStatus.textContent = `❌ ${errorMsg}`;
+          formStatus.classList.add('error');
+        }
+      } catch (error) {
+        formStatus.textContent = '❌ Network error. Please check your connection.';
+        formStatus.classList.add('error');
+      } finally {
+        submitBtn.disabled = false;
+        btnText.hidden = false;
+        btnLoading.hidden = true;
+      }
+    });
+  }
 });
