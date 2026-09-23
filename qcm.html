@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="QCM PHP & Intelligence Artificielle avec affichage immédiat de la note." />
+  <title>QCM — PHP & Intelligence Artificielle | Dhiaa Mezni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/qcm.css" />
+  <script src="js/qcm.js" defer></script>
+</head>
+<body class="quiz-page">
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">Dhiaa<span>.</span></a>
+      <a href="index.html" class="quiz-back">← Retour au portfolio</a>
+    </div>
+  </header>
+
+  <main class="container quiz-main">
+    <section class="quiz-heading" aria-labelledby="quiz-title">
+      <p class="section-tag">ÉVALUATION · PHP & INTELLIGENCE ARTIFICIELLE</p>
+      <h1 id="quiz-title">QCM <span class="accent">PHP & IA</span></h1>
+      <p>Répondez aux 15 questions, puis validez pour découvrir votre note et les corrections.</p>
+      <div class="quiz-meta"><span>15 questions</span><span>·</span><span>Note sur 20</span><span>·</span><span>Une seule réponse par question</span></div>
+    </section>
+
+    <form id="quiz-form">
+      <div class="student-field">
+        <label for="student-name">Nom et prénom</label>
+        <input id="student-name" name="student-name" type="text" autocomplete="name" placeholder="Votre nom" required />
+      </div>
+
+      <!-- Q1 — PHP -->
+        <fieldset class="question-card" data-answer="b">
+          <legend><span class="question-number">01</span> Quelle balise ouvre un bloc de code PHP ?</legend>
+          <label class="answer"><input type="radio" name="q1" value="a" /><span>&lt;php&gt;</span></label>
+          <label class="answer"><input type="radio" name="q1" value="b" /><span>&lt;?php</span></label>
+          <label class="answer"><input type="radio" name="q1" value="c" /><span>&lt;%php&gt;</span></label>
+          <p class="answer-feedback" aria-live="polite"></p>
+        </fieldset>
+
+      <!-- Q2 — IA -->
+      <fieldset class="question-card" data-answer="c">
+        <legend><span class="question-number">02</span> Que signifie l'acronyme « IA » ?</legend>
+        <label class="answer"><input type="radio" name="q2" value="a" /><span>Internet Automatique</span></label>
+        <label class="answer"><input type="radio" name="q2" value="b" /><span>Interface Avancée</span></label>
+        <label class="answer"><input type="radio" name="q2" value="c" /><span>Intelligence Artificielle</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q3 — PHP -->
+      <fieldset class="question-card" data-answer="b">
+        <legend><span class="question-number">03</span> Quelle fonction PHP permet de se connecter à une base MySQL ?</legend>
+        <label class="answer"><input type="radio" name="q3" value="a" /><span>mysql_connect()</span></label>
+        <label class="answer"><input type="radio" name="q3" value="b" /><span>mysqli_connect()</span></label>
+        <label class="answer"><input type="radio" name="q3" value="c" /><span>db_connect()</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q4 — IA -->
+      <fieldset class="question-card" data-answer="a">
+        <legend><span class="question-number">04</span> Les types d'intelligence artificielle</legend>
+        <label class="answer"><input type="radio" name="q4" value="a" /><span>IA étroite (ou faible), IA générale et superintelligence artificielle</span></label>
+        <label class="answer"><input type="radio" name="q4" value="b" /><span>IA rapide, IA lente et IA automatique</span></label>
+        <label class="answer"><input type="radio" name="q4" value="c" /><span>IA locale, IA distante et IA virtuelle</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q5 — PHP -->
+      <fieldset class="question-card" data-answer="a">
+        <legend><span class="question-number">05</span> Que fait l'opérateur <code>===</code> en PHP ?</legend>
+        <label class="answer"><input type="radio" name="q5" value="a" /><span>Il compare la valeur ET le type</span></label>
+        <label class="answer"><input type="radio" name="q5" value="b" /><span>Il compare uniquement la valeur</span></label>
+        <label class="answer"><input type="radio" name="q5" value="c" /><span>Il assigne une valeur à une variable</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q6 — IA -->
+      <fieldset class="question-card" data-answer="a">
+        <legend><span class="question-number">06</span> Sur quoi s'inspirent les réseaux de neurones artificiels ?</legend>
+        <label class="answer"><input type="radio" name="q6" value="a" /><span>Le cerveau humain</span></label>
+        <label class="answer"><input type="radio" name="q6" value="b" /><span>Les bases de données</span></label>
+        <label class="answer"><input type="radio" name="q6" value="c" /><span>Les algorithmes de tri</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q7 — PHP -->
+      <fieldset class="question-card" data-answer="b">
+        <legend><span class="question-number">07</span> Quelle superglobale contient les données d'un formulaire envoyé en POST ?</legend>
+        <label class="answer"><input type="radio" name="q7" value="a" /><span>$_GET</span></label>
+        <label class="answer"><input type="radio" name="q7" value="b" /><span>$_POST</span></label>
+        <label class="answer"><input type="radio" name="q7" value="c" /><span>$_FORM</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q8 — IA -->
+      <fieldset class="question-card" data-answer="a">
+        <legend><span class="question-number">08</span> Quelle bibliothèque Python est très utilisée pour l'IA ?</legend>
+        <label class="answer"><input type="radio" name="q8" value="a" /><span>TensorFlow</span></label>
+        <label class="answer"><input type="radio" name="q8" value="b" /><span>Bootstrap</span></label>
+        <label class="answer"><input type="radio" name="q8" value="c" /><span>Laravel</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q9 — PHP -->
+      <fieldset class="question-card" data-answer="c">
+        <legend><span class="question-number">09</span> Quel framework PHP suit le modèle MVC ?</legend>
+        <label class="answer"><input type="radio" name="q9" value="a" /><span>Bootstrap</span></label>
+        <label class="answer"><input type="radio" name="q9" value="b" /><span>jQuery</span></label>
+        <label class="answer"><input type="radio" name="q9" value="c" /><span>Laravel</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q10 — IA -->
+      <fieldset class="question-card" data-answer="c">
+        <legend><span class="question-number">10</span> Qu'est-ce que le « Deep Learning » en intelligence artificielle ?</legend>
+        <label class="answer"><input type="radio" name="q10" value="a" /><span>Une technique de compression d'images</span></label>
+        <label class="answer"><input type="radio" name="q10" value="b" /><span>Un langage de programmation pour l'IA</span></label>
+        <label class="answer"><input type="radio" name="q10" value="c" /><span>Un apprentissage automatique basé sur des réseaux de neurones profonds</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q11 — PHP -->
+      <fieldset class="question-card" data-answer="b">
+        <legend><span class="question-number">11</span> Quelle fonction PHP compte les éléments d'un tableau ?</legend>
+        <label class="answer"><input type="radio" name="q11" value="a" /><span>length()</span></label>
+        <label class="answer"><input type="radio" name="q11" value="b" /><span>count()</span></label>
+        <label class="answer"><input type="radio" name="q11" value="c" /><span>sizeof_only()</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q12 — IA -->
+      <fieldset class="question-card" data-answer="a">
+        <legend><span class="question-number">12</span> Que signifie « NLP » en intelligence artificielle ?</legend>
+        <label class="answer"><input type="radio" name="q12" value="a" /><span>Natural Language Processing</span></label>
+        <label class="answer"><input type="radio" name="q12" value="b" /><span>New Logic Program</span></label>
+        <label class="answer"><input type="radio" name="q12" value="c" /><span>Network Layer Protocol</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q13 — PHP -->
+      <fieldset class="question-card" data-answer="b">
+        <legend><span class="question-number">13</span> Quel mot-clé définit une classe en PHP ?</legend>
+        <label class="answer"><input type="radio" name="q13" value="a" /><span>function</span></label>
+        <label class="answer"><input type="radio" name="q13" value="b" /><span>class</span></label>
+        <label class="answer"><input type="radio" name="q13" value="c" /><span>object</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q14 — IA -->
+      <fieldset class="question-card" data-answer="a">
+        <legend><span class="question-number">14</span> Quel chatbot développé par OpenAI est célèbre ?</legend>
+        <label class="answer"><input type="radio" name="q14" value="a" /><span>ChatGPT</span></label>
+        <label class="answer"><input type="radio" name="q14" value="b" /><span>Siri</span></label>
+        <label class="answer"><input type="radio" name="q14" value="c" /><span>Alexa</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <!-- Q15 — PHP -->
+      <fieldset class="question-card" data-answer="b">
+        <legend><span class="question-number">15</span> Quelle instruction affiche du texte en PHP ?</legend>
+        <label class="answer"><input type="radio" name="q15" value="a" /><span>print_r()</span></label>
+        <label class="answer"><input type="radio" name="q15" value="b" /><span>echo</span></label>
+        <label class="answer"><input type="radio" name="q15" value="c" /><span>display()</span></label>
+        <p class="answer-feedback" aria-live="polite"></p>
+      </fieldset>
+
+      <div class="quiz-actions">
+        <p id="quiz-error" class="quiz-error" role="alert" hidden>Veuillez répondre à toutes les questions avant de valider.</p>
+        <button class="btn btn-primary" type="submit">Afficher ma note</button>
+        <button class="btn btn-outline" type="reset">Recommencer</button>
+      </div>
+    </form>
+
+    <section id="quiz-result" class="quiz-result" aria-live="polite" tabindex="-1" hidden>
+      <p class="section-tag">RÉSULTAT</p>
+      <h2 id="result-title"></h2>
+      <p id="result-message"></p>
+      <div class="score-track" aria-hidden="true"><span id="score-bar"></span></div>
+      <p class="correction-note">Les bonnes réponses sont indiquées en vert dans le questionnaire.</p>
+    </section>
+
+    <section class="gradebook" aria-labelledby="gradebook-title">
+      <p class="section-tag">SUIVI DE LA CLASSE</p>
+      <h2 id="gradebook-title">Moyennes des étudiants</h2>
+      <p class="gradebook-intro">La moyenne est calculée à partir de toutes les tentatives enregistrées sur cet appareil.</p>
+      <p class="gradebook-empty" id="gradebook-empty">Aucun résultat enregistré pour le moment.</p>
+      <div class="gradebook-table-wrap" id="gradebook-table-wrap" hidden>
+        <table class="gradebook-table">
+          <thead><tr><th scope="col">Étudiant</th><th scope="col">Moyenne /20</th><th scope="col">Tentatives</th><th scope="col">Notes et dates</th><th scope="col">Action</th></tr></thead>
+          <tbody id="gradebook-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><p>© 2026 Dhiaa Mezni — QCM pédagogique</p><p class="footer-loc">Jendouba, Tunisie</p></div></footer>
+</body>
+</html>
