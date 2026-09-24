@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Embeddings : du texte au vecteur (cours interactif)</title>
+<style>
+:root{--bg:#f2f6fa;--ink:#0e2244;--mut:#52627d;--card:#fff;--line:#d5deea;--c1:#1499c0;--c2:#f0a92e;--c3:#e2506b;--ok:#2a9d6a;--dk:#0e2244}
+@media(prefers-color-scheme:dark){:root{--bg:#0a1730;--ink:#e6eef9;--mut:#9fb0cc;--card:#122447;--line:#2a3f6b;--dk:#050d1e}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:60px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Segoe UI",system-ui,sans-serif}
+main{max-width:880px;margin:0 auto;padding:0 20px 70px}
+h1,h2{font-family:Georgia,serif;line-height:1.2}h2{font-size:1.7rem;margin:0 0 6px}
+section{padding-top:56px}p{max-width:70ch}
+nav{position:sticky;top:0;z-index:9;background:var(--dk);display:flex;gap:4px;overflow-x:auto;padding:0 12px}
+nav a{color:#b9c8e2;text-decoration:none;padding:12px 10px;font-size:.88rem;white-space:nowrap}nav a:hover{color:#fff}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--c2);width:0;z-index:10}
+.hero{background:var(--dk);color:#fff;padding:52px 20px 44px}.hero>div{max-width:880px;margin:auto}
+.hero h1{font-size:clamp(2rem,6vw,3.1rem);margin:0 0 10px}.hero p{color:#b9c8e2}
+.stage{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:26px}
+.tok{padding:8px 14px;border:2px solid var(--c1);border-radius:8px;font-weight:600;animation:hop 3.6s ease-in-out infinite}
+.tok:nth-child(2){animation-delay:.25s;border-color:var(--c2)}.tok:nth-child(3){animation-delay:.5s;border-color:var(--c3)}
+@keyframes hop{0%,60%,100%{transform:none}20%{transform:translateY(-10px)}}
+.arrow{color:var(--c2);font-size:1.6rem;animation:sl 1.6s ease-in-out infinite}@keyframes sl{50%{transform:translateX(8px)}}
+.vec{display:flex;gap:4px;font:600 .95rem ui-monospace,Consolas,monospace}
+.vec span{background:#1a3566;border-radius:6px;padding:8px 10px;min-width:62px;text-align:center;color:#7fe0ff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+.note{border-left:5px solid var(--c2)}.bad{border-left:5px solid var(--c3)}.good{border-left:5px solid var(--ok)}
+code,.mono{font-family:ui-monospace,Consolas,monospace;background:var(--dk);color:#7fe0ff;padding:2px 7px;border-radius:5px;font-size:.9em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+.tag{display:inline-block;background:var(--c2);color:#111;border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:700}
+input[type=text],select{width:100%;font:inherit;padding:10px 12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--c2);outline-offset:2px}
+button{font:inherit;font-weight:600;background:var(--c1);color:#fff;border:0;border-radius:10px;padding:9px 16px;cursor:pointer;margin:4px 4px 4px 0}
+button.alt{background:var(--dk);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{padding:6px 12px;border-radius:8px;background:var(--dk);color:#fff;font-weight:600}
+.chip small{display:block;font:500 .75rem ui-monospace,monospace;color:var(--c2)}
+.hm{display:grid;grid-template-columns:90px repeat(6,1fr);gap:4px;align-items:center;font:600 .82rem ui-monospace,monospace}
+.hm i{font-style:normal;text-align:center;border-radius:6px;padding:8px 2px;color:#fff;text-shadow:0 0 3px #000}
+.bar{height:22px;border-radius:6px;background:var(--line);overflow:hidden;margin:4px 0}
+.bar div{height:100%;background:var(--c1);width:0;transition:width .8s ease;border-radius:6px}
+.row{display:grid;grid-template-columns:200px 1fr 54px;gap:10px;align-items:center;margin:8px 0}
+@media(max-width:640px){.row{grid-template-columns:1fr 1fr 48px;font-size:.9rem}}
+svg{width:100%;height:auto;display:block}svg text{fill:var(--ink);font:600 13px "Segoe UI",sans-serif}
+.axis{stroke:var(--mut);stroke-width:1.5}.pt{transition:cx 1s,cy 1s}
+.pulse{animation:pl 2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes pl{50%{transform:scale(1.35)}}
+.flow{list-style:none;padding:0;display:grid;gap:8px}
+.flow li{padding:11px 16px;border-radius:10px;background:var(--card);border:2px solid var(--line);animation:lit 8s infinite}
+.flow li:nth-child(2){animation-delay:1s}.flow li:nth-child(3){animation-delay:2s}.flow li:nth-child(4){animation-delay:3s}.flow li:nth-child(5){animation-delay:4s}.flow li:nth-child(6){animation-delay:5s}
+@keyframes lit{0%,14%{border-color:var(--c1)}15%,100%{border-color:var(--line)}}
+pre{background:var(--dk);color:#d7e6ff;padding:16px;border-radius:12px;overflow-x:auto;font-size:.88rem}
+.q{margin:14px 0}.fb{font-weight:600;margin-left:8px}
+dt{font-weight:700;margin-top:10px}dd{margin:0 0 4px;color:var(--mut)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header class="hero"><div>
+<h1>Du texte au vecteur : comprendre les embeddings</h1>
+<p>Un cours pas à pas avec des analogies, des exemples chiffrés et des mini-outils à manipuler.</p>
+<div class="stage" aria-hidden="true"><span class="tok">Le</span><span class="tok">chat</span><span class="tok">dort</span><span class="arrow">➜</span>
+<div class="vec"><span id="v0">0.82</span><span id="v1">0.15</span><span id="v2">-0.37</span><span id="v3">0.91</span><span>…</span></div></div>
+</div></header>
+<nav><a href="index.html">← Accueil</a><a href="ia.html">← Cours IA</a><a href="#s1">Analogie GPS</a><a href="#s2">Tokens</a><a href="#s3">Vecteur d’un mot</a><a href="#s4">Neurone</a><a href="#s5">Entraînement</a><a href="#s6">Similarité</a><a href="#s7">Chatbot</a><a href="#s8">Pièges</a><a href="#s9">PHP</a><a href="#s10">Quiz</a></nav>
+<main>
+
+<section id="s1"><h2>1. L’idée en une image : des coordonnées pour le sens</h2>
+<p>Une ville est décrite par 2 nombres (latitude, longitude). Deux villes proches ont des coordonnées proches. Un embedding fait la même chose pour un texte, mais avec des centaines de nombres, et c’est le <b>sens</b> qui est « proche » ou « loin ».</p>
+<div class="card"><svg viewBox="0 0 520 250" role="img" aria-label="Carte de villes et de phrases">
+<line class="axis" x1="30" y1="220" x2="500" y2="220"/><line class="axis" x1="30" y1="220" x2="30" y2="10"/>
+<circle class="pulse" cx="330" cy="70" r="8" fill="var(--c1)"/><text x="342" y="66">Tunis [36.8, 10.2]</text>
+<circle class="pulse" cx="345" cy="105" r="8" fill="var(--c1)"/><text x="357" y="115">Sfax [34.7, 10.8]</text>
+<circle cx="90" cy="170" r="8" fill="var(--c3)"/><text x="102" y="174">Lisbonne [38.7, -9.1]</text>
+<text x="40" y="240">Villes proches = coordonnées proches. Phrases proches = vecteurs proches.</text></svg></div>
+<div class="grid2"><div class="card note"><b>Ville</b><br>2 nombres, un lieu sur la carte.</div><div class="card note"><b>Phrase</b><br>384, 768, 1536… nombres, un point dans l’« espace du sens ».</div></div>
+</section>
+
+<section id="s2"><h2>2. Étape 1 : découper en tokens <span class="tag">à essayer</span></h2>
+<p>Le modèle ne lit pas des lettres. Il découpe d’abord le texte en <b>tokens</b> (mots ou morceaux de mots), puis remplace chacun par un identifiant.</p>
+<div class="card"><label for="tin"><b>Tapez une phrase :</b></label>
+<input id="tin" type="text" value="Le chat dort dans l’anticonstitutionnellement">
+<div class="chips" id="tout" aria-live="polite"></div>
+<p style="margin:0;color:var(--mut)">Simulation : vrais tokenizers (BPE…) découpent autrement, mais l’idée est la même. Les identifiants ici sont fictifs. Ce n’est <b>pas</b> encore l’embedding.</p></div>
+</section>
+
+<section id="s3"><h2>3. Étape 2 : chaque token a un vecteur appris</h2>
+<p>Les cases ci-dessous montrent 6 dimensions (rouge = négatif, bleu = positif). Regardez : <b>chat</b> et <b>chien</b> ont presque le même motif, <b>voiture</b> est très différente.</p>
+<div class="card"><div class="hm" id="hm"></div>
+<p id="hmres" style="margin-bottom:0"></p></div>
+<p><b>Pourquoi ?</b> Chat et chien apparaissent dans les mêmes contextes (« Le ___ mange », « Le ___ dort »). Le modèle rapproche ce qui se ressemble par l’usage.</p>
+</section>
+
+<section id="s4"><h2>4. Étape 3 : un neurone fait un petit calcul <span class="tag">à essayer</span></h2>
+<p>Le réseau est fait de milliers de neurones. Chacun calcule : <span class="mono">z = x₁w₁ + x₂w₂ + x₃w₃ + b</span>, puis applique une activation. Ici : w = [0.13, -0.27, 0.41], b = 0.10.</p>
+<div class="card">
+<div class="row"><label for="x1">x₁ = <b id="x1v">0.5</b></label><input id="x1" type="range" min="-1" max="1" step=".1" value=".5"><span></span></div>
+<div class="row"><label for="x2">x₂ = <b id="x2v">0.8</b></label><input id="x2" type="range" min="-1" max="1" step=".1" value=".8"><span></span></div>
+<div class="row"><label for="x3">x₃ = <b id="x3v">0.2</b></label><input id="x3" type="range" min="-1" max="1" step=".1" value=".2"><span></span></div>
+<p class="mono" id="zres" style="display:block"></p></div>
+<ol class="flow"><li>Texte</li><li>Tokens</li><li>Vecteurs de tokens</li><li>Couches de neurones (poids + biais)</li><li>Embedding final</li><li>Comparaison par similarité cosinus</li></ol>
+</section>
+
+<section id="s5"><h2>5. Comment les poids sont appris <span class="tag">à essayer</span></h2>
+<p>Départ : poids aléatoires. Puis on répète : <b>prédire ➜ mesurer l’erreur ➜ ajuster ➜ recommencer</b>, des millions de fois. Ici, le but est de rapprocher « chat » et « animal ».</p>
+<div class="card"><svg viewBox="0 0 520 250" role="img" aria-label="Deux points qui se rapprochent">
+<line class="axis" x1="30" y1="225" x2="500" y2="225"/><line class="axis" x1="30" y1="225" x2="30" y2="10"/>
+<line id="lk" stroke="var(--c2)" stroke-width="2" stroke-dasharray="6 5"/>
+<circle id="pc" class="pt" r="11" fill="var(--c1)"/><circle id="pa" class="pt" r="11" fill="var(--c3)"/>
+<text id="lc">chat</text><text id="la">animal</text></svg>
+<div class="row"><b>Erreur (distance)</b><div class="bar"><div id="eb"></div></div><b id="ev"></b></div>
+<p><span class="mono" id="cd"></span></p><button id="btn" type="button">Étape suivante</button></div>
+</section>
+
+<section id="s6"><h2>6. Mesurer la ressemblance : la similarité cosinus <span class="tag">à essayer</span></h2>
+<p>On compare l’<b>angle</b> entre deux vecteurs : proche de 1 = même sens, proche de 0 = sans rapport, négatif = opposé. Formule : <span class="mono">cos(A,B) = (A·B) / (‖A‖ × ‖B‖)</span></p>
+<div class="card"><div class="grid2"><div><label for="sa"><b>Phrase A</b></label><select id="sa"></select></div><div><label for="sb"><b>Phrase B</b></label><select id="sb"></select></div></div>
+<div class="bar" style="height:30px;margin-top:16px"><div id="cb"></div></div>
+<p class="mono" id="cres" style="display:block"></p><p id="cver" style="margin-bottom:0"></p></div>
+</section>
+
+<section id="s7"><h2>7. Cas réel : le moteur de votre chatbot <span class="tag">à essayer</span></h2>
+<p>Le chatbot vectorise la question, la compare à toutes les réponses stockées, puis renvoie la meilleure. Choisissez une question :</p>
+<div class="card"><div id="qs"></div><div id="rk" style="margin-top:14px"></div></div>
+<div class="grid2"><div class="card"><b>Le modèle IA</b><br>Texte ➜ vecteur</div><div class="card"><b>Votre PHP</b><br>Vecteur A + vecteur B ➜ cosinus ➜ score</div></div>
+</section>
+
+<section id="s8"><h2>8. Les 3 pièges classiques</h2>
+<div class="card bad"><b>Piège 1 : « 0.82 = chat ».</b><br>Faux. Les dimensions sont distribuées : le sens vient de <em>l’ensemble</em> du vecteur, pas d’une case.</div>
+<div class="card bad"><b>Piège 2 : « L’embedding est écrit à la main ».</b><br>Faux. Notre <code>[0.9, 0.8, 0.7, 0.1]</code> en PHP était fictif, uniquement pour montrer Texte ➜ Vecteur ➜ Comparaison. Les vraies valeurs (0.012, -0.084, 0.231…) sortent du modèle.</div>
+<div class="card bad"><b>Piège 3 : « Un token = un mot ».</b><br>Faux. Un mot rare peut être coupé en plusieurs morceaux (voir l’outil de l’étape 2).</div>
+</section>
+
+<section id="s9"><h2>9. Le code côté PHP</h2>
+<p>Le modèle fait Texte ➜ vecteur. Votre code ne fait que la comparaison :</p>
+<pre>function cosine(array $a, array $b): float {
+    $dot = $na = $nb = 0.0;
+    foreach ($a as $i =&gt; $x) {
+        $dot += $x * $b[$i];
+        $na  += $x * $x;
+        $nb  += $b[$i] * $b[$i];
+    }
+    return $dot / (sqrt($na) * sqrt($nb));
+}
+// $score = cosine($vecQuestion, $vecReponseEnBase);</pre>
+</section>
+
+<section id="s10"><h2>10. Testez-vous</h2><div class="card" id="quiz"></div>
+<div class="card good"><b>À retenir :</b> les nombres d’un vecteur sont le résultat des calculs d’un réseau de neurones dont les poids ont été appris pendant l’entraînement. Textes proches ➜ vecteurs proches ➜ cosinus élevé.</div>
+<dl><dt>Token</dt><dd>Morceau de texte (mot ou fragment) traité par le modèle.</dd><dt>Embedding</dt><dd>Vecteur qui représente le sens d’un texte.</dd><dt>Poids / biais</dt><dd>Paramètres appris par le réseau pendant l’entraînement.</dd><dt>Similarité cosinus</dt><dd>Score entre -1 et 1 mesurant la ressemblance entre deux vecteurs.</dd></dl>
+</section>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+function cos(a,b){var d=0,x=0,y=0;a.forEach(function(v,i){d+=v*b[i];x+=v*v;y+=b[i]*b[i]});return d/Math.sqrt(x*y)}
+// progression + hero
+addEventListener("scroll",function(){$("bar").style.width=100*scrollY/(document.body.scrollHeight-innerHeight)+"%"});
+var base=[.82,.15,-.37,.91];setInterval(function(){base.forEach(function(v,i){$("v"+i).textContent=(v+(Math.random()-.5)*.12).toFixed(2)})},900);
+// 2 tokenizer
+function fid(s){var h=7;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%9000;return h+100}
+function tok(){var w=$("tin").value.match(/[\wÀ-ÿ]+|[^\s\w]/g)||[],o="";
+w.forEach(function(t){var p=[];if(t.length>8){for(var i=0;i<t.length;i+=5)p.push((i?"##":"")+t.slice(i,i+5))}else p=[t];
+p.forEach(function(q){o+='<span class="chip">'+q+'<small>id '+fid(q)+'</small></span>'})});
+$("tout").innerHTML=o}
+$("tin").oninput=tok;tok();
+// 3 heatmap
+var W={chat:[.21,-.45,.73,.18,.55,-.3],chien:[.2,-.42,.69,.21,.5,-.28],voiture:[-.6,.35,-.12,.8,-.4,.66]},h="";
+function col(v){return v>=0?"rgba(20,153,192,"+(.25+v*.75)+")":"rgba(226,80,107,"+(.25-v*.75)+")"}
+h+="<span></span>";for(var d=1;d<=6;d++)h+="<span style='text-align:center'>d"+d+"</span>";
+for(var k in W){h+="<b>"+k+"</b>";W[k].forEach(function(v){h+="<i style='background:"+col(v)+"'>"+v.toFixed(2)+"</i>"})}
+$("hm").innerHTML=h;
+$("hmres").innerHTML="cosinus(chat, chien) = <b>"+cos(W.chat,W.chien).toFixed(2)+"</b> &nbsp; cosinus(chat, voiture) = <b>"+cos(W.chat,W.voiture).toFixed(2)+"</b>";
+// 4 neurone
+function neu(){var x=[1,2,3].map(function(i){var v=+$("x"+i).value;$("x"+i+"v").textContent=v;return v}),w=[.13,-.27,.41],z=.1;
+x.forEach(function(v,i){z+=v*w[i]});$("zres").innerHTML="z = "+x[0]+"×0.13 + "+x[1]+"×(-0.27) + "+x[2]+"×0.41 + 0.10 = "+z.toFixed(3)+" &nbsp; ReLU(z) = "+Math.max(0,z).toFixed(3)+" &nbsp; sigmoïde(z) = "+(1/(1+Math.exp(-z))).toFixed(3)}
+["x1","x2","x3"].forEach(function(i){$(i).oninput=neu});neu();
+// 5 entraînement
+var S=[[.1,.2,.8,.7],[.3,.4,.6,.5],[.55,.62,.58,.6]],k5=0;
+function px(x){return 30+x*440}function py(y){return 225-y*200}
+function dr(){var s=S[k5];$("pc").setAttribute("cx",px(s[0]));$("pc").setAttribute("cy",py(s[1]));$("pa").setAttribute("cx",px(s[2]));$("pa").setAttribute("cy",py(s[3]));
+["x1","y1"].forEach(function(a,i){$("lk").setAttribute(a,i?py(s[1]):px(s[0]))});$("lk").setAttribute("x2",px(s[2]));$("lk").setAttribute("y2",py(s[3]));
+$("lc").setAttribute("x",px(s[0])-36);$("lc").setAttribute("y",py(s[1])-18);$("la").setAttribute("x",px(s[2])-14);$("la").setAttribute("y",py(s[3])+32);
+var e=Math.hypot(s[0]-s[2],s[1]-s[3]);$("eb").style.width=Math.min(100,e/1.0*100)+"%";$("ev").textContent=e.toFixed(2);
+$("cd").textContent="Étape "+k5+" : chat ["+s[0]+", "+s[1]+"]  animal ["+s[2]+", "+s[3]+"]"}
+$("btn").onclick=function(){k5=(k5+1)%3;this.textContent=k5==2?"Recommencer":"Étape suivante";dr()};dr();
+// 6 cosinus
+var P={"Le chat dort":[.82,.15,-.37,.91],"Le chat se repose":[.79,.18,-.35,.88],"Le chien dort":[.78,.2,-.33,.85],"La voiture roule":[-.21,.73,.12,-.42],"Le moteur tourne":[-.18,.7,.15,-.38],"Le chat ne dort pas":[-.5,.1,.3,-.7]},o="";
+for(var n in P)o+="<option>"+n+"</option>";$("sa").innerHTML=o;$("sb").innerHTML=o;$("sb").selectedIndex=1;
+function cs(){var c=cos(P[$("sa").value],P[$("sb").value]);$("cb").style.width=Math.max(0,c)*100+"%";
+$("cres").innerHTML="cosinus = "+c.toFixed(3);$("cver").textContent=c>.9?"Même sens : quasi équivalents.":c>.5?"Sens assez proche.":c>0?"Peu de rapport.":"Sens opposé ou sans rapport."}
+$("sa").onchange=cs;$("sb").onchange=cs;cs();
+// 7 chatbot
+var F={"Conseils pour bien dormir":[.8,.2,-.3,.9],"Que faire en cas de panne de voiture ?":[-.2,.7,.1,-.4],"Que donner à manger à son chat ?":[.6,-.1,.5,.3],"Comment changer un pneu ?":[-.15,.6,.2,-.3]},
+Q={"Comment dormir ?":[.75,.2,-.3,.85],"Ma voiture ne démarre pas":[-.25,.68,.14,-.35],"Mon chat ne mange plus":[.55,-.05,.45,.35]},qb="";
+for(var q in Q)qb+='<button type="button" data-q="'+q+'">'+q+'</button>';$("qs").innerHTML=qb;
+$("qs").onclick=function(e){var q=e.target.dataset.q;if(!q)return;var r=[];for(var f in F)r.push([f,cos(Q[q],F[f])]);r.sort(function(a,b){return b[1]-a[1]});
+$("rk").innerHTML=r.map(function(x,i){return '<div class="row"><span>'+(i?"":"✅ ")+x[0]+'</span><div class="bar"><div style="background:'+(i?"var(--mut)":"var(--ok)")+'"></div></div><b>'+x[1].toFixed(2)+'</b></div>'}).join("");
+setTimeout(function(){document.querySelectorAll("#rk .bar div").forEach(function(d,i){d.style.width=Math.max(0,r[i][1])*100+"%"})},30)};
+// 10 quiz
+var QZ=[["Un embedding est écrit à la main par le développeur.",false,"Il est calculé par un modèle entraîné."],["Le vecteur [0.82, 0.15…] : 0.82 signifie « chat ».",false,"Le sens est distribué sur toutes les dimensions."],["Deux phrases de sens proche ont un cosinus proche de 1.",true,"C’est le principe de la recherche sémantique."],["Un token est toujours exactement un mot.",false,"Un mot peut être coupé en plusieurs tokens."]],qh="";
+QZ.forEach(function(x,i){qh+='<div class="q"><b>'+(i+1)+'. '+x[0]+'</b><br><button data-i="'+i+'" data-v="1">Vrai</button><button class="alt" data-i="'+i+'" data-v="0">Faux</button><span class="fb" id="f'+i+'"></span></div>'});
+$("quiz").innerHTML=qh;$("quiz").onclick=function(e){var i=e.target.dataset.i;if(i==null)return;var x=QZ[i],ok=(e.target.dataset.v=="1")==x[1],f=$("f"+i);f.style.color=ok?"var(--ok)":"var(--c3)";f.textContent=(ok?"Bravo. ":"Pas tout à fait. ")+x[2]};
+</script>
+</body>
+</html>

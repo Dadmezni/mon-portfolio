@@ -25,7 +25,15 @@
           <li><a href="#services" data-i18n="nav.services">Services</a></li>
           <li><a href="#certifications" data-i18n="nav.certifications">Certifications</a></li>
           <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-          <li><a href="qcm.html">QCM étudiants</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="learning-menu">
+              Cours <span class="dropdown-chevron" aria-hidden="true">▾</span>
+            </button>
+            <ul class="dropdown-menu" id="learning-menu">
+              <li><a href="qcm.html">QCM étudiants</a></li>
+              <li><a href="ia.html">Cours IA</a></li>
+            </ul>
+          </li>
           <li><a href="#contact" class="btn-nav" data-i18n="nav.contact">Contact</a></li>
         </ul>
       </nav>

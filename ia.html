@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L’intelligence artificielle : comprendre, développer, utiliser</title>
+<style>
+:root{--bg:#f2f6fa;--ink:#0e2244;--mut:#52627d;--card:#fff;--line:#d5deea;--c1:#1499c0;--c2:#f0a92e;--c3:#e2506b;--ok:#2a9d6a;--dk:#0e2244}
+@media(prefers-color-scheme:dark){:root{--bg:#0a1730;--ink:#e6eef9;--mut:#9fb0cc;--card:#122447;--line:#2a3f6b;--dk:#050d1e}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Segoe UI",system-ui,sans-serif}
+main{max-width:900px;margin:0 auto;padding:0 20px 70px}
+h1,h2,h3{font-family:Georgia,serif;line-height:1.2}h2{font-size:1.7rem;margin:0 0 6px}h3{margin:14px 0 4px}
+section{padding-top:56px}p{max-width:70ch}
+nav{position:sticky;top:0;z-index:9;background:var(--dk);display:flex;gap:4px;overflow-x:auto;padding:0 12px}
+nav a{color:#b9c8e2;text-decoration:none;padding:12px 11px;font-size:.9rem;white-space:nowrap}nav a:hover{color:#fff}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--c2);width:0;z-index:10}
+.hero{background:var(--dk);color:#fff;padding:52px 20px 44px}.hero>div{max-width:900px;margin:auto}
+.hero h1{font-size:clamp(2rem,6vw,3.1rem);margin:0 0 10px}.hero p{color:#b9c8e2}
+.orbit{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.orbit span{padding:8px 14px;border:2px solid var(--c1);border-radius:99px;font-weight:600;animation:hop 4s ease-in-out infinite}
+.orbit span:nth-child(2){animation-delay:.3s;border-color:var(--c2)}.orbit span:nth-child(3){animation-delay:.6s;border-color:var(--c3)}.orbit span:nth-child(4){animation-delay:.9s;border-color:#7fe0ff}
+@keyframes hop{0%,60%,100%{transform:none}20%{transform:translateY(-9px)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+.note{border-left:5px solid var(--c2)}.bad{border-left:5px solid var(--c3)}.good{border-left:5px solid var(--ok)}
+code,.mono{font-family:ui-monospace,Consolas,monospace;background:var(--dk);color:#7fe0ff;padding:2px 7px;border-radius:5px;font-size:.9em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+.tag{display:inline-block;background:var(--c2);color:#111;border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:700}
+input[type=text],textarea{width:100%;font:inherit;padding:9px 12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+input:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--c2);outline-offset:2px}
+button{font:inherit;font-weight:600;background:var(--c1);color:#fff;border:0;border-radius:10px;padding:9px 16px;cursor:pointer;margin:4px 4px 4px 0}
+button.alt{background:var(--dk)}button.on{background:var(--c2);color:#111}
+.nest{padding:14px;border-radius:18px;border:3px solid var(--c1)}.nest .nest{border-color:var(--c2);margin-top:10px}.nest .nest .nest{border-color:var(--c3)}.nest .nest .nest .nest{border-color:var(--ok)}
+.nest button{background:none;color:var(--ink);padding:0;font-weight:700;text-align:left}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{padding:6px 12px;border-radius:8px;background:var(--dk);color:#fff;font-weight:600}.chip small{display:block;font:500 .75rem ui-monospace,monospace;color:var(--c2)}
+.row{display:grid;grid-template-columns:190px 1fr 50px;gap:10px;align-items:center;margin:6px 0}
+@media(max-width:640px){.row{grid-template-columns:1fr 1fr 44px;font-size:.9rem}}
+.bar{height:20px;border-radius:6px;background:var(--line);overflow:hidden}.bar div{height:100%;background:var(--c1);width:0;transition:width .8s;border-radius:6px}
+.wb{display:flex;height:20px;background:var(--line);border-radius:6px;position:relative}.wb div{position:absolute;top:0;height:100%;transition:all .6s}
+.flow{list-style:none;padding:0;display:grid;gap:8px}
+.flow li{padding:11px 16px;border-radius:10px;background:var(--card);border:2px solid var(--line);animation:lit 7s infinite}
+.flow li:nth-child(2){animation-delay:1s}.flow li:nth-child(3){animation-delay:2s}.flow li:nth-child(4){animation-delay:3s}.flow li:nth-child(5){animation-delay:4s}.flow li:nth-child(6){animation-delay:5s}
+@keyframes lit{0%,14%{border-color:var(--c1)}15%,100%{border-color:var(--line)}}
+pre{background:var(--dk);color:#d7e6ff;padding:16px;border-radius:12px;overflow-x:auto;font-size:.86rem;white-space:pre-wrap}
+.q{margin:14px 0}.fb{font-weight:600;margin-left:8px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header class="hero"><div>
+<h1>L’intelligence artificielle : comprendre, développer, utiliser</h1>
+<p>Un parcours en 6 modules avec des exemples concrets et des outils interactifs.</p>
+<div class="orbit" aria-hidden="true"><span>Comprendre</span><span>Apprendre</span><span>Développer</span><span>Utiliser</span></div>
+</div></header>
+<nav><a href="index.html">← Accueil</a><a href="#m1">1. C’est quoi l’IA ?</a><a href="#m2">2. Apprendre</a><a href="#m3">3. Développer</a><a href="#m4">4. Texte et vecteurs</a><a href="#m5">5. Utiliser</a><a href="#m6">6. Limites</a><a href="#m7">Quiz</a><a href="embedding.html">Cours détaillé : embeddings →</a></nav>
+<main>
+
+<section id="m1"><h2>1. C’est quoi l’intelligence artificielle ?</h2>
+<p>L’IA regroupe les techniques qui permettent à une machine d’accomplir des tâches qui demandent d’habitude de l’intelligence humaine : reconnaître une image, comprendre une phrase, recommander un film. Ce sont des <b>poupées russes</b> : cliquez sur chaque niveau.</p>
+<div class="card"><div class="nest"><button data-n="0">Intelligence artificielle</button>
+<div class="nest"><button data-n="1">Machine Learning</button>
+<div class="nest"><button data-n="2">Deep Learning (réseaux de neurones)</button>
+<div class="nest"><button data-n="3">IA générative et LLM</button></div></div></div></div>
+<p id="ninfo" class="note card" style="margin-bottom:0"></p></div>
+<div class="grid2">
+<div class="card"><h3>Programmation classique</h3><p>Vous écrivez les <b>règles</b>. <code>si mail contient « gratuit » alors spam</code>. Facile à comprendre, mais impossible à maintenir pour des milliers de cas.</p></div>
+<div class="card"><h3>Machine Learning</h3><p>Vous donnez des <b>exemples</b> et la machine <b>déduit les règles</b> elle-même. C’est la grande différence.</p></div></div>
+<div class="grid3">
+<div class="card">📧<br><b>Filtre anti-spam</b><br>Machine Learning</div><div class="card">📱<br><b>Face ID</b><br>Deep Learning</div><div class="card">💬<br><b>Assistant de chat</b><br>LLM</div></div>
+</section>
+
+<section id="m2"><h2>2. Comment une IA apprend</h2>
+<p>Choisissez un type d’apprentissage :</p>
+<div id="ltabs"></div><div class="card note" id="ltxt"></div>
+<h3>Essayez : un détecteur de spam qui apprend <span class="tag">à essayer</span></h3>
+<p>4 mails d’exemple, chacun étiqueté. À chaque « époque », le modèle corrige les poids des mots quand il se trompe. Un poids positif (orange) pousse vers spam, négatif (bleu) vers normal.</p>
+<div class="card"><div id="ex"></div><div id="ws" style="margin-top:10px"></div>
+<button id="ep" type="button">Lancer une époque d’entraînement</button><button id="rs" class="alt" type="button">Réinitialiser</button><span id="eps" class="mono"></span>
+<p style="margin-top:12px"><b>Testez un nouveau mail :</b></p><input id="tm" type="text" value="cliquez pour gagner" aria-label="Mail de test"><p id="tr" style="margin-bottom:0"></p></div>
+</section>
+
+<section id="m3"><h2>3. Comment développer une IA</h2>
+<p>Un projet d’IA suit toujours le même cycle. Cliquez sur une étape.</p>
+<div class="card"><div id="lc"></div><div id="lt" class="note card" style="margin-bottom:0"></div></div>
+<h3>Le même cycle en 8 lignes de Python</h3>
+<pre>from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LogisticRegression
+
+mails  = ["gagner gratuit", "réunion rapport", "cliquez gratuit", "facture réunion"]
+labels = [1, 0, 1, 0]                       # 1 = spam
+vec = CountVectorizer(); X = vec.fit_transform(mails)
+model = LogisticRegression().fit(X, labels)  # entraînement
+print(model.predict(vec.transform(["cliquez pour gagner"])))  # prédiction</pre>
+<div class="card good"><b>Outils à connaître :</b> Python, scikit-learn (ML classique), PyTorch ou TensorFlow (deep learning), Hugging Face (modèles prêts à l’emploi), Jupyter / Colab (pour expérimenter).</div>
+</section>
+
+<section id="m4"><h2>4. Comment l’IA comprend le texte : tokens et vecteurs</h2>
+<p>Un modèle ne lit pas des lettres. Il découpe en <b>tokens</b>, puis transforme le texte en <b>vecteur</b> (une liste de nombres) qui représente le sens. Des textes de sens proche donnent des vecteurs proches.</p>
+<div class="card"><p style="margin-top:0"><b>Tokenisation (simulée) <span class="tag">à essayer</span></b></p>
+<input id="tin" type="text" value="Le chat dort dans l’anticonstitutionnellement" aria-label="Phrase"><div class="chips" id="tout"></div>
+<p style="margin:0;color:var(--mut)">Identifiants fictifs ; un vrai tokenizer découpe autrement.</p></div>
+<div class="card"><p style="margin-top:0"><b>Recherche sémantique (comme votre chatbot) <span class="tag">à essayer</span></b></p>
+<p>La question est vectorisée, puis comparée à chaque réponse par <b>similarité cosinus</b> (proche de 1 = même sens).</p>
+<div id="qs"></div><div id="rk" style="margin-top:12px"></div>
+<p style="margin-bottom:0;color:var(--mut)">Attention : ce ne sont pas des cases lisibles. « 0.82 » ne veut pas dire « chat » : le sens est porté par tout le vecteur, calculé par un réseau de neurones entraîné.</p></div>
+</section>
+
+<section id="m5"><h2>5. Comment utiliser l’IA efficacement</h2>
+<h3>A. Écrire un bon prompt <span class="tag">à essayer</span></h3>
+<div class="grid2"><div class="card bad"><b>Prompt vague</b><br><i>« Parle-moi des vecteurs. »</i><br>➜ Réponse générale, peu utile.</div>
+<div class="card good"><b>Prompt structuré</b><br><i>Rôle + contexte + tâche + format.</i><br>➜ Réponse ciblée.</div></div>
+<div class="card"><label for="p1"><b>Rôle</b></label><input id="p1" type="text" value="Tu es un professeur d’informatique">
+<label for="p2"><b>Contexte</b></label><input id="p2" type="text" value="Mes étudiants de licence connaissent le PHP mais pas l’IA">
+<label for="p3"><b>Tâche</b></label><input id="p3" type="text" value="Explique ce qu’est un embedding avec une analogie">
+<label for="p4"><b>Format</b></label><input id="p4" type="text" value="5 lignes maximum, puis un exemple chiffré">
+<p><b>Prompt final :</b></p><pre id="pf"></pre></div>
+<h3>B. Appeler une IA depuis votre code</h3>
+<pre>$ch = curl_init('https://api.anthropic.com/v1/messages');
+curl_setopt_array($ch, [
+  CURLOPT_HTTPHEADER => ['content-type: application/json',
+      'x-api-key: ' . getenv('API_KEY'), 'anthropic-version: 2023-06-01'],
+  CURLOPT_POSTFIELDS => json_encode([
+      'model' =&gt; 'claude-sonnet-5', 'max_tokens' =&gt; 500,
+      'messages' =&gt; [['role' =&gt; 'user', 'content' =&gt; $prompt]]]),
+  CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true]);
+$reponse = json_decode(curl_exec($ch), true);</pre>
+<p>Ne mettez jamais la clé API dans le code source ni dans le navigateur : utilisez une variable d’environnement côté serveur.</p>
+<h3>C. Donner vos propres documents à l’IA : le RAG</h3>
+<ol class="flow"><li>Vous découpez vos documents en morceaux et calculez leurs vecteurs (une fois)</li><li>L’utilisateur pose une question</li><li>La question est vectorisée</li><li>Les morceaux les plus proches (cosinus) sont retrouvés</li><li>Ils sont ajoutés au prompt du modèle</li><li>Le modèle répond en s’appuyant sur vos documents</li></ol>
+</section>
+
+<section id="m6"><h2>6. Les limites à connaître</h2>
+<div class="grid2">
+<div class="card bad"><b>Hallucinations</b><br>Le modèle peut affirmer avec assurance quelque chose de faux. Vérifiez les faits importants.</div>
+<div class="card bad"><b>Biais</b><br>Il reproduit les biais des données d’entraînement.</div>
+<div class="card bad"><b>Vie privée</b><br>N’envoyez pas de données personnelles ou confidentielles sans cadre clair.</div>
+<div class="card bad"><b>Responsabilité</b><br>L’IA assiste, l’humain décide et signe. Citez l’usage de l’IA dans vos travaux.</div></div>
+<div class="card good"><b>À retenir :</b> l’IA apprend des règles à partir d’exemples ; on la développe par un cycle données ➜ entraînement ➜ évaluation ➜ déploiement ; on l’utilise avec des prompts précis, en vérifiant toujours le résultat.</div>
+</section>
+
+<section id="m7"><h2>Quiz final</h2><div class="card" id="quiz"></div></section>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+function cos(a,b){var d=0,x=0,y=0;a.forEach(function(v,i){d+=v*b[i];x+=v*v;y+=b[i]*b[i]});return d/Math.sqrt(x*y)}
+addEventListener("scroll",function(){$("bar").style.width=100*scrollY/(document.body.scrollHeight-innerHeight)+"%"});
+// 1 poupées russes
+var N=["<b>IA</b> : tout système qui imite une capacité intelligente (règles, recherche, apprentissage).","<b>Machine Learning</b> : la machine apprend à partir de données au lieu d’être programmée règle par règle.","<b>Deep Learning</b> : Machine Learning avec des réseaux de neurones à de nombreuses couches. Excellent pour images, voix, texte.","<b>IA générative / LLM</b> : modèles géants qui produisent du texte, des images ou du code. Ils sont entraînés à prédire la suite d’un texte."];
+document.querySelectorAll(".nest button").forEach(function(b){b.onclick=function(){$("ninfo").innerHTML=N[b.dataset.n]}});$("ninfo").innerHTML=N[0];
+// 2 types d'apprentissage
+var L={"Supervisé":"Exemples <b>avec réponse</b> : mails étiquetés spam / normal, photos étiquetées chat / chien. Le modèle apprend à retrouver la bonne réponse. Le plus courant.","Non supervisé":"Exemples <b>sans réponse</b> : le modèle découvre seul des groupes. Exemple : regrouper des clients aux habitudes d’achat similaires.","Par renforcement":"Le modèle <b>essaie et reçoit des récompenses</b>. Exemple : un robot ou un programme de jeu qui apprend en jouant des milliers de parties."},lb="";
+for(var t in L)lb+='<button type="button" data-t="'+t+'">'+t+'</button>';$("ltabs").innerHTML=lb;
+function lt(t){$("ltxt").innerHTML=L[t];document.querySelectorAll("#ltabs button").forEach(function(b){b.className=b.dataset.t==t?"on":""})}
+$("ltabs").onclick=function(e){if(e.target.dataset.t)lt(e.target.dataset.t)};lt("Supervisé");
+// 2 perceptron spam
+var EX=[["gagner gratuit cliquez",1],["réunion rapport facture",0],["cliquez gratuit",1],["facture réunion",0]],W0=["gratuit","gagner","cliquez","réunion","facture","rapport"],w={},ep=0;
+function rs(){W0.forEach(function(k){w[k]=0});ep=0;up()}
+function sc(t){return t.toLowerCase().split(/\s+/).reduce(function(s,x){return s+(w[x]||0)},0)}
+function up(){$("ex").innerHTML=EX.map(function(e){var s=sc(e[0]),p=s>0?1:0;return '<div class="row"><span>'+e[0]+'</span><span>attendu : <b>'+(e[1]?"spam":"normal")+'</b></span><b>'+(p==e[1]&&s!=0?"✅":"❌")+'</b></div>'}).join("");
+$("ws").innerHTML=W0.map(function(k){var v=w[k],x=Math.min(50,Math.abs(v)*25);return '<div class="row"><span>'+k+' ('+v.toFixed(1)+')</span><div class="wb"><div style="left:'+(v>=0?50:50-x)+'%;width:'+x+'%;background:'+(v>=0?"var(--c2)":"var(--c1)")+'"></div></div><span></span></div>'}).join("");
+$("eps").textContent=" époque "+ep;var s=sc($("tm").value);$("tr").innerHTML="Score = "+s.toFixed(1)+" ➜ <b>"+(s>0?"SPAM":s<0?"NORMAL":"indécis (mots inconnus)")+"</b>"}
+$("ep").onclick=function(){EX.forEach(function(e){var y=e[1]?1:-1;if(y*sc(e[0])<=0)e[0].split(" ").forEach(function(x){if(x in w)w[x]+=y*.5})});ep++;up()};
+$("rs").onclick=rs;$("tm").oninput=up;rs();
+// 3 cycle de vie
+var C=[["Problème","Que veut-on prédire ? Exemple : « ce mail est-il un spam ? » Sans question claire, aucun modèle ne sauvera le projet."],["Données","Collecter et nettoyer des exemples. C’est souvent 70 % du travail. Mauvaises données = mauvais modèle."],["Modèle","Choisir l’approche : régression logistique, arbre de décision, réseau de neurones, ou modèle pré-entraîné existant."],["Entraînement","Le modèle ajuste ses poids sur 80 % des données : prédire, mesurer l’erreur, corriger, recommencer."],["Évaluation","Test sur les 20 % jamais vus. Si le score est bon à l’entraînement mais mauvais au test : surapprentissage (le modèle a appris par cœur)."],["Déploiement","Mettre le modèle dans une API ou un site, surveiller ses erreurs, le ré-entraîner régulièrement."]],cb="";
+C.forEach(function(c,i){cb+='<button type="button" data-c="'+i+'">'+(i+1)+'. '+c[0]+'</button>'});$("lc").innerHTML=cb;
+function lc(i){$("lt").innerHTML="<b>"+C[i][0]+"</b><br>"+C[i][1];document.querySelectorAll("#lc button").forEach(function(b){b.className=b.dataset.c==i?"on":""})}
+$("lc").onclick=function(e){if(e.target.dataset.c)lc(e.target.dataset.c)};lc(0);
+// 4 tokens
+function fid(s){var h=7;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%9000;return h+100}
+function tok(){var ws=$("tin").value.match(/[\wÀ-ÿ]+|[^\s\w]/g)||[],o="";ws.forEach(function(t){var p=[];if(t.length>8){for(var i=0;i<t.length;i+=5)p.push((i?"##":"")+t.slice(i,i+5))}else p=[t];p.forEach(function(q){o+='<span class="chip">'+q+'<small>id '+fid(q)+'</small></span>'})});$("tout").innerHTML=o}
+$("tin").oninput=tok;tok();
+// 4 recherche sémantique
+var F={"Conseils pour bien dormir":[.8,.2,-.3,.9],"Que faire en cas de panne de voiture ?":[-.2,.7,.1,-.4],"Que donner à manger à son chat ?":[.6,-.1,.5,.3],"Comment changer un pneu ?":[-.15,.6,.2,-.3]},
+Q={"Comment dormir ?":[.75,.2,-.3,.85],"Ma voiture ne démarre pas":[-.25,.68,.14,-.35],"Mon chat ne mange plus":[.55,-.05,.45,.35]},qb="";
+for(var q in Q)qb+='<button type="button" data-q="'+q+'">'+q+'</button>';$("qs").innerHTML=qb;
+$("qs").onclick=function(e){var q=e.target.dataset.q;if(!q)return;var r=[];for(var f in F)r.push([f,cos(Q[q],F[f])]);r.sort(function(a,b){return b[1]-a[1]});
+$("rk").innerHTML=r.map(function(x,i){return '<div class="row"><span>'+(i?"":"✅ ")+x[0]+'</span><div class="bar"><div style="background:'+(i?"var(--mut)":"var(--ok)")+'"></div></div><b>'+x[1].toFixed(2)+'</b></div>'}).join("");
+setTimeout(function(){document.querySelectorAll("#rk .bar div").forEach(function(d,i){d.style.width=Math.max(0,r[i][1])*100+"%"})},30)};
+// 5 prompt builder
+function pb(){$("pf").textContent=$("p1").value+".\nContexte : "+$("p2").value+".\nTâche : "+$("p3").value+".\nFormat attendu : "+$("p4").value+"."}
+["p1","p2","p3","p4"].forEach(function(i){$(i).oninput=pb});pb();
+// quiz
+var QZ=[["Le Machine Learning consiste à écrire toutes les règles à la main.",0,"Il déduit les règles à partir d’exemples."],["Un modèle très bon à l’entraînement mais mauvais au test souffre de surapprentissage.",1,"Il a appris par cœur au lieu de généraliser."],["Un embedding est un vecteur qui représente le sens d’un texte.",1,"Textes proches ➜ vecteurs proches."],["On peut mettre sa clé API directement dans le JavaScript du navigateur.",0,"Non : gardez-la côté serveur."],["Une IA générative ne peut jamais se tromper.",0,"Elle peut halluciner : vérifiez toujours."]],qh="";
+QZ.forEach(function(x,i){qh+='<div class="q"><b>'+(i+1)+'. '+x[0]+'</b><br><button data-i="'+i+'" data-v="1">Vrai</button><button class="alt" data-i="'+i+'" data-v="0">Faux</button><span class="fb" id="f'+i+'"></span></div>'});
+$("quiz").innerHTML=qh;$("quiz").onclick=function(e){var i=e.target.dataset.i;if(i==null)return;var x=QZ[i],ok=e.target.dataset.v==x[1],f=$("f"+i);f.style.color=ok?"var(--ok)":"var(--c3)";f.textContent=(ok?"Bravo. ":"Pas tout à fait. ")+x[2]};
+</script>
+</body>
+</html>

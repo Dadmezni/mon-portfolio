@@ -9,6 +9,30 @@ document.addEventListener('DOMContentLoaded', () => {
      -------------------------------------------- */
   const burger = document.querySelector('.burger');
   const navLinks = document.querySelector('.nav-links');
+  const dropdown = document.querySelector('.nav-dropdown');
+  const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
+
+  if (dropdown && dropdownToggle) {
+    dropdownToggle.addEventListener('click', () => {
+      const isOpen = dropdown.classList.toggle('open');
+      dropdownToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('open');
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    dropdown.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        dropdown.classList.remove('open');
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+        dropdownToggle.focus();
+      }
+    });
+  }
 
   if (burger && navLinks) {
     burger.addEventListener('click', () => {
