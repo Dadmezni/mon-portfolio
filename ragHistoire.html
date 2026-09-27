@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'histoire de Sami : comprendre l'IA et le RAG / قصة سامي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f6fa;--ink:#0e2244;--mut:#52627d;--card:#fff;--line:#d5deea;--c1:#1499c0;--c2:#f0a92e;--c3:#e2506b;--ok:#2a9d6a;--dk:#0e2244}
+@media(prefers-color-scheme:dark){:root{--bg:#0a1730;--ink:#e6eef9;--mut:#9fb0cc;--card:#122447;--line:#2a3f6b;--dk:#050d1e}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "Segoe UI",system-ui,sans-serif}
+body[dir="rtl"]{font-family:'Tajawal',"Segoe UI",Tahoma,Arial,sans-serif}
+main{max-width:900px;margin:0 auto;padding:0 20px 70px}
+h1,h2,h3{font-family:Georgia,serif;line-height:1.25}
+body[dir="rtl"] h1,body[dir="rtl"] h2,body[dir="rtl"] h3{font-family:'Tajawal',"Segoe UI",sans-serif}
+h2{font-size:1.55rem;margin:0 0 6px}h3{margin:14px 0 4px;font-size:1.15rem}
+section{padding-top:56px}p{max-width:72ch}
+.lead{color:var(--mut);font-size:1.05rem}
+nav{position:sticky;top:0;z-index:9;background:var(--dk);display:flex;gap:4px;overflow-x:auto;padding:0 12px}
+nav a{color:#b9c8e2;text-decoration:none;padding:11px 9px;font-size:.8rem;white-space:nowrap}nav a:hover{color:#fff}
+.langbar{position:sticky;top:39px;z-index:8;background:#0c1c3d;display:flex;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px solid #1e335e}
+.langbar span{color:#b9c8e2;font-size:.85rem}
+.langbar button{margin:0;padding:6px 14px;font-size:.85rem;border-radius:8px;background:#1a2f5c;color:#cfe0ff}
+.langbar button.on{background:var(--c2);color:#111}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--c2);width:0;z-index:10}
+.hero{background:var(--dk);color:#fff;padding:48px 20px 40px}.hero>div{max-width:900px;margin:auto}
+.hero h1{font-size:clamp(1.6rem,5vw,2.6rem);margin:0 0 10px}.hero p{color:#b9c8e2}
+.hero .who{display:flex;gap:14px;align-items:center;margin-top:22px;background:rgba(255,255,255,.07);border-radius:14px;padding:14px 16px}
+.hero .who .av{font-size:2.2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+.story{border-left:5px solid var(--c1);background:color-mix(in srgb,var(--c1) 6%,var(--card))}
+[dir="rtl"] .story{border-left:none;border-right:5px solid var(--c1)}
+.note{border-left:5px solid var(--c2)}.bad{border-left:5px solid var(--c3)}.good{border-left:5px solid var(--ok)}
+[dir="rtl"] .note{border-left:none;border-right:5px solid var(--c2)}
+[dir="rtl"] .bad{border-left:none;border-right:5px solid var(--c3)}
+[dir="rtl"] .good{border-left:none;border-right:5px solid var(--ok)}
+.recap{border:2px dashed var(--c1);background:transparent}
+code,.mono,pre,.ltr{direction:ltr;unicode-bidi:isolate}
+code,.mono{font-family:ui-monospace,Consolas,monospace;background:var(--dk);color:#7fe0ff;padding:2px 7px;border-radius:5px;font-size:.9em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+.tag{display:inline-block;background:var(--c2);color:#111;border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:700}
+input[type=text]{width:100%;font:inherit;padding:9px 12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+input:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--c2);outline-offset:2px}
+button{font:inherit;font-weight:600;background:var(--c1);color:#fff;border:0;border-radius:10px;padding:9px 16px;cursor:pointer;margin:4px 4px 4px 0}
+button.alt{background:var(--dk)}
+details{margin:10px 0}
+summary{cursor:pointer;font-weight:700;color:var(--c1);padding:8px 0}
+details[open] summary{color:var(--c3)}
+.mind{display:grid;gap:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.mind button{all:unset;cursor:pointer;display:block;padding:14px 18px;color:#fff;font-weight:700;margin:0}
+.mind button:nth-child(1){background:var(--c1)}.mind button:nth-child(2){background:#0e7ea3;padding-inline-start:34px}.mind button:nth-child(3){background:var(--c3);padding-inline-start:52px}.mind button:nth-child(4){background:var(--dk);padding-inline-start:52px}
+.mind button small{display:block;font-weight:500;opacity:.85;font-size:.82rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{padding:6px 12px;border-radius:8px;background:var(--dk);color:#fff;font-weight:600;direction:ltr}
+.row{display:grid;grid-template-columns:1fr 1fr 60px;gap:10px;align-items:center;margin:8px 0}
+@media(max-width:640px){.row{grid-template-columns:1fr 44px;font-size:.9rem}.row>span:nth-child(2){display:none}}
+.bar{height:20px;border-radius:6px;background:var(--line);overflow:hidden;direction:ltr}.bar div{height:100%;background:var(--c1);width:0;transition:width .8s;border-radius:6px}
+svg{width:100%;height:auto;display:block;direction:ltr}svg text{fill:var(--ink);font:600 13px "Segoe UI",sans-serif}
+.axis{stroke:var(--mut);stroke-width:1.5}
+.pulse{animation:pl 2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes pl{50%{transform:scale(1.3)}}
+.fly{animation:fly 6s ease-in-out infinite}@keyframes fly{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+pre{background:var(--dk);color:#d7e6ff;padding:16px;border-radius:12px;overflow-x:auto;font-size:.86rem;white-space:pre-wrap;text-align:left}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{text-align:start;padding:10px 12px;border-bottom:1px solid var(--line)}th{color:var(--mut);font-size:.85rem;text-transform:uppercase}
+.q{margin:14px 0}.fb{font-weight:600;margin-inline-start:8px}
+.bot{display:flex;gap:10px;align-items:flex-start;margin:10px 0}
+.bot .av{width:34px;height:34px;border-radius:50%;background:var(--c1);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+.bot.user .av{background:var(--c3)}
+.bot .msg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.gloss{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}@media(max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.gloss div b{display:block;margin-bottom:4px}
+.step{display:flex;align-items:center;gap:8px;font-weight:700;margin:18px 0 6px}
+.step .n{background:var(--dk);color:#fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header class="hero"><div>
+<h1 data-ar="قصة سامي: فهم الذكاء الاصطناعي خطوة بخطوة">L'histoire de Sami : comprendre l'IA, étape par étape</h1>
+<p class="lead" data-ar="لا مصطلحات معقّدة في البداية: قصة واحدة من البداية إلى النهاية. كل مصطلح تقني جديد يظهر فقط عندما تحتاجه القصة.">Pas de jargon d'abord : une seule histoire, du début à la fin. Chaque nouveau mot technique arrive seulement quand l'histoire en a besoin.</p>
+<div class="who"><span class="av">🧑‍💼</span><div data-ar="<b>سامي</b> يعمل في استقبال مركز تكوين. طوال اليوم، تُطرح عليه نفس الأسئلة: السعر، المدة، البرنامج... سنساعده تدريجيًا باستخدام الذكاء الاصطناعي."><b>Sami</b> travaille à l'accueil d'un centre de formation. Toute la journée, on lui pose les mêmes questions : le prix, la durée, le programme… On va l'aider petit à petit avec l'IA.</div></div>
+</div></header>
+<nav>
+<a href="index.html">← Accueil</a>
+<a href="rag.html">← RAG</a>
+<a href="#s0" data-ar="الخريطة الذهنية">Carte mentale</a>
+<a href="#s1" data-ar="الجولة 1">Round 1</a>
+<a href="#s2" data-ar="الجولة 2">Round 2</a>
+<a href="#s3" data-ar="الجولة 3">Round 3</a>
+<a href="#s4" data-ar="الجولة 4">Round 4</a>
+<a href="#s5" data-ar="في الواقع">Vie réelle</a>
+<a href="#s6" data-ar="المصطلحات">Glossaire</a>
+<a href="#s7" data-ar="اختبار">Quiz</a>
+</nav>
+<div class="langbar"><span>🌐</span><button id="bFr" class="on" type="button">Français</button><button id="bAr" type="button">العربية</button></div>
+<main>
+
+<section id="s0"><h2 data-ar="قبل أن نبدأ: خريطة الطريق">Avant de commencer : la carte du terrain</h2>
+<p data-ar="ستتكرر خمس كلمات طوال القصة: <b>الذكاء الاصطناعي</b>، <b>التعلّم الآلي</b>، <b>التعلّم العميق</b>، <b>المتجه (embedding)</b> و<b>RAG</b>. إليك كيف ترتبط ببعضها، مثل الدمى الروسية المتداخلة. انقر على كل مستوى — سنعود إليه في كل مرحلة من قصة سامي.">Cinq mots vont revenir tout le long : <b>IA</b>, <b>Machine Learning</b>, <b>Deep Learning</b>, <b>embedding</b> et <b>RAG</b>. Voici comment ils s'emboîtent, comme des poupées russes. Cliquez sur chaque niveau — on y reviendra à chaque étape de l'histoire de Sami.</p>
+<div class="card"><div class="mind">
+<button data-i="0"><span data-ar="🌍 الذكاء الاصطناعي (IA)">🌍 Intelligence artificielle (IA)</span><small data-ar="أي آلة تحاكي قدرة بشرية">Toute machine qui imite une capacité humaine</small></button>
+<button data-i="1"><span data-ar="🧩 التعلّم الآلي">🧩 Machine Learning</span><small data-ar="الآلة تتعلّم انطلاقًا من أمثلة">La machine apprend à partir d'exemples</small></button>
+<button data-i="2"><span data-ar="🧠 التعلّم العميق">🧠 Deep Learning</span><small data-ar="تعلّم باستخدام الشبكات العصبية — يفهم المعنى">Apprentissage avec des réseaux de neurones — comprend le sens</small></button>
+<button data-i="3"><span data-ar="💬 RAG">💬 RAG</span><small data-ar="معادلة تجمع التعلّم العميق + قاعدة وثائق + كاتب ذكاء اصطناعي">Une recette qui combine Deep Learning + une base de documents + un rédacteur IA</small></button>
+</div>
+<p id="mindinfo" class="card note" style="margin:14px 0 0"></p></div>
+<div class="card good" style="margin-top:0" data-ar="<b>خيط القصة:</b> سيكتسب سامي هذه القدرات واحدة تلو الأخرى. في الجولة 1، لا يملك أيًّا منها. وفي نهاية الجولة 4، سيملكها جميعًا."><b>Le fil de l'histoire :</b> Sami va gagner ces capacités une par une. Round 1, il n'a rien de tout ça. À la fin du Round 4, il aura les quatre.</div>
+</section>
+
+<section id="s1"><h2 data-ar="الجولة 1 — الروبوت القائم على الكلمات المفتاحية (بدون ذكاء اصطناعي)">Round 1 — Le robot à mots-clés (sans IA)</h2>
+<div class="card story" data-ar="<p style='margin:0'><b>📖 القصة:</b> سئم سامي من تكرار نفس الإجابات. فبرمج روبوتًا صغيرًا: إذا احتوت الرسالة على كلمة «سعر»، يُرسل الجملة الخاصة بالسعر. بسيط وسريع... لكنه هشّ.</p>"><p style="margin:0"><b>📖 L'histoire :</b> Sami en a assez de répéter les mêmes réponses. Il programme un petit robot : si le message contient le mot « prix », il renvoie la phrase sur le prix. Simple, rapide… mais fragile.</p></div>
+<div class="card"><div class="bot user"><div class="av">🧑</div><div class="msg" data-ar="كم تكلفة تكوين Laravel؟">C'est combien pour la formation Laravel ?</div></div>
+<div class="bot"><div class="av">🤖</div><div class="msg" data-ar="🤔 ... (لا توجد كلمة مطابقة تمامًا لكلمة «سعر»)">🤔 … (aucun mot ne correspond exactement à « prix »)</div></div></div>
+<div class="card bad" data-ar="<b>لماذا يفشل:</b> كلمة «سعر» غير موجودة إطلاقًا في السؤال. الروبوت يقارن الكلمات، لا الأفكار. بالنسبة له، «كم يكلّف» و«ما هو السعر» جملتان مختلفتان تمامًا."><b>Pourquoi ça rate :</b> le mot « <b>prix</b> » n'apparaît nulle part dans la question. Le robot compare des <b>mots</b>, pas des <b>idées</b>. Pour lui, « combien coûte » et « quel est le prix » sont deux phrases complètement différentes.</div>
+<details><summary data-ar="عرض شيفرة PHP لهذا الروبوت البسيط">Voir le code PHP de ce robot simple</summary>
+<pre>$documents = [
+    "prix"  => "Le prix de la formation est de 500 DT.",
+    "durée" => "La formation Laravel dure 40 heures.",
+];
+foreach ($documents as $motCle => $reponse) {
+    if (str_contains(strtolower($question), $motCle)) {
+        echo $reponse;
+    }
+}</pre></details>
+<div class="card recap" data-ar="<b>🔁 العودة إلى الخريطة:</b> هذه الجولة 1 لا تستعمل أيًّا من المكوّنات الأربعة في الخريطة الذهنية. إنها مجرّد PHP تقليدية — مقارنة كلمات. ينقصنا وسيلة لفهم المعنى، لا الكلمات فقط."><b>🔁 Retour à la carte :</b> ce Round 1 n'utilise aucun des 4 blocs de la carte mentale. C'est juste du PHP classique — la comparaison de mots. Il nous manque un moyen de comprendre le <b>sens</b>, pas seulement les mots.</div>
+</section>
+
+<section id="s2"><h2 data-ar="الجولة 2 — سامي يتعلّم فهم المعنى">Round 2 — Sami apprend à comprendre le sens</h2>
+<div class="card story" data-ar="<p style='margin:0'><b>📖 القصة:</b> يحصل سامي على نظارة سحرية (نموذج تعلّم عميق). بهذه النظارة، تتحوّل كل جملة يقرأها إلى نقطة على خريطة غير مرئية: الجمل التي تحمل نفس المعنى تقع في نفس المكان على الخريطة، حتى لو اختلفت الكلمات.</p>"><p style="margin:0"><b>📖 L'histoire :</b> Sami reçoit des lunettes magiques (un modèle de <b>Deep Learning</b>). Avec ces lunettes, chaque phrase qu'il lit se transforme en un point sur une carte invisible : les phrases qui veulent dire la même chose tombent au même endroit sur la carte, même si les mots sont différents.</p></div>
+<div class="step"><span class="n">1</span><span data-ar="ما هي بالضبط هذه النقطة على الخريطة؟">C'est quoi, concrètement, ce point sur la carte ?</span></div>
+<p data-ar="إنها قائمة من الأرقام تُسمّى «متجهًا» أو embedding. تمامًا كما يتكوّن موقع GPS من رقمين (خط الطول وخط العرض)، تتكوّن الجملة من مئات الأرقام. انظر: «القط نائم» و«القط مسترخٍ» تقعان في نفس المكان؛ أمّا «السيارة تسير» فتقع في مكان آخر.">C'est une liste de nombres, appelée <b>vecteur</b> ou <b>embedding</b>. Comme une adresse GPS a 2 nombres (latitude, longitude), une phrase en a des centaines. Regardez : « Le chat dort » et « Le chat se repose » tombent au même endroit ; « La voiture roule » tombe ailleurs.</p>
+<div class="card"><svg viewBox="0 0 520 220" role="img" aria-label="Carte du sens">
+<line class="axis" x1="30" y1="195" x2="500" y2="195"/><line class="axis" x1="30" y1="195" x2="30" y2="12"/>
+<circle class="pulse" cx="150" cy="130" r="9" fill="var(--c1)"/><text x="65" y="155" data-ar="«القط نائم»">« Le chat dort »</text>
+<circle class="pulse" cx="200" cy="90" r="9" fill="var(--c1)"/><text x="215" y="86" data-ar="«القط مسترخٍ»">« Le chat se repose »</text>
+<line x1="150" y1="130" x2="200" y2="90" stroke="var(--c2)" stroke-width="2" stroke-dasharray="6 5"/>
+<circle cx="410" cy="170" r="9" fill="var(--c3)"/><text x="330" y="195" dy="18" data-ar="«السيارة تسير»">« La voiture roule »</text>
+</svg><p style="margin:0;color:var(--mut)" data-ar="جملتان متقاربتان في المعنى ➜ نقطتان متقاربتان على الخريطة.">Deux phrases proches par le sens ➜ deux points proches sur la carte.</p></div>
+<div class="step"><span class="n">2</span><span data-ar="كيف يحصل سامي على هذه النقطة (المتجه)؟">Comment Sami obtient ce point (le vecteur) ?</span></div>
+<pre>$embedding = getEmbedding("La formation Laravel dure 40 heures.");
+// $embedding n'est PAS écrit à la main.
+// Résultat (extrait) : [0.80, 0.18, -0.30, 0.85, ...]</pre>
+<div class="card"><p style="margin-top:0"><b data-ar="جرّب: حوّل جملة إلى متجه">Essayez : transformez une phrase en vecteur</b> <span class="tag" data-ar="للتجربة">à essayer</span></p>
+<button id="run1" type="button" data-ar="▶ احسب متجه جملة «التكوين يدوم 40 ساعة»">▶ Calculer l'embedding de « La formation dure 40 heures »</button>
+<div class="chips" id="vecout"></div>
+<p style="margin:0;color:var(--mut)" data-ar="4 قيم افتراضية لغرض المثال؛ النموذج الحقيقي يعطي المئات منها.">4 valeurs fictives pour l'exemple ; un vrai modèle en donne des centaines.</p></div>
+<div class="card bad" data-ar="<b>خطأ شائع:</b> هذه الأرقام لا تعني شيئًا بمفردها. لا يمكن القول إن «0.80 = السعر». مجموع الأرقام هو الذي يمثّل المعنى، تمامًا كما تُعرَّف بصمة الإصبع كاملة، لا بخط واحد منها."><b>Piège fréquent :</b> ces nombres ne veulent rien dire isolément. On ne peut pas lire « 0.80 = prix ». C'est <b>l'ensemble</b> des nombres qui représente le sens, comme une empreinte digitale entière identifie une personne, pas un seul sillon.</div>
+<div class="card recap" data-ar="<b>🔁 العودة إلى الخريطة:</b> النظارة السحرية هي التعلّم العميق. النقطة على الخريطة هي المتجه (embedding). أصبح سامي الآن يفهم المعنى — لكنه لا يملك بعد وصولًا إلى وثائقه للإجابة. هذا موضوع الجولة 3."><b>🔁 Retour à la carte :</b> les lunettes magiques, c'est le <b>Deep Learning</b>. Le point sur la carte, c'est l'<b>embedding</b>. Sami comprend maintenant le sens — mais il n'a toujours pas accès à ses documents pour répondre. C'est le Round 3.</div>
+</section>
+
+<section id="s3"><h2 data-ar="الجولة 3 — سامي يجد البطاقة الصحيحة">Round 3 — Sami retrouve la bonne fiche</h2>
+<div class="card story" data-ar="<p style='margin:0'><b>📖 القصة:</b> يرتّب سامي كل بطاقة معلومات (السعر، المدة، البرنامج) في خزانة (قاعدة بيانات MySQL)، مع نقطتها على خريطة المعنى بجانبها. عندما يصل سؤال، يحسب نقطته، ثم يبحث عن البطاقة التي تكون نقطتها الأقرب على الخريطة.</p>"><p style="margin:0"><b>📖 L'histoire :</b> Sami range chaque fiche d'information (prix, durée, programme) dans une armoire (une base de données MySQL), avec son point sur la carte du sens à côté. Quand une question arrive, il calcule le point de la question, puis cherche la fiche dont le point est <b>le plus proche</b> sur la carte.</p></div>
+<div class="card"><svg viewBox="0 0 560 170" role="img" aria-label="Sami compare la question aux fiches rangées">
+<text x="10" y="24" data-ar="❓ «كم السعر؟»">❓ « C'est combien ? »</text>
+<rect x="10" y="40" width="90" height="46" rx="8" fill="none" stroke="var(--c1)" stroke-width="2"/><text x="24" y="68" data-ar="🔢 متجه">🔢 vecteur</text>
+<g class="fly"><path d="M105 63 H420" class="axis"/><text x="150" y="55" data-ar="نقارن ببطاقات الخزانة ➜">on compare aux fiches de l'armoire ➜</text></g>
+<rect x="430" y="10" width="120" height="34" rx="6" fill="none" stroke="var(--line)" stroke-width="2"/><text x="440" y="32" data-ar="📄 السعر: 500 دينار">📄 Prix : 500 DT</text>
+<rect x="430" y="52" width="120" height="34" rx="6" fill="var(--ok)" opacity=".18" stroke="var(--ok)" stroke-width="2"/><text x="440" y="74" data-ar="📄 ✅ السعر: 500 دينار">📄 ✅ Prix : 500 DT</text>
+<rect x="430" y="94" width="120" height="34" rx="6" fill="none" stroke="var(--line)" stroke-width="2"/><text x="440" y="116" data-ar="📄 المدة: 40 ساعة">📄 Durée : 40h</text>
+<text x="380" y="150" data-ar="البطاقة الأقرب على الخريطة هي الفائزة.">La fiche la plus proche sur la carte gagne.</text>
+</svg></div>
+<p data-ar="لهذه «المسافة على الخريطة» اسم دقيق: <b>التشابه الجيب-تمامي</b> (cosine similarity). نتيجة قريبة من 1 تعني معنى شبه مطابق؛ وقريبة من 0 تعني عدم وجود أي علاقة.">Cette « distance sur la carte » a un nom précis : la <b>similarité cosinus</b>. Un score proche de 1 = presque le même sens ; proche de 0 = aucun rapport.</p>
+<details><summary data-ar="عرض شيفرة PHP لهذا البحث">Voir le code PHP de cette recherche</summary>
+<pre>$vQuestion = getEmbedding($question);
+foreach ($documents as $document) {
+    $score = cosineSimilarity($vQuestion, $document['embedding']);
+    if ($score > 0.75) {
+        $meilleurPassage = $document['contenu'];
+    }
+}
+
+function cosineSimilarity(array $a, array $b): float {
+    $dot = $normA = $normB = 0.0;
+    foreach ($a as $i => $x) {
+        $dot   += $x * $b[$i];
+        $normA += $x * $x;
+        $normB += $b[$i] * $b[$i];
+    }
+    return $dot / (sqrt($normA) * sqrt($normB));
+}</pre></details>
+<div class="card"><p style="margin-top:0"><b data-ar="جرّب: قارن السؤال بالبطاقات الثلاث">Essayez : comparez la question aux 3 fiches</b> <span class="tag" data-ar="للتجربة">à essayer</span></p>
+<div id="rk4"></div><p style="margin:8px 0 0;color:var(--mut)" data-ar="الشريط الأخضر هو البطاقة الأقرب: هي التي سيستعملها سامي.">La barre verte est la fiche la plus proche : c'est elle que Sami va utiliser.</p></div>
+<div class="card recap" data-ar="<b>🔁 العودة إلى الخريطة:</b> الخزانة + البحث هما PHP + MySQL، مضافًا إليهما متجهات الجولة 2. وجد سامي الآن البطاقة الصحيحة. لم يتبقَّ له سوى قراءتها بصوت عالٍ بذكاء — الجولة 4."><b>🔁 Retour à la carte :</b> l'armoire + la recherche, c'est <b>PHP + MySQL</b>, combiné aux embeddings du Round 2. Sami a maintenant retrouvé la bonne fiche. Il ne lui reste qu'à la lire à voix haute intelligemment — Round 4.</div>
+</section>
+
+<section id="s4"><h2 data-ar="الجولة 4 — سامي يكتب إجابة حقيقية (RAG الكامل)">Round 4 — Sami rédige une vraie réponse (RAG complet)</h2>
+<div class="card story" data-ar="<p style='margin:0'><b>📖 القصة:</b> يعطي سامي البطاقة التي وجدها لزميل موهوب جدًا في الكتابة (نموذج توليدي، LLM). يقرأ هذا الزميل البطاقة والسؤال، ثم يكتب جملة طبيعية. إنه لا يخمّن عشوائيًا: يعتمد فقط على البطاقة التي أُعطيت له.</p>"><p style="margin:0"><b>📖 L'histoire :</b> Sami donne la fiche trouvée à un collègue très doué pour écrire (un modèle génératif, un <b>LLM</b>). Ce collègue lit la fiche et la question, puis rédige une phrase naturelle. Il ne devine pas au hasard : il s'appuie uniquement sur la fiche qu'on lui a donnée.</p></div>
+<pre>$context  = "La formation Laravel dure 40 heures. Elle comprend PHP, MVC, Eloquent et API REST.";
+$reponse  = generateAnswer($question, $context);
+echo $reponse;
+// "La formation Laravel dure 40 heures et couvre PHP, MVC, Eloquent et les API REST."</pre>
+<details><summary data-ar="عرض شيفرة PHP لاستدعاء النموذج التوليدي">Voir le code PHP de l'appel au modèle génératif</summary>
+<pre>function generateAnswer(string $question, string $context): string {
+    $prompt = "Contexte :\n{$context}\n\nQuestion : {$question}\n"
+            . "Réponds uniquement à partir du contexte ci-dessus.";
+    $ch = curl_init('https://api.anthropic.com/v1/messages');
+    curl_setopt_array($ch, [
+        CURLOPT_HTTPHEADER => ['content-type: application/json',
+            'x-api-key: ' . getenv('API_KEY'), 'anthropic-version: 2023-06-01'],
+        CURLOPT_POSTFIELDS => json_encode(['model' => 'claude-sonnet-5',
+            'max_tokens' => 300, 'messages' => [['role' => 'user', 'content' => $prompt]]]),
+        CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true
+    ]);
+    $data = json_decode(curl_exec($ch), true);
+    return $data['content'][0]['text'];
+}</pre>
+<p style="color:var(--mut);margin-bottom:0" data-ar="لا تضعوا أبدًا مفتاح API في شيفرة ظاهرة للمتصفّح؛ احتفظوا به في الخادم.">Ne mettez jamais la clé API dans du code visible au navigateur ; gardez-la côté serveur.</p></details>
+
+<h3 data-ar="الرحلة الكاملة في صورة واحدة">Le voyage complet, en une seule image</h3>
+<div class="card"><svg viewBox="0 0 620 190" role="img" aria-label="Voyage complet de la question à travers les 4 étapes">
+<text x="10" y="20" data-ar="❓ «كم تكلفة التكوين؟»">❓ « C'est combien pour la formation ? »</text>
+<rect x="10" y="35" width="100" height="55" rx="10" fill="none" stroke="var(--c1)" stroke-width="2"/><text x="26" y="58">🔢</text><text x="18" y="78" data-ar="متجه">Embedding</text>
+<rect x="140" y="35" width="110" height="55" rx="10" fill="none" stroke="var(--c3)" stroke-width="2"/><text x="178" y="58">🔍</text><text x="150" y="78" data-ar="بطاقة موجودة">Fiche trouvée</text>
+<rect x="280" y="35" width="90" height="55" rx="10" fill="none" stroke="#7fe0ff" stroke-width="2"/><text x="312" y="58">🧠</text><text x="292" y="78" data-ar="LLM يكتب">LLM rédige</text>
+<rect x="400" y="35" width="90" height="55" rx="10" fill="none" stroke="var(--ok)" stroke-width="2"/><text x="432" y="58">✅</text><text x="415" y="78" data-ar="الإجابة">Réponse</text>
+<path d="M110 62 H140" class="axis"/><path d="M250 62 H280" class="axis"/><path d="M370 62 H400" class="axis"/>
+<circle class="pulse" cx="530" cy="62" r="9" fill="var(--ok)"/><text x="500" y="110" data-ar="«السعر هو 500 دينار.»">« Le prix est de 500 DT. »</text>
+</svg></div>
+<div class="card"><p style="margin-top:0"><b data-ar="جرّب سامي الكامل">Testez le Sami complet</b> <span class="tag" data-ar="للتجربة">à essayer</span></p>
+<div class="chips">
+<button class="q6" data-q="Combien coûte la formation ?" data-ar="كم تكلفة التكوين؟">Combien coûte la formation ?</button>
+<button class="q6" data-q="Quelle est la durée du cours ?" data-ar="ما هي مدة الدورة؟">Quelle est la durée du cours ?</button>
+<button class="q6" data-q="Qu'apprend-on pendant la formation ?" data-ar="ماذا نتعلّم خلال التكوين؟">Qu'apprend-on pendant la formation ?</button>
+</div>
+<div id="chatlog"></div></div>
+<div class="card recap" data-ar="<b>🔁 العودة إلى الخريطة للمرّة الأخيرة:</b> الجولة 4 = كل المكوّنات معًا. التعلّم العميق (الفهم)، المتجه (التمثيل)، PHP + MySQL (الاسترجاع)، LLM (الكتابة). لهذا المزيج الكامل اسم واحد: RAG."><b>🔁 Retour à la carte, une dernière fois :</b> Round 4 = tous les blocs ensemble. Deep Learning (comprendre), embedding (représenter), PHP + MySQL (retrouver), LLM (rédiger). Cette combinaison complète a un nom : <b>RAG</b>.</div>
+</section>
+
+<section id="s5"><h2 data-ar="وفي الواقع، أين نجد كل هذا؟">Et dans la vraie vie, on croise ça où ?</h2>
+<p data-ar="هذه المصطلحات ليست نظرية فقط: أنتم تستعملونها بالفعل يوميًا.">Ces mots ne sont pas juste théoriques : vous les utilisez déjà, tous les jours.</p>
+<div class="grid3">
+<div class="card"><b data-ar="✉️ مرشّح البريد المزعج (Spam)">✉️ Filtre anti-spam</b><br><span data-ar="التعلّم الآلي">Machine Learning</span></div>
+<div class="card"><b data-ar="📸 التعرّف على الوجه (Face ID)">📸 Reconnaissance faciale (Face ID)</b><br><span data-ar="التعلّم العميق">Deep Learning</span></div>
+<div class="card"><b data-ar="🔎 بحث Google الذي يفهم سؤالًا مصاغًا بشكل غير دقيق">🔎 Recherche Google qui comprend une question mal formulée</b><br><span data-ar="المتجهات (Embeddings)">Embeddings</span></div>
+<div class="card"><b data-ar="🎬 اقتراحات Netflix و Spotify">🎬 Recommandations Netflix / Spotify</b><br><span data-ar="التعلّم الآلي">Machine Learning</span></div>
+<div class="card"><b data-ar="🗣️ Siri و Alexa و ChatGPT و Claude">🗣️ Siri, Alexa, ChatGPT, Claude</b><br><span data-ar="LLM (ذكاء اصطناعي توليدي)">LLM (IA générative)</span></div>
+<div class="card"><b data-ar="💬 روبوت محادثة في موقع يجيب انطلاقًا من وثائقكم الخاصة">💬 Un chatbot de site qui répond avec vos propres documents</b><br><span data-ar="RAG — بالضبط قصة سامي">RAG — exactement l'histoire de Sami</span></div>
+</div>
+</section>
+
+<section id="s6"><h2 data-ar="قائمة المصطلحات المصوَّرة">Glossaire visuel</h2>
+<div class="gloss">
+<div data-ar="🌍 <b>الذكاء الاصطناعي</b> — أي آلة تحاكي قدرة بشرية.">🌍 <b>IA (Intelligence artificielle)</b> — Toute machine qui imite une capacité humaine.</div>
+<div data-ar="🧩 <b>التعلّم الآلي</b> — الآلة تتعلّم القواعد من الأمثلة، بدل أن تُملى عليها.">🧩 <b>Machine Learning</b> — La machine apprend des règles à partir d'exemples, au lieu qu'on les lui dicte.</div>
+<div data-ar="🧠 <b>التعلّم العميق</b> — تعلّم آلي باستخدام الشبكات العصبية؛ يفهم معنى نص أو صورة.">🧠 <b>Deep Learning</b> — Machine Learning avec des réseaux de neurones ; comprend le sens d'un texte ou d'une image.</div>
+<div data-ar="🔢 <b>المتجه (Embedding)</b> — قائمة أرقام تمثّل معنى نص؛ نقطة على «خريطة المعنى».">🔢 <b>Embedding / vecteur</b> — Une liste de nombres qui représente le sens d'un texte ; un point sur la « carte du sens ».</div>
+<div data-ar="📐 <b>التشابه الجيب-تمامي</b> — نتيجة تقيس مدى تقارب متجهين (أي مدى تقارب معنى نصّين).">📐 <b>Similarité cosinus</b> — Un score qui mesure si deux vecteurs sont proches (donc si deux textes ont un sens proche).</div>
+<div data-ar="🧠💬 <b>LLM</b> — نموذج مدرَّب على كتابة نص طبيعي (ChatGPT، Claude...).">🧠💬 <b>LLM</b> — Un modèle entraîné à rédiger du texte naturel (ChatGPT, Claude…).</div>
+<div data-ar="💬 <b>RAG</b> — بحث في وثائقكم + كتابة بواسطة LLM = إجابة موثوقة وطبيعية.">💬 <b>RAG</b> — Recherche dans vos documents + rédaction par un LLM = réponse fiable et naturelle.</div>
+<div data-ar="🗄️ <b>PHP + MySQL</b> — الشيفرة وقاعدة البيانات اللتان تخزّنان الوثائق وتُشغّلان الآلية بأكملها.">🗄️ <b>PHP + MySQL</b> — Le code et la base de données qui stockent les documents et pilotent toute la mécanique.</div>
+</div>
+</section>
+
+<section id="s7"><h2 data-ar="اختبار ختامي">Quiz de fin</h2>
+<div class="card" id="quiz"></div>
+<div class="card good" data-ar="<b>خلاصة في جملة واحدة:</b> RAG يعني إعطاء كاتب الذكاء الاصطناعي البطاقة الصحيحة في الوقت المناسب — والتي عُثر عليها بفضل المعنى (المتجهات)، لا بفضل الكلمات الحرفية."><b>À retenir en une phrase :</b> le RAG, c'est donner à un rédacteur IA la bonne fiche au bon moment — trouvée grâce au sens (embeddings), pas grâce aux mots exacts.</div>
+</section>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+function cos(a,b){var d=0,x=0,y=0;a.forEach(function(v,i){d+=v*b[i];x+=v*v;y+=b[i]*b[i]});return d/Math.sqrt(x*y)}
+addEventListener("scroll",function(){$("bar").style.width=100*scrollY/(document.body.scrollHeight-innerHeight)+"%"});
+
+var LANG="fr";
+function applyLang(){
+  document.querySelectorAll("[data-ar]").forEach(function(el){
+    if(!el.dataset.frSaved) el.dataset.frSaved=el.innerHTML;
+    if(el.tagName==="BUTTON" && el.dataset.q){ /* handled separately below to keep data-q */ }
+    el.innerHTML = LANG==="ar" ? el.dataset.ar : el.dataset.frSaved;
+  });
+  document.documentElement.lang = LANG;
+  document.body.dir = LANG==="ar" ? "rtl" : "ltr";
+  $("bFr").className = LANG==="fr" ? "on" : "";
+  $("bAr").className = LANG==="ar" ? "on" : "";
+  document.querySelectorAll(".mind button").forEach(function(b){b.onclick=function(){$("mindinfo").innerHTML=(LANG==="ar"?MI_AR:MI_FR)[b.dataset.i]}});
+  $("mindinfo").innerHTML=(LANG==="ar"?MI_AR:MI_FR)[$("mindinfo").dataset.cur||0];
+  rk4(); $("chatlog").innerHTML="";
+  renderQuiz();
+}
+$("bFr").onclick=function(){LANG="fr";applyLang()};
+$("bAr").onclick=function(){LANG="ar";applyLang()};
+
+var MI_FR=["<b>🌍 Intelligence artificielle</b> : le nom général. Sami avec son robot à mots-clés (Round 1) fait déjà de l'informatique « intelligente » au sens large, mais sans apprentissage.",
+"<b>🧩 Machine Learning</b> : la machine apprend depuis des exemples au lieu de suivre des règles écrites à la main. C'est le grand saut par rapport au Round 1.",
+"<b>🧠 Deep Learning</b> : la version « comprend le sens » du Machine Learning, grâce à des réseaux de neurones. C'est ce qui donne à Sami ses lunettes magiques au Round 2.",
+"<b>💬 RAG</b> : pas une brique isolée, mais une recette qui assemble le Deep Learning (comprendre), une base de documents (PHP + MySQL) et un LLM (rédiger). C'est le Sami final du Round 4."];
+var MI_AR=["<b>🌍 الذكاء الاصطناعي</b>: هو الاسم العام. سامي بروبوته القائم على الكلمات المفتاحية (الجولة 1) يقوم بمعلوماتية «ذكية» بالمعنى الواسع، لكن بدون أي تعلّم.",
+"<b>🧩 التعلّم الآلي</b>: الآلة تتعلّم من الأمثلة بدل اتّباع قواعد مكتوبة يدويًا. هذه هي القفزة الكبرى مقارنة بالجولة 1.",
+"<b>🧠 التعلّم العميق</b>: هو نسخة «تفهم المعنى» من التعلّم الآلي، بفضل الشبكات العصبية. هذا ما يمنح سامي نظارته السحرية في الجولة 2.",
+"<b>💬 RAG</b>: ليس لبنة منفصلة، بل معادلة تجمع التعلّم العميق (الفهم)، قاعدة وثائق PHP + MySQL (الاسترجاع)، ونموذج لغوي كبير LLM (الكتابة). إنه سامي النهائي في الجولة 4."];
+
+var DOCS=[{t:"La formation Laravel dure 40 heures.",ar:"يدوم تكوين Laravel 40 ساعة.",v:[0.80,0.18,-0.30,0.85]},
+{t:"La formation comprend PHP, MVC, Eloquent et API REST.",ar:"يشمل التكوين PHP و MVC و Eloquent وواجهات API REST.",v:[0.30,0.75,0.40,-0.10]},
+{t:"Le prix de la formation est de 500 DT.",ar:"سعر التكوين هو 500 دينار.",v:[-0.60,0.20,0.70,0.15]}];
+
+$("run1").onclick=function(){var v=DOCS[0].v.map(function(x){return (x+(Math.random()-.5)*.03).toFixed(2)});
+$("vecout").innerHTML=v.map(function(x){return '<span class="chip">'+x+'</span>'}).join("")+'<span class="chip" style="background:var(--mut)">…</span>'};
+
+var QV=[0.78,0.20,-0.28,0.82];
+function rk4(){$("rk4").innerHTML=DOCS.map(function(d){var s=cos(QV,d.v),ok=s>0.75;
+return '<div class="row"><span>'+(LANG==="ar"?d.ar:d.t)+'</span><div class="bar"><div style="background:'+(ok?"var(--ok)":"var(--mut)")+';width:'+Math.max(0,s)*100+'%"></div></div><b>'+s.toFixed(2)+'</b></div>'}).join("");}
+
+var ANSWERS_FR={"Combien coûte la formation ?":"Le prix de la formation est de 500 DT.",
+"Quelle est la durée du cours ?":"La formation Laravel dure 40 heures.",
+"Qu'apprend-on pendant la formation ?":"Elle comprend PHP, MVC, Eloquent et API REST."};
+var ANSWERS_AR={"Combien coûte la formation ?":"سعر التكوين هو 500 دينار.",
+"Quelle est la durée du cours ?":"يدوم تكوين Laravel 40 ساعة.",
+"Qu'apprend-on pendant la formation ?":"يشمل PHP و MVC و Eloquent وواجهات API REST."};
+var QVECS={"Combien coûte la formation ?":[-0.58,0.22,0.68,0.18],
+"Quelle est la durée du cours ?":[0.76,0.19,-0.27,0.80],
+"Qu'apprend-on pendant la formation ?":[0.28,0.73,0.38,-0.08]};
+function bot(html){var d=document.createElement("div");d.className="bot";d.innerHTML='<div class="av">🤖</div><div class="msg">'+html+'</div>';$("chatlog").appendChild(d)}
+function user(html){var d=document.createElement("div");d.className="bot user";d.innerHTML='<div class="av">🧑</div><div class="msg">'+html+'</div>';$("chatlog").appendChild(d)}
+document.querySelectorAll(".q6").forEach(function(b){b.onclick=function(){
+$("chatlog").innerHTML="";var q=b.dataset.q;user(LANG==="ar"?b.dataset.ar:q);
+var L1=LANG==="ar"?"🔢 <b>المتجه:</b> يتحوّل السؤال إلى نقطة على خريطة المعنى...":"🔢 <b>Embedding :</b> la question devient un point sur la carte du sens…";
+var L2t=LANG==="ar"?"🔍 <b>البحث:</b><br>":"🔍 <b>Recherche :</b><br>";
+var L3=LANG==="ar"?"🧠 <b>LLM:</b> كتابة انطلاقًا من البطاقة التي تم العثور عليها...":"🧠 <b>LLM :</b> rédaction à partir de la fiche retrouvée…";
+var L4=LANG==="ar"?"✅ <b>إجابة سامي:</b> ":"✅ <b>Réponse de Sami :</b> ";
+setTimeout(function(){bot(L1)},250);
+setTimeout(function(){var scores=DOCS.map(function(d){return cos(QVECS[q],d.v)});
+var rows=DOCS.map(function(d,i){var ok=scores[i]>0.6;return (LANG==="ar"?d.ar:d.t)+' — '+(LANG==="ar"?"النتيجة ":"score ")+scores[i].toFixed(2)+(ok?" ✅":"")}).join("<br>");
+bot(L2t+rows)},900);
+setTimeout(function(){bot(L3)},1700);
+setTimeout(function(){bot(L4+(LANG==="ar"?ANSWERS_AR[q]:ANSWERS_FR[q]))},2400);
+}});
+
+var QZ_FR=[["Le robot du Round 1 comprend le sens des phrases.",0,"Il compare seulement des mots exacts, pas des idées."],
+["Deux phrases de sens proche ont des embeddings (vecteurs) proches.",1,"C'est exactement le principe de la carte du sens."],
+["Dans le RAG, le LLM invente la réponse sans regarder les documents.",0,"Il rédige à partir de la fiche retrouvée par la recherche."],
+["Le Deep Learning est ce qui permet à Sami de comprendre le sens, pas seulement les mots.",1,"Ce sont ses « lunettes magiques » du Round 2."],
+["RAG veut dire qu'on combine recherche dans des documents et rédaction par un LLM.",1,"Retrieval (recherche) + Generation (rédaction)."]];
+var QZ_AR=[["روبوت الجولة 1 يفهم معنى الجمل.",0,"هو يقارن فقط كلمات مطابقة، لا أفكارًا."],
+["الجملتان المتقاربتان في المعنى لهما متجهات (embeddings) متقاربة.",1,"هذا بالضبط مبدأ خريطة المعنى."],
+["في RAG، يخترع LLM الإجابة دون النظر إلى الوثائق.",0,"هو يكتب انطلاقًا من البطاقة التي وجدها البحث."],
+["التعلّم العميق هو ما يمكّن سامي من فهم المعنى، لا الكلمات فقط.",1,"إنها «نظارته السحرية» في الجولة 2."],
+["RAG تعني الجمع بين البحث في الوثائق والكتابة بواسطة LLM.",1,"Retrieval (بحث) + Generation (توليد)."]];
+function renderQuiz(){
+var QZ=LANG==="ar"?QZ_AR:QZ_FR,vT=LANG==="ar"?"صحيح":"Vrai",vF=LANG==="ar"?"خطأ":"Faux",okPre=LANG==="ar"?"أحسنت. ":"Bravo. ",noPre=LANG==="ar"?"ليس تمامًا. ":"Pas tout à fait. ",qh="";
+QZ.forEach(function(x,i){qh+='<div class="q"><b>'+(i+1)+'. '+x[0]+'</b><br><button data-i="'+i+'" data-v="1">'+vT+'</button><button class="alt" data-i="'+i+'" data-v="0">'+vF+'</button><span class="fb" id="f'+i+'"></span></div>'});
+$("quiz").innerHTML=qh;
+$("quiz").onclick=function(e){var i=e.target.dataset.i;if(i==null)return;var x=QZ[i],ok=e.target.dataset.v==x[1],f=$("f"+i);f.style.color=ok?"var(--ok)":"var(--c3)";f.textContent=(ok?okPre:noPre)+x[2]};
+}
+applyLang();
+</script>
+</body>
+</html>
