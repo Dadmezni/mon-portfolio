@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Du Machine Learning au RAG : chatbot PHP intelligent</title>
+<style>
+:root{--bg:#f2f6fa;--ink:#0e2244;--mut:#52627d;--card:#fff;--line:#d5deea;--c1:#1499c0;--c2:#f0a92e;--c3:#e2506b;--ok:#2a9d6a;--dk:#0e2244}
+@media(prefers-color-scheme:dark){:root{--bg:#0a1730;--ink:#e6eef9;--mut:#9fb0cc;--card:#122447;--line:#2a3f6b;--dk:#050d1e}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Segoe UI",system-ui,sans-serif}
+main{max-width:920px;margin:0 auto;padding:0 20px 70px}
+h1,h2,h3{font-family:Georgia,serif;line-height:1.2}h2{font-size:1.6rem;margin:0 0 6px}h3{margin:16px 0 4px}
+section{padding-top:56px}p{max-width:72ch}
+nav{position:sticky;top:0;z-index:9;background:var(--dk);display:flex;gap:4px;overflow-x:auto;padding:0 12px}
+nav a{color:#b9c8e2;text-decoration:none;padding:12px 10px;font-size:.85rem;white-space:nowrap}nav a:hover{color:#fff}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--c2);width:0;z-index:10}
+.hero{background:var(--dk);color:#fff;padding:50px 20px 42px}.hero>div{max-width:920px;margin:auto}
+.hero h1{font-size:clamp(1.8rem,5.6vw,2.9rem);margin:0 0 10px}.hero p{color:#b9c8e2}
+.stage{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:22px;font-weight:600}
+.stage span{padding:8px 13px;border:2px solid var(--c1);border-radius:99px;animation:hop 4s ease-in-out infinite}
+.stage span:nth-child(2){border-color:var(--c2);animation-delay:.3s}.stage span:nth-child(3){border-color:var(--c3);animation-delay:.6s}.stage span:nth-child(4){border-color:#7fe0ff;animation-delay:.9s}.stage span:nth-child(5){border-color:var(--ok);animation-delay:1.2s}
+.stage i{color:var(--c2);font-style:normal}
+@keyframes hop{0%,60%,100%{transform:none}20%{transform:translateY(-8px)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+.note{border-left:5px solid var(--c2)}.bad{border-left:5px solid var(--c3)}.good{border-left:5px solid var(--ok)}
+code,.mono{font-family:ui-monospace,Consolas,monospace;background:var(--dk);color:#7fe0ff;padding:2px 7px;border-radius:5px;font-size:.9em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+.tag{display:inline-block;background:var(--c2);color:#111;border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:700}
+input[type=text]{width:100%;font:inherit;padding:9px 12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+input:focus-visible,button:focus-visible{outline:3px solid var(--c2);outline-offset:2px}
+button{font:inherit;font-weight:600;background:var(--c1);color:#fff;border:0;border-radius:10px;padding:9px 16px;cursor:pointer;margin:4px 4px 4px 0}
+button.alt{background:var(--dk)}
+.stack{display:grid;gap:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.stack button{all:unset;cursor:pointer;display:flex;gap:14px;align-items:center;padding:16px 18px;color:#fff;font-weight:700;margin:0;border-radius:0}
+.stack button .ic{width:38px;height:38px;flex:none;background:rgba(255,255,255,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.stack button:nth-child(1){background:var(--c1)}.stack button:nth-child(2){background:#0e7ea3}.stack button:nth-child(3){background:var(--c3)}.stack button:nth-child(4){background:var(--dk)}
+.stack button small{display:block;font-weight:500;opacity:.85;font-size:.82rem}
+#stackinfo{margin-top:0}
+.flow{list-style:none;padding:0;display:grid;gap:8px;margin:14px 0}
+.flow li{padding:12px 16px;border-radius:10px;background:var(--card);border:2px solid var(--line);display:flex;gap:12px;align-items:flex-start;animation:lit 8s infinite}
+.flow li .ic{width:30px;height:30px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--dk);color:#fff;border-radius:50%;font-size:.95rem}
+.flow li:nth-child(2){animation-delay:1.2s}.flow li:nth-child(3){animation-delay:2.4s}.flow li:nth-child(4){animation-delay:3.6s}.flow li:nth-child(5){animation-delay:4.8s}
+@keyframes lit{0%,12%{border-color:var(--c1);background:color-mix(in srgb,var(--c1) 12%,var(--card))}13%,100%{border-color:var(--line);background:var(--card)}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{padding:6px 12px;border-radius:8px;background:var(--dk);color:#fff;font-weight:600}.chip small{display:block;font:500 .75rem ui-monospace,monospace;color:var(--c2)}
+.row{display:grid;grid-template-columns:1fr 1fr 60px;gap:10px;align-items:center;margin:8px 0}
+@media(max-width:640px){.row{grid-template-columns:1fr 44px;font-size:.9rem}.row>span:nth-child(2){display:none}}
+.bar{height:20px;border-radius:6px;background:var(--line);overflow:hidden}.bar div{height:100%;background:var(--c1);width:0;transition:width .8s;border-radius:6px}
+svg{width:100%;height:auto;display:block}svg text{fill:var(--ink);font:600 13px "Segoe UI",sans-serif}
+.axis{stroke:var(--mut);stroke-width:1.5}
+.pulse{animation:pl 2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes pl{50%{transform:scale(1.3)}}
+pre{background:var(--dk);color:#d7e6ff;padding:16px;border-radius:12px;overflow-x:auto;font-size:.86rem;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}th{color:var(--mut);font-size:.85rem;text-transform:uppercase}
+.q{margin:14px 0}.fb{font-weight:600;margin-left:8px}
+.bot{display:flex;gap:10px;align-items:flex-start;margin:10px 0}
+.bot .av{width:34px;height:34px;border-radius:50%;background:var(--c1);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+.bot.user .av{background:var(--c3)}
+.bot .msg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header class="hero"><div>
+<h1>Du Machine Learning au RAG : construire un chatbot PHP intelligent</h1>
+<p>On relie ici la théorie (ML, Deep Learning, embeddings) aux applications PHP que vous allez réaliser : un chatbot pour un centre de formation.</p>
+<div class="stage" aria-hidden="true"><span>Documents</span><i>➜</i><span>Vecteurs</span><i>➜</i><span>Recherche</span><i>➜</i><span>LLM</span><i>➜</i><span>Réponse</span></div>
+</div></header>
+<nav><a href="#s0">Transition</a><a href="#s1">Sans IA</a><a href="#s2">Pipeline</a><a href="#s3">Étape A</a><a href="#s4">Étape B</a><a href="#s5">Étape C</a><a href="#s6">Démo</a><a href="#s7">Tableau</a><a href="#s8">Quiz</a></nav>
+<main>
+
+<section id="s0"><h2>0. Transition : où se situe le RAG ?</h2>
+<p>Reprenons l'exemple fil rouge : un <b>chatbot intelligent pour un centre de formation</b>. Il combine 4 couches technologiques. Cliquez sur chacune.</p>
+<div class="card"><div class="stack">
+<button data-i="0"><span class="ic">🧩</span><span>1. Machine Learning<small>Classer la question</small></span></button>
+<button data-i="1"><span class="ic">🧠</span><span>2. Deep Learning<small>Comprendre le sens, produire des embeddings</small></span></button>
+<button data-i="2"><span class="ic">🗄️</span><span>3. PHP + MySQL<small>Stocker, comparer, récupérer</small></span></button>
+<button data-i="3"><span class="ic">💬</span><span>4. RAG<small>Générer la réponse finale</small></span></button>
+</div>
+<div id="stackinfo" class="card note" style="margin-top:14px"></div></div>
+<div class="card"><svg viewBox="0 0 620 210" role="img" aria-label="Question de l'utilisateur traversant les 4 couches">
+<text x="10" y="24">« C'est combien pour la formation Laravel ? »</text>
+<rect x="10" y="40" width="140" height="46" rx="8" fill="none" stroke="var(--c1)" stroke-width="2"/><text x="26" y="68">🧩 ML : catégorie</text>
+<rect x="170" y="40" width="140" height="46" rx="8" fill="none" stroke="#0e7ea3" stroke-width="2"/><text x="186" y="60">🧠 Deep Learning</text><text x="186" y="76">embedding</text>
+<rect x="330" y="40" width="140" height="46" rx="8" fill="none" stroke="var(--c3)" stroke-width="2"/><text x="346" y="60">🗄️ PHP + MySQL</text><text x="346" y="76">recherche</text>
+<rect x="490" y="40" width="120" height="46" rx="8" fill="none" stroke="var(--dk)" stroke-width="2"/><text x="505" y="68">💬 RAG : réponse</text>
+<path d="M150 63 H170" class="axis"/><path d="M310 63 H330" class="axis"/><path d="M470 63 H490" class="axis"/>
+<circle class="pulse" cx="550" cy="140" r="9" fill="var(--ok)"/><text x="500" y="175">« La formation coûte 500 DT. »</text>
+</svg></div>
+<div class="grid2">
+<div class="card"><b>🧩 1. Machine Learning</b><br>Classifier la question : inscription, prix, durée ou programme. Un modèle simple suffit souvent ici.</div>
+<div class="card"><b>🧠 2. Deep Learning</b><br>Un modèle de langage entraîné comprend le <i>sens</i> de la question et produit son embedding.</div>
+<div class="card"><b>🗄️ 3. PHP + MySQL</b><br>Votre code stocke les documents, compare les vecteurs (similarité cosinus) et récupère les passages utiles.</div>
+<div class="card"><b>💬 4. RAG</b><br>Les passages retrouvés et la question sont envoyés à un modèle génératif, qui rédige la réponse finale.</div></div>
+</section>
+
+<section id="s1"><h2>1. Le chatbot PHP « sans IA générative »</h2>
+<p>Imaginons une base de données sur une formation Laravel :</p>
+<pre>$documents = [
+    "La formation Laravel dure 40 heures.",
+    "La formation comprend PHP, MVC, Eloquent et API REST.",
+    "Le prix de la formation est de 500 DT."
+];</pre>
+<p>L'utilisateur demande : <i>« Combien coûte la formation Laravel ? »</i>. PHP peut chercher une correspondance et afficher une phrase déjà écrite à l'avance.</p>
+<div class="card"><div class="bot user"><div class="av">🧑</div><div class="msg">Combien coûte la formation Laravel ?</div></div>
+<div class="bot"><div class="av">🤖</div><div class="msg">Le prix de la formation est de 500 DT.</div></div></div>
+<div class="card bad"><b>Limite :</b> si l'utilisateur demande <i>« C'est combien pour apprendre Laravel ? »</i>, une simple comparaison de mots peut échouer : aucun mot n'est identique. PHP recherche et compare, mais ne <b>comprend</b> pas et ne <b>rédige</b> pas une réponse nouvelle.</div>
+</section>
+
+<section id="s2"><h2>2. Comment fonctionne le RAG : le pipeline en 5 étapes</h2>
+<p><i>RAG = Retrieval-Augmented Generation</i>, « génération augmentée de recherche ». On ajoute deux étapes autour du LLM pour qu'il connaisse vos documents.</p>
+<div class="card"><ol class="flow">
+<li><span class="ic">📄</span><span><b>Documents</b><br>PDF, Word, fichiers texte, table MySQL : la matière brute de votre base de connaissances.</span></li>
+<li><span class="ic">🔢</span><span><b>Embeddings</b><br>Un modèle IA transforme chaque texte en vecteur (liste de nombres) qui représente son sens.</span></li>
+<li><span class="ic">🔍</span><span><b>Recherche sémantique</b><br>PHP compare le vecteur de la question aux vecteurs stockés et récupère les passages les plus proches.</span></li>
+<li><span class="ic">🧠</span><span><b>IA générative (LLM)</b><br>Le modèle reçoit la question <i>et</i> les passages retrouvés, puis rédige une réponse.</span></li>
+<li><span class="ic">✅</span><span><b>Réponse à l'utilisateur</b><br>Une phrase naturelle, fondée sur vos documents, pas sur une réponse toute faite.</span></li>
+</ol></div>
+<div class="card"><svg viewBox="0 0 620 190" role="img" aria-label="Schéma du pipeline RAG avec icônes">
+<rect x="10" y="65" width="100" height="60" rx="10" fill="none" stroke="var(--c1)" stroke-width="2"/><text x="42" y="90">📄</text><text x="22" y="112">Documents</text>
+<rect x="140" y="65" width="100" height="60" rx="10" fill="none" stroke="var(--c2)" stroke-width="2"/><text x="176" y="90">🔢</text><text x="152" y="112">Vecteurs</text>
+<rect x="270" y="65" width="110" height="60" rx="10" fill="none" stroke="var(--c3)" stroke-width="2"/><text x="308" y="90">🔍</text><text x="280" y="112">Recherche PHP</text>
+<rect x="410" y="65" width="90" height="60" rx="10" fill="none" stroke="#7fe0ff" stroke-width="2"/><text x="442" y="90">🧠</text><text x="428" y="112">LLM</text>
+<rect x="530" y="65" width="80" height="60" rx="10" fill="none" stroke="var(--ok)" stroke-width="2"/><text x="558" y="90">✅</text><text x="536" y="112">Réponse</text>
+<path d="M110 95 H140" class="axis"/><path d="M240 95 H270" class="axis"/><path d="M380 95 H410" class="axis"/><path d="M500 95 H530" class="axis"/>
+</svg></div>
+</section>
+
+<section id="s3"><h2>3.A Transformer un texte en vecteur (embedding)</h2>
+<p>Le vecteur n'est <b>pas inventé par PHP</b> : il est calculé par un modèle IA, via une API.</p>
+<pre>$texte = "La formation Laravel dure 40 heures.";
+
+// Le modèle IA transforme le texte
+// en une liste de nombres (vecteur).
+$embedding = getEmbedding($texte);
+
+// Exemple pédagogique simplifié du résultat :
+// $embedding = [0.25, 0.81, -0.12, 0.44];
+// En pratique : des centaines ou des milliers de valeurs.</pre>
+<div class="card"><p style="margin-top:0"><b>Voir un embedding se calculer <span class="tag">à essayer</span></b></p>
+<pre style="margin:0">$texte = "La formation Laravel dure 40 heures.";
+$embedding = getEmbedding($texte);</pre>
+<button id="run1" type="button">▶ Calculer l'embedding</button>
+<div class="chips" id="vecout"></div>
+<p style="margin:0;color:var(--mut)">Ici, 4 valeurs fictives pour l'exemple. Un vrai modèle en produit des centaines.</p></div>
+<p>On stocke ensuite le texte <b>et</b> son vecteur dans MySQL, une seule fois par document :</p>
+<pre>CREATE TABLE documents (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    contenu TEXT,
+    embedding TEXT   -- vecteur enregistré en JSON, ex: [0.25,0.81,-0.12,0.44]
+);</pre>
+</section>
+
+<section id="s4"><h2>3.B Rechercher les passages pertinents avec PHP</h2>
+<p>On transforme la <b>question</b> en vecteur, puis on la compare à chaque vecteur enregistré grâce à la <b>similarité cosinus</b>.</p>
+<pre>$question  = "Quelle est la durée du cours Laravel ?";
+$vQuestion = getEmbedding($question);
+
+foreach ($documents as $document) {
+    $score = cosineSimilarity($vQuestion, $document['embedding']);
+
+    if ($score > 0.75) {
+        echo $document['contenu'];
+    }
+}</pre>
+<div class="card note"><code>getEmbedding()</code> et <code>cosineSimilarity()</code> sont des fonctions à implémenter (ou à connecter à une API d'embedding). Le seuil <code>0.75</code> est illustratif : à ajuster selon le modèle et vos données.</div>
+<p>Le calcul de <code>cosineSimilarity()</code> en PHP :</p>
+<pre>function cosineSimilarity(array $a, array $b): float {
+    $dot = $normA = $normB = 0.0;
+    foreach ($a as $i =&gt; $x) {
+        $dot   += $x * $b[$i];
+        $normA += $x * $x;
+        $normB += $b[$i] * $b[$i];
+    }
+    return $dot / (sqrt($normA) * sqrt($normB));
+}</pre>
+<div class="card"><p style="margin-top:0"><b>Comparer la question aux 3 documents <span class="tag">à essayer</span></b></p>
+<div id="rk4"></div><p style="margin:8px 0 0;color:var(--mut)">Score &gt; 0.75 (barre verte) : le passage est retenu et envoyé au LLM à l'étape suivante.</p></div>
+</section>
+
+<section id="s5"><h2>3.C Générer une réponse avec le modèle IA</h2>
+<p>Une fois les passages retrouvés, on les transmet au modèle génératif <b>avec</b> la question, dans un seul prompt :</p>
+<pre>$context = "
+La formation Laravel dure 40 heures.
+Elle comprend PHP, MVC, Eloquent et API REST.
+";
+
+// La fonction envoie le contexte et la question
+// à une API de génération de texte.
+$reponse = generateAnswer($question, $context);
+
+echo $reponse;
+// "La formation Laravel dure 40 heures. Elle couvre
+//  PHP, MVC, Eloquent et les API REST."</pre>
+<div class="card note"><code>generateAnswer()</code> représente un appel à une API de génération de texte (le LLM), pas une fonction PHP native. Voici à quoi elle peut ressembler avec l'API Claude :</div>
+<pre>function generateAnswer(string $question, string $context): string {
+    $prompt = "Contexte :\n{$context}\n\nQuestion : {$question}\n"
+            . "Réponds uniquement à partir du contexte ci-dessus.";
+
+    $ch = curl_init('https://api.anthropic.com/v1/messages');
+    curl_setopt_array($ch, [
+        CURLOPT_HTTPHEADER => [
+            'content-type: application/json',
+            'x-api-key: ' . getenv('API_KEY'),
+            'anthropic-version: 2023-06-01'
+        ],
+        CURLOPT_POSTFIELDS => json_encode([
+            'model'      => 'claude-sonnet-5',
+            'max_tokens' => 300,
+            'messages'   => [['role' => 'user', 'content' => $prompt]]
+        ]),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true
+    ]);
+    $data = json_decode(curl_exec($ch), true);
+    return $data['content'][0]['text'];
+}</pre>
+<div class="card bad" style="margin-top:0"><b>Important :</b> ne mettez jamais la clé API dans du code accessible au navigateur. Gardez <code>generateAnswer()</code> côté serveur, avec la clé dans une variable d'environnement.</div>
+</section>
+
+<section id="s6"><h2>4. Démo complète : posez une question <span class="tag">à essayer</span></h2>
+<p>Ce mini-simulateur enchaîne les 5 étapes du pipeline avec les 3 documents Laravel.</p>
+<div class="card">
+<div class="chips"><button class="q6" data-q="Combien coûte la formation ?">Combien coûte la formation ?</button>
+<button class="q6" data-q="Quelle est la durée du cours ?">Quelle est la durée du cours ?</button>
+<button class="q6" data-q="Qu'apprend-on pendant la formation ?">Qu'apprend-on pendant la formation ?</button></div>
+<div id="chatlog"></div></div>
+</section>
+
+<section id="s7"><h2>5. Différence à retenir</h2>
+<div class="card"><table><tr><th>Technologie</th><th>Rôle</th><th>Exemple</th></tr>
+<tr><td>PHP</td><td>Logique de l'application</td><td>Recherche dans MySQL</td></tr>
+<tr><td>Embedding</td><td>Représentation numérique du texte</td><td>Question ➜ vecteur</td></tr>
+<tr><td>Similarité cosinus</td><td>Comparaison des vecteurs</td><td>Trouver les passages proches</td></tr>
+<tr><td>LLM</td><td>Génération de texte</td><td>Formuler la réponse</td></tr>
+<tr><td>RAG</td><td>Combinaison de ces étapes</td><td>Chatbot qui répond à partir de documents</td></tr></table></div>
+<div class="card good"><b>En résumé :</b> un chatbot PHP classique retrouve une réponse déjà enregistrée. Un système RAG recherche les informations pertinentes dans vos documents, les transmet à un modèle IA génératif, puis produit une réponse rédigée et adaptée à la question posée.</div>
+</section>
+
+<section id="s8"><h2>Quiz</h2><div class="card" id="quiz"></div></section>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+function cos(a,b){var d=0,x=0,y=0;a.forEach(function(v,i){d+=v*b[i];x+=v*v;y+=b[i]*b[i]});return d/Math.sqrt(x*y)}
+addEventListener("scroll",function(){$("bar").style.width=100*scrollY/(document.body.scrollHeight-innerHeight)+"%"});
+
+// s0 stack
+var ST=["<b>🧩 Machine Learning</b> : un modèle simple lit la question et la range dans une catégorie — inscription, prix, durée ou programme. Exemple : « C'est combien ? » ➜ catégorie <i>prix</i>.",
+"<b>🧠 Deep Learning</b> : un modèle de langage entraîné (réseau de neurones) va plus loin : il comprend le <i>sens</i> de la phrase et produit son embedding, même si les mots changent.",
+"<b>🗄️ PHP + MySQL</b> : votre code stocke les documents et leurs vecteurs, compare le vecteur de la question à ceux enregistrés (similarité cosinus), et récupère les passages utiles.",
+"<b>💬 RAG</b> : les passages retrouvés sont envoyés avec la question à un modèle génératif, qui rédige une réponse naturelle et adaptée."];
+document.querySelectorAll(".stack button").forEach(function(b){b.onclick=function(){$("stackinfo").innerHTML=ST[b.dataset.i]}});$("stackinfo").innerHTML=ST[0];
+
+var DOCS=[{t:"La formation Laravel dure 40 heures.",v:[0.80,0.18,-0.30,0.85]},
+{t:"La formation comprend PHP, MVC, Eloquent et API REST.",v:[0.30,0.75,0.40,-0.10]},
+{t:"Le prix de la formation est de 500 DT.",v:[-0.60,0.20,0.70,0.15]}];
+
+// 3A embedding demo
+$("run1").onclick=function(){var v=DOCS[0].v.map(function(x){return (x+(Math.random()-.5)*.03).toFixed(2)});
+$("vecout").innerHTML=v.map(function(x){return '<span class="chip">'+x+'</span>'}).join("")+'<span class="chip" style="background:var(--mut)">…</span>'};
+
+// 3B search demo
+var QV=[0.78,0.20,-0.28,0.82];
+function rk4(){$("rk4").innerHTML=DOCS.map(function(d){var s=cos(QV,d.v),ok=s>0.75;
+return '<div class="row"><span>'+d.t+'</span><div class="bar"><div style="background:'+(ok?"var(--ok)":"var(--mut)")+';width:'+Math.max(0,s)*100+'%"></div></div><b>'+s.toFixed(2)+'</b></div>'}).join("");}
+rk4();
+
+// 6 full simulator
+var ANSWERS={"Combien coûte la formation ?":"Le prix de la formation est de 500 DT.",
+"Quelle est la durée du cours ?":"La formation Laravel dure 40 heures.",
+"Qu'apprend-on pendant la formation ?":"Elle comprend PHP, MVC, Eloquent et API REST."};
+var QVECS={"Combien coûte la formation ?":[-0.58,0.22,0.68,0.18],
+"Quelle est la durée du cours ?":[0.76,0.19,-0.27,0.80],
+"Qu'apprend-on pendant la formation ?":[0.28,0.73,0.38,-0.08]};
+function bot(html){var d=document.createElement("div");d.className="bot";d.innerHTML='<div class="av">🤖</div><div class="msg">'+html+'</div>';$("chatlog").appendChild(d)}
+function user(html){var d=document.createElement("div");d.className="bot user";d.innerHTML='<div class="av">🧑</div><div class="msg">'+html+'</div>';$("chatlog").appendChild(d)}
+document.querySelectorAll(".q6").forEach(function(b){b.onclick=function(){
+$("chatlog").innerHTML="";var q=b.dataset.q;user(q);
+setTimeout(function(){bot("<b>Étape 2 — Embedding :</b> vectorisation de la question…")},250);
+setTimeout(function(){var scores=DOCS.map(function(d){return cos(QVECS[q],d.v)});
+var rows=DOCS.map(function(d,i){var ok=scores[i]>0.6;return d.t+' — score '+scores[i].toFixed(2)+(ok?" ✅":"")}).join("<br>");
+bot("<b>Étape 3 — Recherche sémantique :</b><br>"+rows)},900);
+setTimeout(function(){bot("<b>Étape 4 — LLM :</b> rédaction de la réponse à partir du passage retrouvé…")},1700);
+setTimeout(function(){bot("<b>Étape 5 — Réponse :</b> "+ANSWERS[q])},2400);
+}});
+
+var QZ=[["Un chatbot PHP classique peut rédiger une réponse totalement nouvelle.",0,"Il ne fait que retrouver une réponse déjà écrite."],["Dans le RAG, le vecteur du texte est calculé par PHP lui-même.",0,"Il est calculé par un modèle d'embedding, pas par PHP."],["La similarité cosinus sert à comparer deux vecteurs.",1,"Plus le score est proche de 1, plus les textes sont proches en sens."],["Le LLM reçoit uniquement la question, sans les documents retrouvés.",0,"Il reçoit la question ET le contexte retrouvé, pour rédiger une réponse fondée sur vos données."],["Dans l'exemple du centre de formation, le Deep Learning sert à produire les embeddings.",1,"Un modèle de langage entraîné comprend le sens et produit les vecteurs."]],qh="";
+QZ.forEach(function(x,i){qh+='<div class="q"><b>'+(i+1)+'. '+x[0]+'</b><br><button data-i="'+i+'" data-v="1">Vrai</button><button class="alt" data-i="'+i+'" data-v="0">Faux</button><span class="fb" id="f'+i+'"></span></div>'});
+$("quiz").innerHTML=qh;$("quiz").onclick=function(e){var i=e.target.dataset.i;if(i==null)return;var x=QZ[i],ok=e.target.dataset.v==x[1],f=$("f"+i);f.style.color=ok?"var(--ok)":"var(--c3)";f.textContent=(ok?"Bravo. ":"Pas tout à fait. ")+x[2]};
+</script>
+</body>
+</html>
