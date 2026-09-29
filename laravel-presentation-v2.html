@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laravel — Le framework PHP moderne</title>
+<style>
+:root{--bg:#f5f4fb;--ink:#160f22;--mut:#5c5470;--card:#fff;--line:#e3ddf0;--lrv:#FF2D20;--c1:#1499c0;--c2:#f0a92e;--c3:#e2506b;--ok:#2a9d6a;--dk:#160f22}
+@media(prefers-color-scheme:dark){:root{--bg:#0f0a1a;--ink:#f1eefb;--mut:#a99fc4;--card:#1c1430;--line:#332752;--dk:#0a0614}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Segoe UI",system-ui,sans-serif}
+main{max-width:960px;margin:0 auto;padding:0 20px 70px}
+h1,h2,h3{font-family:Georgia,serif;line-height:1.2}h2{font-size:1.65rem;margin:0 0 6px}h3{margin:16px 0 4px}
+section{padding-top:56px}p{max-width:72ch}
+nav{position:sticky;top:0;z-index:9;background:var(--dk);display:flex;gap:4px;overflow-x:auto;padding:0 12px}
+nav a{color:#cabdea;text-decoration:none;padding:11px 9px;font-size:.8rem;white-space:nowrap}nav a:hover{color:#fff}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--lrv);width:0;z-index:10}
+.hero{background:linear-gradient(135deg,#1a1128,#2a1338);color:#fff;padding:54px 20px 46px;position:relative;overflow:hidden}
+.hero>div{max-width:960px;margin:auto;position:relative;z-index:1}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);margin:14px 0 10px}
+.hero p{color:#d8cdf0;max-width:60ch}
+.diamonds{position:absolute;inset:0;overflow:hidden;opacity:.25}
+.diamonds span{position:absolute;width:26px;height:26px;border:2px solid var(--lrv);transform:rotate(45deg);animation:drift 14s linear infinite}
+@keyframes drift{0%{transform:rotate(45deg) translateY(0)}100%{transform:rotate(45deg) translateY(-40px)}}
+.logo{width:56px;height:56px}
+.badge{display:inline-block;background:rgba(255,45,32,.15);color:#ff8a7a;border:1px solid rgba(255,45,32,.4);border-radius:99px;padding:4px 12px;font-size:.8rem;font-weight:700;margin-bottom:6px}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+.note{border-left:5px solid var(--c2)}.good{border-left:5px solid var(--ok)}.ai{border-left:5px solid var(--c1)}
+code,.mono{font-family:ui-monospace,Consolas,monospace;background:var(--dk);color:#a9f4ff;padding:2px 7px;border-radius:5px;font-size:.9em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:760px){.grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+.feat{text-align:center;cursor:default}.feat .ico{font-size:1.8rem;display:block;margin-bottom:6px}
+.term{background:#1a1128;color:#d8cdf0;border-radius:10px;padding:14px 16px;font-family:ui-monospace,Consolas,monospace;font-size:.88rem;overflow-x:auto;min-height:1.4em}
+.term .p{color:#ff8a7a}
+.cursor{display:inline-block;width:7px;background:#d8cdf0;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+button{font:inherit;font-weight:600;background:var(--lrv);color:#fff;border:0;border-radius:10px;padding:9px 16px;cursor:pointer;margin:4px 4px 4px 0}
+button.alt{background:var(--dk)}
+input[type=text]{width:100%;font:inherit;padding:9px 12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+pre{background:var(--dk);color:#d7e6ff;padding:16px;border-radius:12px;overflow-x:auto;font-size:.85rem;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;transition:background .2s}
+th{color:var(--mut);font-size:.82rem;text-transform:uppercase;cursor:pointer}
+th:hover{color:var(--lrv)}
+td.best{color:var(--ok);font-weight:700}
+tr.hl td{background:color-mix(in srgb,var(--lrv) 6%,transparent)}
+.tree{font-family:ui-monospace,Consolas,monospace;font-size:.88rem;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;line-height:1.9}
+.tree .d{color:var(--lrv);font-weight:700}.tree .f{color:var(--mut)}
+svg{width:100%;height:auto;display:block}svg text{fill:var(--ink);font:600 13px "Segoe UI",sans-serif}
+.axis{stroke:var(--mut);stroke-width:1.5}
+.mvcbox{cursor:pointer;transition:filter .2s}
+.mvcbox.active{filter:drop-shadow(0 0 6px var(--lrv))}
+.step{display:flex;gap:14px;margin:16px 0}
+.step .n{background:var(--lrv);color:#fff;border-radius:50%;width:32px;height:32px;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{padding:6px 12px;border-radius:8px;background:var(--dk);color:#fff;font-weight:600;cursor:pointer;font-size:.85rem}
+.bot{display:flex;gap:10px;align-items:flex-start;margin:10px 0}
+.bot .av{width:34px;height:34px;border-radius:50%;background:var(--lrv);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+.bot.user .av{background:var(--c1)}
+.bot .msg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.bar{height:18px;border-radius:6px;background:var(--line);overflow:hidden}.bar div{height:100%;background:var(--lrv);width:0;transition:width .6s;border-radius:6px}
+.row{display:grid;grid-template-columns:1fr 1fr 50px;gap:10px;align-items:center;margin:6px 0;font-size:.88rem}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header class="hero">
+<div class="diamonds" id="diamonds"></div>
+<div>
+<svg class="logo" viewBox="0 0 60 60"><path d="M30 4 L54 18 V42 L30 56 L6 42 V18 Z" fill="none" stroke="#FF2D20" stroke-width="3"/><text x="18" y="38" style="font:700 22px Georgia,serif;fill:#FF2D20">L</text></svg>
+<div class="badge">Framework PHP</div>
+<h1>Laravel</h1>
+<p>Le framework PHP le plus populaire pour construire des applications web modernes, propres et rapides à développer — « The PHP Framework for Web Artisans ».</p>
+</div></header>
+<nav><a href="index.html">Accueil</a><a href="#s1">Qu'est-ce que Laravel</a><a href="#s2">Pourquoi</a><a href="#s3">Installation</a><a href="#s4">Architecture</a><a href="#s5">Tutoriel</a><a href="#s6">Comparatif</a><a href="#s7">Laravel + IA</a><a href="#s8">Écosystème</a></nav>
+<main>
+
+<section id="s1"><h2 class="reveal">1. Qu'est-ce que Laravel ?</h2>
+<p class="reveal">Laravel est un <b>framework PHP open source</b>, créé par <b>Taylor Otwell</b> en 2011. Un framework, c'est une ossature de code déjà construite : au lieu de partir d'une page blanche, vous héritez d'une structure solide (routage, sécurité, base de données, emails, files d'attente…) et vous vous concentrez sur la logique propre à votre projet.</p>
+<div class="grid4 reveal">
+<div class="card feat"><span class="ico">📅</span><b>2011</b><br><span style="color:var(--mut);font-size:.85rem">Première version</span></div>
+<div class="card feat"><span class="ico">🏷️</span><b>Laravel 13</b><br><span style="color:var(--mut);font-size:.85rem">Version actuelle (2026)</span></div>
+<div class="card feat"><span class="ico">🐘</span><b>PHP 8.3+</b><br><span style="color:var(--mut);font-size:.85rem">Version requise</span></div>
+<div class="card feat"><span class="ico">⭐</span><b>N°1</b><br><span style="color:var(--mut);font-size:.85rem">Framework PHP le plus utilisé</span></div>
+</div>
+</section>
+
+<section id="s2"><h2 class="reveal">2. Pourquoi choisir Laravel ?</h2>
+<p class="reveal">Survolez ou touchez une carte pour voir un exemple concret.</p>
+<div class="grid3" id="whyGrid"></div>
+</section>
+
+<section id="s3"><h2 class="reveal">3. Installation, étape par étape</h2>
+<p class="reveal">Cliquez sur le bouton pour regarder les commandes se taper toutes seules, comme dans un vrai terminal.</p>
+<div class="card reveal">
+<button id="runTerm" type="button">▶ Lancer la simulation</button>
+<div class="term" id="termOut"><span class="p">$</span> <span class="cursor">&nbsp;</span></div>
+</div>
+<div class="card note reveal">💡 <code>artisan</code> est l'outil en ligne de commande de Laravel : il génère du code, exécute les migrations, lance des tâches planifiées, etc.</div>
+</section>
+
+<section id="s4"><h2 class="reveal">4. L'architecture MVC</h2>
+<p class="reveal">Laravel suit le modèle <b>MVC</b> (Modèle-Vue-Contrôleur). Cliquez sur une étape pour la détailler.</p>
+<div class="card reveal"><svg viewBox="0 0 620 170" role="img" aria-label="Cycle MVC dans Laravel">
+<text x="10" y="20">🧑 Requête du navigateur</text>
+<g class="mvcbox" data-k="route"><rect x="10" y="35" width="90" height="50" rx="8" fill="none" stroke="var(--lrv)" stroke-width="2"/><text x="20" y="65">🛣️ Route</text></g>
+<g class="mvcbox" data-k="controller"><rect x="130" y="35" width="110" height="50" rx="8" fill="none" stroke="var(--c2)" stroke-width="2"/><text x="140" y="65">🕹️ Contrôleur</text></g>
+<g class="mvcbox" data-k="model"><rect x="270" y="35" width="100" height="50" rx="8" fill="none" stroke="var(--c1)" stroke-width="2"/><text x="290" y="65">🗄️ Modèle</text></g>
+<g class="mvcbox" data-k="view"><rect x="400" y="35" width="90" height="50" rx="8" fill="none" stroke="var(--c3)" stroke-width="2"/><text x="415" y="65">🎨 Vue</text></g>
+<rect x="520" y="35" width="90" height="50" rx="8" fill="none" stroke="var(--ok)" stroke-width="2"/><text x="530" y="65">✅ Réponse</text>
+<path d="M100 60 H130" class="axis"/><path d="M240 60 H270" class="axis"/><path d="M370 60 H400" class="axis"/><path d="M490 60 H520" class="axis"/>
+<circle r="6" fill="var(--lrv)"><animateMotion dur="4s" repeatCount="indefinite" path="M55,60 H565"/></circle>
+</svg>
+<p id="mvcDetail" class="card note" style="margin:14px 0 0"></p>
+</div>
+<div class="tree reveal">
+<span class="d">mon-projet/</span><br>
+&nbsp;&nbsp;<span class="d">app/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="d">Http/Controllers/</span> <span class="f">← vos contrôleurs</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="d">Models/</span> <span class="f">← vos modèles Eloquent</span><br>
+&nbsp;&nbsp;<span class="d">routes/</span><span class="f">web.php ← toutes vos URLs</span><br>
+&nbsp;&nbsp;<span class="d">resources/views/</span> <span class="f">← vos fichiers Blade (.blade.php)</span><br>
+&nbsp;&nbsp;<span class="d">database/migrations/</span> <span class="f">← structure des tables</span><br>
+&nbsp;&nbsp;<span class="d">.env</span> <span class="f">← configuration (base de données, clés API…)</span>
+</div>
+</section>
+
+<section id="s5"><h2 class="reveal">5. Mini-tutoriel : afficher une liste depuis la base de données</h2>
+<div class="step reveal"><div class="n">1</div><div><b>Créer une migration et un modèle</b>
+<div class="term"><span class="p">$</span> php artisan make:model Formation -m</div></div></div>
+<div class="step reveal"><div class="n">2</div><div><b>Définir la table dans la migration</b>
+<pre>Schema::create('formations', function (Blueprint $table) {
+    $table->id();
+    $table->string('titre');
+    $table->integer('duree_heures');
+    $table->decimal('prix', 8, 2);
+    $table->timestamps();
+});</pre></div></div>
+<div class="step reveal"><div class="n">3</div><div><b>Exécuter la migration</b>
+<div class="term"><span class="p">$</span> php artisan migrate</div></div></div>
+<div class="step reveal"><div class="n">4</div><div><b>Ajouter une route</b>
+<pre>Route::get('/formations', [FormationController::class, 'index']);</pre></div></div>
+<div class="step reveal"><div class="n">5</div><div><b>Écrire le contrôleur</b>
+<pre>public function index()
+{
+    $formations = Formation::all(); // Eloquent : pas de SQL à écrire
+    return view('formations.index', compact('formations'));
+}</pre></div></div>
+<div class="step reveal"><div class="n">6</div><div><b>Créer la vue Blade</b>
+<pre>@foreach ($formations as $formation)
+    &lt;p&gt;{{ $formation->titre }} — {{ $formation->duree_heures }}h — {{ $formation->prix }} DT&lt;/p&gt;
+@endforeach</pre></div></div>
+<div class="card good reveal">✅ En 6 étapes, sans écrire une seule requête SQL, vous avez une page qui liste vos formations depuis la base de données.</div>
+</section>
+
+<section id="s6"><h2 class="reveal">6. Laravel face aux alternatives</h2>
+<p class="reveal">Cliquez sur un critère pour voir la ligne se mettre en évidence.</p>
+<div class="card reveal"><table id="cmpTable">
+<tr><th data-r="1">Courbe d'apprentissage</th><th>PHP pur</th><th>CodeIgniter</th><th>Symfony</th><th>Laravel</th></tr>
+<tr id="r1"><td>Courbe d'apprentissage</td><td class="best">Aucune</td><td class="best">Facile</td><td>Difficile</td><td>Modérée</td></tr>
+<tr id="r2"><td>Structure imposée</td><td>Aucune</td><td>Légère</td><td>Forte</td><td>Équilibrée</td></tr>
+<tr id="r3"><td>ORM intégré</td><td>Non</td><td>Basique</td><td>Doctrine (puissant)</td><td class="best">Eloquent (simple)</td></tr>
+<tr id="r4"><td>Rapidité de développement</td><td>Lente</td><td>Rapide</td><td>Lente</td><td class="best">Très rapide</td></tr>
+<tr id="r5"><td>Écosystème / packages</td><td>—</td><td>Limité</td><td>Riche</td><td class="best">Très riche</td></tr>
+<tr id="r6"><td>Idéal pour</td><td>Micro-scripts</td><td>Petits projets</td><td>Projets d'entreprise complexes</td><td class="best">La majorité des projets web</td></tr>
+</table></div>
+<div class="card note reveal">💡 Symfony reste un excellent choix pour des architectures très complexes et sur-mesure ; Laravel privilégie la productivité et la lisibilité pour aller plus vite sans sacrifier la qualité.</div>
+</section>
+
+<section id="s7"><h2 class="reveal">7. Laravel et l'intelligence artificielle</h2>
+<p class="reveal">Ce que vous avez appris avec PHP pur (embeddings, similarité cosinus, appel à une API IA) s'applique directement dans Laravel — en plus propre.</p>
+<div class="card ai reveal"><b>🔌 Appeler une API IA avec le client HTTP de Laravel</b>
+<pre>use Illuminate\Support\Facades\Http;
+
+$reponse = Http::withHeaders([
+        'x-api-key' => config('services.anthropic.key'),
+        'anthropic-version' => '2023-06-01',
+    ])->post('https://api.anthropic.com/v1/messages', [
+        'model' => 'claude-sonnet-5',
+        'max_tokens' => 300,
+        'messages' => [['role' => 'user', 'content' => $prompt]],
+    ]);
+
+$texte = $reponse->json('content.0.text');</pre>
+<p style="margin-bottom:0">Plus besoin de <code>curl_init()</code> à la main : le facade <code>Http</code> fait tout, et la clé API reste dans <code>.env</code>.</p></div>
+
+<div class="card ai reveal"><p style="margin-top:0"><b>🤖 Essayez le mini-chatbot « à la Laravel » <span class="badge" style="margin:0">démo en direct</span></b></p>
+<p style="color:var(--mut)">Simulation du même pipeline RAG que dans votre TP PHP — ici, <code>Formation::all()</code> et Eloquent remplacent le tableau <code>$documents</code>.</p>
+<div class="chips">
+<button class="q6" data-q="Combien coûte la formation ?">Combien coûte la formation ?</button>
+<button class="q6" data-q="Quelle est la durée du cours ?">Quelle est la durée du cours ?</button>
+<button class="q6" data-q="Qu'apprend-on pendant la formation ?">Qu'apprend-on pendant la formation ?</button>
+</div>
+<div id="chatlog"></div></div>
+
+<div class="card ai reveal"><b>🗄️ Stocker des documents et leurs embeddings avec Eloquent</b>
+<pre>Schema::create('documents', function (Blueprint $table) {
+    $table->id();
+    $table->text('contenu');
+    $table->json('embedding'); // le vecteur, stocké proprement
+});
+
+$meilleur = Document::all()
+    ->sortByDesc(fn ($doc) => cosineSimilarity($vQuestion, $doc->embedding))
+    ->first();</pre></div>
+<div class="card good reveal">🎯 Résultat : le même chatbot RAG que Sami, mais rangé proprement en routes, contrôleurs et modèles.</div>
+</section>
+
+<section id="s8"><h2 class="reveal">8. L'écosystème Laravel</h2>
+<div class="grid3">
+<div class="card feat reveal"><span class="ico">⚡</span><b>Livewire</b><br><span style="color:var(--mut);font-size:.85rem">Des interfaces interactives en PHP, sans écrire de JavaScript.</span></div>
+<div class="card feat reveal"><span class="ico">🖥️</span><b>Nova</b><br><span style="color:var(--mut);font-size:.85rem">Un panneau d'administration généré automatiquement.</span></div>
+<div class="card feat reveal"><span class="ico">🔑</span><b>Sanctum</b><br><span style="color:var(--mut);font-size:.85rem">Authentification simple pour API et applications SPA.</span></div>
+<div class="card feat reveal"><span class="ico">💳</span><b>Cashier</b><br><span style="color:var(--mut);font-size:.85rem">Gestion des abonnements et paiements (Stripe).</span></div>
+<div class="card feat reveal"><span class="ico">☁️</span><b>Forge / Vapor</b><br><span style="color:var(--mut);font-size:.85rem">Déploiement de serveurs ou en serverless, en quelques clics.</span></div>
+<div class="card feat reveal"><span class="ico">🧵</span><b>Horizon</b><br><span style="color:var(--mut);font-size:.85rem">Supervision des files d'attente (tâches en arrière-plan).</span></div>
+</div>
+<div class="card good reveal" style="margin-top:20px"><b>Pour aller plus loin :</b> la documentation officielle <code>laravel.com/docs</code> est particulièrement claire et à jour.</div>
+</section>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
+addEventListener("scroll",function(){$("bar").style.width=100*scrollY/(document.body.scrollHeight-innerHeight)+"%"});
+
+// Floating diamonds in hero
+var dh="";for(var i=0;i<10;i++){dh+='<span style="left:'+(i*10+Math.random()*5)+'%;top:'+(Math.random()*100)+'%;animation-delay:'+(Math.random()*14)+'s"></span>'}
+$("diamonds").innerHTML=dh;
+
+// ---- Section 2 : pourquoi (hover reveals example) ----
+var WHY=[["🛣️","Routage élégant","Des URLs propres définies en quelques lignes.","Route::get('/formations', ...) au lieu de parser $_GET vous-même."],
+["🗄️","Eloquent ORM","Manipuler la base de données comme des objets PHP.","Formation::where('prix','<',300)->get() au lieu d'écrire du SQL."],
+["🎨","Blade","Un moteur de templates simple pour vos pages HTML.","{{ $titre }} affiche une variable, échappée automatiquement contre les failles XSS."],
+["🔐","Sécurité intégrée","Protection CSRF, hachage des mots de passe, authentification prêtes à l'emploi.","php artisan make:auth générait autrefois tout un système de connexion."],
+["🧪","Tests intégrés","PHPUnit et Pest configurés dès le départ.","php artisan test lance toute votre suite de tests en une commande."],
+["📦","Écosystème riche","Des milliers de packages prêts à l'emploi via Composer.","composer require laravel/cashier ajoute la facturation Stripe en une ligne."]];
+$("whyGrid").innerHTML=WHY.map(function(w){return '<div class="card feat reveal in" data-ex="'+w[3].replace(/"/g,"&quot;")+'"><span class="ico">'+w[0]+'</span><b>'+w[1]+'</b><br><span style="color:var(--mut);font-size:.9rem" class="whytext">'+w[2]+'</span></div>'}).join("");
+document.querySelectorAll("#whyGrid .card").forEach(function(c){var orig=c.querySelector(".whytext").innerHTML;
+c.onmouseenter=function(){c.querySelector(".whytext").innerHTML='<code style="white-space:normal">'+c.dataset.ex+'</code>'};
+c.onmouseleave=function(){c.querySelector(".whytext").innerHTML=orig};
+c.onclick=c.onmouseenter;});
+
+// ---- Section 3 : terminal typing simulation ----
+var CMDS=[["$ php -v","PHP 8.3.11"],["$ composer -V","Composer version 2.7"],["$ composer create-project laravel/laravel mon-projet","Téléchargement... ✔ Application prête !"],["$ cd mon-projet && php artisan serve","Server running on http://127.0.0.1:8000"]];
+$("runTerm").onclick=function(){$("termOut").innerHTML="";this.disabled=true;var idx=0;
+function next(){if(idx>=CMDS.length){$("termOut").innerHTML+='<div style="color:var(--ok)">✔ mon-projet est prêt — ouvrez http://127.0.0.1:8000</div>';$("runTerm").disabled=false;return}
+var cmd=CMDS[idx][0],out=CMDS[idx][1],i=0;
+var line=document.createElement("div");line.innerHTML='<span class="p"></span>';$("termOut").appendChild(line);
+var iv=setInterval(function(){line.innerHTML='<span class="p">'+cmd.slice(0,i)+'</span><span class="cursor">&nbsp;</span>';i++;
+if(i>cmd.length){clearInterval(iv);var res=document.createElement("div");res.style.color="#a99fc4";res.textContent=out;$("termOut").appendChild(res);idx++;setTimeout(next,500)}},22)}
+next()};
+
+// ---- Section 4 : MVC interactive ----
+var MVC={route:"🛣️ <b>Route</b> — associe une URL (ex : /formations) à une action précise dans votre code.",
+controller:"🕹️ <b>Contrôleur</b> — reçoit la requête, décide quoi faire, et fait appel au Modèle si besoin.",
+model:"🗄️ <b>Modèle</b> — représente une table de la base de données (ex : Formation) et va y chercher les informations via Eloquent.",
+view:"🎨 <b>Vue</b> — le fichier Blade qui transforme les données en HTML affiché à l'utilisateur."};
+document.querySelectorAll(".mvcbox").forEach(function(g){g.onclick=function(){
+document.querySelectorAll(".mvcbox").forEach(function(x){x.classList.remove("active")});
+g.classList.add("active");$("mvcDetail").innerHTML=MVC[g.dataset.k]}});
+$("mvcDetail").innerHTML=MVC.route;document.querySelector('.mvcbox[data-k="route"]').classList.add("active");
+
+// ---- Section 6 : comparison table row highlight ----
+document.querySelectorAll("#cmpTable tr").forEach(function(tr,i){if(i===0)return;
+tr.onclick=function(){document.querySelectorAll("#cmpTable tr").forEach(function(t){t.classList.remove("hl")});tr.classList.add("hl")}});
+
+// ---- Section 7 : mini chatbot demo (same logic as the PHP TP, in JS) ----
+function cos(a,b){var d=0,x=0,y=0;a.forEach(function(v,i){d+=v*b[i];x+=v*v;y+=b[i]*b[i]});return x&&y?d/Math.sqrt(x*y):0}
+var DOCS=[{t:"La formation Laravel dure 40 heures.",v:[0.80,0.18,-0.30,0.85]},
+{t:"La formation comprend PHP, MVC, Eloquent et API REST.",v:[0.30,0.75,0.40,-0.10]},
+{t:"Le prix de la formation est de 500 DT.",v:[-0.60,0.20,0.70,0.15]}];
+var QVECS={"Combien coûte la formation ?":[-0.58,0.22,0.68,0.18],"Quelle est la durée du cours ?":[0.76,0.19,-0.27,0.80],"Qu'apprend-on pendant la formation ?":[0.28,0.73,0.38,-0.08]};
+var ANSWERS={"Combien coûte la formation ?":"Le prix de la formation est de 500 DT.","Quelle est la durée du cours ?":"La formation Laravel dure 40 heures.","Qu'apprend-on pendant la formation ?":"Elle comprend PHP, MVC, Eloquent et API REST."};
+function bot(html){var d=document.createElement("div");d.className="bot";d.innerHTML='<div class="av">🤖</div><div class="msg">'+html+'</div>';$("chatlog").appendChild(d)}
+function user(html){var d=document.createElement("div");d.className="bot user";d.innerHTML='<div class="av">🧑</div><div class="msg">'+html+'</div>';$("chatlog").appendChild(d)}
+document.querySelectorAll(".q6").forEach(function(b){b.onclick=function(){
+$("chatlog").innerHTML="";var q=b.dataset.q;user(q);
+setTimeout(function(){bot("<code>Http::post(...)</code> — vectorisation de la question (embedding simulé)…")},250);
+setTimeout(function(){var scores=DOCS.map(function(d){return cos(QVECS[q],d.v)});
+var rows=DOCS.map(function(d,i){var ok=scores[i]>0.6;return '<div class="row"><span>'+(ok?"✅ ":"")+d.t+'</span><div class="bar"><div style="width:'+Math.max(0,scores[i])*100+'%"></div></div><b>'+scores[i].toFixed(2)+'</b></div>'}).join("");
+bot("<code>Document::all()->sortByDesc(...)</code><br>"+rows)},900);
+setTimeout(function(){bot("<code>Http::post('.../messages', ...)</code> — rédaction par le LLM…")},1900);
+setTimeout(function(){bot("✅ <b>Réponse :</b> "+ANSWERS[q])},2700);
+}});
+</script>
+</body>
+</html>

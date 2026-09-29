@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le marketing digital en images</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f6fa;--ink:#141a2e;--mut:#5c6478;--card:#fff;--line:#e2e5ee;--ac:#3457d5;--ac2:#00b894;--warn:#e94f64;--dark:#0d1120;
+--f:"Manrope",system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1120;--ink:#eceefb;--mut:#a6acc2;--card:#171b2e;--line:#2b3050;--dark:#090b16}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(52px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--f)}
+main{max-width:920px;margin:0 auto;padding:0 22px 90px}
+h1,h2,h3{font-family:var(--f);font-weight:800;line-height:1.18;letter-spacing:-.01em}
+h2{font-size:1.65rem;margin:0 0 8px}h3{font-size:1.02rem;margin:0 0 5px;font-weight:700}
+section{padding-top:60px}p{max-width:66ch}.lede{color:var(--mut)}
+nav{position:sticky;top:0;z-index:9;background:var(--dark);display:flex;gap:2px;overflow-x:auto;padding:calc(env(safe-area-inset-top,0px) + 4px) 14px 4px}
+nav a{color:#b7bdd6;text-decoration:none;padding:11px 12px;font-size:.82rem;font-weight:600;white-space:nowrap;border-radius:6px}
+nav a.on{color:#fff;background:rgba(255,255,255,.1)}
+#bar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--ac);z-index:10}
+.hero{background:var(--dark);color:#fff;padding:62px 22px 46px}
+.hero>div{max-width:920px;margin:auto}
+.hero h1{font-size:clamp(1.9rem,5vw,2.9rem);margin:0 0 12px}
+.hero .word{display:inline-block;opacity:0;transform:translateY(14px);animation:rise .6s ease forwards}
+.hero p{color:#bcc2df;max-width:60ch;opacity:0;animation:fade .7s ease forwards;animation-delay:.9s}
+@keyframes rise{to{opacity:1;transform:none}}@keyframes fade{to{opacity:1}}
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}.reveal.in{opacity:1;transform:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.chan{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;margin-bottom:34px}
+@media(max-width:700px){.chan{grid-template-columns:1fr}}
+.chan.rev .mock{order:2}
+.tag{display:inline-block;font:800 .72rem var(--f);color:var(--ac);letter-spacing:.03em;margin-bottom:4px}
+.chan p{font-size:.94rem}
+.take{margin-top:10px;font-size:.85rem;background:rgba(52,87,213,.08);border-inline-start:3px solid var(--ac);padding:8px 12px;border-radius:6px}
+/* browser mockup */
+.browser{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 10px 30px -14px rgba(20,26,46,.25)}
+.bbar{background:#eef0f5;padding:7px 10px;display:flex;align-items:center;gap:6px}
+.bdot{width:8px;height:8px;border-radius:50%;background:#d4d7e2}
+.burl{margin-inline-start:8px;background:#fff;border:1px solid #e2e5ee;border-radius:6px;padding:3px 10px;font-size:.68rem;color:#8890a6;flex:1;font-family:ui-monospace,monospace}
+.bbody{padding:16px}
+.res{margin-bottom:14px}.res:last-child{margin-bottom:0}
+.res .badge{display:inline-block;background:#fdecc8;color:#8a5a00;font-size:.62rem;font-weight:800;padding:1px 6px;border-radius:4px;margin-inline-end:6px;vertical-align:middle}
+.res .rtitle{color:#1a56db;font-size:.98rem}
+.res .rurl{color:#0a7a3f;font-size:.76rem}
+.res .rdesc{color:#5a6072;font-size:.82rem;margin-top:2px}
+.skel{height:9px;background:#e9ebf3;border-radius:4px;margin:6px 0}
+/* phone mockup */
+.phone{width:220px;margin:0 auto;border:7px solid var(--dark);border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 14px 34px -16px rgba(20,26,46,.35)}
+.phead{display:flex;align-items:center;gap:8px;padding:9px 10px}
+.avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));flex-shrink:0}
+.phead b{font-size:.76rem;color:#222}
+.pimg{height:150px;background:linear-gradient(135deg,var(--ac),var(--ac2))}
+.pact{display:flex;gap:14px;padding:8px 10px;color:#8890a6;font-size:.72rem}
+.pcap{padding:0 10px 12px;font-size:.78rem;color:#333}
+/* email mockup */
+.email{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 10px 30px -14px rgba(20,26,46,.25)}
+.erow{padding:10px 14px;border-bottom:1px solid var(--line);background:#f7f8fc;font-size:.78rem;color:#333}
+.erow b{display:block;font-size:.85rem;color:var(--ink)}
+.ebody{padding:18px}
+.ehero{height:70px;border-radius:8px;background:linear-gradient(135deg,var(--ac2),var(--ac));margin-bottom:12px}
+.ecta{display:inline-block;margin-top:10px;background:var(--ac);color:#fff;padding:8px 18px;border-radius:6px;font-weight:700;font-size:.82rem}
+/* article + banner ad */
+.artmock{border:1px solid var(--line);border-radius:10px;padding:16px;background:#fff;box-shadow:0 10px 30px -14px rgba(20,26,46,.25)}
+.adbox{border:2px dashed var(--ac);border-radius:8px;padding:14px;margin:12px 0;background:rgba(52,87,213,.05);text-align:center}
+.adbox .lbl{font-size:.62rem;font-weight:800;color:var(--ac);letter-spacing:.05em}
+.adbox h3{margin:6px 0 4px;font-size:.95rem}
+.adbtn{display:inline-block;margin-top:6px;background:var(--ac2);color:#fff;font-size:.78rem;font-weight:700;padding:6px 14px;border-radius:6px}
+/* storyboard */
+.story{display:flex;align-items:flex-start;justify-content:center;gap:0;flex-wrap:wrap;margin-top:18px}
+.sbox{width:150px;text-align:center}.sbox b{display:block;margin-top:8px;font-size:.8rem}
+.sarrow{align-self:center;color:var(--ac);font-size:1.3rem;padding:0 8px;margin-top:40px}
+.mini{transform:scale(.72);transform-origin:top center;margin-bottom:-34px}
+/* before/after */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:680px){.ba{grid-template-columns:1fr}}
+.bacard{border-radius:12px;padding:16px;border:2px solid var(--warn)}
+.bacard.after{border-color:var(--ac2)}
+.bacard h3{display:flex;align-items:center;gap:8px}
+.bacard .dot{width:10px;height:10px;border-radius:50%;background:var(--warn)}
+.bacard.after .dot{background:var(--ac2)}
+.lp{border:1px solid var(--line);border-radius:8px;padding:14px;background:#fff}
+.lp .h{height:16px;background:#dde1ee;border-radius:4px;width:70%;margin-bottom:8px}
+.lp .l{height:8px;background:#eceef6;border-radius:4px;margin:5px 0}
+.lp .btn{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:6px;font-size:.75rem;font-weight:700}
+.bacard .btn{background:#ccc;color:#666}.bacard.after .btn{background:var(--ac2);color:#fff}
+.diffs{list-style:none;margin:10px 0 0;padding:0;font-size:.86rem}
+.diffs li{padding:3px 0 3px 20px;position:relative}
+.diffs li::before{position:absolute;left:0}
+.bacard .diffs li::before{content:"−";color:var(--warn);font-weight:800}
+.bacard.after .diffs li::before{content:"+";color:var(--ac2);font-weight:800}
+/* brand consistency */
+.swatches{display:flex;gap:10px;margin:12px 0 18px;flex-wrap:wrap}
+.sw{width:52px;height:52px;border-radius:10px;display:flex;align-items:flex-end;justify-content:center;color:#fff;font-size:.62rem;font-weight:700;padding-bottom:4px}
+.brandrow{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;align-items:flex-start}
+.brandrow .mini{transform:scale(.6)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.hero .word,.hero p{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav id="nav"><a href="index.html">Accueil</a><a href="#canaux" data-s="canaux">Canaux en images</a><a href="#parcours" data-s="parcours">Parcours client</a><a href="#avantapres" data-s="avantapres">Avant / Après</a><a href="#marque" data-s="marque">Cohérence de marque</a></nav>
+<header class="hero"><div>
+<h1 id="heroTitle"></h1>
+<p>Chaque canal du marketing digital, illustré par une maquette représentative et un exemple concret — pour visualiser, pas seulement lire.</p>
+</div></header>
+<main>
+
+<section id="canaux"><h2 class="reveal">Les canaux, illustrés</h2>
+<p class="lede reveal">Les maquettes ci-dessous sont des reconstitutions fidèles à quoi ressemble chaque format — pas des captures réelles.</p>
+
+<div class="chan reveal">
+<div><span class="tag">SEO · Référencement naturel</span><h3>Le résultat organique</h3>
+<p>Un contenu bien optimisé apparaît dans les résultats sans publicité, grâce à sa pertinence pour la requête et la qualité technique du site.</p>
+<div class="take"><b>À retenir :</b> le titre et la description affichés viennent des balises <code>&lt;title&gt;</code> et <code>meta description</code> de la page.</div></div>
+<div class="mock browser"><div class="bbar"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><div class="burl">google.com/search?q=chaussures+randonnée</div></div>
+<div class="bbody">
+<div class="res"><div class="rtitle">Chaussures de randonnée imperméables | Marque</div><div class="rurl">www.marque.com › randonnee</div><div class="rdesc">Découvrez notre gamme testée en montagne. Livraison 48h, retours gratuits sous 30 jours.</div></div>
+<div class="skel" style="width:90%"></div><div class="skel" style="width:75%"></div><div class="skel" style="width:85%"></div>
+</div></div></div>
+
+<div class="chan rev reveal">
+<div><span class="tag">SEA · Publicité sur moteur de recherche</span><h3>Le résultat sponsorisé</h3>
+<p>Même position visible, mais achetée : l'annonceur paie à chaque clic pour apparaître sur des mots-clés choisis, avec un contrôle immédiat sur le message.</p>
+<div class="take"><b>À retenir :</b> le badge « Annonce » distingue légalement le contenu payant du résultat naturel.</div></div>
+<div class="mock browser"><div class="bbar"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><div class="burl">google.com/search?q=chaussures+randonnée</div></div>
+<div class="bbody">
+<div class="res"><span class="badge">Annonce</span><span class="rtitle" style="display:inline">-20% Chaussures Randonnée | Marque</span><div class="rurl">www.marque.com/promo</div><div class="rdesc">Offre limitée cette semaine. Paiement en 3 fois. Livraison offerte dès 50€.</div></div>
+<div class="skel" style="width:90%"></div><div class="skel" style="width:75%"></div>
+</div></div></div>
+
+<div class="chan reveal">
+<div><span class="tag">Réseaux sociaux</span><h3>La publication engageante</h3>
+<p>Une image forte, une légende courte et un appel à l'action discret suffisent à générer de l'engagement — les réseaux sociaux récompensent la régularité plus que la perfection.</p>
+<div class="take"><b>À retenir :</b> le taux d'engagement (likes + commentaires ÷ portée) compte plus que le nombre d'abonnés.</div></div>
+<div class="mock phone"><div class="phead"><div class="avatar"></div><b>marque_outdoor</b></div><div class="pimg"></div>
+<div class="pact"><span>♥ 1 284</span><span>💬 48</span><span>↗ 12</span></div>
+<div class="pcap"><b>marque_outdoor</b> 🥾 Nouvelle collection montagne, dès aujourd'hui. Lien en bio.</div></div></div>
+
+<div class="chan rev reveal">
+<div><span class="tag">Email marketing</span><h3>La séquence qui convertit</h3>
+<p>Un objet qui donne envie d'ouvrir, un message centré sur un seul bénéfice, et un bouton d'action unique et visible.</p>
+<div class="take"><b>À retenir :</b> un email avec un seul call-to-action convertit mieux qu'un email qui en propose plusieurs.</div></div>
+<div class="mock email"><div class="erow"><b>Marque Outdoor</b>-20% sur la collection montagne, 48h seulement</div>
+<div class="ebody"><div class="ehero"></div><p style="margin:0;font-size:.86rem">Bonjour Claire,<br>vos prochaines sorties commencent ici.</p><span class="ecta">Découvrir la collection</span></div></div></div>
+
+<div class="chan reveal">
+<div><span class="tag">Content marketing</span><h3>L'article qui installe la confiance</h3>
+<p>Un guide utile positionne la marque comme experte avant même la vente, et nourrit le référencement naturel sur la durée.</p>
+<div class="take"><b>À retenir :</b> un bon article répond à une vraie question tapée dans un moteur de recherche.</div></div>
+<div class="mock browser"><div class="bbar"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><div class="burl">blog.marque.com/choisir-chaussures</div></div>
+<div class="bbody"><div class="pimg" style="height:70px;border-radius:6px;margin-bottom:10px"></div>
+<div style="font-weight:800;font-size:.92rem">Comment bien choisir ses chaussures de randonnée</div>
+<div style="font-size:.72rem;color:#8890a6;margin:2px 0 8px">Par l'équipe Marque · 5 min de lecture</div>
+<div class="skel" style="width:95%"></div><div class="skel" style="width:88%"></div><div class="skel" style="width:70%"></div></div></div></div>
+
+<div class="chan rev reveal">
+<div><span class="tag">Publicité display</span><h3>La bannière contextuelle</h3>
+<p>Diffusée sur des sites tiers pertinents pour l'audience visée, elle vise la notoriété plus que la conversion immédiate.</p>
+<div class="take"><b>À retenir :</b> le taux de clic moyen d'une bannière display est bien plus bas que celui d'une annonce de recherche — son rôle est différent.</div></div>
+<div class="mock artmock"><div class="skel" style="width:80%"></div><div class="skel" style="width:95%"></div>
+<div class="adbox"><div class="lbl">PUBLICITÉ</div><h3>Randonnez sans limites</h3><p style="margin:0;font-size:.8rem;color:var(--mut)">-20% cette semaine seulement</p><span class="adbtn">En profiter</span></div>
+<div class="skel" style="width:90%"></div><div class="skel" style="width:75%"></div></div></div>
+</section>
+
+<section id="parcours"><h2 class="reveal">Le parcours d'une campagne</h2>
+<p class="lede reveal">Les canaux ne travaillent jamais seuls : voici comment ils s'enchaînent dans un parcours réel.</p>
+<div class="story reveal">
+<div class="sbox"><div class="mini artmock" style="padding:10px"><div class="adbox" style="margin:0;padding:8px"><div class="lbl">PUB</div><h3 style="font-size:.8rem">Randonnez sans limites</h3></div></div><b>1 · Découverte (bannière)</b></div>
+<div class="sarrow">→</div>
+<div class="sbox"><div class="mini browser"><div class="bbar"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span></div><div class="bbody"><div style="font-weight:800;font-size:.85rem">Collection Montagne</div><div class="skel"></div><span class="ecta" style="margin-top:8px">Voir l'offre</span></div></div><b>2 · Clic → page d'atterrissage</b></div>
+<div class="sarrow">→</div>
+<div class="sbox"><div class="mini email"><div class="erow"><b>Merci pour votre visite</b>Votre sélection vous attend</div></div><b>3 · Relance par email</b></div>
+</div></section>
+
+<section id="avantapres"><h2 class="reveal">Avant / Après : une page d'atterrissage</h2>
+<p class="lede reveal">Même produit, même trafic — mais une conversion très différente selon la clarté du message.</p>
+<div class="ba reveal">
+<div class="bacard"><h3><span class="dot"></span>Avant</h3>
+<div class="lp"><div class="h" style="width:95%"></div><div class="h" style="width:80%"></div><div class="l"></div><div class="l"></div><div class="l" style="width:60%"></div><span class="btn">En savoir plus</span></div>
+<ul class="diffs"><li>Titre vague, orienté produit plutôt que bénéfice</li><li>Trop de texte avant tout appel à l'action</li><li>Bouton peu visible, message générique</li></ul></div>
+<div class="bacard after"><h3><span class="dot"></span>Après</h3>
+<div class="lp"><div class="h" style="width:70%"></div><div class="l" style="width:50%"></div><div class="l" style="width:40%"></div><span class="btn">Découvrir la collection −20%</span></div>
+<ul class="diffs"><li>Titre centré sur le bénéfice client</li><li>Un seul message clair avant l'action</li><li>Bouton contrasté avec la promesse intégrée</li></ul></div>
+</div></section>
+
+<section id="marque"><h2 class="reveal">La cohérence de marque, canal par canal</h2>
+<p class="lede reveal">Les mêmes couleurs et le même ton doivent se reconnaître partout — c'est ce qui construit la confiance dans la durée.</p>
+<div class="swatches reveal">
+<div class="sw" style="background:var(--ac)">Primaire</div><div class="sw" style="background:var(--ac2)">Accent</div><div class="sw" style="background:var(--dark)">Texte</div>
+</div>
+<div class="brandrow reveal">
+<div class="mini phone"><div class="phead"><div class="avatar"></div><b>marque_outdoor</b></div><div class="pimg"></div></div>
+<div class="mini email"><div class="erow"><b>Marque Outdoor</b>-20% collection montagne</div><div class="ebody"><div class="ehero"></div></div></div>
+<div class="mini artmock" style="padding:10px"><div class="adbox" style="margin:0"><div class="lbl">PUB</div><h3 style="font-size:.85rem">Randonnez sans limites</h3></div></div>
+</div>
+<p class="lede" style="margin-top:-20px">Même dégradé de couleurs, même ton de voix, sur le post social, l'email et la bannière — c'est ce qui rend une marque reconnaissable en une fraction de seconde.</p>
+</section>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+(function(){var w="Le marketing digital en images".split(" ");$("heroTitle").innerHTML=w.map(function(x,i){return '<span class="word" style="animation-delay:'+(i*.06)+'s">'+x+'&nbsp;</span>'}).join("")})();
+addEventListener("scroll",function(){$("bar").style.width=100*scrollY/(document.body.scrollHeight-innerHeight)+"%"});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
+var links=document.querySelectorAll("#nav a");
+var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove("on")});var a=document.querySelector('#nav a[data-s="'+e.target.id+'"]');a&&a.classList.add("on")}})},{rootMargin:"-45% 0px -50% 0px"});
+document.querySelectorAll("main section").forEach(function(s){spy.observe(s)});
+</script>
+</body>
+</html>

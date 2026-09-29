@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Créer et déployer son portfolio : HTML/CSS, Git, GitHub, Render</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f7f6;--ink:#132420;--mut:#5c6d68;--card:#fff;--line:#dde7e2;--git:#f0532e;--dep:#1f7a8c;--ok:#2f9e5b;--dark:#0e1a17;
+--fd:"Sora",system-ui,sans-serif;--fm:"JetBrains Mono",ui-monospace,Consolas,monospace;
+padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1613;--ink:#e7f0ec;--mut:#a3b3ad;--card:#132420;--line:#25382f;--dark:#08110e}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(52px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,sans-serif}
+main{max-width:900px;margin:0 auto;padding:0 22px 90px}
+h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.18;letter-spacing:-.01em}
+h2{font-size:1.65rem;margin:0 0 8px}h3{font-size:1.05rem;margin:0 0 4px}
+section{padding-top:60px}p{max-width:66ch}.lede{color:var(--mut)}
+nav{position:sticky;top:0;z-index:9;background:var(--dark);display:flex;gap:2px;overflow-x:auto;padding:calc(env(safe-area-inset-top,0px) + 4px) 14px 4px}
+nav a{color:#aac2ba;text-decoration:none;padding:11px 12px;font-size:.82rem;font-weight:600;white-space:nowrap;border-radius:6px}
+nav a.on{color:#fff;background:rgba(255,255,255,.1)}
+#bar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--git);z-index:10}
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#0e1a17,#123128,#0e1a17);background-size:220% 220%;animation:grad 10s ease infinite;color:#fff;padding:62px 22px 44px}
+@keyframes grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero>div{max-width:900px;margin:auto;position:relative;z-index:1}
+.hero h1{font-size:clamp(1.9rem,5vw,2.8rem);margin:0 0 12px}
+.hero .word{display:inline-block;opacity:0;transform:translateY(14px);animation:rise .6s ease forwards}
+.hero p{color:#bcd0c8;max-width:58ch;opacity:0;animation:fade .7s ease forwards;animation-delay:.9s}
+@keyframes rise{to{opacity:1;transform:none}}@keyframes fade{to{opacity:1}}
+.term{margin-top:22px;background:#081310;border:1px solid #1f342c;border-radius:10px;padding:14px 18px;font:500 .92rem/1.55 var(--fm);color:#d8f5e8;min-height:52px}
+.term b{color:var(--git)}.caret{display:inline-block;width:8px;height:1em;background:var(--git);vertical-align:-2px;margin-inline-start:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}.reveal.in{opacity:1;transform:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+/* flow diagram */
+.flow{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin:20px 0 6px}
+.fnode{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:110px;text-align:center}
+.fnode .ic{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;border:2px solid var(--line);transition:border-color .3s,transform .3s,background .3s}
+.fnode.active .ic{border-color:var(--git);transform:translateY(-3px);background:rgba(240,83,46,.08)}
+.fnode svg{width:26px;height:26px}
+.fnode span{font:600 .8rem var(--fd)}
+.fedge{position:relative;width:44px;height:2px;background:var(--line);margin:0 4px 26px}
+.fedge i{position:absolute;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--git);animation:go 2.4s linear infinite}
+@keyframes go{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}
+/* steps */
+.steps{counter-reset:st}
+.step{display:grid;grid-template-columns:56px 1fr;gap:16px;margin:0 0 26px;position:relative}
+.step:not(:last-child)::before{content:"";position:absolute;left:27px;top:56px;bottom:-26px;width:2px;background:var(--line)}
+.sic{width:56px;height:56px;border-radius:50%;background:var(--card);border:2px solid var(--git);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sic svg{width:26px;height:26px;stroke:var(--git)}
+.step h3{margin-bottom:4px}
+pre{background:var(--dark);color:#e6f3ec;padding:14px 16px;border-radius:10px;overflow-x:auto;font:400 .82rem/1.6 var(--fm);white-space:pre-wrap;margin:10px 0 0}
+.copybar{display:flex;justify-content:flex-end;margin-bottom:-4px}
+button.cp{font:600 .78rem var(--fd);padding:5px 12px;border:0;border-radius:7px;background:var(--git);color:#fff;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:14px}
+.grid .card{border-top:3px solid var(--dep)}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ok);color:#fff;padding:10px 18px;border-radius:8px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:20;font-weight:600}
+.toast.show{opacity:1}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.hero .word,.hero p{opacity:1;transform:none}}
+.tabs2{display:flex;gap:6px;margin:16px 0 0}
+.tabs2 button{font:600 .85rem var(--fd);padding:7px 14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;cursor:pointer}
+.tabs2 button.on{background:var(--dep);border-color:var(--dep);color:#fff}
+.stypes .card{border-top:3px solid var(--git);text-align:center}
+.stypes .ic2{width:40px;height:40px;margin:0 auto 8px;color:var(--git)}
+.stypes .ic2 svg{width:100%;height:100%}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:16px 0}
+.defbox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;border-top:3px solid var(--dep)}
+.defbox h3{font-size:.98rem}.defbox p{font-size:.88rem;margin:4px 0 0;color:var(--mut)}
+.note{background:rgba(31,122,140,.08);border:1px solid var(--line);border-inline-start:4px solid var(--dep);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.86rem;color:var(--mut)}
+.note b{color:var(--ink)}
+.check{list-style:none;margin:0;padding:0}
+.check li{position:relative;padding:6px 0 6px 28px;font-size:.92rem}
+.check li::before{content:"";position:absolute;left:0;top:9px;width:16px;height:16px;border:2px solid var(--ok);border-radius:4px}
+.check li::after{content:"✓";position:absolute;left:2.5px;top:6px;color:var(--ok);font-size:.7rem;font-weight:800}
+
+.pipe{margin:20px 0 8px}
+.pipebar{height:10px;border-radius:6px;background:var(--line);overflow:hidden}
+.pipebar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--dep),var(--git));border-radius:6px;transition:width .6s ease}
+.pipestages{display:flex;justify-content:space-between;margin-top:10px;font-size:.72rem;color:var(--mut);font-family:var(--fd);font-weight:600}
+.pipestages span{flex:1;text-align:center}
+.pipestages span.on{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:7px;font:700 .82rem var(--fd);padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);margin-top:12px}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--mut)}
+.pill.building i{background:#e0a72c;animation:blk 1s ease-in-out infinite}
+.pill.deploying i{background:var(--dep);animation:blk 1s ease-in-out infinite}
+.pill.live i{background:var(--ok)}
+@keyframes blk{50%{opacity:.3}}
+.subst{margin:14px 0 0;padding:0;list-style:none;counter-reset:sub}
+.subst li{counter-increment:sub;position:relative;padding:7px 0 7px 30px;font-size:.9rem}
+.subst li::before{content:counter(sub);position:absolute;left:0;top:6px;width:20px;height:20px;border-radius:50%;background:var(--dep);color:#fff;font:700 .72rem var(--fd);display:flex;align-items:center;justify-content:center}
+.tipcat{margin-top:26px}.tipcat h3{color:var(--dep)}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav id="nav"><a href="index.html">Accueil</a><a href="#build" data-s="build">Créer le portfolio</a><a href="#flow" data-s="flow">Vue d'ensemble</a><a href="#steps" data-s="steps">Déploiement</a><a href="#render" data-s="render">Zoom Render</a><a href="#pro" data-s="pro">Niveau pro</a><a href="#tips" data-s="tips">Conseils</a></nav>
+<header class="hero"><div>
+<h1 id="heroTitle"></h1>
+<p>De vos fichiers HTML/CSS jusqu'à une URL publique, en passant par Git, GitHub et Render.</p>
+<div class="term"><b>$</b> <span id="typed"></span><span class="caret"></span></div>
+</div></header>
+<main>
+
+<section id="build"><h2 class="reveal">Créer le portfolio (HTML/CSS)</h2>
+<p class="lede reveal">Un bon portfolio tient en cinq blocs. Pas besoin de plus pour commencer — la qualité prime sur la quantité de sections.</p>
+<div class="grid stypes reveal" id="stypes"></div>
+
+<div class="card reveal" style="margin-top:16px">
+<h3>Pourquoi une structure HTML « sémantique » ?</h3>
+<p class="lede" style="margin:4px 0 0">Le code ci-dessous utilise des balises comme <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code> et <code>&lt;footer&gt;</code> plutôt que de simples <code>&lt;div&gt;</code> partout. Ce n'est pas un détail esthétique : ces balises indiquent le <b>rôle</b> de chaque bloc.</p>
+<div class="note"><b>Deux conséquences concrètes :</b> les moteurs de recherche comprennent mieux la page (meilleur référencement), et les lecteurs d'écran utilisés par les personnes malvoyantes peuvent naviguer directement d'une section à l'autre. Un site « pro » commence par un HTML propre, avant même le design.</div>
+</div>
+
+<div class="card reveal" style="margin-top:16px">
+<h3>Une base à copier</h3>
+<p class="lede" style="margin:2px 0 10px">Créez deux fichiers, <code>index.html</code> et <code>style.css</code>, dans le même dossier.</p>
+<div class="tabs2" id="tabsBuild"><button data-t="h" class="on">index.html</button><button data-t="c">style.css</button></div>
+<div class="copybar"><button class="cp" data-src="buildCode">Copier</button></div>
+<pre id="buildCode"></pre>
+<div class="note" id="buildNote"></div>
+</div>
+</section>
+
+<section id="flow"><h2 class="reveal">Le trajet, en un coup d'œil</h2>
+<p class="lede reveal">Vos fichiers voyagent de votre ordinateur jusqu'au navigateur de vos visiteurs, en trois relais. Voici à quoi sert chacun avant de les enchaîner :</p>
+<div class="defs reveal">
+<div class="defbox"><h3>Git — le suivi des versions</h3><p>Un outil installé sur votre ordinateur qui enregistre l'historique de vos fichiers. Chaque « commit » est un point de sauvegarde nommé : vous pouvez toujours revenir en arrière.</p></div>
+<div class="defbox"><h3>GitHub — l'hébergement du code</h3><p>Une copie de votre dépôt Git stockée en ligne. Elle sert de source unique et sauvegardée, et c'est elle que Render va lire pour publier le site.</p></div>
+<div class="defbox"><h3>Render — l'hébergement du site</h3><p>Un service qui prend les fichiers de votre dépôt GitHub et les rend accessibles au public via une URL, avec HTTPS automatique.</p></div>
+</div>
+<div class="flow reveal" id="flowDia"></div>
+</section>
+
+<section id="steps"><h2 class="reveal">Les étapes, en détail</h2>
+<div class="steps">
+<div class="step reveal"><div class="sic" id="ic0"></div><div><h3>1 · Structurer les fichiers HTML/CSS</h3><p class="lede" style="margin:0">Un fichier <code>index.html</code> à la racine (obligatoire), un <code>style.css</code>, et un dossier <code>images/</code> si besoin. Ouvrez <code>index.html</code> dans le navigateur pour le tester avant d'aller plus loin.</p></div></div>
+
+<div class="step reveal"><div class="sic" id="ic1"></div><div><h3>2 · Initialiser Git en local</h3><p class="lede" style="margin:0">Créez un dépôt Git qui suit l'historique de vos fichiers.</p>
+<div class="copybar"><button class="cp" data-src="c1">Copier</button></div><pre id="c1">git init
+git add .
+git commit -m "Premier commit"</pre>
+<div class="note"><b>Ce que fait chaque ligne :</b> <code>git init</code> crée le dépôt ; <code>git add .</code> sélectionne tous les fichiers modifiés ; <code>git commit</code> enregistre un point de sauvegarde avec un message descriptif. Prenez l'habitude d'écrire des messages clairs — c'est ce qui rend un historique de code lisible par vous-même et par d'autres développeurs.</div>
+</div></div>
+
+<div class="step reveal"><div class="sic" id="ic2"></div><div><h3>3 · Créer un dépôt sur GitHub</h3><p class="lede" style="margin:0">Sur github.com : « New repository » → nom (ex. <code>mon-portfolio</code>) → public. Puis reliez votre dépôt local :</p>
+<div class="copybar"><button class="cp" data-src="c2">Copier</button></div><pre id="c2">git remote add origin https://github.com/VOTRE-COMPTE/mon-portfolio.git
+git push -u origin main</pre></div></div>
+
+<div class="step reveal"><div class="sic" id="ic3"></div><div><h3>4 · Créer un compte Render et relier GitHub</h3><p class="lede" style="margin:0">Sur render.com, connectez-vous avec GitHub. Cliquez « New + » → « Static Site » → sélectionnez votre dépôt <code>mon-portfolio</code>.</p></div></div>
+
+<div class="step reveal"><div class="sic" id="ic4"></div><div><h3>5 · Configurer le déploiement</h3><p class="lede" style="margin:0">Laissez <b>Build Command</b> vide (rien à compiler en HTML/CSS pur). Mettez un point dans <b>Publish Directory</b> si vos fichiers sont à la racine :</p>
+<div class="copybar"><button class="cp" data-src="c3">Copier</button></div><pre id="c3">Build Command : (laisser vide)
+Publish Directory : .</pre>
+<div class="note"><b>Pourquoi laisser Build Command vide ?</b> Cette option sert aux sites qui doivent être « compilés » avant publication (React, Vue…). Votre HTML/CSS est déjà prêt à être lu par un navigateur : aucune étape de construction n'est nécessaire.</div>
+</div></div>
+
+<div class="step reveal"><div class="sic" id="ic5"></div><div><h3>6 · Déployer et récupérer l'URL</h3><p class="lede" style="margin:0">Render construit et publie automatiquement. Vous obtenez une URL du type <code>https://mon-portfolio.onrender.com</code>, avec HTTPS automatique et gratuit.</p>
+<div class="note"><b>Le « s » de HTTPS</b> signifie que les données échangées entre le visiteur et votre site sont chiffrées. C'est un signal de confiance basique attendu de tout site professionnel, et Render s'en charge sans configuration de votre part.</div>
+</div></div>
+
+<div class="step reveal"><div class="sic" id="ic6"></div><div><h3>7 · Mettre à jour le site</h3><p class="lede" style="margin:0">Chaque nouveau commit poussé sur GitHub redéploie automatiquement le site sur Render.</p>
+<div class="copybar"><button class="cp" data-src="c4">Copier</button></div><pre id="c4">git add .
+git commit -m "Mise à jour du portfolio"
+git push</pre></div></div>
+</div></section>
+
+<section id="render"><h2 class="reveal">Zoom sur l'hébergement Render</h2>
+<p class="lede reveal">Ce qui se passe concrètement entre votre <code>git push</code> et le site en ligne — et comment le configurer en détail.</p>
+
+<div class="card reveal">
+<h3>Le pipeline de déploiement</h3>
+<p class="lede" style="margin:2px 0 0">À chaque envoi sur GitHub, Render exécute automatiquement ces étapes :</p>
+<div class="pipe"><div class="pipebar"><i id="pipeFill"></i></div>
+<div class="pipestages" id="pipeLabels"></div></div>
+<div id="pipePill"></div>
+</div>
+
+<div class="card reveal" style="margin-top:14px">
+<h3>Configurer le service, étape par étape</h3>
+<ol class="subst">
+<li>Sur <b>render.com</b>, connectez-vous avec votre compte GitHub (autorisez l'accès à vos dépôts).</li>
+<li>Cliquez sur <b>New +</b> en haut à droite, puis choisissez <b>Static Site</b>.</li>
+<li>Sélectionnez le dépôt <code>mon-portfolio</code> dans la liste proposée.</li>
+<li>Donnez un nom au service (il apparaîtra dans l'URL générée, ex. <code>mon-portfolio.onrender.com</code>).</li>
+<li>Laissez <b>Build Command</b> vide et mettez <code>.</code> dans <b>Publish Directory</b>.</li>
+<li>Cliquez sur <b>Create Static Site</b> : le premier déploiement démarre immédiatement.</li>
+<li>Dans l'onglet <b>Logs</b> du service, suivez le déploiement en direct et repérez les erreurs éventuelles.</li>
+<li>Une fois le statut passé à <b>Live</b>, ouvrez l'URL fournie en haut de la page du service.</li>
+</ol>
+<div class="note"><b>Auto-Deploy :</b> ce réglage est activé par défaut — chaque <code>git push</code> sur la branche <code>main</code> relance automatiquement les étapes ci-dessus, sans action de votre part.</div>
+</div>
+</section>
+
+<section id="pro"><h2 class="reveal">Ce qui distingue un portfolio pro</h2>
+<p class="lede reveal">Le code fonctionne ; ces détails font la différence entre « ça marche » et « ça fait sérieux ».</p>
+<div class="grid reveal">
+<div class="card"><h3>Balise meta description</h3><p style="font-size:.9rem;margin:4px 0 0">Une phrase dans <code>&lt;head&gt;</code> qui s'affiche sous votre titre dans les résultats de recherche. Sans elle, Google en choisit une au hasard sur la page.</p></div>
+<div class="card"><h3>Favicon</h3><p style="font-size:.9rem;margin:4px 0 0">La petite icône affichée dans l'onglet du navigateur. Son absence se remarque immédiatement et donne une impression d'inachevé.</p></div>
+<div class="card"><h3>Texte alternatif des images</h3><p style="font-size:.9rem;margin:4px 0 0">L'attribut <code>alt="…"</code> décrit une image pour les lecteurs d'écran et s'affiche si l'image ne charge pas.</p></div>
+<div class="card"><h3>Poids des images</h3><p style="font-size:.9rem;margin:4px 0 0">Des captures de projets non compressées ralentissent le chargement. Visez des fichiers JPEG ou WebP de quelques centaines de kilo-octets, pas plusieurs mégaoctets.</p></div>
+<div class="card"><h3>Contraste et lisibilité</h3><p style="font-size:.9rem;margin:4px 0 0">Un texte gris clair sur fond blanc est difficile à lire. Gardez un contraste suffisant, surtout pour le texte principal.</p></div>
+<div class="card"><h3>Test sur mobile</h3><p style="font-size:.9rem;margin:4px 0 0">Une bonne partie des visiteurs arrivera depuis un téléphone. Vérifiez que la navigation et les projets restent lisibles à l'étroit.</p></div>
+</div></section>
+
+<section id="tips"><h2 class="reveal">Conseils pour un portfolio qui donne envie de vous contacter</h2>
+<p class="lede reveal">Un bon code ne suffit pas : ce que vous montrez et comment vous le racontez comptent autant.</p>
+
+<div class="tipcat reveal"><h3>Sur le contenu</h3>
+<div class="grid">
+<div class="card"><h3>Moins de projets, mieux présentés</h3><p style="font-size:.9rem;margin:4px 0 0">3 à 5 projets solides valent mieux que 15 projets bâclés. Choisissez ceux qui montrent le mieux votre niveau actuel.</p></div>
+<div class="card"><h3>Racontez Problème → Solution → Résultat</h3><p style="font-size:.9rem;margin:4px 0 0">Pour chaque projet : quel était le besoin, ce que vous avez fait, et ce que ça a changé (chiffre, retour utilisateur, apprentissage).</p></div>
+<div class="card"><h3>Un appel à l'action clair</h3><p style="font-size:.9rem;margin:4px 0 0">Dites explicitement ce que vous voulez : « Me contacter », « Voir mon CV », « Discuter d'un projet ». Ne laissez pas le visiteur deviner.</p></div>
+<div class="card"><h3>Gardez-le à jour</h3><p style="font-size:.9rem;margin:4px 0 0">Un projet vieux de 3 ans en avant montre une activité arrêtée. Retirez ou archivez ce qui ne vous représente plus.</p></div>
+<div class="card"><h3>Une touche personnelle</h3><p style="font-size:.9rem;margin:4px 0 0">Une photo, une phrase sur votre parcours ou vos centres d'intérêt techniques humanisent la page sans la rendre bavarde.</p></div>
+<div class="card"><h3>Liez vos preuves sociales</h3><p style="font-size:.9rem;margin:4px 0 0">GitHub, LinkedIn, un article que vous avez écrit, un témoignage court : chaque lien crédibilise ce que vous affirmez.</p></div>
+</div></div>
+
+<div class="tipcat reveal"><h3>Sur la technique</h3>
+<div class="grid">
+<div class="card reveal"><h3>Domaine personnalisé</h3><p style="font-size:.92rem;margin:4px 0 0">Ajoutez votre propre nom de domaine dans les réglages du site sur Render, puis suivez les instructions DNS fournies.</p></div>
+<div class="card reveal"><h3>Fichier .gitignore</h3><p style="font-size:.92rem;margin:4px 0 0">Évite d'envoyer des fichiers temporaires générés par votre éditeur ou votre système d'exploitation.</p></div>
+<div class="card reveal"><h3>Alternative : GitHub Pages</h3><p style="font-size:.92rem;margin:4px 0 0">Tout aussi gratuite et encore plus directe : Settings → Pages → Deploy from a branch, sans compte supplémentaire.</p></div>
+<div class="card reveal"><h3>Vérifiez les interfaces</h3><p style="font-size:.92rem;margin:4px 0 0">Les boutons exacts sur github.com et render.com peuvent changer : gardez un œil sur leur documentation officielle.</p></div>
+</div></div>
+
+<div class="card reveal" style="margin-top:16px"><h3>Liste de vérification avant publication</h3>
+<ul class="check">
+<li>index.html s'ouvre correctement en local</li>
+<li>Tous les liens de la navigation fonctionnent</li>
+<li>Chaque projet a un lien ou une description à jour</li>
+<li>Les images ont un attribut alt</li>
+<li>Le titre de l'onglet et la meta description sont renseignés</li>
+<li>Le site a été testé sur mobile</li>
+<li>Aucune faute d'orthographe dans les textes visibles</li>
+</ul></div>
+</section>
+</main>
+<div class="toast" id="toast">Copié !</div>
+<script>
+var $=function(i){return document.getElementById(i)};
+(function(){var w="Créer et déployer son portfolio".split(" ");$("heroTitle").innerHTML=w.map(function(x,i){return '<span class="word" style="animation-delay:'+(i*.06)+'s">'+x+'&nbsp;</span>'}).join("")})();
+addEventListener("scroll",function(){$("bar").style.width=100*scrollY/(document.body.scrollHeight-innerHeight)+"%"});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
+var links=document.querySelectorAll("#nav a");
+var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove("on")});var a=document.querySelector('#nav a[data-s="'+e.target.id+'"]');a&&a.classList.add("on")}})},{rootMargin:"-45% 0px -50% 0px"});
+document.querySelectorAll("main section").forEach(function(s){spy.observe(s)});
+
+function toast(){var t=$("toast");t.classList.add("show");setTimeout(function(){t.classList.remove("show")},1400)}
+function copyText(x){function fb(){var a=document.createElement("textarea");a.value=x;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(a);toast()}
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(x).then(toast,fb);else fb()}
+document.querySelectorAll("button.cp").forEach(function(b){b.onclick=function(){copyText($(b.dataset.src).textContent)}});
+
+// hero typewriter
+var HP=["git init","git push -u origin main","render.com → New + → Static Site"];
+var hi=0,hc=0;
+if(matchMedia("(prefers-reduced-motion:reduce)").matches){$("typed").textContent=HP[0]}else{(function tick(){
+ var s=HP[hi];hc++;$("typed").textContent=s.slice(0,hc);
+ if(hc>=s.length){hc=0;hi=(hi+1)%HP.length;setTimeout(tick,1700)}else setTimeout(tick,55)})()}
+
+// icons (line SVG)
+var ICN={
+folder:'<path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6z"/>',
+git:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M6 8.4V15.6M6 8.4C6 12 10 12 12 12h3.8"/>',
+hub:'<path d="M12 2C6.5 2 2 6.6 2 12.2c0 4.5 2.9 8.3 6.9 9.6.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.3-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.5-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7 1 .7 2v3c0 .3.2.6.7.5 4-1.3 6.9-5.1 6.9-9.6C22 6.6 17.5 2 12 2z"/>',
+cloud:'<path d="M7 18a4.5 4.5 0 0 1-1-8.9 5.5 5.5 0 0 1 10.7-1.7A4 4 0 0 1 17 18H7z"/>',
+gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M4.2 7.2l1.4 1.4M18.4 15.4l1.4 1.4M3 12h2M19 12h2M4.2 16.8l1.4-1.4M18.4 8.6l1.4-1.4"/>',
+globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9z"/>',
+refresh:'<path d="M20 11A8 8 0 0 0 6.3 6.3L4 8.6M4 13a8 8 0 0 0 13.7 4.7L20 15.4"/><path d="M4 4v4.6h4.6M20 20v-4.6h-4.6"/>',
+user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/>',
+grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+star:'<path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 16.9 6.4 20.1l1.4-6.3L3 9.5l6.4-.6z"/>',
+mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>'};
+function ic(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+ICN[name]+'</svg>'}
+["folder","git","hub","cloud","gear","globe","refresh"].forEach(function(n,i){var e=$("ic"+i);if(e)e.innerHTML=ic(n)});
+
+// ---- Sections types du portfolio ----
+var ST=[["grid","En-tête & navigation","Nom, titre, liens vers les sections (Projets, Compétences, Contact)."],
+["user","Présentation (hero)","Une phrase claire sur qui vous êtes et ce que vous faites."],
+["star","Projets","3 à 5 réalisations avec une image ou une capture, une courte description et un lien."],
+["gear","Compétences","Les technologies et outils que vous maîtrisez, sous forme de liste ou de badges."],
+["mail","Contact","Un email ou un formulaire simple, et vos liens (GitHub, LinkedIn)."]];
+$("stypes").innerHTML=ST.map(function(s){return '<div class="card"><div class="ic2">'+ic(s[0])+'</div><h3>'+s[1]+'</h3><p style="font-size:.86rem;margin:4px 0 0">'+s[2]+'</p></div>'}).join("");
+
+// ---- Base HTML/CSS à copier ----
+var BUILD={
+h:'<!DOCTYPE html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>Prénom Nom — Portfolio</title>\n<link rel="stylesheet" href="style.css">\n</head>\n<body>\n<header>\n  <nav>\n    <a href="#accueil">Accueil</a>\n    <a href="#projets">Projets</a>\n    <a href="#competences">Compétences</a>\n    <a href="#contact">Contact</a>\n  </nav>\n</header>\n\n<section id="accueil" class="hero">\n  <h1>Prénom Nom</h1>\n  <p>Développeur / Designer — je crée [ce que vous faites].</p>\n</section>\n\n<section id="projets">\n  <h2>Projets</h2>\n  <div class="grid">\n    <article class="card">\n      <h3>Nom du projet</h3>\n      <p>Le problème résolu et les technologies utilisées.</p>\n      <a href="LIEN_DU_PROJET">Voir le projet →</a>\n    </article>\n    <!-- Répétez ce bloc pour chaque projet -->\n  </div>\n</section>\n\n<section id="competences">\n  <h2>Compétences</h2>\n  <ul class="skills">\n    <li>HTML / CSS</li>\n    <li>JavaScript</li>\n    <li>Git &amp; GitHub</li>\n  </ul>\n</section>\n\n<section id="contact">\n  <h2>Contact</h2>\n  <p>Écrivez-moi : <a href="mailto:vous@exemple.com">vous@exemple.com</a></p>\n</section>\n\n<footer>\n  <p>&copy; 2026 Prénom Nom</p>\n</footer>\n</body>\n</html>',
+c:':root{--ink:#182420;--bg:#fff;--accent:#1f7a8c}\n*{box-sizing:border-box}\nbody{margin:0;font-family:system-ui,sans-serif;color:var(--ink);line-height:1.6}\nnav{display:flex;gap:16px;padding:16px;justify-content:center}\nnav a{color:var(--ink);text-decoration:none;font-weight:600}\n.hero{text-align:center;padding:80px 20px}\nsection{padding:60px 20px;max-width:900px;margin:0 auto}\n.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}\n.card{border:1px solid #ddd;border-radius:10px;padding:20px}\n.skills{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0}\n.skills li{background:#f2f2f2;padding:6px 14px;border-radius:20px}\nfooter{text-align:center;padding:20px;color:#777}\n@media(max-width:600px){.hero{padding:50px 16px}}'};
+function showBuild(t){$("buildCode").textContent=BUILD[t];$("buildNote").innerHTML=t==="h"
+ ?"<b>À repérer dans ce code :</b> une seule balise <code>&lt;h1&gt;</code> par page (votre nom), des <code>&lt;h2&gt;</code> pour chaque section, et des ancres (<code>#projets</code>) qui relient la navigation aux sections — c'est ce qui permet le défilement fluide au clic."
+ :"<b>Techniques utilisées :</b> les variables <code>--ink</code>/<code>--accent</code> centralisent les couleurs pour les changer en un seul endroit ; <code>grid-template-columns: repeat(auto-fit, minmax(220px,1fr))</code> range les projets automatiquement selon la largeur d'écran ; la media query en bas ajuste les espacements sur mobile."}
+document.querySelectorAll("#tabsBuild button").forEach(function(b){b.onclick=function(){document.querySelectorAll("#tabsBuild button").forEach(function(x){x.className=""});b.className="on";showBuild(b.dataset.t)}});
+showBuild("h");
+
+// ---- Pipeline Render animé ----
+var PIPE=[["Push GitHub",8,"pending","En file d'attente"],["Webhook reçu",28,"pending","En file d'attente"],["Build",55,"building","Build en cours…"],["Déploiement",80,"deploying","Déploiement en cours…"],["Live",100,"live","Live ✓"]];
+$("pipeLabels").innerHTML=PIPE.map(function(p){return '<span>'+p[0]+'</span>'}).join("");
+var pi=0;
+function tickPipe(){
+ var p=PIPE[pi];
+ $("pipeFill").style.width=p[1]+"%";
+ document.querySelectorAll("#pipeLabels span").forEach(function(s,i){s.classList.toggle("on",i<=pi)});
+ $("pipePill").innerHTML='<span class="pill '+p[2]+'"><i></i>'+p[3]+'</span>';
+ pi=(pi+1)%PIPE.length;
+}
+tickPipe();setInterval(tickPipe,1600);
+
+// flow diagram
+var FL=[["folder","Votre code"],["git","Git"],["hub","GitHub"],["cloud","Render"],["globe","Navigateur"]];
+$("flowDia").innerHTML=FL.map(function(f,i){return '<div class="fnode" data-i="'+i+'" style="color:var(--git)"><div class="ic">'+ic(f[0])+'</div><span style="color:var(--ink)">'+f[1]+'</span></div>'+(i<FL.length-1?'<div class="fedge"><i style="animation-delay:'+(i*.45)+'s"></i></div>':'')}).join("");
+var fi=0;function tickFlow(){document.querySelectorAll(".fnode").forEach(function(n){n.classList.remove("active")});
+ document.querySelector('.fnode[data-i="'+fi+'"]').classList.add("active");fi=(fi+1)%FL.length}
+tickFlow();setInterval(tickFlow,1400);
+</script>
+</body>
+</html>
