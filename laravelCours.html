@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تعلم Laravel خطوة بخطوة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9edf5;--paper:#fdfdfb;--line:#dbe3f2;--ink:#14235c;--txt:#2b3557;--blue:#1f3fa0;--green:#2e9e57;--orange:#ee8a1f;--purple:#6a3fb5;--red:#d6335b;--yel:#ffd93b;--note:#fff3a6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}}
+:root[data-theme="dark"]{--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.7}
+header{text-align:center;padding:28px 16px 8px}
+header h1{margin:0;color:var(--ink);font-size:clamp(24px,5vw,38px);font-weight:800}
+header p{margin:4px 0 0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--bg)}
+nav a{flex:none;text-decoration:none;font-size:13px;font-weight:600;color:var(--ink);border:2px solid var(--blue);border-radius:99px;padding:2px 12px;background:var(--paper)}
+nav a:focus-visible,nav a:hover{background:var(--yel);color:#14235c}
+main{max-width:none;width:100%;margin:0;padding:8px 14px 40px;display:grid;gap:28px}
+.page{position:relative;background:var(--paper);border-radius:10px;padding:22px 22px 18px 20px;padding-right:44px;box-shadow:0 2px 0 var(--line),0 10px 24px rgba(20,35,92,.12);background-image:repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px)}
+.page:before{content:"";position:absolute;top:10px;bottom:10px;right:10px;width:16px;background:radial-gradient(circle at 50% 50%,var(--ink) 0 4px,transparent 5px) 0 0/16px 26px repeat-y}
+.brand{font-size:13px;font-weight:600;color:var(--blue)}
+.page h2{margin:2px 0 0;color:var(--ink);font-size:clamp(24px,5vw,34px);font-weight:800;line-height:1.35;display:inline;background:linear-gradient(transparent 62%,var(--yel) 62% 92%,transparent 92%)}
+.sub{margin:6px 0 14px;font-weight:600;color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.blk{background:var(--paper);border:2px dashed var(--c);border-radius:12px;padding:12px 14px}
+.blk h3{display:inline-block;margin:-26px 0 6px;padding:0 12px;background:var(--c);color:#fff;border-radius:6px;font-size:15px;font-weight:800;transform:rotate(-1deg)}
+.blk ul,.blk ol{margin:0;padding:0 18px 0 0}
+.blk li{margin:3px 0}
+.blk li::marker{color:var(--c);font-weight:800}
+.blk{margin-top:14px}
+.note,.end{margin-top:14px;padding:10px 14px;border-radius:6px;font-weight:600}
+.note{background:var(--note);color:var(--ink);transform:rotate(-.6deg);box-shadow:2px 3px 0 rgba(0,0,0,.12);width:fit-content;max-width:100%}
+.end{border:2px solid var(--blue);border-radius:12px;color:var(--ink)}
+.end b{color:var(--blue)}
+footer{text-align:center;padding:20px;font-weight:600;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:4px;z-index:9;background:linear-gradient(90deg,var(--blue),var(--yel));transform-origin:right;transform:scaleX(0)}
+.hero{position:absolute;top:14px;left:16px;font-size:clamp(42px,9vw,64px);animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+.il{list-style:none;padding:0!important}
+.il li{display:flex;gap:8px;align-items:flex-start}
+.ib{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,var(--paper));font-size:19px;transition:transform .25s}
+.il li:hover .ib{transform:scale(1.25) rotate(-8deg)}
+.flow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 2px;margin-top:6px}
+.st{flex:1 1 92px;min-width:92px;max-width:170px;text-align:center}
+.ico{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 4px;border-radius:16px;background:color-mix(in srgb,var(--c) 14%,var(--paper));border:2px solid var(--c);font-size:36px;transition:transform .25s}
+.st:hover .ico{transform:translateY(-4px) rotate(-6deg) scale(1.08)}
+.num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;font-size:12px;font-weight:800}
+.st b{display:block;font-size:13px;line-height:1.4;color:var(--ink)}
+.st small{display:block;font-size:11.5px;line-height:1.45}
+.ar{align-self:center;margin-top:-30px;color:var(--c);font-style:normal;font-size:14px;animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(-6px)}}
+.js .page{opacity:0;transform:translateY(36px) rotate(.5deg);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .page.in{opacity:1;transform:none}
+.js .page h2{background-repeat:no-repeat;background-size:0 100%;background-position:right;transition:background-size .9s .35s}
+.js .page.in h2{background-size:100% 100%}
+.js .blk{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .5s,transform .5s;transition-delay:calc(var(--k)*90ms + 250ms)}
+.js .in .blk{opacity:1;transform:none}
+.js .st{opacity:0;transform:scale(.6);transition:opacity .4s,transform .45s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i)*110ms + 500ms)}
+.js .in .st{opacity:1;transform:none}
+.js .in .note{animation:pop .8s 1s both}
+@keyframes pop{0%{transform:rotate(-6deg) scale(.7);opacity:0}60%{transform:rotate(2deg) scale(1.05)}100%{transform:rotate(-.6deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){.js .page,.js .blk,.js .st,.hero,.ar,.js .in .note{animation:none;transition:none;opacity:1;transform:none}.js .page h2{background-size:100% 100%}}
+#art svg{width:min(430px,92%);display:block;margin:0 auto}
+.nd{transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.4)}}
+.flowline{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 10px;margin:8px 0 0;font-weight:600;color:var(--ink)}
+.flowline span{background:var(--paper);border:2px solid var(--blue);border-radius:99px;padding:0 12px}
+.flowline i{color:var(--orange);font-style:normal}
+nav a.on{background:var(--yel);color:#14235c;border-color:var(--orange)}
+@media (min-width:900px){
+html{scroll-padding-top:16px}
+body{padding-right:250px}
+nav{position:fixed;top:0;right:0;bottom:0;width:250px;flex-direction:column;align-items:stretch;overflow-y:auto;overflow-x:hidden;gap:6px;padding:20px 14px;background:var(--paper);border-left:2px solid var(--line);z-index:7}
+nav:before{content:"المواضيع";font-weight:800;color:var(--ink);font-size:18px;padding:0 4px 6px}
+nav a{border-radius:10px;padding:4px 12px;border-width:2px;font-size:14px;transition:transform .2s}
+nav a:hover{transform:translateX(-4px)}
+}
+@media (prefers-reduced-motion:reduce){.nd{animation:none}}
+.sig{width:150px;height:53px;margin-bottom:2px;background:var(--ink);-webkit-mask:url(data:image/png;base64,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) center/contain no-repeat;mask:url(data:image/png;base64,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) center/contain no-repeat}
+nav a{display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav a b{display:inline-grid;place-items:center;flex:none;min-width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800}
+nav a.on b{background:var(--orange)}
+nav a.home{border-style:dashed;justify-content:center}
+@media (min-width:900px){
+nav a{white-space:normal;line-height:1.4;padding:7px 12px;border-color:transparent;background:transparent}
+nav a.on{border-color:var(--orange)}
+nav a.home{border-color:var(--blue);margin-bottom:6px}
+}
+#bar{background-size:200% 100%;animation:sh 3s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.dig{margin-top:14px;border:2px solid var(--purple);border-radius:12px;background:var(--paper);overflow:hidden}
+.dig summary{cursor:pointer;padding:8px 14px;font-weight:800;color:var(--purple);list-style:none;display:flex;align-items:center;gap:8px}
+.dig summary::-webkit-details-marker{display:none}
+.dig summary:after{content:"＋";margin-inline-start:auto;transition:transform .3s}
+.dig[open] summary:after{transform:rotate(45deg)}
+.dig p{margin:0;padding:4px 16px 12px;animation:dg .5s}
+@keyframes dg{from{opacity:0;transform:translateY(-8px)}}
+.js .in .blk:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 8px 18px rgba(20,35,92,.15)}
+.st .ico{animation:gl 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*.45s)}
+@keyframes gl{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}}
+.flowline span{animation:fl 3s ease-in-out infinite}
+.flowline span:nth-of-type(2){animation-delay:.5s}
+.flowline span:nth-of-type(3){animation-delay:1s}
+@keyframes fl{50%{background:var(--yel);color:#14235c;transform:translateY(-3px)}}
+#top{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);background:var(--yel);color:#14235c;font-size:20px;cursor:pointer;z-index:8;opacity:0;pointer-events:none;transform:scale(.6);transition:.3s}
+#top.show{opacity:1;pointer-events:auto;transform:none}
+@media (prefers-reduced-motion:reduce){.st .ico,.flowline span,#bar,.dig p{animation:none}}
+.dig ul{margin:0;padding:4px 34px 12px 16px;animation:dg .5s}
+.dig li{margin:4px 0}
+.dig li::marker{color:var(--purple)}
+@media (prefers-reduced-motion:reduce){.dig ul{animation:none}}
+.fg{margin:8px 16px 0}
+.fg svg{width:min(460px,100%);display:block;margin:0 auto;overflow:visible}
+.fi{animation:fi .6s both;animation-delay:var(--d)}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+.fa{stroke-dasharray:5 4;animation:da 1s linear infinite}
+@keyframes da{to{stroke-dashoffset:-9}}
+.sl{animation:sl 3s ease-in-out infinite}
+@keyframes sl{0%,10%{transform:translate(0,0)}50%{transform:translate(64px,0)}90%,100%{transform:translate(64px,64px)}}
+@media (prefers-reduced-motion:reduce){.fi,.fa,.sl{animation:none}}
+code{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Consolas,monospace;font-size:.85em;background:color-mix(in srgb,var(--blue) 12%,var(--paper));border-radius:6px;padding:1px 6px;word-break:break-word}
+</style>
+</head>
+<body>
+<header><div id="art"></div><h1>تعلم Laravel خطوة بخطوة</h1><p class="flowline"><span>🛣️ Route</span><i>◀</i><span>🎮 Controller</span><i>◀</i><span>🖼️ View</span></p></header>
+<nav id="nav" aria-label="المواضيع"><a href="index.html" title="Accueil"><b>⌂</b><span>الرئيسية</span></a></nav>
+<main id="main"></main>
+<footer>Mezni Dhiaa | Smart Formation — احفظ المنشور وشاركه مع من يهمه الأمر</footer>
+<script>
+const B='blue',G='green',O='orange',P='purple',R='red';
+const D=[
+["ما هو Laravel؟","Laravel Framework — إطار عمل PHP للويب",[
+["تعريف Laravel",B,["إطار عمل مفتوح المصدر مبني على PHP لبناء مواقع وتطبيقات ويب منظمة وسريعة","يعتمد نمط MVC ويوفر أدوات جاهزة: توجيه، قواعد بيانات، مصادقة، طوابير"]],
+["لماذا يحبه المطورون؟",G,["صياغة واضحة ومقروءة","توثيق ممتاز ومجتمع كبير","أداة Artisan توفر الوقت","منظومة متكاملة: Livewire وInertia وSanctum"]],
+["ماذا تبني به؟",O,["مواقع ومتاجر إلكترونية","لوحات تحكم وأنظمة إدارة","واجهات API للتطبيقات","أنظمة حجز وخدمات SaaS"]],
+["كيف يخدم الطلب؟",P,["الطلب (Request) يصل","المسار (Route) يحدد الوجهة","المتحكم (Controller) ينفذ المنطق","النموذج (Model) يجلب البيانات","العرض (View) ينتج الصفحة"],1]],
+"Laravel لا يغني عن PHP جيد: كلما أتقنت الأساسيات فهمت الإطار أسرع.","يمنحك Laravel هيكلًا جاهزًا لتركز على فكرة مشروعك لا على التفاصيل المتكررة."],
+["التثبيت وبنية المشروع","من الصفر إلى أول صفحة",[
+["المتطلبات",B,["PHP وComposer (مدير الحزم)","قاعدة بيانات مثل MySQL أو SQLite","بديل سهل: Laravel Herd أو Sail"]],
+["خطوات التثبيت",G,["أنشئ المشروع: <code>composer create-project laravel/laravel app</code>","ادخل المجلد: <code>cd app</code>","شغّل الخادم: <code>php artisan serve</code>","افتح المتصفح: <code>localhost:8000</code>"],1],
+["أهم المجلدات",P,["<code>app/</code> النماذج والمتحكمات","<code>routes/</code> ملفات المسارات","<code>resources/views/</code> قوالب Blade","<code>database/</code> الهجرات والبيانات التجريبية"]],
+["ملف .env",O,["يحوي إعدادات قاعدة البيانات وكلمات السر","لا ترفعه إلى GitHub أبدًا"]]],
+"استخدم Git من اليوم الأول ليسهل الرجوع لأي نسخة.","بعد التثبيت تظهر صفحة ترحيب جاهزة تؤكد أن كل شيء يعمل."],
+["المسارات والمتحكمات","Routing & Controllers",[
+["المسارات (Routes)",B,["ملف <code>routes/web.php</code> يربط الرابط بالكود الذي يعالجه","<code>Route::get('/about', fn() => view('about'));</code>"]],
+["المتحكمات",G,["تجمع منطق الطلبات في مكان واحد","<code>php artisan make:controller PostController</code>","<code>Route::get('/posts', [PostController::class, 'index']);</code>"]],
+["مسارات الموارد",O,["<code>Route::resource('posts', PostController::class);</code> تنشئ مسارات CRUD بسطر واحد","الدوال: index وcreate وstore وshow وedit وupdate وdestroy"]],
+["التحقق من البيانات",R,["<code>$request->validate(['title' => 'required|max:100']);</code>","عند الفشل يعود المستخدم للنموذج مع رسائل الأخطاء تلقائيًا"]]],
+"اجعل المتحكم رفيعًا: انقل المنطق المعقد إلى كلاسات وخدمات مستقلة.","المسار يحدد الوجهة، والمتحكم ينفذ، والتحقق يحمي بياناتك."],
+["قوالب Blade","العرض (Views)",[
+["ما هو Blade؟",B,["محرك قوالب يحوّل ملفات <code>.blade.php</code> إلى HTML","أنظف من PHP الخام ويهرّب المخرجات تلقائيًا"]],
+["أهم التعليمات",G,["<code>{{ $name }}</code> عرض متغير بأمان","<code>@if</code> و<code>@foreach</code> للشروط والحلقات","<code>@csrf</code> داخل كل نموذج POST","<code>@auth</code> لمحتوى المسجّلين فقط"]],
+["التخطيطات",O,["الملف الرئيسي فيه الهيكل و<code>@yield('content')</code>","الصفحة الفرعية تبدأ بـ <code>@extends('layouts.app')</code>","ثم تضع محتواها في <code>@section('content')</code>"]],
+["المكوّنات",P,["مكوّنات قابلة لإعادة الاستخدام مثل &lt;x-button /&gt;","<code>php artisan make:component Alert</code>"]]],
+"لا تستخدم <code>{!! !!}</code> إلا مع محتوى موثوق، فهي تعطّل الحماية من XSS.","Blade يجعل الواجهة نظيفة وقابلة للصيانة."],
+["Eloquent وقواعد البيانات","Migrations • Models • Relations",[
+["الهجرات (Migrations)",B,["نسخ إصدارات لقاعدة البيانات داخل الكود","<code>php artisan make:model Post -mcr</code> تنشئ النموذج والهجرة والمتحكم","<code>php artisan migrate</code> تنفذ الهجرات"]],
+["نموذج Eloquent",G,["<code>Post::all()</code> و<code>Post::find(1)</code> و<code>Post::create([...])</code>","حدد <code>$fillable</code> لحماية الحقول من التعبئة الجماعية"]],
+["العلاقات",P,["<code>hasMany</code>: مستخدم لديه عدة مقالات","<code>belongsTo</code>: المقال ينتمي لمستخدم","<code>belongsToMany</code>: كثير لكثير عبر جدول وسيط"]],
+["الاستعلامات",O,["<code>Post::where('published', true)->latest()->paginate(10)</code>","Seeders وFactories لتوليد بيانات تجريبية"]],
+["مشكلة N+1",R,["جلب العلاقة داخل حلقة يرسل استعلامًا لكل صف فيبطئ التطبيق","الحل: <code>Post::with('user')->get()</code>"]]],
+"لا تعدّل جدولًا في الإنتاج مباشرة؛ أنشئ هجرة جديدة دائمًا.","Eloquent يحوّل الجداول إلى كائنات تتعامل معها بسهولة."],
+["المصادقة والأمان","Auth • Middleware • Security",[
+["المصادقة الجاهزة",B,["Starter Kits (مثل Breeze) تنشئ التسجيل والدخول واستعادة كلمة المرور","لا تكتب نظام مصادقة من الصفر"]],
+["Middleware",G,["طبقة تفحص الطلب قبل وصوله للمتحكم","<code>->middleware('auth')</code> على أي مسار","<code>php artisan make:middleware IsAdmin</code>"]],
+["الحماية المدمجة",O,["CSRF عبر <code>@csrf</code>","XSS بتهريب المخرجات في Blade","SQL Injection بالاستعلامات المحضّرة","كلمات المرور مُجزّأة بـ Hash"]],
+["الصلاحيات",P,["Gates وPolicies تحدد من يفعل ماذا","مثال: يعدّل المستخدم مقالاته فقط"]],
+["أخطاء أمنية شائعة",R,["ترك <code>APP_DEBUG=true</code> في الإنتاج","فتح التعبئة الجماعية لكل الحقول","الثقة بمدخلات المستخدم دون تحقق"]]],
+"الأمان عادة تبدأ من أول سطر لا ميزة تضاف في النهاية.","استخدم أدوات Laravel المدمجة ولا تخترع حماية بنفسك."],
+["بناء API","REST API مع Sanctum",[
+["مسارات API",B,["ملف <code>routes/api.php</code> لمسارات تعيد JSON","في الإصدارات الحديثة: <code>php artisan install:api</code>"]],
+["API Resources",G,["<code>php artisan make:resource PostResource</code>","تتحكم بالحقول التي تظهر للعميل"]],
+["المصادقة بالتوكن",O,["Sanctum يصدر رموز وصول للتطبيقات","ترسل الرمز في ترويسة <code>Authorization: Bearer</code>"]],
+["أفضل الممارسات",P,["رموز HTTP الصحيحة: 200 و201 و404 و422","قسّم النتائج بـ paginate","أضف إصدارًا للمسار مثل <code>/api/v1</code>"]]],
+"لا تُرجع حقولًا حساسة مثل كلمة المرور في JSON.","API جيد التصميم يخدم الموقع والتطبيق معًا."],
+["الاختبار والنشر","Testing & Deployment",[
+["الاختبار",B,["يمنع كسر ميزة قديمة عند إضافة جديدة","Pest وPHPUnit جاهزان: <code>php artisan test</code>","Feature لمسار كامل، وUnit لدالة أو كلاس"]],
+["خطوات النشر",G,["جهّز البيئة: <code>APP_DEBUG=false</code>","ثبّت الحزم: <code>composer install --no-dev</code>","شغّل الهجرات: <code>php artisan migrate --force</code>","خزّن الإعدادات: <code>php artisan optimize</code>"],1],
+["خيارات الاستضافة",O,["VPS مع Nginx","Laravel Forge لإدارة الخوادم","Laravel Cloud أو منصات PaaS"]]],
+"لا تنشر أبدًا وAPP_DEBUG=true، فهي تكشف تفاصيل حساسة.","اختبر ثم انشر بثقة."],
+["خريطة طريق تعلم Laravel","من المبتدئ إلى مشروع احترافي",[
+["1. أساسيات PHP",B,["الدوال والمصفوفات وOOP وNamespaces","المدة: 3 - 4 أسابيع"]],
+["2. SQL وHTML وCSS",B,["استعلامات أساسية وتصميم بسيط","المدة: 2 - 3 أسابيع"]],
+["3. أساسيات Laravel",G,["Routes وControllers وBlade","المدة: 3 - 4 أسابيع"]],
+["4. Eloquent",G,["Migrations والعلاقات والاستعلامات","المدة: 2 - 3 أسابيع"]],
+["5. المصادقة والصلاحيات",P,["Breeze وMiddleware وPolicies","المدة: 2 أسابيع"]],
+["6. API وSanctum",P,["JSON وResources والتوكن","المدة: 2 أسابيع"]],
+["7. الاختبار والطوابير",O,["Pest وQueues وEvents","المدة: 2 - 3 أسابيع"]],
+["8. مشاريع حقيقية",O,["مدونة، متجر مصغر، نظام حجز، إدارة مهام"]],
+["9. انشر وابنِ معرض أعمالك",R,["GitHub وREADME واستضافة تجريبية"]]],
+"المدد تقريبية وتختلف حسب وقتك ومستواك.","ابدأ بمشروع صغير ثم طوّره كل أسبوع."]
+];
+document.documentElement.classList.add('js');
+const IC=[[/صور|الصور/,'🖼️'],[/بيانات|Dataset|Kaggle|UCI|Hugging/,'🗄️'],[/شبكة|شبكات|عصب|Neural/,'🕸️'],[/نتيج|إخراج|Output|تقرير/,'📊'],[/سؤال|يقرأ/,'❓'],[/كلمات|كلمة|نص/,'📝'],[/يبحث|بحث|اكتشاف/,'🔍'],[/تدريب|درّب|درب|Train/,'🏋️'],[/خطأ/,'🎯'],[/تحسين|حسّن|طور|طوّر/,'⚙️'],[/إعادة|تكرر|كرر|راجع/,'🔄'],[/تخطيط|فكرة|أفكار|هدف|الهدف/,'💡'],[/أدوات|Python|Pandas|NumPy/,'🛠️'],[/نشر|انشر|GitHub|Streamlit/,'🚀'],[/وجه|الوجوه/,'🙂'],[/سيارة|السيارات/,'🚗'],[/طبي|الأشعة|تشخيص|الأمراض|مرض/,'🩺'],[/صوت/,'🎙️'],[/ترجمة/,'🌐'],[/روبوت/,'🤖'],[/برمج|كود/,'💻'],[/تقييم|قيّم|اختبر|Accuracy|اختبار/,'✅'],[/تنبؤ|توقع|التوقع/,'📈'],[/مشاعر/,'❤️'],[/وظيف|Portfolio/,'💼'],[/بريد/,'✉️'],[/تحليل|تحلل|يحلل/,'🔬'],[/توصية|منتجات|Netflix/,'🛒'],[/ذكاء|Claude|ChatGPT|Gemini|AI/,'🧠'],[/الجبر|إحصاء|رياضيات/,'📐'],[/Prompt|الدور|تصرف/,'💬'],[/تنسيق|جدول|نقاط/,'📋']];
+IC.unshift([/Route|مسار/i,'🛣️'],[/Controller|متحكم/i,'🎮'],[/Blade|View|قالب/i,'🖼️'],[/Eloquent|Migration|Model|نموذج|جدول|قاعدة/i,'🗄️'],[/artisan|Composer/i,'⌨️'],[/CSRF|أمان|مصادقة|Auth|Sanctum|Breeze/i,'🔐'],[/API/,'🔌'],[/اختبار|Test|Pest/i,'✅'],[/نشر|Deploy/i,'🚀']);
+const ic=t=>{for(const[r,e]of IC)if(r.test(t))return e;return null};
+const HE=['🐘','🧰','🛣️','🖼️','🗄️','🔐','🔌','🚀','🗺️'];
+const NL=['ما هو Laravel؟','التثبيت والبنية','المسارات والمتحكمات','قوالب Blade','Eloquent وقواعد البيانات','المصادقة والأمان','بناء API','الاختبار والنشر','خريطة الطريق'];
+const DG=[
+["الإطار يفرض هيكلًا ويستدعي كودك، أما المكتبة فتستدعيها أنت متى شئت.","المكونات تعمل معًا عبر حاوية الخدمات (Service Container) التي تدير الاعتمادات تلقائيًا.","اختره حين تحتاج مشروعًا متكاملًا بسرعة، وفكّر في أدوات أخف للمهام الصغيرة جدًا."],
+["<code>public/index.php</code> نقطة دخول كل طلب؛ اجعل جذر الخادم يشير إلى مجلد public فقط.","<code>composer.json</code> يسرد الحزم و<code>composer install</code> يعيد تثبيتها.","راجع متطلبات الإصدار الحالي في التوثيق الرسمي قبل التثبيت."],
+["<code>php artisan route:list</code> تعرض كل المسارات وهي أسرع وسيلة لتشخيص خطأ 404.","Form Request (<code>make:request</code>) ينقل قواعد التحقق خارج المتحكم.","Route Model Binding يجلب النموذج تلقائيًا: اكتب <code>show(Post $post)</code>."],
+["<code>{{ }}</code> تمرّر القيمة عبر htmlspecialchars لمنع XSS، أما <code>{!! !!}</code> فتطبع HTML كما هو.","استخدم <code>@include</code> للأجزاء الصغيرة و<code>@stack</code> لإضافة سكربتات من الصفحات الفرعية.","للواجهات التفاعلية انظر إلى Livewire، ولتطبيقات Vue أو React انظر إلى Inertia."],
+["<code>php artisan migrate:rollback</code> تتراجع عن آخر دفعة، فجرّبها على بيانات تجريبية.","الحذف الناعم (SoftDeletes) يخفي السجل بدل حذفه نهائيًا فيمكن استرجاعه.","أضف فهارس للأعمدة كثيرة البحث وراقب الاستعلامات البطيئة بـ Debugbar أو Telescope."],
+["كلمات المرور تُخزَّن مُجزّأة (Hash) ولا تُسترجع، بل يُعاد تعيينها.","Rate Limiting يحد محاولات الدخول لصد التخمين الآلي.","حدّث الحزم بانتظام بعد قراءة سجل التغييرات، وفعّل HTTPS في الإنتاج."],
+["الرمز 422 يعني فشل التحقق، وLaravel يعيده مع تفاصيل الأخطاء لطلبات JSON.","حدد سقفًا للطلبات بـ throttle لحماية الخادم.","وثّق واجهتك بـ OpenAPI أو أداة مثل Scribe ليسهل استخدامها."],
+["اربط الاختبارات بـ CI مثل GitHub Actions لتعمل عند كل Push.","الطوابير (Queues) تؤجل المهام الثقيلة كالبريد؛ تحتاج عاملًا دائمًا عبر Supervisor.","المهام المجدولة تعمل بسطر Cron واحد يستدعي <code>schedule:run</code> كل دقيقة."],
+["مشروع أول مقترح: مدونة بمصادقة وتعليقات وترقيم صفحات.","بعد الأساسيات اختر مسارًا: Livewire، أو Inertia مع Vue/React، أو API لتطبيقات الجوال.","تابع التوثيق الرسمي ودروس Laracasts (بعضها مجاني)."]];
+const CL=['--blue','--green','--orange','--purple','--red'];
+const TX=(x,y,t,z=12)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${z}" font-weight="600" fill="var(--ink)">${t}</text>`;
+const SV=(b,h=140)=>`<svg viewBox="0 0 420 ${h}" role="img"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>${b}</svg>`;
+function flow(it,loop,noar){const n=it.length,g=420/n;let o='';
+ it.forEach(([e,l],i)=>{const x=420-g*(i+.5),c=`var(${CL[i%5]})`;
+  o+=`<g class="fi" style="--d:${i*.25}s"><rect x="${x-30}" y="18" width="60" height="60" rx="14" fill="${c}" fill-opacity=".15" stroke="${c}" stroke-width="2"/>${TX(x,58,e,28)}${TX(x,98,l,11)}</g>`;
+  if(i<n-1&&!noar)o+=`<path class="fa" d="M${x-36} 48H${x-g+36}" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah)"/>`});
+ if(loop)o+=`<path class="fa" d="M${g*.5} 108v14H${420-g*.5}V108" fill="none" stroke="var(--orange)" stroke-width="2" marker-end="url(#ah)"/>`;
+ return SV(o)}
+function net(L,lb){let o='',X=L.map((_,i)=>360-i*100),Y=(i,j)=>65+(j-(L[i]-1)/2)*30;
+ for(let i=0;i<L.length-1;i++)for(let a=0;a<L[i];a++)for(let b=0;b<L[i+1];b++)o+=`<line x1="${X[i]}" y1="${Y(i,a)}" x2="${X[i+1]}" y2="${Y(i+1,b)}" stroke="var(--blue)" stroke-opacity=".3"/>`;
+ L.forEach((k,i)=>{for(let j=0;j<k;j++)o+=`<circle class="nd" style="animation-delay:${(i*.3+j*.15).toFixed(2)}s" cx="${X[i]}" cy="${Y(i,j)}" r="9" fill="var(${CL[i%5]})"/>`;o+=TX(X[i],135,lb[i],11)});
+ return SV(o)}
+function grid(){let o='';
+ for(let i=0;i<7;i++)for(let j=0;j<7;j++)o+=`<rect x="${230+j*16}" y="${14+i*16}" width="16" height="16" fill="var(--blue)" fill-opacity="${j>=3?.75:.12}" stroke="var(--paper)"/>`;
+ o+=`<rect class="sl" x="230" y="14" width="48" height="48" fill="none" stroke="var(--orange)" stroke-width="3"/>`;
+ for(let i=0;i<5;i++)for(let j=0;j<5;j++)o+=`<rect x="${50+j*16}" y="${30+i*16}" width="16" height="16" fill="var(--orange)" fill-opacity="${j==2?.8:.12}" stroke="var(--paper)"/>`;
+ o+=`<path class="fa" d="M215 70H150" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah)"/>`+TX(286,136,'الصورة + المرشح',11)+TX(90,136,'خريطة الملامح (حافة)',11);
+ return SV(o)}
+function curve(){return SV(`<path d="M40 15V115H390" fill="none" stroke="var(--ink)"/><path d="M40 30Q120 100 380 110" fill="none" stroke="var(--blue)" stroke-width="3"/><path d="M40 32Q120 92 200 100T380 40" fill="none" stroke="var(--red)" stroke-width="3"/><circle class="nd" cx="200" cy="100" r="6" fill="var(--orange)"/>${TX(200,132,'بداية الإفراط في التعلم',11)}${TX(330,105,'تدريب',12)}${TX(330,30,'اختبار',12)}${TX(215,12,'الخسارة',11)}`)}
+function split(){return SV(`<rect x="108" y="30" width="272" height="40" rx="8" fill="var(--blue)"/><rect x="40" y="30" width="68" height="40" rx="8" fill="var(--orange)"/>${TX(244,56,'تدريب 80%',14).replace('var(--ink)','#fff')}${TX(74,56,'اختبار 20%',12).replace('var(--ink)','#fff')}${TX(210,100,'قيّم دائمًا على بيانات لم يرها النموذج',12)}`,120)}
+const IM=[
+flow([['🌐','طلب'],['🛣️','Route'],['🎮','Controller'],['🗄️','Model'],['🖼️','View']]),
+flow([['📦','Composer'],['🏗️','create-project'],['⚙️','.env'],['🚀','artisan serve']]),
+flow([['🛣️','Route'],['🛡️','Validation'],['🎮','Controller'],['↩️','Response']]),
+flow([['📄','ملف Blade'],['⚙️','Compile'],['🌐','HTML'],['👤','المتصفح']]),
+flow([['📐','Migration'],['🗄️','جدول'],['🧩','Model'],['🔗','علاقات']]),
+flow([['🌐','طلب'],['🔐','auth'],['🛂','Policy'],['🎮','Controller']]),
+flow([['📱','تطبيق'],['🔑','Token'],['🛣️','api.php'],['🧾','JSON']]),
+flow([['✅','اختبار'],['🧪','CI'],['⚙️','optimize'],['🚀','إنتاج']]),
+flow([['🐘','PHP'],['🛣️','Laravel'],['🗄️','Eloquent'],['🔐','Auth'],['🚀','نشر']])];
+D.forEach((d,n)=>{
+ const [t,s,bl,note,end]=d, id='p'+(n+1);
+ nav.insertAdjacentHTML('beforeend',`<a href="#${id}" title="${t}"><b>${n+1}</b><span>${NL[n]}</span></a>`);
+ const blocks=bl.map(([h,c,it,ol],k)=>{let body;
+  if(ol){body=`<div class="flow">${it.map((x,j)=>{const[a,...r]=x.split(/[:：]/);const d2=r.join(':').trim();return `<div class="st" style="--i:${j}"><span class="ico">${ic(x)||'⭐'}</span><span class="num">${j+1}</span><b>${d2?a:x}</b>${d2?`<small>${d2}</small>`:''}</div>`}).join('<i class="ar">◀</i>')}</div>`}
+  else body=`<ul class="il">${it.map(x=>`<li><span class="ib">${ic(x)||'✦'}</span><span>${x}</span></li>`).join('')}</ul>`;
+  const hi=ic(h);return `<section class="blk" style="--c:var(--${c});--k:${k}"><h3>${hi?hi+' ':''}${h}</h3>${body}</section>`}).join('');
+ main.insertAdjacentHTML('beforeend',`<article class="page" id="${id}"><span class="hero" aria-hidden="true">${HE[n]}</span><div class="sig" role="img" aria-label="التوقيع"></div><h2>${t}</h2><p class="sub">${s}</p><div class="grid">${blocks}</div><div class="note">💡 ${note}</div><div class="end"><b>الخلاصة: </b>${end}</div><details class="dig"><summary>🔎 تعمّق أكثر</summary><figure class="fg">${IM[n]}</figure><ul>${DG[n].map(x=>`<li>${x}</li>`).join('')}</ul></details></article>`);
+});
+const pages=document.querySelectorAll('.page');
+if('IntersectionObserver' in window){const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}}),{threshold:.08});pages.forEach(p=>o.observe(p))}else pages.forEach(p=>p.classList.add('in'));
+const tb=document.createElement('button');tb.id='top';tb.textContent='↑';tb.setAttribute('aria-label','للأعلى');tb.onclick=()=>scrollTo({top:0});document.body.append(tb);addEventListener('scroll',()=>tb.classList.toggle('show',scrollY>600),{passive:true});
+const bar=document.createElement('div');bar.id='bar';document.body.prepend(bar);
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight||1)})`},{passive:true});
+
+(()=>{const L=[[40,[35,75,115],'--purple'],[130,[20,55,95,130],'--blue'],[220,[20,55,95,130],'--green'],[310,[55,95],'--orange']];let l='',c='';
+L.forEach(([x,ys,col],i)=>{ys.forEach((y,j)=>{c+=`<circle class="nd" style="animation-delay:${(i*.3+j*.15).toFixed(2)}s" cx="${x}" cy="${y}" r="9" fill="var(${col})"/>`;if(i<3)L[i+1][1].forEach(y2=>{l+=`<line x1="${x}" y1="${y}" x2="${L[i+1][0]}" y2="${y2}"/>`})})});
+document.getElementById('art').innerHTML=`<svg viewBox="0 0 350 150" role="img" aria-label="شبكة عصبية"><g stroke="var(--blue)" stroke-opacity=".3" stroke-width="1.2">${l}</g>${c}</svg>`;
+const links=[...nav.querySelectorAll('a')];const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('on',on);if(on)a.scrollIntoView({block:'nearest',inline:'nearest'})})}),{rootMargin:'-30% 0px -60% 0px'});pages.forEach(x=>so.observe(x));})();
+</script>
+
+</body>
+</html>
