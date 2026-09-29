@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comprendre round3.php, ligne par ligne</title>
+<style>
+:root{--bg:#f2f6fa;--ink:#0e2244;--mut:#52627d;--card:#fff;--line:#d5deea;--c1:#1499c0;--c2:#f0a92e;--c3:#e2506b;--ok:#2a9d6a;--dk:#0e2244}
+@media(prefers-color-scheme:dark){:root{--bg:#0a1730;--ink:#e6eef9;--mut:#9fb0cc;--card:#122447;--line:#2a3f6b;--dk:#050d1e}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Segoe UI",system-ui,sans-serif}
+main{max-width:920px;margin:0 auto;padding:0 20px 70px}
+h1,h2,h3{font-family:Georgia,serif;line-height:1.2}h2{font-size:1.5rem;margin:0 0 6px}h3{margin:14px 0 4px}
+section{padding-top:56px}p{max-width:72ch}
+nav{position:sticky;top:0;z-index:9;background:var(--dk);display:flex;gap:4px;overflow-x:auto;padding:0 12px}
+nav a{color:#b9c8e2;text-decoration:none;padding:11px 9px;font-size:.8rem;white-space:nowrap}nav a:hover{color:#fff}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--c2);width:0;z-index:10}
+.hero{background:var(--dk);color:#fff;padding:46px 20px 40px}.hero>div{max-width:920px;margin:auto}
+.hero h1{font-size:clamp(1.6rem,5vw,2.5rem);margin:0 0 10px}.hero p{color:#b9c8e2}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+.note{border-left:5px solid var(--c2)}.good{border-left:5px solid var(--ok)}.bad{border-left:5px solid var(--c3)}
+code,.mono{font-family:ui-monospace,Consolas,monospace;background:var(--dk);color:#7fe0ff;padding:2px 7px;border-radius:5px;font-size:.9em}
+pre{background:var(--dk);color:#d7e6ff;padding:16px;border-radius:12px;overflow-x:auto;font-size:.85rem;line-height:1.55}
+pre .ln{color:#5f7aa8;user-select:none;display:inline-block;width:2.2em}
+.blockwrap{border:2px solid var(--line);border-radius:14px;overflow:hidden;margin:18px 0}
+.blockwrap .code{margin:0;border-radius:0}
+.blockwrap .exp{padding:16px 20px;background:var(--card)}
+.blockwrap .exp h3{margin-top:0}
+.tag{display:inline-block;background:var(--c2);color:#111;border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);font-size:.92rem}
+th{color:var(--mut);font-size:.78rem;text-transform:uppercase}
+input[type=text]{width:100%;font:inherit;padding:9px 12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+button{font:inherit;font-weight:600;background:var(--c1);color:#fff;border:0;border-radius:10px;padding:9px 16px;cursor:pointer;margin:4px 4px 4px 0}
+button.alt{background:var(--dk)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{padding:6px 12px;border-radius:8px;background:var(--dk);color:#fff;font-weight:600;cursor:pointer;font-size:.85rem}
+.trace{list-style:none;padding:0;display:grid;gap:8px}
+.trace li{padding:10px 14px;border-radius:10px;background:var(--card);border:2px solid var(--line);font-size:.92rem}
+.trace li b.k{color:var(--c1)}
+.row{display:grid;grid-template-columns:1fr 1fr 50px;gap:10px;align-items:center;margin:6px 0;font-size:.9rem}
+.bar{height:18px;border-radius:6px;background:var(--line);overflow:hidden}.bar div{height:100%;background:var(--c1);width:0;transition:width .6s;border-radius:6px}
+.q{margin:14px 0}.fb{font-weight:600;margin-left:8px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header class="hero"><div>
+<h1>Comprendre round3.php, ligne par ligne</h1>
+<p>Le même fichier que celui de votre labo, expliqué bloc par bloc : ce qu'il fait, pourquoi il est écrit ainsi, et un exemple qui trace son exécution en direct.</p>
+</div></header>
+<nav><a href="#s0">Vue d'ensemble</a><a href="#s1">Le vecteur</a><a href="#s2">L'embedding simulé</a><a href="#s3">Les documents</a><a href="#s4">Le traitement</a><a href="#s5">La sécurité</a><a href="#s6">Le HTML/PHP</a><a href="#s7">Trace en direct</a><a href="#s8">Quiz</a></nav>
+<main>
+
+<section id="s0"><h2 class="reveal">Vue d'ensemble</h2>
+<p class="reveal">Ce fichier fait une seule chose : recevoir une question tapée dans un formulaire, et afficher à quel point chacun des 3 documents lui ressemble. C'est le Round 3 de votre histoire — la recherche sémantique.</p>
+<div class="card note reveal">🧭 <b>Le fichier contient 4 morceaux :</b> une fonction de calcul (<code>cosineSimilarity</code>), une fonction qui simule un embedding (<code>getEmbeddingSimule</code>), une liste de documents, puis le formulaire HTML qui utilise tout ça.</div>
+</section>
+
+<section id="s1"><h2 class="reveal">Bloc 1 — <code>cosineSimilarity()</code> : mesurer une ressemblance</h2>
+<div class="blockwrap reveal">
+<pre class="code"><span class="ln">1</span>function cosineSimilarity(array $a, array $b): float
+<span class="ln">2</span>{
+<span class="ln">3</span>    $dot = $normA = $normB = 0.0;
+<span class="ln">4</span>    foreach ($a as $i => $x) {
+<span class="ln">5</span>        $dot   += $x * $b[$i];
+<span class="ln">6</span>        $normA += $x * $x;
+<span class="ln">7</span>        $normB += $b[$i] * $b[$i];
+<span class="ln">8</span>    }
+<span class="ln">9</span>    return ($normA && $normB) ? $dot / (sqrt($normA) * sqrt($normB)) : 0.0;
+<span class="ln">10</span>}</pre>
+<div class="exp">
+<h3>Ce que fait chaque ligne</h3>
+<table>
+<tr><th>Ligne</th><th>Explication</th></tr>
+<tr><td><code>array $a, array $b</code></td><td>La fonction attend deux vecteurs (deux tableaux de nombres) à comparer.</td></tr>
+<tr><td><code>: float</code></td><td>Elle renverra toujours un nombre décimal (le score).</td></tr>
+<tr><td><code>$dot = $normA = $normB = 0.0;</code></td><td>Trois compteurs à zéro, remplis pendant la boucle.</td></tr>
+<tr><td><code>foreach ($a as $i => $x)</code></td><td>On parcourt le vecteur <code>$a</code> ; <code>$i</code> est la position (0, 1, 2…), <code>$x</code> est la valeur à cette position.</td></tr>
+<tr><td><code>$dot += $x * $b[$i]</code></td><td>On multiplie les nombres à la même position dans les deux vecteurs, et on additionne au fil de la boucle — c'est le <b>produit scalaire</b>.</td></tr>
+<tr><td><code>$normA += $x * $x</code></td><td>On additionne le carré de chaque nombre de <code>$a</code> — pour calculer sa « longueur ».</td></tr>
+<tr><td><code>return (...) ? ... : 0.0;</code></td><td>Un raccourci d'écriture (opérateur ternaire) qui veut dire : si les deux normes ne sont pas nulles, on divise ; sinon, on renvoie 0 pour éviter une division par zéro.</td></tr>
+</table>
+<div class="card good" style="margin:14px 0 0"><b>🌍 Analogie :</b> imaginez deux flèches partant du même point. Le score cosinus mesure si elles pointent dans la même direction (proche de 1), perpendiculaires (proche de 0), ou opposées (proche de -1) — peu importe leur longueur.</div>
+</div></div>
+</section>
+
+<section id="s2"><h2 class="reveal">Bloc 2 — <code>getEmbeddingSimule()</code> : deviner un vecteur à partir de mots</h2>
+<div class="blockwrap reveal">
+<pre class="code"><span class="ln">1</span>function getEmbeddingSimule(string $texte): array
+<span class="ln">2</span>{
+<span class="ln">3</span>    $texte = strtolower($texte);
+<span class="ln">4</span>    if (str_contains($texte, "durée") || str_contains($texte, "dure")
+<span class="ln">5</span>        || str_contains($texte, "heures") || str_contains($texte, "temps")) {
+<span class="ln">6</span>        return [0.76, 0.19, -0.27, 0.80];
+<span class="ln">7</span>    }
+<span class="ln">8</span>    if (str_contains($texte, "prix") || ...) {
+<span class="ln">9</span>        return [-0.58, 0.22, 0.68, 0.18];
+<span class="ln">10</span>    }
+<span class="ln">11</span>    if (str_contains($texte, "apprend") || ...) {
+<span class="ln">12</span>        return [0.28, 0.73, 0.38, -0.08];
+<span class="ln">13</span>    }
+<span class="ln">14</span>    return [0, 0, 0, 0];
+<span class="ln">15</span>}</pre>
+<div class="exp"><h3>Ce que fait chaque ligne</h3>
+<table>
+<tr><th>Ligne</th><th>Explication</th></tr>
+<tr><td><code>strtolower($texte)</code></td><td>Met le texte en minuscules, pour que « Durée » et « durée » soient traités pareil.</td></tr>
+<tr><td><code>str_contains($texte, "durée")</code></td><td>Teste si le mot « durée » apparaît dans le texte, peu importe où.</td></tr>
+<tr><td><code>|| str_contains(...)</code></td><td>« OU » : si n'importe lequel de ces mots est présent, la condition est vraie.</td></tr>
+<tr><td><code>return [0.76, 0.19, -0.27, 0.80];</code></td><td>Un vecteur fixe, préparé à l'avance, qu'on renvoie dès qu'un des mots de la catégorie « durée » est détecté.</td></tr>
+<tr><td><code>return [0, 0, 0, 0];</code></td><td>Si aucun mot connu n'a été trouvé, on renvoie un vecteur neutre.</td></tr>
+</table>
+<div class="card bad" style="margin:14px 0 0"><b>⚠️ À bien faire comprendre :</b> ceci n'est <b>pas</b> un vrai modèle d'IA. Un vrai modèle calcule le vecteur à partir du sens de la phrase entière, pas d'une simple recherche de mots. Cette fonction imite le résultat pour que le TP fonctionne sans clé API.</div>
+</div></div>
+</section>
+
+<section id="s3"><h2 class="reveal">Bloc 3 — <code>$documents</code> : la base de connaissances</h2>
+<div class="blockwrap reveal">
+<pre class="code"><span class="ln">1</span>$documents = [
+<span class="ln">2</span>    ["contenu" => "La formation Laravel dure 40 heures.",
+<span class="ln">3</span>     "vecteur"  => [0.80, 0.18, -0.30, 0.85]],
+<span class="ln">4</span>    ["contenu" => "...", "vecteur" => [...]],
+<span class="ln">5</span>    ["contenu" => "...", "vecteur" => [...]],
+<span class="ln">6</span>];</pre>
+<div class="exp"><h3>Ce que fait chaque ligne</h3>
+<p><code>$documents</code> est un <b>tableau de tableaux</b> : une liste, où chaque élément est lui-même un petit tableau avec deux informations — le texte (<code>contenu</code>) et son vecteur déjà calculé (<code>vecteur</code>).</p>
+<div class="card note" style="margin:0"><b>🌍 Analogie :</b> c'est l'armoire de Sami (Round 3 de l'histoire) : chaque tiroir contient une fiche, et l'étiquette collée dessus est déjà son point sur la carte du sens.</div>
+</div></div>
+</section>
+
+<section id="s4"><h2 class="reveal">Bloc 4 — Traiter la question envoyée par le formulaire</h2>
+<div class="blockwrap reveal">
+<pre class="code"><span class="ln">1</span>$texte    = trim($_POST['texte'] ?? '');
+<span class="ln">2</span>$resultat = null;
+<span class="ln">3</span>if ($texte !== '') {
+<span class="ln">4</span>    $vQuestion = getEmbeddingSimule($texte);
+<span class="ln">5</span>    $resultat  = [];
+<span class="ln">6</span>    foreach ($documents as $document) {
+<span class="ln">7</span>        $resultat[] = [
+<span class="ln">8</span>            'contenu' => $document['contenu'],
+<span class="ln">9</span>            'score'   => cosineSimilarity($vQuestion, $document['vecteur']),
+<span class="ln">10</span>        ];
+<span class="ln">11</span>    }
+<span class="ln">12</span>}</pre>
+<div class="exp"><h3>Ce que fait chaque ligne</h3>
+<table>
+<tr><th>Ligne</th><th>Explication</th></tr>
+<tr><td><code>$_POST['texte'] ?? ''</code></td><td>Récupère le texte envoyé par le formulaire ; <code>??</code> évite une erreur si le champ n'existe pas encore (première visite de la page).</td></tr>
+<tr><td><code>trim(...)</code></td><td>Enlève les espaces inutiles au début et à la fin.</td></tr>
+<tr><td><code>if ($texte !== '')</code></td><td>On ne calcule rien si la personne n'a encore rien tapé.</td></tr>
+<tr><td><code>$vQuestion = getEmbeddingSimule($texte)</code></td><td>On transforme la question en vecteur (Bloc 2).</td></tr>
+<tr><td><code>foreach ($documents as $document)</code></td><td>On examine chaque document, un par un.</td></tr>
+<tr><td><code>$resultat[] = [...]</code></td><td>On ajoute à <code>$resultat</code> le contenu du document et son score de similarité.</td></tr>
+</table>
+</div></div>
+</section>
+
+<section id="s5"><h2 class="reveal">Bloc 5 — <code>e()</code> : la fonction de sécurité</h2>
+<div class="blockwrap reveal">
+<pre class="code"><span class="ln">1</span>function e(string $s): string
+<span class="ln">2</span>{
+<span class="ln">3</span>    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+<span class="ln">4</span>}</pre>
+<div class="exp"><h3>Pourquoi cette fonction existe</h3>
+<p>Avant d'afficher un texte tapé par l'utilisateur dans la page, on doit le « nettoyer ». Sans ça, quelqu'un pourrait taper du code HTML ou JavaScript dans le champ, qui s'exécuterait dans la page — une faille appelée <b>XSS</b>. <code>htmlspecialchars()</code> transforme les caractères dangereux (<code>&lt;</code>, <code>&gt;</code>, <code>"</code>…) en texte inoffensif.</p>
+<div class="card bad" style="margin:0"><b>Règle à retenir :</b> tout texte venant de l'utilisateur (<code>$_POST</code>, <code>$_GET</code>…) doit passer par <code>e()</code> avant d'être affiché dans le HTML.</div>
+</div></div>
+</section>
+
+<section id="s6"><h2 class="reveal">Bloc 6 — Le mélange HTML / PHP</h2>
+<div class="blockwrap reveal">
+<pre class="code"><span class="ln">1</span>&lt;input type="text" name="texte" value="&lt;?= e($texte !== '' ? $texte : "Quel est le tarif ?") ?&gt;"&gt;
+<span class="ln">2</span>
+<span class="ln">3</span>&lt;?php if ($resultat !== null):
+<span class="ln">4</span>    $meilleurScore = max(array_column($resultat, 'score')); ?&gt;
+<span class="ln">5</span>  &lt;?php foreach ($resultat as $r): ?&gt;
+<span class="ln">6</span>    &lt;span&gt;&lt;?= $r['score'] == $meilleurScore ? '✅ ' : '' ?&gt;&lt;?= e($r['contenu']) ?&gt;&lt;/span&gt;
+<span class="ln">7</span>  &lt;?php endforeach; ?&gt;
+<span class="ln">8</span>&lt;?php endif; ?&gt;</pre>
+<div class="exp"><h3>Ce que fait chaque ligne</h3>
+<table>
+<tr><th>Élément</th><th>Explication</th></tr>
+<tr><td><code>&lt;?= ... ?&gt;</code></td><td>Raccourci de <code>&lt;?php echo ... ?&gt;</code> : affiche directement une valeur PHP dans le HTML.</td></tr>
+<tr><td><code>if (...) : ... endif;</code></td><td>Syntaxe alternative du <code>if { }</code>, pratique quand on mélange PHP et HTML — plus lisible que des accolades.</td></tr>
+<tr><td><code>array_column($resultat, 'score')</code></td><td>Extrait uniquement la colonne « score » de tous les résultats, pour en calculer le maximum juste après.</td></tr>
+<tr><td><code>$r['score'] == $meilleurScore ? '✅ ' : ''</code></td><td>Opérateur ternaire : si ce score est le meilleur, on affiche une coche verte, sinon rien.</td></tr>
+<tr><td><code>foreach (...) : ... endforeach;</code></td><td>Même idée que le <code>foreach</code> classique, en syntaxe alternative pour le HTML.</td></tr>
+</table>
+</div></div>
+</section>
+
+<section id="s7"><h2 class="reveal">Trace en direct : exécutez le code sous vos yeux</h2>
+<p class="reveal">Choisissez une question : ce panneau rejoue exactement ce que PHP ferait, étape par étape.</p>
+<div class="card reveal">
+<div class="chips">
+<button class="tq" data-q="Quel est le tarif de la formation ?">Quel est le tarif de la formation ?</button>
+<button class="tq" data-q="Combien de temps dure le cours ?">Combien de temps dure le cours ?</button>
+<button class="tq" data-q="Qu'apprend-on au programme ?">Qu'apprend-on au programme ?</button>
+</div>
+<ol class="trace" id="traceOut"></ol>
+</div>
+</section>
+
+<section id="s8"><h2 class="reveal">Quiz de compréhension</h2>
+<div class="card reveal" id="quiz"></div>
+</section>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+addEventListener("scroll",function(){$("bar").style.width=100*scrollY/(document.body.scrollHeight-innerHeight)+"%"});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
+
+function cos(a,b){var d=0,x=0,y=0;a.forEach(function(v,i){d+=v*b[i];x+=v*v;y+=b[i]*b[i]});return (x&&y)?d/Math.sqrt(x*y):0}
+function getEmb(t){t=t.toLowerCase();
+if(/durée|dure|heures|temps/.test(t))return[0.76,0.19,-0.27,0.80];
+if(/prix|coûte|combien|tarif|dt/.test(t))return[-0.58,0.22,0.68,0.18];
+if(/apprend|programme|contenu|cours/.test(t))return[0.28,0.73,0.38,-0.08];
+return[0,0,0,0];}
+var DOCS=[{t:"La formation Laravel dure 40 heures.",v:[0.80,0.18,-0.30,0.85]},
+{t:"La formation comprend PHP, MVC, Eloquent et API REST.",v:[0.30,0.75,0.40,-0.10]},
+{t:"Le prix de la formation est de 500 DT.",v:[-0.60,0.20,0.70,0.15]}];
+
+document.querySelectorAll(".tq").forEach(function(b){b.onclick=function(){
+var q=b.dataset.q,out=$("traceOut");out.innerHTML="";
+function li(html){var l=document.createElement("li");l.innerHTML=html;out.appendChild(l)}
+li('<b class="k">$_POST[\'texte\']</b> = "'+q+'"');
+li('<b class="k">trim(...)</b> → texte nettoyé : "'+q.trim()+'"');
+var v=getEmb(q);
+li('<b class="k">getEmbeddingSimule()</b> → mot-clé détecté, vecteur = ['+v.map(function(x){return x.toFixed(2)}).join(", ")+']');
+var scores=DOCS.map(function(d){return cos(v,d.v)});
+var best=Math.max.apply(null,scores);
+var rows=DOCS.map(function(d,i){return '<div class="row"><span>'+(scores[i]===best?"✅ ":"")+d.t+'</span><div class="bar"><div style="width:'+Math.max(0,scores[i])*100+'%"></div></div><b>'+scores[i].toFixed(2)+'</b></div>'}).join("");
+li('<b class="k">foreach ($documents ...) + cosineSimilarity()</b><br>'+rows);
+li('<b class="k">$resultat</b> contient les 3 scores, prêt à être affiché dans le HTML avec <code>foreach ($resultat as $r): ... endforeach;</code>');
+}});
+
+var QZ=[["str_contains() renvoie true même si le mot est écrit en majuscules dans le texte original, grâce à strtolower().",1,"C'est exactement pourquoi le texte est mis en minuscules avant les tests."],
+["La fonction cosineSimilarity() peut renvoyer une valeur supérieure à 1.",0,"Le résultat d'une similarité cosinus reste toujours entre -1 et 1."],
+["e() sert à rendre le texte plus joli visuellement.",0,"e() sert à la sécurité : elle neutralise le HTML dangereux (protection XSS)."],
+["Si $texte est vide, $resultat reste à null et rien ne s'affiche.",1,"C'est le rôle du if ($texte !== '') { ... }."],
+["array_column($resultat, 'score') renvoie la liste de tous les scores calculés.",1,"Elle extrait uniquement cette colonne du tableau, pour en trouver le maximum."]];
+var qh="";QZ.forEach(function(x,i){qh+='<div class="q"><b>'+(i+1)+'. '+x[0]+'</b><br><button data-i="'+i+'" data-v="1">Vrai</button><button class="alt" data-i="'+i+'" data-v="0">Faux</button><span class="fb" id="f'+i+'"></span></div>'});
+$("quiz").innerHTML=qh;$("quiz").onclick=function(e){var i=e.target.dataset.i;if(i==null)return;var x=QZ[i],ok=e.target.dataset.v==x[1],f=$("f"+i);f.style.color=ok?"var(--ok)":"var(--c3)";f.textContent=(ok?"Bravo. ":"Pas tout à fait. ")+x[2]};
+</script>
+</body>
+</html>
