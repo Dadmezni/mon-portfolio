@@ -32,6 +32,22 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdownToggle.focus();
       }
     });
+
+    const iaSubmenu = dropdown.querySelector('.dropdown-submenu');
+    const iaSubmenuToggle = dropdown.querySelector('.dropdown-submenu-toggle');
+    if (iaSubmenu && iaSubmenuToggle) {
+      iaSubmenuToggle.addEventListener('click', () => {
+        const isOpen = iaSubmenu.classList.toggle('open');
+        iaSubmenuToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      iaSubmenu.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          iaSubmenu.classList.remove('open');
+          iaSubmenuToggle.setAttribute('aria-expanded', 'false');
+          iaSubmenuToggle.focus();
+        }
+      });
+    }
   }
 
   if (burger && navLinks) {

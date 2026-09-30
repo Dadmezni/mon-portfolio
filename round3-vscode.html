@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>round3.php — VS Code Dark+</title>
+<style>
+:root{--bg:#1e1e1e;--bar:#252526;--tab:#1e1e1e;--fg:#d4d4d4;--ln:#858585;--bd:#3c3c3c}
+*{box-sizing:border-box}
+html,body{margin:0;background:#141414;color:var(--fg)}
+body{padding:24px 12px;font-family:Consolas,"Cascadia Code","Courier New",monospace}
+.win{max-width:980px;margin:0 auto;background:var(--bg);border:1px solid var(--bd);border-radius:6px;overflow:hidden}
+.top{display:flex;align-items:center;background:var(--bar);border-bottom:1px solid #000}
+.dots{display:flex;gap:7px;padding:0 14px}
+.dots i{width:11px;height:11px;border-radius:50%;display:block}
+.tab{padding:9px 16px;background:var(--tab);border-top:1px solid #007acc;font-size:13px;color:#fff}
+.tab em{font-style:normal;color:#8892bf;margin-right:6px}
+.scroll{overflow-x:auto;padding:12px 0}
+.code{counter-reset:ln;min-width:max-content;font-size:14px;line-height:1.55}
+.l{white-space:pre;min-height:1.55em;padding-right:24px;tab-size:4}
+.l::before{counter-increment:ln;content:counter(ln);display:inline-block;width:48px;padding-right:18px;text-align:right;color:var(--ln);user-select:none}
+.k{color:#569cd6}.c{color:#c586c0}.f{color:#dcdcaa}.s{color:#ce9178}.n{color:#b5cea8}
+.v{color:#9cdcfe}.m{color:#6a9955;font-style:italic}.q{color:#4fc1ff}.p{color:#569cd6}
+.b{color:#808080}.g{color:#569cd6}.a{color:#9cdcfe}.sel{color:#d7ba7d}.t{color:#4ec9b0}
+.bar{background:#007acc;color:#fff;font:12px Arial,sans-serif;padding:4px 14px;display:flex;justify-content:space-between}
+@media (prefers-color-scheme:light){body{background:#e8e8e8}}
+</style>
+</head>
+<body>
+<div class="win">
+  <div class="top">
+    <div class="dots"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></div>
+    <div class="tab"><em>PHP</em>round3.php</div>
+  </div>
+  <div class="scroll"><div class="code">
+<div class="l"><span class="p">&lt;?php</span></div>
+<div class="l"><span class="k">function</span> <span class="f">cosineSimilarity</span>(<span class="k">array</span> <span class="v">$a</span>, <span class="k">array</span> <span class="v">$b</span>): <span class="k">float</span></div>
+<div class="l">{</div>
+<div class="l">    <span class="v">$dot</span> = <span class="v">$normA</span> = <span class="v">$normB</span> = <span class="n">0.0</span>;</div>
+<div class="l">    <span class="c">foreach</span> (<span class="v">$a</span> <span class="c">as</span> <span class="v">$i</span> =&gt; <span class="v">$x</span>) {</div>
+<div class="l">        <span class="v">$dot</span>   += <span class="v">$x</span> * <span class="v">$b</span>[<span class="v">$i</span>];</div>
+<div class="l">        <span class="v">$normA</span> += <span class="v">$x</span> * <span class="v">$x</span>;</div>
+<div class="l">        <span class="v">$normB</span> += <span class="v">$b</span>[<span class="v">$i</span>] * <span class="v">$b</span>[<span class="v">$i</span>];</div>
+<div class="l">    }</div>
+<div class="l">    <span class="c">return</span> (<span class="v">$normA</span> &amp;&amp; <span class="v">$normB</span>) ? <span class="v">$dot</span> / (<span class="f">sqrt</span>(<span class="v">$normA</span>) * <span class="f">sqrt</span>(<span class="v">$normB</span>)) : <span class="n">0.0</span>;</div>
+<div class="l">}</div>
+<div class="l"><span class="k">function</span> <span class="f">getEmbeddingSimule</span>(<span class="k">string</span> <span class="v">$texte</span>): <span class="k">array</span></div>
+<div class="l">{</div>
+<div class="l">    <span class="v">$texte</span> = <span class="f">strtolower</span>(<span class="v">$texte</span>);</div>
+<div class="l">    <span class="c">if</span> (<span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"durée"</span>) || <span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"dure"</span>) </div>
+<div class="l">        || <span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"heures"</span>) || <span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"temps"</span>)) {</div>
+<div class="l">        <span class="c">return</span> [<span class="n">0.76</span>, <span class="n">0.19</span>, <span class="n">-0.27</span>, <span class="n">0.80</span>];</div>
+<div class="l">    }</div>
+<div class="l">    <span class="c">if</span> (<span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"prix"</span>) || <span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"coûte"</span>) </div>
+<div class="l">        || <span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"combien"</span>) || <span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"tarif"</span>) </div>
+<div class="l">    || <span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"dt"</span>)) {</div>
+<div class="l">        <span class="c">return</span> [<span class="n">-0.58</span>, <span class="n">0.22</span>, <span class="n">0.68</span>, <span class="n">0.18</span>];</div>
+<div class="l">    }</div>
+<div class="l">    <span class="c">if</span> (<span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"apprend"</span>) || <span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"programme"</span>) </div>
+<div class="l">        || <span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"contenu"</span>) || <span class="f">str_contains</span>(<span class="v">$texte</span>, <span class="s">"cours"</span>)) {</div>
+<div class="l">        <span class="c">return</span> [<span class="n">0.28</span>, <span class="n">0.73</span>, <span class="n">0.38</span>, <span class="n">-0.08</span>];</div>
+<div class="l">    }</div>
+<div class="l">    <span class="c">return</span> [<span class="n">0</span>, <span class="n">0</span>, <span class="n">0</span>, <span class="n">0</span>];</div>
+<div class="l">}</div>
+<div class="l"></div>
+<div class="l"><span class="v">$documents</span> = [</div>
+<div class="l">    [<span class="s">"contenu"</span> =&gt; <span class="s">"La formation Laravel dure 40 heures."</span>,</div>
+<div class="l">     <span class="s">"vecteur"</span>  =&gt; [<span class="n">0.80</span>, <span class="n">0.18</span>, <span class="n">-0.30</span>, <span class="n">0.85</span>]],</div>
+<div class="l">    [<span class="s">"contenu"</span> =&gt; <span class="s">"La formation comprend PHP, MVC, Eloquent et API REST."</span>,</div>
+<div class="l">     <span class="s">"vecteur"</span>  =&gt; [<span class="n">0.30</span>, <span class="n">0.75</span>, <span class="n">0.40</span>, <span class="n">-0.10</span>]],</div>
+<div class="l">    [<span class="s">"contenu"</span> =&gt; <span class="s">"Le prix de la formation est de 500 DT."</span>,</div>
+<div class="l">     <span class="s">"vecteur"</span>  =&gt; [<span class="n">-0.60</span>, <span class="n">0.20</span>, <span class="n">0.70</span>, <span class="n">0.15</span>]],</div>
+<div class="l">];</div>
+<div class="l"></div>
+<div class="l"><span class="v">$texte</span>    = <span class="f">trim</span>(<span class="v">$_POST</span>[<span class="s">'texte'</span>] ?? <span class="s">''</span>);</div>
+<div class="l"><span class="v">$resultat</span> = <span class="k">null</span>;</div>
+<div class="l"><span class="c">if</span> (<span class="v">$texte</span> !== <span class="s">''</span>) {</div>
+<div class="l">    <span class="v">$vQuestion</span> = <span class="f">getEmbeddingSimule</span>(<span class="v">$texte</span>);</div>
+<div class="l">    <span class="v">$resultat</span>  = [];</div>
+<div class="l">    <span class="c">foreach</span> (<span class="v">$documents</span> <span class="c">as</span> <span class="v">$document</span>) {</div>
+<div class="l">        <span class="v">$resultat</span>[] = [</div>
+<div class="l">            <span class="s">'contenu'</span> =&gt; <span class="v">$document</span>[<span class="s">'contenu'</span>],</div>
+<div class="l">            <span class="s">'score'</span>   =&gt; <span class="f">cosineSimilarity</span>(<span class="v">$vQuestion</span>, <span class="v">$document</span>[<span class="s">'vecteur'</span>]),</div>
+<div class="l">        ];</div>
+<div class="l">    }</div>
+<div class="l">}</div>
+<div class="l"></div>
+<div class="l"><span class="k">function</span> <span class="f">e</span>(<span class="k">string</span> <span class="v">$s</span>): <span class="k">string</span> { <span class="c">return</span> <span class="f">htmlspecialchars</span>(<span class="v">$s</span>, <span class="q">ENT_QUOTES</span>, <span class="s">'UTF-8'</span>); }</div>
+<div class="l"><span class="p">?&gt;</span></div>
+<div class="l"><span class="b">&lt;</span><span class="g">!DOCTYPE</span> <span class="a">html</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;</span><span class="g">html</span> <span class="a">lang</span>=<span class="s">"fr"</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;</span><span class="g">head</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;</span><span class="g">meta</span> <span class="a">charset</span>=<span class="s">"utf-8"</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;</span><span class="g">meta</span> <span class="a">name</span>=<span class="s">"viewport"</span> <span class="a">content</span>=<span class="s">"width=device-width, initial-scale=1"</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;</span><span class="g">title</span><span class="b">&gt;</span>Round 3 — Recherche sémantique<span class="b">&lt;/</span><span class="g">title</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;</span><span class="g">style</span><span class="b">&gt;</span></div>
+<div class="l"><span class="g">body</span>{<span class="a">font-family</span>:<span class="s">Arial,sans-serif</span>;<span class="a">max-width</span>:<span class="n">700px</span>;<span class="a">margin</span>:<span class="n">30px</span> <span class="s">auto</span>;<span class="a">padding</span>:<span class="n">0</span> <span class="n">15px</span>;<span class="a">color</span>:<span class="n">#222</span>}</div>
+<div class="l"><span class="g">form</span>{<span class="a">margin</span>:<span class="n">10px</span> <span class="n">0</span>}</div>
+<div class="l"><span class="g">input</span>[<span class="a">type</span>=<span class="s">text</span>]{<span class="a">width</span>:<span class="n">100%</span>;<span class="a">padding</span>:<span class="n">6px</span>}</div>
+<div class="l"><span class="g">button</span>{<span class="a">margin-top</span>:<span class="n">8px</span>;<span class="a">padding</span>:<span class="n">6px</span> <span class="n">14px</span>}</div>
+<div class="l"><span class="sel">.res</span>{<span class="a">border-left</span>:<span class="n">3px</span> <span class="s">solid</span> <span class="n">#1499c0</span>;<span class="a">padding</span>:<span class="n">8px</span> <span class="n">12px</span>;<span class="a">margin-top</span>:<span class="n">8px</span>}</div>
+<div class="l"><span class="sel">.score</span>{<span class="a">display</span>:<span class="s">flex</span>;<span class="a">justify-content</span>:<span class="s">space-between</span>;<span class="a">border-bottom</span>:<span class="n">1px</span> <span class="s">solid</span> <span class="n">#ddd</span>;<span class="a">padding</span>:<span class="n">4px</span> <span class="n">0</span>}</div>
+<div class="l"><span class="b">&lt;/</span><span class="g">style</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;/</span><span class="g">head</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;</span><span class="g">body</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;</span><span class="g">h1</span><span class="b">&gt;</span>Round 3 — Rechercher le bon document<span class="b">&lt;/</span><span class="g">h1</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;</span><span class="g">p</span><span class="b">&gt;</span>La question est comparée aux 3 documents grâce à la similarité cosinus.<span class="b">&lt;/</span><span class="g">p</span><span class="b">&gt;</span></div>
+<div class="l"></div>
+<div class="l"><span class="b">&lt;</span><span class="g">form</span> <span class="a">method</span>=<span class="s">"post"</span><span class="b">&gt;</span></div>
+<div class="l">  <span class="b">&lt;</span><span class="g">label</span><span class="b">&gt;</span>Votre question :<span class="b">&lt;/</span><span class="g">label</span><span class="b">&gt;</span></div>
+<div class="l">  <span class="b">&lt;</span><span class="g">input</span> <span class="a">type</span>=<span class="s">"text"</span> <span class="a">name</span>=<span class="s">"texte"</span> <span class="a">value</span>=<span class="s">"</span><span class="p">&lt;?=</span> <span class="f">e</span>(<span class="v">$texte</span> !== <span class="s">''</span> ? <span class="v">$texte</span> : <span class="s">"Quel est le tarif de la formation ?"</span>) <span class="p">?&gt;</span><span class="s">"</span><span class="b">&gt;</span></div>
+<div class="l">  <span class="b">&lt;</span><span class="g">button</span> <span class="a">type</span>=<span class="s">"submit"</span><span class="b">&gt;</span>Comparer aux documents<span class="b">&lt;/</span><span class="g">button</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;/</span><span class="g">form</span><span class="b">&gt;</span></div>
+<div class="l"></div>
+<div class="l"><span class="p">&lt;?php</span> <span class="c">if</span> (<span class="v">$resultat</span> !== <span class="k">null</span>):</div>
+<div class="l">    <span class="v">$meilleurScore</span> = <span class="f">max</span>(<span class="f">array_column</span>(<span class="v">$resultat</span>, <span class="s">'score'</span>)); <span class="p">?&gt;</span></div>
+<div class="l">  <span class="b">&lt;</span><span class="g">div</span> <span class="a">class</span>=<span class="s">"res"</span><span class="b">&gt;</span></div>
+<div class="l">    <span class="p">&lt;?php</span> <span class="c">foreach</span> (<span class="v">$resultat</span> <span class="c">as</span> <span class="v">$r</span>): <span class="p">?&gt;</span></div>
+<div class="l">      <span class="b">&lt;</span><span class="g">div</span> <span class="a">class</span>=<span class="s">"score"</span><span class="b">&gt;</span></div>
+<div class="l">        <span class="b">&lt;</span><span class="g">span</span><span class="b">&gt;</span><span class="p">&lt;?=</span> <span class="v">$r</span>[<span class="s">'score'</span>] == <span class="v">$meilleurScore</span> ? <span class="s">'✅ '</span> : <span class="s">''</span> <span class="p">?&gt;&lt;?=</span> <span class="f">e</span>(<span class="v">$r</span>[<span class="s">'contenu'</span>]) <span class="p">?&gt;</span><span class="b">&lt;/</span><span class="g">span</span><span class="b">&gt;</span></div>
+<div class="l">        <span class="b">&lt;</span><span class="g">b</span><span class="b">&gt;</span><span class="p">&lt;?=</span> <span class="f">number_format</span>(<span class="v">$r</span>[<span class="s">'score'</span>], <span class="n">2</span>) <span class="p">?&gt;</span><span class="b">&lt;/</span><span class="g">b</span><span class="b">&gt;</span></div>
+<div class="l">      <span class="b">&lt;/</span><span class="g">div</span><span class="b">&gt;</span></div>
+<div class="l">    <span class="p">&lt;?php</span> <span class="c">endforeach</span>; <span class="p">?&gt;</span></div>
+<div class="l">  <span class="b">&lt;/</span><span class="g">div</span><span class="b">&gt;</span></div>
+<div class="l"><span class="p">&lt;?php</span> <span class="c">endif</span>; <span class="p">?&gt;</span></div>
+<div class="l"></div>
+<div class="l"><span class="b">&lt;</span><span class="g">p</span><span class="b">&gt;&lt;</span><span class="g">a</span> <span class="a">href</span>=<span class="s">"round2.php"</span><span class="b">&gt;</span>← Round 2<span class="b">&lt;/</span><span class="g">a</span><span class="b">&gt;</span> | <span class="b">&lt;</span><span class="g">a</span> <span class="a">href</span>=<span class="s">"round4.php"</span><span class="b">&gt;</span>Round 4 →<span class="b">&lt;/</span><span class="g">a</span><span class="b">&gt;&lt;/</span><span class="g">p</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;/</span><span class="g">body</span><span class="b">&gt;</span></div>
+<div class="l"><span class="b">&lt;/</span><span class="g">html</span><span class="b">&gt;</span></div>
+  </div></div>
+  <div class="bar"><span>PHP</span><span>UTF-8 · Ln 1, Col 1</span></div>
+</div>
+</body>
+</html>

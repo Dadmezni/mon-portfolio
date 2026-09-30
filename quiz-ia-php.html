@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Quiz récapitulatif sur l’intelligence artificielle, les embeddings, le RAG et PHP.">
+  <title>Quiz récapitulatif — IA et PHP | Dhiaa Mezni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/qcm.css">
+  <style>
+    .summary-box { margin: 24px 0 30px; padding: 20px 22px; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius); }
+    .summary-box h2 { margin: 0 0 8px; font: 700 1.1rem "Space Grotesk", sans-serif; }
+    .summary-box p { margin: 0; color: var(--text-muted); }
+    .question-card legend { display: flex; align-items: flex-start; }
+    .answer-feedback { display: block; }
+    .quiz-actions .btn { cursor: pointer; }
+  </style>
+  <script src="js/quiz-ia-php.js" defer></script>
+</head>
+<body class="quiz-page">
+  <header class="navbar"><div class="container nav-inner">
+    <a href="index.html" class="logo">Dhiaa<span>.</span></a>
+    <a href="ia.html" class="quiz-back">← Retour au cours IA</a>
+  </div></header>
+  <main class="container quiz-main">
+    <section class="quiz-heading" aria-labelledby="quiz-title">
+      <p class="section-tag">RÉVISION · INTELLIGENCE ARTIFICIELLE & PHP</p>
+      <h1 id="quiz-title">Quiz <span class="accent">IA + PHP</span></h1>
+      <p>Un quiz de synthèse sur les notions du cours : apprentissage, embeddings, RAG et rôle de PHP.</p>
+      <div class="quiz-meta"><span>10 questions</span><span>·</span><span>Note sur 20</span><span>·</span><span>Correction expliquée</span></div>
+    </section>
+    <aside class="summary-box" aria-label="Résumé du cours">
+      <h2>Le cours en bref</h2>
+      <p>L’IA apprend des régularités à partir de données. Un embedding représente le sens d’un texte sous forme de vecteur. Dans un système RAG, PHP peut retrouver des documents pertinents avec une base de données, puis transmettre leur contenu à un modèle génératif. Le modèle produit une réponse ; il faut la vérifier.</p>
+    </aside>
+    <form id="quiz-form">
+      <div id="questions"></div>
+      <div class="quiz-actions">
+        <p id="quiz-error" class="quiz-error" role="alert" hidden></p>
+        <button class="btn btn-primary" type="submit">Voir mon résultat</button>
+        <button class="btn btn-outline" type="reset">Recommencer</button>
+      </div>
+    </form>
+    <section id="quiz-result" class="quiz-result" aria-live="polite" tabindex="-1" hidden>
+      <p class="section-tag">RÉSULTAT</p><h2 id="result-title"></h2><p id="result-message"></p>
+      <div class="score-track" aria-hidden="true"><span id="score-bar"></span></div>
+      <p class="correction-note">Les bonnes réponses et les explications sont affichées sous chaque question.</p>
+    </section>
+  </main>
+</body>
+</html>
