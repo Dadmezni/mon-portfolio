@@ -135,7 +135,9 @@ ul { list-style: none; }
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
 }
 
-.nav-dropdown.open .dropdown-menu { display: grid; gap: 2px; }
+.nav-dropdown.open > .dropdown-menu,
+.nav-dropdown:hover > .dropdown-menu,
+.nav-dropdown:focus-within > .dropdown-menu { display: grid; gap: 2px; }
 .dropdown-menu a { display: block; padding: 10px 12px; border-radius: 8px; }
 .dropdown-menu a:hover,
 .dropdown-menu a:focus-visible { background: var(--surface); }
@@ -170,7 +172,9 @@ ul { list-style: none; }
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
   list-style: none;
 }
-.dropdown-submenu.open .dropdown-submenu-menu { display: grid; gap: 2px; }
+.dropdown-submenu.open > .dropdown-submenu-menu,
+.dropdown-submenu:hover > .dropdown-submenu-menu,
+.dropdown-submenu:focus-within > .dropdown-submenu-menu { display: grid; gap: 2px; }
 
 .btn-nav {
   padding: 8px 18px;
@@ -998,12 +1002,33 @@ ul { list-style: none; }
 
 .cert-card {
   display: flex;
+  flex-direction: column;
   gap: 18px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 24px;
   transition: all var(--transition);
+}
+
+.cert-image {
+  display: block;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--surface-2);
+  cursor: zoom-in;
+}
+
+.cert-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.cert-image-only {
+  justify-content: center;
 }
 
 .cert-card:hover {

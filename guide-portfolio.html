@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Créer son portfolio : pas à pas</title>
+<style>
+:root{--bg:#f1f4fa;--card:#fff;--ink:#14235c;--txt:#2b3557;--accent:#1f3fa0;--ok:#2e9e57;--line:#dbe3f2;--code:#0f172a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1226;--card:#182142;--ink:#dfe7ff;--txt:#c3cdee;--accent:#8fa8ff;--line:#26325c}}
+:root[data-theme="dark"]{--bg:#0c1226;--card:#182142;--ink:#dfe7ff;--txt:#c3cdee;--accent:#8fa8ff;--line:#26325c}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65}
+header{text-align:center;padding:32px 16px 12px}
+h1{margin:0;color:var(--ink);font-size:clamp(24px,5vw,38px)}
+header p{margin:6px 0 0}
+.home-link{display:inline-block;margin-top:14px;padding:7px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}.home-link:hover{filter:brightness(1.12)}
+main{max-width:none;width:auto;min-width:0;margin:0;padding:8px 14px 40px;display:grid;gap:22px}
+.step{scroll-margin-top:70px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px;box-shadow:0 6px 18px rgba(20,35,92,.08)}
+.step h2{margin:0 0 4px;color:var(--ink);font-size:clamp(19px,4vw,24px);display:flex;gap:10px;align-items:center}
+.n{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;font-size:16px}
+.goal{margin:0 0 10px;font-style:italic}
+ol,ul{padding-inline-start:22px;margin:8px 0}
+li{margin:5px 0}
+code{background:var(--line);color:var(--ink);padding:1px 6px;border-radius:5px;font-size:.92em}
+.vs{display:flex;flex-direction:column;margin:12px 0;border-radius:10px;overflow:hidden;background:#1e1e1e;border:1px solid #3c3c3c;box-shadow:0 10px 26px rgba(0,0,0,.28);font-family:Consolas,"Cascadia Code",Menlo,monospace}
+.vt{display:flex;align-items:center;gap:7px;background:#3c3c3c;padding:0 10px;height:34px}
+.vt i{width:11px;height:11px;border-radius:50%;background:#ff5f56}.vt i:nth-child(2){background:#ffbd2e}.vt i:nth-child(3){background:#27c93f}
+.vt em{margin:0 auto;font:12px system-ui,sans-serif;color:#9d9d9d;font-style:normal;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.cp{position:absolute;top:44px;right:12px;z-index:2;border:1px solid #6b7280;border-radius:7px;background:#2d2d30;color:#fff;font:600 12px system-ui,sans-serif;padding:5px 12px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.cp:hover{background:#007acc}
+.vb{display:flex;min-width:0}
+.ab{flex:none;width:40px;background:#333;display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:10px;font-size:16px;opacity:.85}
+.vm{flex:1;min-width:0;position:relative}
+.tabs{background:#252526;display:flex}
+.tab{background:#1e1e1e;color:#ccc;font:12px system-ui,sans-serif;padding:8px 14px;border-top:2px solid #007acc;display:flex;gap:6px;align-items:center}
+.vm pre{margin:0;padding:10px 0;overflow:auto;max-height:420px;font-size:13px;line-height:1.55;color:#d4d4d4;counter-reset:ln}
+.vm pre code{background:none;padding:0;color:inherit;font-size:inherit;border-radius:0}
+.vm pre span.ln{display:block;width:max-content;min-width:100%;padding-right:14px}
+.vm pre span.ln:before{counter-increment:ln;content:counter(ln);display:inline-block;width:38px;margin-right:14px;text-align:right;color:#6e7681}
+.sb{background:#007acc;color:#fff;font:11px system-ui,sans-serif;display:flex;gap:14px;padding:3px 10px}
+.sb span:last-child{margin-left:auto}
+.vm .c{color:#6a9955}.vm .t{color:#569cd6}.vm .a{color:#9cdcfe}.vm .s{color:#ce9178}.vm .nm{color:#b5cea8}.vm .f{color:#dcdcaa}
+@media (max-width:480px){.ab{display:none}}
+.vis{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:6px 4px;margin:10px 0 14px;padding:12px;border-radius:12px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 12%,var(--card)),var(--card))}
+.vi{text-align:center;width:88px;font-size:12px;font-weight:700;color:var(--ink);opacity:0;transform:translateY(16px) scale(.8);transition:opacity .5s,transform .5s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i)*140ms)}
+.step.in .vi{opacity:1;transform:none}
+.vi span{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 4px;border-radius:18px;background:var(--card);border:2px solid var(--accent);font-size:32px;box-shadow:0 6px 14px rgba(31,63,160,.2);animation:fl 3s ease-in-out infinite;animation-delay:calc(var(--i)*.4s)}
+@keyframes fl{50%{transform:translateY(-6px) rotate(-4deg)}}
+.va{align-self:center;margin-top:-18px;color:var(--accent);font-weight:800;font-size:22px;font-style:normal;animation:nd 1.4s ease-in-out infinite}
+@keyframes nd{50%{transform:translateX(5px)}}
+.hd{width:min(300px,80%);display:block;margin:0 auto 6px}
+.hd .b{transform-box:fill-box;transform-origin:left;animation:pu 2s ease-in-out infinite}
+@keyframes pu{50%{transform:scaleX(.6)}}
+@media (prefers-reduced-motion:reduce){.vi span,.va,.hd .b{animation:none}.vi{transition:none;opacity:1;transform:none}}
+.warn{margin:10px 0;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,#ee8a1f 18%,var(--card));color:var(--ink);font-size:.95em}
+textarea.src{display:none}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+td,th{border:1px solid var(--line);padding:5px 9px;text-align:left}
+th{background:var(--line);color:var(--ink)}
+footer{text-align:center;padding:10px 16px 30px;font-size:14px}
+.h{margin:18px 0 4px;color:var(--ink);font-size:17px}
+.fig{margin:12px 0;text-align:center}
+.fig svg{width:min(440px,100%);height:auto;background:color-mix(in srgb,var(--accent) 6%,var(--card));border-radius:12px;padding:6px}
+.fig text{font-family:system-ui,sans-serif}
+.fig figcaption{font-size:13px;margin-top:4px;font-style:italic}
+.step .fig{opacity:0;transform:translateY(14px);transition:opacity .6s .2s,transform .6s .2s}
+.step.in .fig{opacity:1;transform:none}
+.flw{stroke-dasharray:6 4;animation:dsh 1s linear infinite}
+@keyframes dsh{to{stroke-dashoffset:-20}}
+.urlx{display:flex;flex-wrap:wrap;justify-content:center;font:600 15px Consolas,Menlo,monospace;margin:10px 0 2px}
+.urlx span{color:var(--txt)}.urlx b{color:#fff;background:var(--accent);border-radius:6px;padding:0 7px;margin:0 2px}.urlx b+span+b{background:var(--ok)}
+.ul2{text-align:center;font-size:12px;margin-bottom:8px}
+details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0}
+summary{cursor:pointer;font-weight:700;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.flw{animation:none}.step .fig{opacity:1;transform:none;transition:none}}
+nav#nav{position:sticky;top:0;z-index:7;display:flex;flex-direction:row;align-items:center;gap:6px;width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 14px;background:var(--card);border-bottom:2px solid var(--line);white-space:nowrap;scrollbar-width:thin}
+nav#nav:before{content:"Étapes";flex:none;font-weight:800;color:var(--ink);font-size:16px;padding:0 4px}
+nav#nav a{text-decoration:none;flex:none;font-size:14px;font-weight:600;color:var(--ink);border:2px solid var(--accent);border-radius:10px;padding:4px 12px;background:var(--bg);transition:transform .2s}
+nav#nav a:hover{transform:translateY(-2px)}nav#nav a.on{background:#ffd93b;color:#14235c;border-color:#ee8a1f}
+@media (min-width:900px){main{padding:12px 28px 40px}.fig svg{width:min(560px,100%)}}</style>
+</head>
+<body>
+<header>
+<svg class="hd" viewBox="0 0 300 130" role="img" aria-label="Fenêtre de navigateur"><rect x="5" y="5" width="290" height="120" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="3"/><rect x="5" y="5" width="290" height="22" rx="10" fill="var(--accent)"/><circle cx="20" cy="16" r="4" fill="#ff5f56"/><circle cx="34" cy="16" r="4" fill="#ffbd2e"/><circle cx="48" cy="16" r="4" fill="#27c93f"/><circle cx="60" cy="62" r="20" fill="var(--accent)" opacity=".85"/><rect class="b" x="92" y="48" width="170" height="10" rx="5" fill="var(--accent)"/><rect class="b" x="92" y="68" width="120" height="8" rx="4" fill="var(--ok)" style="animation-delay:.4s"/><rect class="b" x="20" y="98" width="70" height="16" rx="8" fill="#ee8a1f" style="animation-delay:.8s"/><rect class="b" x="100" y="98" width="70" height="16" rx="8" fill="var(--accent)" style="animation-delay:1.2s"/></svg>
+<h1>🚀 Créer son portfolio web, pas à pas</h1>
+<p>HTML5 · Bootstrap 5 · Git · GitHub Pages</p>
+<a class="home-link" href="index.html">Retour au portfolio</a>
+</header>
+<nav id="nav" aria-label="Étapes"></nav>
+<main>
+
+<article class="step" id="s1">
+<h2><span class="n">1</span>Comprendre le projet</h2>
+<p class="goal">Savoir ce que l'on va construire.</p>
+<p>Un portfolio est un site personnel qui montre qui vous êtes, ce que vous savez faire et la preuve (vos projets). Sections visées : navbar, présentation, à propos, compétences, projets, formation, contact, footer.</p>
+<p>Créez cette arborescence :</p>
+<div class="code" data-l="arborescence"><textarea class="src">portfolio/
+├── index.html
+├── css/
+│   └── style.css
+├── img/
+│   ├── photo.jpg
+│   └── projet1.jpg
+└── README.md</textarea></div>
+<div class="warn">Noms de fichiers en minuscules, sans espaces ni accents.</div>
+<figure class="fig"><svg viewBox="0 0 320 272" role="img" aria-label="Maquette d'une page portfolio"><rect x="5" y="3" width="310" height="266" rx="8" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/><g font-size="11" fill="#fff" text-anchor="middle"><rect x="14" y="10" width="292" height="20" rx="4" fill="#1e293b"/><text x="160" y="24">Navbar</text><rect x="14" y="36" width="292" height="48" rx="4" fill="#1f3fa0"/><text x="160" y="64">Hero : photo + titre + boutons</text><rect x="14" y="90" width="292" height="22" rx="4" fill="#6a3fb5"/><text x="160" y="105">À propos</text><rect x="14" y="118" width="292" height="22" rx="4" fill="#2e9e57"/><text x="160" y="133">Compétences (badges)</text><rect x="14" y="146" width="92" height="40" rx="4" fill="#ee8a1f"/><text x="60" y="170">Projet 1</text><rect x="114" y="146" width="92" height="40" rx="4" fill="#ee8a1f"/><text x="160" y="170">Projet 2</text><rect x="214" y="146" width="92" height="40" rx="4" fill="#ee8a1f"/><text x="260" y="170">Projet 3</text><rect x="14" y="192" width="292" height="22" rx="4" fill="#d6335b"/><text x="160" y="207">Formation et expérience</text><rect x="14" y="220" width="292" height="22" rx="4" fill="#0e7490"/><text x="160" y="235">Contact (formulaire)</text><rect x="14" y="248" width="292" height="16" rx="4" fill="#1e293b"/><text x="160" y="260">Footer</text></g></svg><figcaption>Figure 1 : les sections d'un portfolio, de haut en bas.</figcaption></figure>
+</article>
+
+<article class="step" id="s2">
+<h2><span class="n">2</span>Préparer l'environnement</h2>
+<p class="goal">Avoir tous les outils prêts.</p>
+<ol>
+<li>Installer <b>Visual Studio Code</b> puis l'extension <b>Live Server</b>.</li>
+<li>Installer <b>Git</b> (git-scm.com).</li>
+<li>Créer un compte <b>GitHub</b> (pseudo sobre et professionnel).</li>
+<li>Ouvrir le <b>dossier</b> <code>portfolio</code> dans VS Code (Fichier, Ouvrir le dossier).</li>
+<li>Configurer Git une seule fois :</li>
+</ol>
+<div class="code" data-l="bash"><textarea class="src">git --version
+git config --global user.name "Prénom Nom"
+git config --global user.email "vous@exemple.com"</textarea></div>
+<h3 class="h">Raccourcis VS Code utiles</h3>
+<table><tr><th>Action</th><th>Raccourci</th></tr>
+<tr><td>Enregistrer</td><td><code>Ctrl + S</code></td></tr>
+<tr><td>Ouvrir le terminal</td><td><code>Ctrl + ù</code> (ou <code>Ctrl + `</code>)</td></tr>
+<tr><td>Formater le code</td><td><code>Shift + Alt + F</code></td></tr>
+<tr><td>Commenter une ligne</td><td><code>Ctrl + /</code></td></tr>
+<tr><td>Dupliquer une ligne</td><td><code>Shift + Alt + ↓</code></td></tr>
+<tr><td>Écrire vite du HTML (Emmet)</td><td><code>!</code> puis <code>Tab</code></td></tr></table>
+</article>
+
+<article class="step" id="s3">
+<h2><span class="n">3</span>Première page HTML</h2>
+<p class="goal">Comprendre la structure d'une page, sans Bootstrap.</p>
+<ol>
+<li>Créez <code>index.html</code> et collez le code ci-dessous.</li>
+<li>Clic droit, <b>Open with Live Server</b>.</li>
+<li>Modifiez un texte, enregistrez, regardez la page se rafraîchir.</li>
+</ol>
+<div class="code" data-l="html"><textarea class="src"><!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio de Prénom Nom</title>
+</head>
+<body>
+  <header>
+    <h1>Prénom Nom</h1>
+    <p>Étudiant en développement web</p>
+    <img src="img/photo.jpg" alt="Photo de Prénom Nom" width="150">
+  </header>
+  <section id="apropos">
+    <h2>À propos</h2>
+    <p>Je suis passionné par le web.</p>
+  </section>
+  <section id="competences">
+    <h2>Compétences</h2>
+    <ul><li>HTML5</li><li>CSS3</li><li>Git</li></ul>
+  </section>
+</body>
+</html></textarea></div>
+<ul>
+<li><code>&lt;!DOCTYPE html&gt;</code> : indique HTML5 ; <code>head</code> : infos invisibles ; <code>body</code> : ce qui s'affiche.</li>
+<li><code>alt</code> décrit l'image ; <code>id</code> sert de cible aux liens internes (<code>href="#apropos"</code>).</li>
+</ul>
+<figure class="fig"><svg viewBox="0 0 320 160" role="img" aria-label="Arbre d'une page HTML"><g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M160 32L80 62M160 32L240 62M80 86L40 116M80 86L110 116M240 86L205 116M240 86L277 116"/></g><g font-size="12" text-anchor="middle" fill="#fff"><rect x="110" y="8" width="100" height="24" rx="6" fill="#1f3fa0"/><text x="160" y="25">&lt;html&gt;</text><rect x="40" y="62" width="80" height="24" rx="6" fill="#6a3fb5"/><text x="80" y="79">&lt;head&gt;</text><rect x="200" y="62" width="80" height="24" rx="6" fill="#ee8a1f"/><text x="240" y="79">&lt;body&gt;</text><rect x="10" y="116" width="60" height="24" rx="6" fill="#6a3fb5"/><text x="40" y="133">meta</text><rect x="80" y="116" width="60" height="24" rx="6" fill="#6a3fb5"/><text x="110" y="133">title</text><rect x="175" y="116" width="60" height="24" rx="6" fill="#ee8a1f"/><text x="205" y="133">header</text><rect x="245" y="116" width="65" height="24" rx="6" fill="#ee8a1f"/><text x="277" y="133">section</text></g></svg><figcaption>Figure 2 : <span style="color:#6a3fb5">head</span> = invisible (infos), <span style="color:#ee8a1f">body</span> = ce qui s'affiche.</figcaption></figure>
+</article>
+
+<article class="step" id="s4">
+<h2><span class="n">4</span>Introduire Bootstrap</h2>
+<p class="goal">Obtenir un rendu professionnel et responsive avec des classes.</p>
+<p>Ajoutez le CSS dans le <code>&lt;head&gt;</code> et le JS avant <code>&lt;/body&gt;</code> (le JS sert au menu burger) :</p>
+<div class="code" data-l="html"><textarea class="src"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+...
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script></textarea></div>
+<p>Test : deux colonnes, empilées sur mobile.</p>
+<div class="code" data-l="html"><textarea class="src"><div class="container">
+  <div class="row g-3">
+    <div class="col-md-6"><div class="card card-body">Colonne 1</div></div>
+    <div class="col-md-6"><div class="card card-body">Colonne 2</div></div>
+  </div>
+  <a href="#" class="btn btn-primary mt-3">Bouton</a>
+  <span class="badge bg-success">HTML5</span>
+</div></textarea></div>
+<table>
+<tr><th>Besoin</th><th>Classes</th></tr>
+<tr><td>Conteneur</td><td><code>container</code></td></tr>
+<tr><td>Grille</td><td><code>row</code>, <code>col-12 col-md-6 col-lg-4</code></td></tr>
+<tr><td>Espacements</td><td><code>mt-3</code>, <code>py-5</code>, <code>p-4</code></td></tr>
+<tr><td>Couleurs</td><td><code>bg-dark</code>, <code>text-white</code>, <code>text-primary</code></td></tr>
+<tr><td>Bouton, badge, carte</td><td><code>btn btn-primary</code>, <code>badge</code>, <code>card</code></td></tr>
+</table>
+<div class="warn"><code>col</code> doit être dans <code>row</code>, lui-même dans <code>container</code>. Sans le script bundle, le burger ne s'ouvre pas.</div>
+<figure class="fig"><svg viewBox="0 0 320 196" role="img" aria-label="Grille Bootstrap à 12 colonnes"><g font-size="11" text-anchor="middle" fill="#fff"><g fill="#94a3b8"><rect x="8" y="8" width="24" height="22" rx="3"/><rect x="34" y="8" width="24" height="22" rx="3"/><rect x="60" y="8" width="24" height="22" rx="3"/><rect x="86" y="8" width="24" height="22" rx="3"/><rect x="112" y="8" width="24" height="22" rx="3"/><rect x="138" y="8" width="24" height="22" rx="3"/><rect x="164" y="8" width="24" height="22" rx="3"/><rect x="190" y="8" width="24" height="22" rx="3"/><rect x="216" y="8" width="24" height="22" rx="3"/><rect x="242" y="8" width="24" height="22" rx="3"/><rect x="268" y="8" width="24" height="22" rx="3"/><rect x="294" y="8" width="24" height="22" rx="3"/></g><text x="160" y="46" fill="var(--ink)">12 colonnes par ligne</text><rect x="8" y="54" width="154" height="26" rx="4" fill="#1f3fa0"/><text x="85" y="71">col-md-6</text><rect x="166" y="54" width="152" height="26" rx="4" fill="#1f3fa0"/><text x="242" y="71">col-md-6</text><rect x="8" y="88" width="100" height="26" rx="4" fill="#2e9e57"/><text x="58" y="105">col-md-4</text><rect x="110" y="88" width="100" height="26" rx="4" fill="#2e9e57"/><text x="160" y="105">col-md-4</text><rect x="212" y="88" width="106" height="26" rx="4" fill="#2e9e57"/><text x="265" y="105">col-md-4</text><rect x="8" y="122" width="76" height="26" rx="4" fill="#ee8a1f"/><text x="46" y="139">col-md-3</text><rect x="86" y="122" width="232" height="26" rx="4" fill="#ee8a1f"/><text x="202" y="139">col-md-9</text></g><g font-size="11" text-anchor="middle" fill="var(--ink)"><text x="160" y="170">sm 576 px · md 768 px · lg 992 px · xl 1200 px</text><text x="160" y="186">En dessous du point de rupture : chaque colonne prend 100 % de la largeur</text></g></svg><figcaption>Figure 3 : la grille Bootstrap et ses points de rupture.</figcaption></figure>
+</article>
+
+<article class="step" id="s5">
+<h2><span class="n">5</span>Construire le portfolio</h2>
+<p class="goal">Remplacer <code>index.html</code> par la version complète.</p>
+<ol>
+<li>Sélectionnez tout le contenu de <code>index.html</code> et remplacez-le par le code ci-dessous.</li>
+<li>Ajoutez <code>img/photo.jpg</code> et <code>img/projet1.jpg</code>.</li>
+<li>Enregistrez et vérifiez chaque section dans le navigateur.</li>
+</ol>
+<div class="code" data-l="index.html"><textarea class="src"><!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prénom Nom | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#accueil">Prénom Nom</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#apropos">À propos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#competences">Compétences</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projets">Projets</a></li>
+        <li class="nav-item"><a class="nav-link" href="#parcours">Parcours</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header id="accueil" class="hero d-flex align-items-center text-white text-center">
+  <div class="container">
+    <img src="img/photo.jpg" alt="Photo de Prénom Nom" class="rounded-circle border border-3 border-white mb-4" width="160" height="160">
+    <h1 class="display-4 fw-bold">Bonjour, je suis Prénom Nom</h1>
+    <p class="lead">Étudiant en développement web</p>
+    <a href="#projets" class="btn btn-primary btn-lg me-2">Mes projets</a>
+    <a href="#contact" class="btn btn-outline-light btn-lg">Me contacter</a>
+  </div>
+</header>
+
+<main>
+  <section id="apropos" class="py-5">
+    <div class="container text-center">
+      <h2 class="mb-4">À propos</h2>
+      <p class="lead mx-auto" style="max-width:700px">Passionné par le web, je crée des sites clairs et accessibles. Je cherche un stage pour progresser.</p>
+    </div>
+  </section>
+
+  <section id="competences" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">Compétences</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <h3 class="h5">Techniques</h3>
+          <span class="badge bg-primary">HTML5</span> <span class="badge bg-primary">CSS3</span>
+          <span class="badge bg-primary">Bootstrap</span> <span class="badge bg-primary">Git</span>
+        </div>
+        <div class="col-md-6">
+          <h3 class="h5">Personnelles</h3>
+          <span class="badge bg-success">Autonomie</span> <span class="badge bg-success">Curiosité</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projets" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Projets</h2>
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <img src="img/projet1.jpg" class="card-img-top" alt="Capture du projet 1">
+            <div class="card-body">
+              <h3 class="card-title h5">Projet 1</h3>
+              <p class="card-text">Objectif du projet et technologies utilisées.</p>
+              <span class="badge bg-secondary">HTML</span> <span class="badge bg-secondary">Bootstrap</span>
+            </div>
+            <div class="card-footer bg-white border-0">
+              <a href="https://github.com/votre-pseudo/projet1" target="_blank" rel="noopener" class="btn btn-sm btn-dark">Code GitHub</a>
+            </div>
+          </div>
+        </div>
+        <!-- Copiez le bloc col-12 ... ci-dessus pour ajouter un projet -->
+      </div>
+    </div>
+  </section>
+
+  <section id="parcours" class="py-5 bg-light">
+    <div class="container" style="max-width:760px">
+      <h2 class="text-center mb-4">Formation et expérience</h2>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>2025 à aujourd'hui</strong> : Licence, Établissement X</li>
+        <li class="list-group-item"><strong>2024</strong> : Stage, Entreprise Y</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="py-5">
+    <div class="container" style="max-width:560px">
+      <h2 class="text-center mb-4">Contact</h2>
+      <form action="mailto:vous@exemple.com" method="post" enctype="text/plain">
+        <div class="mb-3"><label for="nom" class="form-label">Nom</label><input type="text" class="form-control" id="nom" name="nom" required></div>
+        <div class="mb-3"><label for="email" class="form-label">E-mail</label><input type="email" class="form-control" id="email" name="email" required></div>
+        <div class="mb-3"><label for="msg" class="form-label">Message</label><textarea class="form-control" id="msg" name="message" rows="4" required>&lt;/textarea&gt;</div>
+        <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-dark text-white text-center py-4">
+  <p class="mb-1">&copy; 2026 Prénom Nom</p>
+  <a class="text-white me-3" href="https://github.com/votre-pseudo" target="_blank" rel="noopener">GitHub</a>
+  <a class="text-white" href="https://www.linkedin.com/in/votre-profil" target="_blank" rel="noopener">LinkedIn</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html></textarea></div>
+</article>
+
+<article class="step" id="s6">
+<h2><span class="n">6</span>Personnaliser</h2>
+<p class="goal">Rendre le portfolio unique avec un petit fichier CSS.</p>
+<ol>
+<li>Créez <code>css/style.css</code> avec le code ci-dessous.</li>
+<li>Changez les couleurs via les variables, remplacez les textes et la photo, ajoutez vos projets.</li>
+<li>Testez sur mobile (F12, icône appareil).</li>
+</ol>
+<div class="code" data-l="css/style.css"><textarea class="src">:root{
+  --couleur-principale:#1f3fa0;
+}
+html{scroll-behavior:smooth}
+section,header{scroll-margin-top:70px}
+.hero{
+  min-height:100vh;
+  padding-top:70px;
+  background:linear-gradient(135deg,var(--couleur-principale),#0a1a4d);
+}
+.card{transition:transform .2s}
+.card:hover{transform:translateY(-6px)}
+.card-img-top{height:180px;object-fit:cover}
+@media (max-width:576px){
+  .hero h1{font-size:1.8rem}
+  .hero .btn{display:block;margin:.5rem auto}
+}</textarea></div>
+</article>
+
+<article class="step" id="s7">
+<h2><span class="n">7</span>Git : versionner</h2>
+<p class="goal">Enregistrer l'historique du projet.</p>
+<ul>
+<li><b>Repository</b> : dossier suivi par Git · <b>Commit</b> : point de sauvegarde · <b>Branch</b> : ligne de travail (<code>main</code>) · <b>Remote</b> : copie sur GitHub (<code>origin</code>).</li>
+</ul>
+<p>Dans le terminal de VS Code (Ctrl+ù), à la racine du projet :</p>
+<div class="code" data-l="bash"><textarea class="src">git init                        # crée le dépôt local
+git status                      # fichiers modifiés
+git add .                       # prépare tous les fichiers
+git commit -m "Initial commit"  # enregistre la version
+git branch -M main              # branche principale = main
+git log --oneline               # historique</textarea></div>
+<div class="warn">Faites un commit par étape (ex. « Ajout de la section projets »). Visez 8 commits ou plus.</div>
+<h3 class="h">Le trajet d'une modification</h3>
+<figure class="fig"><svg viewBox="0 0 340 124" role="img" aria-label="Flux Git"><g font-size="12" text-anchor="middle" fill="#fff"><rect x="4" y="30" width="68" height="46" rx="8" fill="#6a3fb5"/><text x="38" y="50">Dossier</text><text x="38" y="65" font-size="10">vos fichiers</text><rect x="92" y="30" width="68" height="46" rx="8" fill="#ee8a1f"/><text x="126" y="50">Staging</text><text x="126" y="65" font-size="10">préparation</text><rect x="180" y="30" width="68" height="46" rx="8" fill="#1f3fa0"/><text x="214" y="50">Dépôt local</text><text x="214" y="65" font-size="10">commits</text><rect x="268" y="30" width="68" height="46" rx="8" fill="#2e9e57"/><text x="302" y="50">GitHub</text><text x="302" y="65" font-size="10">en ligne</text></g><g stroke="var(--accent)" stroke-width="2.5" fill="none"><path class="flw" d="M72 53H92M160 53H180M248 53H268"/><path class="flw" d="M302 78V104H214V80"/></g><g font-size="11" text-anchor="middle" fill="var(--ink)" font-weight="700"><text x="82" y="24">add</text><text x="170" y="24">commit</text><text x="258" y="24">push</text><text x="258" y="118">pull / clone</text></g></svg><figcaption>Figure 4 : add prépare, commit enregistre, push envoie, pull récupère.</figcaption></figure>
+<h3 class="h">Travailler avec des branches</h3>
+<p>Une branche permet d'essayer une nouveauté sans toucher à la version stable (<code>main</code>).</p>
+<figure class="fig"><svg viewBox="0 0 340 128" role="img" aria-label="Branches Git"><g stroke-width="3" fill="none"><path d="M10 34H330" stroke="#1f3fa0"/><path d="M90 34C100 34 100 94 112 94H230C245 94 245 34 260 34" stroke="#ee8a1f"/></g><g fill="#1f3fa0"><circle cx="30" cy="34" r="8"/><circle cx="90" cy="34" r="8"/><circle cx="310" cy="34" r="8"/></g><g fill="#ee8a1f"><circle cx="125" cy="94" r="8"/><circle cx="175" cy="94" r="8"/><circle cx="225" cy="94" r="8"/></g><circle cx="260" cy="34" r="10" fill="#2e9e57"/><g font-size="11" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="40" y="18">main</text><text x="175" y="120">feature-contact</text><text x="260" y="14">merge</text></g></svg><figcaption>Figure 5 : une branche part de main, reçoit des commits, puis est fusionnée (merge).</figcaption></figure>
+<div class="code" data-l="bash"><textarea class="src">git switch -c feature-contact   # crée la branche et bascule dessus
+git add .
+git commit -m "Ajout du formulaire de contact"
+git switch main                 # retour à la branche principale
+git merge feature-contact       # fusionne la branche dans main
+git branch                      # liste les branches
+git branch -d feature-contact   # supprime la branche fusionnée</textarea></div>
+<h3 class="h">Annuler une erreur</h3>
+<table><tr><th>Situation</th><th>Commande</th></tr>
+<tr><td>Voir ce qui a changé</td><td><code>git diff</code></td></tr>
+<tr><td>Annuler les modifs d'un fichier</td><td><code>git restore index.html</code></td></tr>
+<tr><td>Retirer un fichier du staging</td><td><code>git restore --staged index.html</code></td></tr>
+<tr><td>Corriger le dernier message</td><td><code>git commit --amend -m "Nouveau message"</code></td></tr>
+<tr><td>Récupérer les changements distants</td><td><code>git pull</code></td></tr></table>
+<div class="warn">Bon commit : un commit = une idée, message court à l'infinitif (« Ajouter la section contact »).</div>
+</article>
+
+<article class="step" id="s8">
+<h2><span class="n">8</span>GitHub : envoyer en ligne</h2>
+<p class="goal">Connecter le dossier local à GitHub.</p>
+<ol>
+<li>Sur github.com : <b>New repository</b>, nom <code>portfolio</code>, <b>Public</b>, sans README ni .gitignore, puis <b>Create repository</b>.</li>
+<li>Copiez l'URL du dépôt et exécutez :</li>
+</ol>
+<div class="code" data-l="bash"><textarea class="src">git remote add origin https://github.com/VOTRE-PSEUDO/portfolio.git
+git push -u origin main</textarea></div>
+<ol start="3">
+<li>Actualisez la page GitHub : vos fichiers apparaissent.</li>
+<li>Créez <code>README.md</code> (titre, lien de démo, sections), puis :</li>
+</ol>
+<div class="code" data-l="bash"><textarea class="src">git add .
+git commit -m "Ajout du README"
+git push</textarea></div>
+<div class="warn">Si l'authentification est refusée : utilisez un Personal Access Token ou connectez GitHub dans VS Code. Vérifiez l'URL avec <code>git remote -v</code>.</div>
+<h3 class="h">Un dépôt bien organisé</h3>
+<div class="code" data-l="arborescence"><textarea class="src">portfolio/
+├── index.html
+├── css/style.css
+├── img/
+├── .gitignore
+└── README.md</textarea></div>
+<div class="code" data-l=".gitignore"><textarea class="src">.DS_Store
+Thumbs.db
+.vscode/</textarea></div>
+<div class="code" data-l="README.md"><textarea class="src"># Portfolio de Prénom Nom
+
+Portfolio personnel réalisé avec HTML5, CSS3 et Bootstrap 5.
+
+🔗 Démo : https://VOTRE-PSEUDO.github.io/portfolio/
+
+## Technologies
+- HTML5 et CSS3
+- Bootstrap 5.3
+- Git et GitHub Pages
+
+## Lancer en local
+Ouvrir index.html avec Live Server.</textarea></div>
+<h3 class="h">Récupérer un dépôt existant</h3>
+<div class="code" data-l="bash"><textarea class="src">git clone https://github.com/VOTRE-PSEUDO/portfolio.git   # copie le dépôt
+git pull                                                   # met à jour</textarea></div>
+</article>
+
+<article class="step" id="s9">
+<h2><span class="n">9</span>Publier avec GitHub Pages</h2>
+<p class="goal">Obtenir une URL publique.</p>
+<ol>
+<li>Dans le dépôt : <b>Settings</b>.</li>
+<li>Menu de gauche : <b>Pages</b>.</li>
+<li><b>Source</b> : <i>Deploy from a branch</i>.</li>
+<li><b>Branch</b> : <code>main</code>, dossier <code>/ (root)</code>, puis <b>Save</b>.</li>
+<li>Attendez 1 à 3 minutes et actualisez : l'URL apparaît.</li>
+</ol>
+<div class="code" data-l="url"><textarea class="src">https://VOTRE-PSEUDO.github.io/portfolio/</textarea></div>
+<div class="warn">Erreur 404 ? Vérifiez que le dépôt est public et que <code>index.html</code> est bien à la racine.</div>
+<figure class="fig"><svg viewBox="0 0 340 100" role="img" aria-label="Déploiement GitHub Pages"><g font-size="12" text-anchor="middle" fill="#fff"><rect x="6" y="26" width="86" height="46" rx="8" fill="#1f3fa0"/><text x="49" y="47">git push</text><text x="49" y="62" font-size="10">sur main</text><rect x="126" y="26" width="92" height="46" rx="8" fill="#ee8a1f"/><text x="172" y="47">GitHub Pages</text><text x="172" y="62" font-size="10">construit le site</text><rect x="252" y="26" width="82" height="46" rx="8" fill="#2e9e57"/><text x="293" y="47">🌍 En ligne</text><text x="293" y="62" font-size="10">URL publique</text></g><g stroke="var(--accent)" stroke-width="2.5" fill="none"><path class="flw" d="M92 49H126M218 49H252"/></g></svg><figcaption>Figure 6 : chaque push met le site à jour en 1 à 3 minutes.</figcaption></figure>
+<div class="urlx"><span>https://</span><b>pseudo</b><span>.github.io/</span><b>portfolio</b></div>
+<div class="ul2">pseudo GitHub · nom du dépôt</div>
+<h3 class="h">Mettre à jour le site</h3>
+<div class="code" data-l="bash"><textarea class="src">git add .
+git commit -m "Ajout du projet 4"
+git push</textarea></div>
+<p>Attendez 1 à 2 minutes puis rechargez avec <code>Ctrl + F5</code>.</p>
+</article>
+
+<article class="step" id="s10">
+<h2><span class="n">10</span>Projet final et vérification</h2>
+<p class="goal">Rendre un portfolio complet.</p>
+<ul>
+<li>Toutes les sections sont présentes et personnalisées.</li>
+<li>Au moins 3 projets en cartes, avec liens.</li>
+<li>Images avec <code>alt</code>, burger testé, liens testés.</li>
+<li>Au moins 8 commits, messages clairs.</li>
+<li>Dépôt public, README complet avec l'URL de démo.</li>
+<li>GitHub Pages actif.</li>
+</ul>
+<p><b>À rendre :</b> l'URL du dépôt et l'URL GitHub Pages.</p>
+<h3 class="h">Barème indicatif sur 20</h3>
+<table><tr><th>Critère</th><th>Points</th></tr>
+<tr><td>Structure HTML</td><td>3</td></tr><tr><td>Utilisation de Bootstrap</td><td>3</td></tr><tr><td>Responsive design</td><td>2</td></tr><tr><td>Contenu</td><td>2</td></tr><tr><td>Design</td><td>2</td></tr><tr><td>Section projets</td><td>2</td></tr><tr><td>Qualité du code</td><td>1</td></tr><tr><td>Utilisation de Git</td><td>2</td></tr><tr><td>Repository GitHub</td><td>1</td></tr><tr><td>Publication GitHub Pages</td><td>2</td></tr></table>
+</article>
+<article class="step" id="extra">
+<h2><span class="n">📚</span>Glossaire et erreurs fréquentes</h2>
+<table><tr><th>Terme</th><th>Définition</th></tr>
+<tr><td>Repository</td><td>Dossier de projet suivi par Git</td></tr>
+<tr><td>Commit</td><td>Point de sauvegarde avec un message</td></tr>
+<tr><td>Branch</td><td>Ligne de travail parallèle</td></tr>
+<tr><td>Merge</td><td>Fusion d'une branche dans une autre</td></tr>
+<tr><td>Remote / origin</td><td>Copie du dépôt sur GitHub</td></tr>
+<tr><td>Push / Pull / Clone</td><td>Envoyer / récupérer / copier un dépôt</td></tr>
+<tr><td>CDN</td><td>Serveur qui héberge Bootstrap pour vous</td></tr>
+<tr><td>Responsive</td><td>Page qui s'adapte à la taille de l'écran</td></tr>
+<tr><td>Breakpoint</td><td>Largeur à partir de laquelle la mise en page change</td></tr></table>
+<details><summary>Mon image ne s'affiche pas</summary><p>Vérifiez le chemin (<code>img/photo.jpg</code>), les majuscules/minuscules et l'extension réelle du fichier.</p></details>
+<details><summary>Le menu burger ne s'ouvre pas</summary><p>Le script <code>bootstrap.bundle.min.js</code> est absent ou placé avant le reste de la page.</p></details>
+<details><summary>Git refuse le push</summary><p>Vérifiez l'URL avec <code>git remote -v</code> et votre authentification (token ou connexion GitHub dans VS Code).</p></details>
+<details><summary>GitHub Pages affiche une erreur 404</summary><p>Dépôt public ? Branche <code>main</code> ? <code>index.html</code> à la racine ? Attendez quelques minutes.</p></details>
+<details><summary>Mon style Bootstrap ne s'applique pas</summary><p>Le lien CDN est mal copié, ou votre <code>style.css</code> est chargé avant Bootstrap.</p></details>
+</article>
+</main>
+<footer>Support de cours : portfolio HTML + Bootstrap + Git/GitHub</footer>
+
+<script>
+function esc(x){return x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function tk(x,re,cl){var o='',i=0,m;re.lastIndex=0;while((m=re.exec(x))){if(m[0]===''){re.lastIndex++;continue}o+=esc(x.slice(i,m.index));var k=1;while(m[k]===undefined)k++;o+='<span class="'+cl[k-1]+'">'+esc(m[0])+'</span>';i=m.index+m[0].length}return o+esc(x.slice(i))}
+var RH=/(<!--[\s\S]*?-->)|(<\/?!?[\w-]+)|("[^"]*")|([\w:-]+(?==))|(\/?>)/g,CH=['c','t','s','a','t'];
+var RB=/(https?:\/\/\S+)|(#.*$)|("[^"]*")|(^\s*[\w.-]+)|(\s-{1,2}[\w-]+)/g,CB=['s','c','s','f','a'];
+function cssl(l){if(/^\s*\/\*/.test(l))return '<span class="c">'+esc(l)+'</span>';var j=l.indexOf('{'),p='',r=l;if(j>-1){p='<span class="t">'+esc(l.slice(0,j))+'</span>{';r=l.slice(j+1)}return p+tk(r,/([\w-]+(?=:))|(#[0-9a-fA-F]{3,8}\b|-?\.?\d[\w.%]*)/g,['a','nm'])}
+var M={html:'index.html',bash:'Terminal',arborescence:'Explorateur',url:'Navigateur'},IC={html:'🟧',css:'🟦',bash:'⌨️',txt:'📄'},LN={html:'HTML',css:'CSS',bash:'Shell',txt:'Texte'};
+document.querySelectorAll('.code').forEach(function(d){
+  var raw=d.querySelector('textarea').value,lb=d.dataset.l||'',name=M[lb]||lb,lang=/\.css$/.test(lb)?'css':(lb==='bash'?'bash':(/html$/.test(lb)?'html':'txt'));
+  var lines=raw.split('\n').map(function(l){var h=lang==='html'?tk(l,RH,CH):lang==='css'?cssl(l):lang==='bash'?tk(l,RB,CB):esc(l);return '<span class="ln">'+(h||'&#8203;')+'</span>'}).join('');
+  var w=document.createElement('div');w.className='vs';
+  w.innerHTML='<div class="vt"><i></i><i></i><i></i><em>'+esc(name)+' — Visual Studio Code</em></div><div class="vb"><div class="ab"><span>📁</span><span>🔍</span><span>🌿</span><span>🧩</span></div><div class="vm"><button class="cp" type="button">📋 Copier</button><div class="tabs"><div class="tab">'+IC[lang]+' '+esc(name)+'</div></div><pre><code>'+lines+'</code></pre></div></div><div class="sb"><span>⎇ main</span><span>UTF-8</span><span>'+LN[lang]+'</span></div>';
+  var b=w.querySelector('.cp');
+  b.onclick=function(){function ok(){b.textContent='✅ Copié';setTimeout(function(){b.textContent='📋 Copier'},1500)}
+    if(navigator.clipboard){navigator.clipboard.writeText(raw).then(ok,function(){})}else{var t=document.createElement('textarea');t.value=raw;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();ok()}};
+  d.replaceWith(w);
+});
+var V={s1:['🎯|Objectif','📁|Structure','🌐|Résultat'],s2:['💻|VS Code','🔧|Git','🐙|GitHub'],s3:['📄|HTML','🏷️|Balises','🖼️|Image'],s4:['🎨|Bootstrap','🧱|Grille','📱|Responsive'],s5:['🧭|Navbar','🦸|Hero','🃏|Cartes','✉️|Contact'],s6:['🎨|Couleurs','📸|Photo','✍️|Textes'],s7:['📝|Modifier','➕|Add','💾|Commit','📜|Historique'],s8:['📂|Dépôt','🔗|Remote','☁️|Push'],s9:['⚙️|Settings','🚀|Pages','🌍|URL'],s10:['✅|Checklist','📦|Rendu','🏆|Réussite']};
+document.querySelectorAll('.step').forEach(function(s){var v=V[s.id];if(!v)return;var h='';
+  v.forEach(function(x,i){var q=x.split('|');h+=(i?'<i class="va">›</i>':'')+'<div class="vi" style="--i:'+i+'"><span>'+q[0]+'</span>'+q[1]+'</div>'});
+  var d=document.createElement('div');d.className='vis';d.innerHTML=h;s.querySelector('.goal').after(d)});
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});document.querySelectorAll('.step').forEach(function(s){io.observe(s)})}else document.querySelectorAll('.step').forEach(function(s){s.classList.add('in')});
+var nv=document.getElementById('nav'),st=[].slice.call(document.querySelectorAll('.step'));
+st.forEach(function(x,i){var h=x.querySelector('h2').textContent.slice(x.querySelector('.n').textContent.length).trim();var a=document.createElement('a');a.href='#'+x.id;a.textContent=(x.id==='extra'?'📚 ':(i+1)+'. ')+(h.length>24?h.slice(0,24)+'…':h);nv.appendChild(a)});
+if('IntersectionObserver' in window){var ls=[].slice.call(nv.querySelectorAll('a')),so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)ls.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-30% 0px -60% 0px'});st.forEach(function(x){so.observe(x)})}
+</script>
+</body>
+</html>
