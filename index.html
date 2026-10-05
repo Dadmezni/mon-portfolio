@@ -19,30 +19,42 @@
       <nav>
         <ul class="nav-links">
           <li><a href="#about" data-i18n="nav.about">About</a></li>
-          <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
           <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
-          <li><a href="#services" data-i18n="nav.services">Services</a></li>
+          <li><a href="#recommendations" data-i18n="nav.recommendations">Recommendations</a></li>
           <li><a href="#certifications" data-i18n="nav.certifications">Certifications</a></li>
           <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <!--<li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li> -->
           <li class="nav-dropdown">
             <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="learning-menu">
               Formations <span class="dropdown-chevron" aria-hidden="true">▾</span>
             </button>
             <ul class="dropdown-menu" id="learning-menu">
-              <li><a href="qcm.html">Quiz d'évaluation</a></li>
-              <li><a href="quiz-ia-php.html">Quiz récapitulatif IA + PHP</a></li>
-              <li class="dropdown-submenu">
-                <button class="dropdown-submenu-toggle" type="button" aria-expanded="false" aria-controls="ia-menu">IA <span aria-hidden="true">›</span></button>
-                <ul class="dropdown-submenu-menu" id="ia-menu">
-                  <li><a href="ia.html">IA Cours</a></li>
-                  <li><a href="round3-vscode.html">TP</a></li>
-                </ul>
+              <li class="learning-group">
+                <h3>Intelligence artificielle</h3>
+                <a href="ia.html">Comprendre l'IA</a>
+                <a href="iaCours.html" lang="ar" hreflang="ar">Cours d'IA en arabe</a>
+                <a href="rag.html">Machine Learning et RAG</a>
+                <a href="ragHistoire.html">Histoire de l'IA et du RAG</a>
+                <a href="embedding.html">Embeddings</a>
+                <a href="prompts.html">Technologies et prompts</a>
               </li>
-              <li><a href="iaCours.html" lang="ar" hreflang="ar">IA (version arabe)</a></li>
-              <li><a href="laravelCours.html">Développement web avec Laravel</a></li>
-              <li><a href="bootstrap-cours.html">Cours Bootstrap</a></li>
-              <li><a href="marketing-digital-visuel.html">Marketing digital</a></li>
-              <li><a href="guide-portfolio.html">Guide du portfolio</a></li>
+              <li class="learning-group">
+                <h3>Développement web</h3>
+                <a href="laravelCours.html">Cours Laravel</a>
+                <a href="bootstrap-cours.html">Cours Bootstrap 5</a>
+                <a href="guide-portfolio.html">Guide du portfolio</a>
+              </li>
+              <li class="learning-group">
+                <h3>Ateliers et évaluations</h3>
+                <a href="round3-vscode.html">Atelier pratique</a>
+                <a href="explication-code-round3.html">Explication du code</a>
+                <a href="quiz-ia-php.html">Quiz récapitulatif IA + PHP</a>
+                <a href="qcm.html">QCM PHP et IA</a>
+              </li>
+              <li class="learning-group">
+                <h3>Marketing digital</h3>
+                <a href="marketing-digital-visuel.html">Cours illustré</a>
+              </li>
             </ul>
           </li>
           <li><a href="#contact" class="btn-nav" data-i18n="nav.contact">Contact</a></li>
@@ -71,14 +83,16 @@
 
         <p class="hero-greeting" data-i18n="hero.greeting">👋 Hi, I'm</p>
         <h1>Dhiaa Mezni</h1>
-        <h2 data-i18n-html="hero.role">Full Stack Developer <span class="accent">&</span> IT Teacher</h2>
+        <h2 data-i18n-html="hero.role">Full Stack Laravel Developer <span class="accent">&</span> IT Trainer</h2>
+        <p class="hero-proof" data-i18n="hero.proof">HR teams described a strategic project as “a genuine success” and recognized my contribution as exceptional.</p>
         <p class="hero-desc" data-i18n-html="hero.desc">
-          I build scalable web applications with <strong>Laravel</strong>, <strong>PHP</strong>
-          and <strong>ReactJS</strong>, and I teach these skills to the next generation of developers.
+          I build web applications with <strong>Laravel</strong>, <strong>PHP</strong> and <strong>ReactJS</strong>,
+          and teach practical web development.
         </p>
 
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary" data-i18n="hero.ctaProjects">View my projects</a>
+          <a href="#training" class="btn btn-outline" data-i18n="hero.ctaTraining">Explore my training</a>
           <a href="#contact" class="btn btn-outline" data-i18n="hero.ctaContact">Get in touch</a>
         </div>
 
@@ -99,7 +113,7 @@
           </div>
           <pre><code><span class="k">class</span> <span class="c">Developer</span> {
   <span class="k">public</span> <span class="v">$name</span> = <span class="s">"Dhiaa Mezni"</span>;
-  <span class="k">public</span> <span class="v">$role</span> = <span class="s">"Full Stack & Teacher"</span>;
+  <span class="k">public</span> <span class="v">$role</span> = <span class="s">"Laravel Developer & IT Trainer"</span>;
   <span class="k">public</span> <span class="v">$stack</span> = [
     <span class="s">"Laravel"</span>, <span class="s">"React"</span>, <span class="s">"Node.js"</span>
   ];
@@ -121,9 +135,8 @@
       <div class="about-grid">
         <div class="about-text">
           <p data-i18n-html="about.p1">
-            Full Stack Developer and Computer Science Teacher with over
-            <strong>15 years of experience</strong> across web development, teaching,
-            and technical team leadership.
+            Full Stack Developer and IT trainer with professional experience across web development,
+            teaching, and technical team leadership.
           </p>
           <p data-i18n-html="about.p2">
             I've designed e-learning platforms, marketplaces, booking portals and
@@ -138,15 +151,15 @@
 
         <div class="about-stats">
           <div class="stat">
-            <span class="stat-num">15+</span>
-            <span class="stat-label" data-i18n="about.stat1">Years of experience</span>
+            <span class="stat-num">15 +</span>
+            <span class="stat-label" data-i18n="about.stat1">Professional experience since</span>
           </div>
           <div class="stat">
-            <span class="stat-num">5+</span>
-            <span class="stat-label" data-i18n="about.stat2">Projects delivered</span>
+            <span class="stat-num">+ 6</span>
+            <span class="stat-label" data-i18n="about.stat2">Projects featured</span>
           </div>
           <div class="stat">
-            <span class="stat-num">4</span>
+            <span class="stat-num">+ 7</span>
             <span class="stat-label" data-i18n="about.stat3">Years teaching</span>
           </div>
           <div class="stat">
@@ -168,27 +181,26 @@
 
         <div class="skill-card">
           <div class="skill-icon">⚙️</div>
-          <h3 data-i18n="skills.backend">Backend</h3>
+          <h3 data-i18n="skills.core">Core stack</h3>
           <ul class="tag-list">
-            <li>PHP</li><li>Laravel</li><li>Symfony</li>
-            <li>Node.js</li><li>Django</li><li>REST API</li>
+            <li>Laravel</li><li>PHP</li><li>React.js</li>
+            <li>REST API</li><li>MySQL</li>
           </ul>
         </div>
 
         <div class="skill-card">
           <div class="skill-icon">🎨</div>
-          <h3 data-i18n="skills.frontend">Frontend</h3>
+          <h3 data-i18n="skills.web">Web foundations</h3>
           <ul class="tag-list">
-            <li>React.js</li><li>JavaScript</li><li>HTML5</li>
-            <li>CSS3</li><li>Bootstrap</li>
+            <li>JavaScript</li><li>HTML5</li><li>CSS3</li><li>Bootstrap</li>
           </ul>
         </div>
 
         <div class="skill-card">
           <div class="skill-icon">🗄️</div>
-          <h3 data-i18n="skills.databases">Databases</h3>
+          <h3 data-i18n="skills.additional">Additional technologies</h3>
           <ul class="tag-list">
-            <li>MySQL</li><li>PostgreSQL</li><li>SQL</li>
+            <li>Symfony</li><li>Node.js</li><li>Django</li><li>PostgreSQL</li><li>SQL</li>
           </ul>
         </div>
 
@@ -282,6 +294,47 @@
     </div>
   </section>
 
+  <!-- ===== RECOMMENDATIONS ===== -->
+  <section id="recommendations" class="section section-alt">
+    <div class="container">
+      <p class="section-tag" data-i18n="recommendations.tag">Recommendations</p>
+      <h2 class="section-title" data-i18n="recommendations.title">What project leads say</h2>
+      <p class="section-lead" data-i18n="recommendations.lead">Feedback shared by HR managers and project leads on delivered tools and project contributions.</p>
+
+      <div class="recommendations-grid">
+        <article class="recommendation-card" id="feedback-ninebox">
+          <p class="recommendation-project" data-i18n="recommendations.ninebox.project">Promotion assessment · Nine Box</p>
+          <blockquote data-i18n="recommendations.ninebox.quote">“Dhia tested the promotion assessment. It works and consistently places the employee in the Nine Box tool according to the manager's evaluation.”</blockquote>
+          <p class="recommendation-author" data-i18n="recommendations.ninebox.author">Charfeddine Nsira · HR Manager</p>
+          <a class="recommendation-evidence lightbox-trigger" href="assets/images/testimonials/recommendation-2.png" data-full="assets/images/testimonials/recommendation-2.png" data-caption="Nine Box assessment feedback">
+            <img src="assets/images/testimonials/recommendation-2.png" alt="Cropped email excerpt validating the Nine Box assessment" loading="lazy" />
+            <span data-i18n="recommendations.evidence">Validation feedback · email addresses removed</span>
+          </a>
+        </article>
+
+        <article class="recommendation-card" id="feedback-dashboard">
+          <p class="recommendation-project" data-i18n="recommendations.dashboard.project">Recruitment & Development Dashboard</p>
+          <blockquote data-i18n="recommendations.dashboard.quote">“Your dedication and skills have been truly remarkable.”</blockquote>
+          <p class="recommendation-author" data-i18n="recommendations.dashboard.author">Marwen Kahlaoui · Project Manager</p>
+          <a class="recommendation-evidence lightbox-trigger" href="assets/images/testimonials/recommendation-1.png" data-full="assets/images/testimonials/recommendation-1.png" data-caption="Dashboard project feedback">
+            <img src="assets/images/testimonials/recommendation-1.png" alt="Cropped email excerpt praising the dashboard project contribution" loading="lazy" />
+            <span data-i18n="recommendations.evidence">Validation feedback · email addresses removed</span>
+          </a>
+        </article>
+
+        <article class="recommendation-card" id="feedback-skill-matrix">
+          <p class="recommendation-project" data-i18n="recommendations.matrix.project">Skill Matrix Staff Application</p>
+          <blockquote data-i18n="recommendations.matrix.quote">“The Evaluation Skills Staff Application is ready and functional.”</blockquote>
+          <p class="recommendation-author" data-i18n="recommendations.matrix.author">Inaam Dhoulbi · HR Development</p>
+          <a class="recommendation-evidence lightbox-trigger" href="assets/images/testimonials/recommendation-3.png" data-full="assets/images/testimonials/recommendation-3.png" data-caption="Skill Matrix application feedback">
+            <img src="assets/images/testimonials/recommendation-3.png" alt="Cropped email excerpt confirming the Skill Matrix application is ready and functional" loading="lazy" />
+            <span data-i18n="recommendations.evidence">Validation feedback · email addresses removed</span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== SERVICES ===== -->
   <section id="services" class="section section-alt">
     <div class="container">
@@ -289,100 +342,70 @@
       <h2 class="section-title" data-i18n="services.title">What I can do for you</h2>
       <p class="section-lead" data-i18n="services.lead">
         Whether you need a full web application, a custom platform, or training for your team —
-        I bring 15+ years of experience to every project.
+        I bring hands-on experience in web development and IT training to every project.
       </p>
 
       <div class="services-grid">
-
         <article class="service-card">
-          <div class="service-icon">🚀</div>
-          <h3 data-i18n="services.s1.title">Web Application Development</h3>
-          <p data-i18n="services.s1.desc">
-            Custom full-stack applications built with Laravel, ReactJS and MySQL.
-            From MVP to production-ready platforms.
-          </p>
+          <div class="service-icon" aria-hidden="true">🚀</div>
+          <h3 data-i18n="services.offer.dev">Web application development</h3>
+          <p data-i18n="services.offer.dev.desc">Build useful web products around your business needs, from a focused application to a larger platform.</p>
           <ul class="service-list">
-            <li data-i18n="services.s1.li1">SaaS platforms</li>
-            <li data-i18n="services.s1.li2">Internal business tools</li>
-            <li data-i18n="services.s1.li3">Marketplaces</li>
+            <li data-i18n="services.offer.dev.1">Laravel applications</li>
+            <li data-i18n="services.offer.dev.2">REST APIs</li>
+            <li data-i18n="services.offer.dev.3">React interfaces</li>
           </ul>
         </article>
-
         <article class="service-card">
-          <div class="service-icon">🌐</div>
-          <h3 data-i18n="services.s2.title">Website Design & Development</h3>
-          <p data-i18n="services.s2.desc">
-            Modern, responsive websites — from landing pages to complex corporate sites.
-            Fast, SEO-friendly and built to last.
-          </p>
+          <div class="service-icon" aria-hidden="true">🎓</div>
+          <h3 data-i18n="services.offer.training">IT training and mentoring</h3>
+          <p data-i18n="services.offer.training.desc">Practical guidance for learners and teams, from programming fundamentals to building web projects.</p>
           <ul class="service-list">
-            <li data-i18n="services.s2.li1">Corporate websites</li>
-            <li data-i18n="services.s2.li2">Portfolios & landing pages</li>
-            <li data-i18n="services.s2.li3">E-commerce</li>
+            <li data-i18n="services.offer.training.1">PHP and MySQL</li>
+            <li data-i18n="services.offer.training.2">Laravel and React</li>
+            <li data-i18n="services.offer.training.3">Project mentoring</li>
           </ul>
         </article>
-
         <article class="service-card">
-          <div class="service-icon">🔌</div>
-          <h3 data-i18n="services.s3.title">API Development & Integration</h3>
-          <p data-i18n="services.s3.desc">
-            REST APIs, third-party integrations, payment gateways, and data sync
-            between your systems.
-          </p>
+          <div class="service-icon" aria-hidden="true">🛠️</div>
+          <h3 data-i18n="services.offer.support">Support and improvement</h3>
+          <p data-i18n="services.offer.support.desc">Improve an existing application with focused technical support and ongoing care.</p>
           <ul class="service-list">
-            <li data-i18n="services.s3.li1">REST API design</li>
-            <li data-i18n="services.s3.li2">Third-party integrations</li>
-            <li data-i18n="services.s3.li3">Payment gateways</li>
+            <li data-i18n="services.offer.support.1">Bug fixing</li>
+            <li data-i18n="services.offer.support.2">Performance and maintenance</li>
+            <li data-i18n="services.offer.support.3">Code and architecture review</li>
           </ul>
         </article>
-
-        <article class="service-card">
-          <div class="service-icon">🎓</div>
-          <h3 data-i18n="services.s4.title">IT Training & Teaching</h3>
-          <p data-i18n="services.s4.desc">
-            Custom training for students, teams or companies — from programming
-            fundamentals to advanced Laravel & React.
-          </p>
-          <ul class="service-list">
-            <li data-i18n="services.s4.li1">1-on-1 mentoring</li>
-            <li data-i18n="services.s4.li2">Team workshops</li>
-            <li data-i18n="services.s4.li3">Corporate training</li>
-          </ul>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon">🧭</div>
-          <h3 data-i18n="services.s5.title">Technical Consulting</h3>
-          <p data-i18n="services.s5.desc">
-            Architecture reviews, tech stack choices, code audits and help
-            scaling your existing projects.
-          </p>
-          <ul class="service-list">
-            <li data-i18n="services.s5.li1">Code audits</li>
-            <li data-i18n="services.s5.li2">Architecture reviews</li>
-            <li data-i18n="services.s5.li3">Tech stack advice</li>
-          </ul>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon">🛠️</div>
-          <h3 data-i18n="services.s6.title">Maintenance & Support</h3>
-          <p data-i18n="services.s6.desc">
-            Bug fixing, performance optimization, security updates and ongoing
-            maintenance for existing apps.
-          </p>
-          <ul class="service-list">
-            <li data-i18n="services.s6.li1">Bug fixing</li>
-            <li data-i18n="services.s6.li2">Performance tuning</li>
-            <li data-i18n="services.s6.li3">Security updates</li>
-          </ul>
-        </article>
-
       </div>
-
       <div class="services-cta">
         <p data-i18n="services.ctaText">Need something custom? Let's talk about your project.</p>
         <a href="#contact" class="btn btn-primary" data-i18n="services.ctaBtn">Start a project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRAINING ===== -->
+  <section id="training" class="section">
+    <div class="container">
+      <p class="section-tag" data-i18n="training.tag">Training resources</p>
+      <h2 class="section-title" data-i18n="training.title">Learn by building real projects</h2>
+      <p class="section-lead" data-i18n="training.lead">Explore practical courses and learning materials created from my work in web development and IT teaching.</p>
+      <div class="services-grid">
+        <article class="service-card training-card">
+          <h3 data-i18n="training.laravel.title">Laravel development</h3>
+          <p data-i18n="training.laravel.desc">A step-by-step course covering the Laravel foundations and application structure.</p>
+          <a class="training-link" href="laravelCours.html" data-i18n="training.open">Explore the course →</a>
+        </article>
+        <article class="service-card training-card">
+          <h3 data-i18n="training.ai.title">AI for developers</h3>
+          <p data-i18n="training.ai.desc">Explore AI concepts, embeddings, prompts and RAG through practical learning resources.</p>
+          <a class="training-link" href="ia.html" data-i18n="training.open">Explore the course →</a>
+        </article>
+        <article class="service-card training-card">
+          <h3 data-i18n="training.web.title">Web development foundations</h3>
+          <p data-i18n="training.web.desc">Learn Bootstrap and follow a guide to creating and publishing a portfolio.</p>
+          <a class="training-link" href="bootstrap-cours.html" data-i18n="training.open">Explore the course →</a>
+        </article>
       </div>
     </div>
   </section>
@@ -492,7 +515,8 @@
   <section id="projects" class="section section-alt">
     <div class="container">
       <p class="section-tag" data-i18n="proj.tag">06 — Projects</p>
-      <h2 class="section-title" data-i18n="proj.title">Selected work</h2>
+      <h2 class="section-title" data-i18n="proj.title">Project gallery</h2>
+      <p class="section-lead" data-i18n="proj.lead">A visual overview of web applications and platforms I have built. Select an image to view it larger.</p>
 
       <div class="projects-grid">
 
@@ -507,7 +531,7 @@
             <h3>Wafed Proxi</h3>
             <p data-i18n="proj.p1.desc">Dynamic marketplace platform with real-time order tracking.</p>
             <ul class="project-stack">
-              <li>Laravel</li><li>REST API</li><li>MySQL</li>
+              <li>Laravel</li><li>Vite JS</li><li>MySQL</li><li>Bootstrap</li>
             </ul>
           </div>
         </article>
@@ -523,7 +547,7 @@
             <h3>Almaine Travel</h3>
             <p data-i18n="proj.p2.desc">Responsive travel and booking platform with integrated API services.</p>
             <ul class="project-stack">
-              <li>Laravel</li><li>JavaScript</li><li>API</li>
+              <li>PHP 8</li><li>Bootstrap</li><li>MySQL</li>
             </ul>
           </div>
         </article>
@@ -533,13 +557,13 @@
                data-full="assets/images/project-smart.jpg"
                data-caption="SmartFormation">
             <img src="assets/images/project-smart.jpg" alt="SmartFormation" loading="lazy" />
-            <span class="project-badge" data-i18n="proj.p3.badge">E-Learning</span>
+            <span class="project-badge" data-i18n="proj.p3.badge">E-learning</span>
           </div>
           <div class="project-body">
             <h3>SmartFormation</h3>
             <p data-i18n="proj.p3.desc">Modern educational portal for online learning and student tracking.</p>
             <ul class="project-stack">
-              <li>Laravel</li><li>ReactJS</li><li>MySQL</li>
+              <li>Laravel</li><li>Bootstrap</li><li>MySQL</li>
             </ul>
           </div>
         </article>
@@ -565,17 +589,104 @@
                data-full="assets/images/project-sebn.jpg"
                data-caption="SEBN-TN Onboarding">
             <img src="assets/images/project-sebn.jpg" alt="SEBN-TN Onboarding" loading="lazy" />
-            <span class="project-badge" data-i18n="proj.p5.badge">Internal</span>
+            <span class="project-badge" data-i18n="proj.p5.badge">Internal tool</span>
           </div>
           <div class="project-body">
             <h3>SEBN-TN Onboarding</h3>
             <p data-i18n="proj.p5.desc">Internal web app automating employee onboarding workflows.</p>
             <ul class="project-stack">
-              <li>Laravel</li><li>MySQL</li>
+              <li>Laravel</li><li>LiveWire</li><li>MySQL</li>
             </ul>
           </div>
         </article>
 
+        <article class="project-card">
+          <div class="project-image lightbox-trigger"
+               data-full="assets/images/Ambulance-Bullaregia.png"
+               data-caption="Ambulance Bullaregia">
+            <img src="assets/images/Ambulance-Bullaregia.png" alt="Ambulance Bullaregia" loading="lazy" />
+            <span class="project-badge" data-i18n="proj.p6.badge">Emergency</span>
+          </div>
+          <div class="project-body">
+            <h3>Emergency Application</h3>
+            <p data-i18n="proj.p6.desc">Internal web app automating emergency response workflows.</p>
+            <ul class="project-stack">
+              <li>Laravel</li><li>LiveWire</li><li>MySQL</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card project-case-study">
+          <div class="project-body">
+            <span class="project-badge" data-i18n="case.ninebox.label">Validated project</span>
+            <h3 data-i18n="case.ninebox.title">Promotion Assessment · Nine Box</h3>
+            <p><strong data-i18n="case.challenge">Challenge:</strong> <span data-i18n="case.ninebox.challenge">Help HR assess employee potential using the manager's evaluation.</span></p>
+            <p><strong data-i18n="case.role">My role:</strong> <span data-i18n="case.ninebox.role">Functional testing and validation.</span></p>
+            <p class="case-result"><strong data-i18n="case.result">Result:</strong> <span data-i18n="case.ninebox.result">The tool worked and consistently mapped employees to the Nine Box.</span></p>
+            <a class="training-link" href="#feedback-ninebox" data-i18n="case.feedback">See the HR validation →</a>
+          </div>
+        </article>
+
+        <article class="project-card project-case-study">
+          <div class="project-body">
+            <span class="project-badge" data-i18n="case.matrix.label">Validated project</span>
+            <h3 data-i18n="case.matrix.title">Skill Matrix Staff Application</h3>
+            <p><strong data-i18n="case.challenge">Challenge:</strong> <span data-i18n="case.matrix.challenge">Assess staff skills and identify development needs.</span></p>
+            <p><strong data-i18n="case.role">My role:</strong> <span data-i18n="case.matrix.role">Tested the skills matrix as part of HR department testing.</span></p>
+            <p class="case-result"><strong data-i18n="case.result">Result:</strong> <span data-i18n="case.matrix.result">The application was reported ready and functional, with a gap analysis and development plan.</span></p>
+            <a class="training-link" href="#feedback-skill-matrix" data-i18n="case.feedback">See the HR validation →</a>
+          </div>
+        </article>
+
+        <article class="project-card project-case-study">
+          <div class="project-body">
+            <span class="project-badge" data-i18n="case.dashboard.label">Recognized contribution</span>
+            <h3 data-i18n="case.dashboard.title">Recruitment & Development Dashboard</h3>
+            <p><strong data-i18n="case.challenge">Challenge:</strong> <span data-i18n="case.dashboard.challenge">Support recruitment and development workflows with a dedicated dashboard.</span></p>
+            <p><strong data-i18n="case.role">My role:</strong> <span data-i18n="case.dashboard.role">Contributed to the project delivery.</span></p>
+            <p class="case-result"><strong data-i18n="case.result">Result:</strong> <span data-i18n="case.dashboard.result">The project was described as a success, with my contribution recognized by the project manager and HR.</span></p>
+            <a class="training-link" href="#feedback-dashboard" data-i18n="case.feedback">See the project feedback →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <p class="section-tag" data-i18n="gallery.tag">07 — Gallery</p>
+      <h2 class="section-title" data-i18n="gallery.title">Moments in pictures</h2>
+      <p class="section-lead" data-i18n="gallery.lead">A few snapshots from my work and activities.</p>
+
+      <div class="gallery-carousel" aria-label="Image gallery">
+        <div class="gallery-viewport">
+          <div class="gallery-track">
+        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/1.png" data-full="assets/images/gallery/1.png" data-caption="Gallery photo 1">
+          <img src="assets/images/gallery/1.png" alt="Gallery photo 1" loading="lazy" />
+        </a>
+        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/2.jpg" data-full="assets/images/gallery/2.jpg" data-caption="Gallery photo 2">
+          <img src="assets/images/gallery/2.jpg" alt="Gallery photo 2" loading="lazy" />
+        </a>
+        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/3.png" data-full="assets/images/gallery/3.png" data-caption="Gallery photo 3">
+          <img src="assets/images/gallery/3.png" alt="Gallery photo 3" loading="lazy" />
+        </a>
+        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/4.jpg" data-full="assets/images/gallery/4.jpg" data-caption="Gallery photo 4">
+          <img src="assets/images/gallery/4.jpg" alt="Gallery photo 4" loading="lazy" />
+        </a>
+        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/5.jpg" data-full="assets/images/gallery/5.jpg" data-caption="Gallery photo 5">
+          <img src="assets/images/gallery/5.jpg" alt="Gallery photo 5" loading="lazy" />
+        </a>
+        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/6.jpg" data-full="assets/images/gallery/6.jpg" data-caption="Gallery photo 6">
+          <img src="assets/images/gallery/6.jpg" alt="Gallery photo 6" loading="lazy" />
+        </a>
+          </div>
+        </div>
+        <div class="gallery-controls">
+          <button class="gallery-prev" type="button" aria-label="Previous slide">&#10094;</button>
+          <div class="gallery-dots" aria-label="Choose a slide"></div>
+          <button class="gallery-next" type="button" aria-label="Next slide">&#10095;</button>
+        </div>
       </div>
     </div>
   </section>
@@ -583,7 +694,7 @@
   <!-- ===== CONTACT ===== -->
   <section id="contact" class="section">
     <div class="container">
-      <p class="section-tag" data-i18n="contact.tag">07 — Contact</p>
+      <p class="section-tag" data-i18n="contact.tag">08 — Contact</p>
       <h2 class="section-title" data-i18n="contact.title">Let's work together</h2>
       <p class="contact-lead" data-i18n="contact.lead">
         Got a project in mind, a freelance mission, or a teaching opportunity?
@@ -594,11 +705,11 @@
 
         <!-- Contact info cards -->
         <div class="contact-info">
-          <a href="mailto:mezni.dhiao@gmail.com" class="contact-card">
+          <a href="mailto:mezni.dhiaa@gmail.com" class="contact-card">
             <span class="contact-icon">✉️</span>
             <div>
               <h4 data-i18n="contact.email">Email</h4>
-              <p>mezni.dhiao@gmail.com</p>
+              <p>mezni.dhiaa@gmail.com</p>
             </div>
           </a>
           <a href="tel:+21652829452" class="contact-card">
@@ -608,11 +719,18 @@
               <p>+216 52 829 452</p>
             </div>
           </a>
-          <a href="https://linkedin.com/in/dhiao-mezni-2ab82554" target="_blank" rel="noopener" class="contact-card">
+          <a href="https://wa.me/21652829452" target="_blank" rel="noopener" class="contact-card">
+            <span class="contact-icon" aria-hidden="true">💬</span>
+            <div>
+              <h4 data-i18n="contact.whatsapp">WhatsApp</h4>
+              <p data-i18n="contact.whatsappCta">Send me a message</p>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/dhiaa-mezni-2ab82554" target="_blank" rel="noopener" class="contact-card">
             <span class="contact-icon">💼</span>
             <div>
               <h4 data-i18n="contact.linkedin">LinkedIn</h4>
-              <p>dhiao-mezni</p>
+              <p>dhiaa-mezni</p>
             </div>
           </a>
           <a href="https://dhiaamezni.onrender.com/" target="_blank" rel="noopener" class="contact-card">
@@ -628,7 +746,7 @@
         <form
           id="contact-form"
           class="contact-form"
-          action="https://formspree.io/f/VOTRE-ID-FORMSPREE"
+          action="https://formspree.io/f/mrpbpzvo"
           method="POST"
         >
           <div class="form-row">

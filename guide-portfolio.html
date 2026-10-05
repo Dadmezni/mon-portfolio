@@ -54,6 +54,8 @@ code{background:var(--line);color:var(--ink);padding:1px 6px;border-radius:5px;f
 @keyframes pu{50%{transform:scaleX(.6)}}
 @media (prefers-reduced-motion:reduce){.vi span,.va,.hd .b{animation:none}.vi{transition:none;opacity:1;transform:none}}
 .warn{margin:10px 0;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,#ee8a1f 18%,var(--card));color:var(--ink);font-size:.95em}
+.challenge{margin:14px 0 6px;padding:10px 14px;border-radius:10px;background:color-mix(in srgb,var(--ok) 16%,var(--card));border-left:4px solid var(--ok);color:var(--ink);font-size:.96em}
+.challenge b{color:var(--ok);display:block;margin-bottom:2px;font-size:1.02em}
 textarea.src{display:none}
 table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
 td,th{border:1px solid var(--line);padding:5px 9px;text-align:left}
@@ -73,22 +75,196 @@ footer{text-align:center;padding:10px 16px 30px;font-size:14px}
 .ul2{text-align:center;font-size:12px;margin-bottom:8px}
 details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0}
 summary{cursor:pointer;font-weight:700;color:var(--ink)}
+.template-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px;margin:14px 0}
+.template-card{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.template-card h3{margin:0;color:var(--ink);font-size:18px}
+.template-card p{margin:0;flex:1}
+.template-actions{display:flex;flex-wrap:wrap;gap:8px}
+.template-actions a{display:inline-block;padding:7px 11px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;font-size:14px}
+.template-actions a.secondary{background:var(--line);color:var(--ink)}
+.template-actions a:hover{filter:brightness(1.1)}
 @media (prefers-reduced-motion:reduce){.flw{animation:none}.step .fig{opacity:1;transform:none;transition:none}}
 nav#nav{position:sticky;top:0;z-index:7;display:flex;flex-direction:row;align-items:center;gap:6px;width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 14px;background:var(--card);border-bottom:2px solid var(--line);white-space:nowrap;scrollbar-width:thin}
 nav#nav:before{content:"Étapes";flex:none;font-weight:800;color:var(--ink);font-size:16px;padding:0 4px}
 nav#nav a{text-decoration:none;flex:none;font-size:14px;font-weight:600;color:var(--ink);border:2px solid var(--accent);border-radius:10px;padding:4px 12px;background:var(--bg);transition:transform .2s}
 nav#nav a:hover{transform:translateY(-2px)}nav#nav a.on{background:#ffd93b;color:#14235c;border-color:#ee8a1f}
-@media (min-width:900px){main{padding:12px 28px 40px}.fig svg{width:min(560px,100%)}}</style>
+@media (min-width:900px){main{padding:12px 28px 40px}.fig svg{width:min(560px,100%)}}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0}
+.cmp-c{padding:14px;border-radius:14px;border:1px solid var(--line);border-top:5px solid var(--c);background:var(--card);transition:transform .25s,box-shadow .25s}
+.cmp-c:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(20,35,92,.12)}
+.cmp-i{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;font-size:24px;background:color-mix(in srgb,var(--c) 14%,var(--card))}
+.cmp-c h3{margin:8px 0 0;color:var(--ink);font-size:18px}
+.cmp-r{display:inline-block;margin:4px 0 6px;padding:1px 10px;border-radius:99px;background:var(--c);color:#fff;font-weight:700;font-size:12px}
+.cmp-c ul{margin:4px 0 0;padding-inline-start:18px;font-size:14px}
+.cmpt td.yes{color:var(--ok);font-weight:800;text-align:center;font-size:16px}
+.cmpt td.no{color:#d6335b;font-weight:800;text-align:center;font-size:16px}
+.cmpt td.mid{color:#ee8a1f;font-weight:800;text-align:center;font-size:16px}
+.when{display:grid;gap:8px;margin:8px 0}
+.when div{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.when span{color:var(--txt)}
+.when i{color:var(--accent);font-style:normal;font-weight:800;font-size:20px}
+.when b{color:var(--ink)}
+.scan{animation:scn 2.4s ease-in-out infinite}
+@keyframes scn{0%,100%{transform:translateY(0)}50%{transform:translateY(120px)}}
+@media (prefers-reduced-motion:reduce){.scan{animation:none}}
+.when div b+span{color:var(--txt);font-size:.95em}
+.ats-tabs{display:flex;gap:8px;margin:8px 0}
+.ats-tabs button{flex:1;padding:8px;border-radius:10px;border:2px solid var(--accent);background:var(--card);color:var(--ink);font:700 14px system-ui,sans-serif;cursor:pointer;transition:all .25s}
+.ats-tabs button.on{background:var(--accent);color:#fff}
+.ats-stage{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px;align-items:start}
+@media (max-width:640px){.ats-stage{grid-template-columns:1fr}}
+.cvm{background:#fff;color:#1b2540;border-radius:10px;padding:12px;box-shadow:0 8px 22px rgba(20,35,92,.18);font-size:12px;line-height:1.45;border:1px solid var(--line)}
+.cvm-head{display:flex;gap:10px;align-items:center;border-bottom:2px solid #1f3fa0;padding-bottom:8px}
+.avatar{flex:none;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#ee8a1f,#d6335b);display:grid;place-items:center;color:#fff;font-size:20px}
+.cvm b{display:block;font-size:14px}
+.cvm small{color:#556}
+.cvm-cols{display:grid;grid-template-columns:40% 1fr;gap:10px;margin-top:8px}
+.cvm aside{background:#eef2fb;padding:6px;border-radius:6px}
+.cvm h4{margin:4px 0 2px;font-size:11px;color:#1f3fa0;text-transform:uppercase}
+.sk{margin:4px 0}
+.sk i{display:block;height:6px;border-radius:3px;background:#cdd6ee;margin-top:2px;overflow:hidden}
+.sk i u{display:block;height:100%;background:#1f3fa0;width:var(--w)}
+.badge-img{display:inline-block;margin-top:4px;padding:2px 6px;border-radius:5px;background:#ffd93b;font-weight:700;font-size:10px}
+.vo{transition:opacity .5s,filter .5s,outline-color .5s;outline:2px dashed transparent;outline-offset:2px}
+.ia .vo{opacity:.3;filter:grayscale(1);outline-color:#d6335b}
+.ext{background:#0f172a;color:#d4d4d4;border-radius:10px;padding:10px 12px;font:12px/1.6 Consolas,Menlo,monospace;opacity:.25;filter:blur(1.5px);transform:scale(.97);transition:all .5s}
+.ia .ext{opacity:1;filter:none;transform:none}
+.ext-t{display:block;margin-bottom:4px;font:700 11px system-ui,sans-serif;color:#9cdcfe;text-transform:uppercase;letter-spacing:.05em}
+.ext code{background:none;color:inherit;padding:0;font-size:inherit}
+.ext em{color:#ff6b81;font-style:normal}
+.ats-note{font-size:12px;margin:8px 0 0;opacity:.8}
+.kw{padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--bg)}
+.kw-l{margin:6px 0 4px;color:var(--ink)}
+.kw-row{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.kwr{padding:4px 12px;border-radius:99px;border:2px dashed var(--line);color:var(--txt);font-weight:600;font-size:13px;transition:all .35s}
+.kwr.hit{border:2px solid var(--ok);background:color-mix(in srgb,var(--ok) 15%,var(--card));color:var(--ok)}
+.kwr.hit:after{content:" ✓"}
+.kwc{padding:5px 13px;border-radius:99px;border:2px solid var(--accent);background:var(--card);color:var(--ink);font:600 13px system-ui,sans-serif;cursor:pointer;transition:all .25s}
+.kwc:hover{transform:translateY(-2px)}
+.kwc.on{background:var(--accent);color:#fff}
+.gauge{height:14px;border-radius:99px;background:var(--line);overflow:hidden;margin:12px 0 6px}
+.gauge i{display:block;height:100%;width:0;border-radius:inherit;background:#d6335b;transition:width .6s,background .4s}
+.kw-s{margin:0;color:var(--ink)}
+.kw-s b{font-size:22px;margin-right:6px}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin:8px 0}
+.pr{display:grid;grid-template-columns:1fr 1fr;border-radius:10px;overflow:hidden;border:1px solid var(--line);opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s;transition-delay:calc(var(--i)*90ms)}
+.step.in .pr{opacity:1;transform:none}
+.pr b{padding:9px 8px;text-align:center;font-size:13px}
+.pr .g{background:color-mix(in srgb,var(--ok) 16%,var(--card));color:var(--ok)}
+.pr .r{background:color-mix(in srgb,#d6335b 13%,var(--card));color:#d6335b;text-decoration:line-through}
+.t3{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.t3>div{flex:1 1 150px;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--card);text-align:center;color:var(--ink);font-weight:700;animation:tp 6s infinite;animation-delay:calc(var(--i)*2s)}
+.t3 span{display:inline-grid;place-items:center;width:24px;height:24px;margin-right:6px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px}
+.t3 small{display:block;margin-top:4px;font-weight:400;color:var(--txt)}
+.t3 kbd{padding:1px 7px;border-radius:5px;border:1px solid var(--line);border-bottom-width:3px;background:var(--bg);font:700 12px Consolas,monospace}
+@keyframes tp{0%,30%{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--card));transform:translateY(-4px)}34%,100%{border-color:var(--line);background:var(--card);transform:none}}
+@media (prefers-reduced-motion:reduce){.t3>div{animation:none}.pr{transition:none;opacity:1;transform:none}.vo,.ext,.kwr,.gauge i{transition:none}}
+</style>
 </head>
 <body>
 <header>
 <svg class="hd" viewBox="0 0 300 130" role="img" aria-label="Fenêtre de navigateur"><rect x="5" y="5" width="290" height="120" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="3"/><rect x="5" y="5" width="290" height="22" rx="10" fill="var(--accent)"/><circle cx="20" cy="16" r="4" fill="#ff5f56"/><circle cx="34" cy="16" r="4" fill="#ffbd2e"/><circle cx="48" cy="16" r="4" fill="#27c93f"/><circle cx="60" cy="62" r="20" fill="var(--accent)" opacity=".85"/><rect class="b" x="92" y="48" width="170" height="10" rx="5" fill="var(--accent)"/><rect class="b" x="92" y="68" width="120" height="8" rx="4" fill="var(--ok)" style="animation-delay:.4s"/><rect class="b" x="20" y="98" width="70" height="16" rx="8" fill="#ee8a1f" style="animation-delay:.8s"/><rect class="b" x="100" y="98" width="70" height="16" rx="8" fill="var(--accent)" style="animation-delay:1.2s"/></svg>
 <h1>🚀 Créer son portfolio web, pas à pas</h1>
-<p>HTML5 · Bootstrap 5 · Git · GitHub Pages</p>
+<p>HTML5 · Bootstrap 5 · Git · Render · GitHub Pages</p>
 <a class="home-link" href="index.html">Retour au portfolio</a>
 </header>
 <nav id="nav" aria-label="Étapes"></nav>
 <main>
+
+<article class="step" id="compare">
+<h2><span class="n">⚖️</span>CV, portfolio, LinkedIn : la différence</h2>
+<p class="goal">Trois outils, trois rôles. Ils se complètent.</p>
+<div class="cmp">
+<div class="cmp-c" style="--c:#ee8a1f"><span class="cmp-i">📄</span><h3>CV</h3><p class="cmp-r">Résumer</p><ul><li>1 page, en PDF</li><li>Dates, diplômes, outils</li><li>Envoyé au recruteur</li></ul></div>
+<div class="cmp-c" style="--c:var(--accent)"><span class="cmp-i">🌐</span><h3>Portfolio</h3><p class="cmp-r">Prouver</p><ul><li>Site web en ligne</li><li>Projets, captures, code</li><li>Partagé par un lien</li></ul></div>
+<div class="cmp-c" style="--c:#0e7490"><span class="cmp-i">💼</span><h3>LinkedIn</h3><p class="cmp-r">Être trouvé</p><ul><li>Profil en ligne</li><li>Parcours + réseau</li><li>Les recruteurs vous contactent</li></ul></div>
+</div>
+<figure class="fig"><svg viewBox="0 0 340 120" role="img" aria-label="Le CV et LinkedIn renvoient vers le portfolio"><g font-size="12" text-anchor="middle" fill="#fff"><rect x="4" y="12" width="84" height="40" rx="8" fill="#ee8a1f"/><text x="46" y="37">📄 CV</text><rect x="4" y="70" width="84" height="40" rx="8" fill="#0e7490"/><text x="46" y="95">💼 LinkedIn</text><rect x="222" y="40" width="112" height="40" rx="8" fill="#1f3fa0"/><text x="278" y="65">🌐 Portfolio</text></g><g stroke="var(--accent)" stroke-width="2.5" fill="none"><path class="flw" d="M88 32C150 32 160 56 222 56"/><path class="flw" d="M88 90C150 90 160 66 222 66"/></g><g font-size="11" font-weight="700" text-anchor="middle" fill="var(--ink)"><text x="155" y="22">lien</text><text x="155" y="112">lien</text></g></svg><figcaption>Le CV et LinkedIn renvoient vers votre portfolio.</figcaption></figure>
+<table class="cmpt"><tr><th>Critère</th><th>CV</th><th>Portfolio</th><th>LinkedIn</th></tr>
+<tr><td>Lecture</td><td>30 s</td><td>2 à 5 min</td><td>1 min</td></tr>
+<tr><td>Montre des projets réels</td><td class="no">✗</td><td class="yes">✓</td><td class="mid">~</td></tr>
+<tr><td>Lien vers le code</td><td class="no">✗</td><td class="yes">✓</td><td class="mid">~</td></tr>
+<tr><td>Design libre</td><td class="mid">~</td><td class="yes">✓</td><td class="no">✗</td></tr>
+<tr><td>Réseau et contacts</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
+<tr><td>Mise à jour</td><td>à chaque candidature</td><td>à chaque projet</td><td>chaque mois</td></tr></table>
+<h3 class="h">Lequel utiliser ?</h3>
+<div class="when">
+<div><span>Je postule</span><i>›</i><b>📄 CV + lien portfolio</b></div>
+<div><span>Je prouve mon niveau</span><i>›</i><b>🌐 Portfolio</b></div>
+<div><span>Je veux être repéré</span><i>›</i><b>💼 LinkedIn</b></div>
+</div>
+<div class="warn">Mettez l'URL de votre portfolio dans votre CV et dans votre profil LinkedIn.</div>
+<div class="challenge"><b>🎯 À vous de jouer</b>Ajoutez l'URL de votre portfolio (Render) dans l'en-tête de votre CV et dans la section « Coordonnées » de LinkedIn.</div>
+</article>
+
+<article class="step" id="cvia">
+<h2><span class="n">🤖</span>CV lu par une IA (ATS)</h2>
+<p class="goal">Avant le recruteur, un logiciel lit votre CV.</p>
+<div class="cmp">
+<div class="cmp-c" style="--c:#ee8a1f"><span class="cmp-i">👀</span><h3>CV classique</h3><p class="cmp-r">Pour un humain</p><ul><li>Design, couleurs, photo</li><li>Mise en page libre</li></ul></div>
+<div class="cmp-c" style="--c:#0e7490"><span class="cmp-i">🤖</span><h3>CV lu par IA</h3><p class="cmp-r">Pour un logiciel (ATS)</p><ul><li>Texte simple, 1 colonne</li><li>Titres et mots-clés clairs</li></ul></div>
+</div>
+
+<h3 class="h">1. Humain contre IA : testez</h3>
+<div class="ats-demo" id="atsDemo">
+<div class="ats-tabs"><button type="button" class="on" data-m="h" aria-pressed="true">👀 Humain</button><button type="button" data-m="i" aria-pressed="false">🤖 IA</button></div>
+<div class="ats-stage">
+<div class="cvm">
+<div class="cvm-head"><span class="vo avatar">👤</span><div><b>Sara Ben Ali</b><small>Développeuse web</small></div></div>
+<div class="cvm-cols">
+<aside><h4>Compétences</h4>
+<div class="sk">Laravel<i class="vo"><u style="--w:85%"></u></i></div>
+<div class="sk">PHP<i class="vo"><u style="--w:80%"></u></i></div>
+<div class="sk">Git<i class="vo"><u style="--w:65%"></u></i></div>
+<span class="vo badge-img">★ Certifié Laravel</span></aside>
+<div><h4>Expérience</h4><div>2024-2025 · Stage, Agence Web</div><div>Projet portfolio en Laravel</div><h4>Formation</h4><div>Licence informatique, 2025</div></div>
+</div></div>
+<div class="ext"><span class="ext-t">Texte extrait par l'IA</span>
+<code>Sara Ben Ali<br>Développeuse web<br>Compétences<br>Laravel · PHP · Git<br><em>[photo ignorée]</em><br><em>[barres de niveau ignorées]</em><br><em>[image « Certifié » ignorée]</em><br>Expérience<br>2024-2025 · Stage, Agence Web<br>Formation<br>Licence informatique, 2025</code></div>
+</div>
+<p class="ats-note">En mode 🤖, les éléments en pointillés rouges sont perdus.</p>
+</div>
+
+<h3 class="h">2. Le jeu des mots-clés</h3>
+<div class="kw" id="kw">
+<p class="kw-l"><b>📋 L'offre demande :</b> Développeur Laravel junior</p>
+<div class="kw-row"><span class="kwr" data-k="Laravel">Laravel</span><span class="kwr" data-k="PHP">PHP</span><span class="kwr" data-k="MySQL">MySQL</span><span class="kwr" data-k="Git">Git</span><span class="kwr" data-k="API REST">API REST</span><span class="kwr" data-k="Bootstrap">Bootstrap</span></div>
+<p class="kw-l"><b>📄 Mon CV contient :</b> cliquez pour tester</p>
+<div class="kw-row"><button type="button" class="kwc" data-k="Laravel">Laravel</button><button type="button" class="kwc" data-k="PHP">PHP</button><button type="button" class="kwc" data-k="MySQL">MySQL</button><button type="button" class="kwc" data-k="Git">Git</button><button type="button" class="kwc" data-k="API REST">API REST</button><button type="button" class="kwc" data-k="Bootstrap">Bootstrap</button><button type="button" class="kwc" data-k="Photoshop">Photoshop</button><button type="button" class="kwc" data-k="Excel">Excel</button></div>
+<div class="gauge"><i></i></div>
+<p class="kw-s"><b id="kwPct">0 %</b> <span id="kwMsg">Cliquez sur vos compétences.</span></p>
+<p class="ats-note">Exemple pédagogique : chaque logiciel calcule son score à sa façon. N'écrivez que ce que vous maîtrisez.</p>
+</div>
+
+<h3 class="h">3. Titres que le logiciel reconnaît</h3>
+<div class="pairs">
+<div class="pr" style="--i:0"><b class="g">✓ Expérience</b><b class="r">✗ Mon aventure pro</b></div>
+<div class="pr" style="--i:1"><b class="g">✓ Formation</b><b class="r">✗ Mon parcours</b></div>
+<div class="pr" style="--i:2"><b class="g">✓ Compétences</b><b class="r">✗ Mes super-pouvoirs</b></div>
+</div>
+
+<h3 class="h">4. Format du fichier</h3>
+<div class="pairs">
+<div class="pr" style="--i:0"><b class="g">✓ PDF texte</b><b class="r">✗ Scan ou image</b></div>
+<div class="pr" style="--i:1"><b class="g">✓ 1 colonne</b><b class="r">✗ Tableaux</b></div>
+<div class="pr" style="--i:2"><b class="g">✓ Arial, Calibri</b><b class="r">✗ Police fantaisie</b></div>
+<div class="pr" style="--i:3"><b class="g">✓ Infos dans la page</b><b class="r">✗ En-tête, pied de page</b></div>
+<div class="pr" style="--i:4"><b class="g">✓ Mots écrits</b><b class="r">✗ Icônes seules</b></div>
+<div class="pr" style="--i:5"><b class="g">✓ prenom-nom-cv.pdf</b><b class="r">✗ cv_final_v3(2).pdf</b></div>
+</div>
+
+<h3 class="h">5. Test en 10 secondes</h3>
+<div class="t3">
+<div style="--i:0"><span>1</span><kbd>Ctrl</kbd> + <kbd>A</kbd><small>tout sélectionner</small></div>
+<div style="--i:1"><span>2</span><kbd>Ctrl</kbd> + <kbd>C</kbd><small>copier</small></div>
+<div style="--i:2"><span>3</span>📝 Bloc-notes<small>coller : texte lisible ✓</small></div>
+</div>
+<div class="warn">Gardez deux versions : un CV design pour l'envoi direct, un CV simple pour les plateformes de recrutement.</div>
+<div class="challenge"><b>🎯 À vous de jouer</b>Faites le test sur votre CV. Si le texte est illisible ou dans le désordre, simplifiez la mise en page et recommencez.</div>
+</article>
+
+
+
 
 <article class="step" id="s1">
 <h2><span class="n">1</span>Comprendre le projet</h2>
@@ -105,6 +281,7 @@ nav#nav a:hover{transform:translateY(-2px)}nav#nav a.on{background:#ffd93b;color
 └── README.md</textarea></div>
 <div class="warn">Noms de fichiers en minuscules, sans espaces ni accents.</div>
 <figure class="fig"><svg viewBox="0 0 320 272" role="img" aria-label="Maquette d'une page portfolio"><rect x="5" y="3" width="310" height="266" rx="8" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/><g font-size="11" fill="#fff" text-anchor="middle"><rect x="14" y="10" width="292" height="20" rx="4" fill="#1e293b"/><text x="160" y="24">Navbar</text><rect x="14" y="36" width="292" height="48" rx="4" fill="#1f3fa0"/><text x="160" y="64">Hero : photo + titre + boutons</text><rect x="14" y="90" width="292" height="22" rx="4" fill="#6a3fb5"/><text x="160" y="105">À propos</text><rect x="14" y="118" width="292" height="22" rx="4" fill="#2e9e57"/><text x="160" y="133">Compétences (badges)</text><rect x="14" y="146" width="92" height="40" rx="4" fill="#ee8a1f"/><text x="60" y="170">Projet 1</text><rect x="114" y="146" width="92" height="40" rx="4" fill="#ee8a1f"/><text x="160" y="170">Projet 2</text><rect x="214" y="146" width="92" height="40" rx="4" fill="#ee8a1f"/><text x="260" y="170">Projet 3</text><rect x="14" y="192" width="292" height="22" rx="4" fill="#d6335b"/><text x="160" y="207">Formation et expérience</text><rect x="14" y="220" width="292" height="22" rx="4" fill="#0e7490"/><text x="160" y="235">Contact (formulaire)</text><rect x="14" y="248" width="292" height="16" rx="4" fill="#1e293b"/><text x="160" y="260">Footer</text></g></svg><figcaption>Figure 1 : les sections d'un portfolio, de haut en bas.</figcaption></figure>
+<div class="challenge"><b>🎯 À vous de jouer</b>Ouvrez le Bloc-notes (ou VS Code) et créez l'arborescence sur votre bureau. Vérifiez que le dossier s'appelle bien <code>portfolio</code> (sans accent, sans espace).</div>
 </article>
 
 <article class="step" id="s2">
@@ -114,6 +291,7 @@ nav#nav a:hover{transform:translateY(-2px)}nav#nav a.on{background:#ffd93b;color
 <li>Installer <b>Visual Studio Code</b> puis l'extension <b>Live Server</b>.</li>
 <li>Installer <b>Git</b> (git-scm.com).</li>
 <li>Créer un compte <b>GitHub</b> (pseudo sobre et professionnel).</li>
+<li>Créer un compte <b>Render</b> (render.com, connexion avec GitHub).</li>
 <li>Ouvrir le <b>dossier</b> <code>portfolio</code> dans VS Code (Fichier, Ouvrir le dossier).</li>
 <li>Configurer Git une seule fois :</li>
 </ol>
@@ -128,6 +306,7 @@ git config --global user.email "vous@exemple.com"</textarea></div>
 <tr><td>Commenter une ligne</td><td><code>Ctrl + /</code></td></tr>
 <tr><td>Dupliquer une ligne</td><td><code>Shift + Alt + ↓</code></td></tr>
 <tr><td>Écrire vite du HTML (Emmet)</td><td><code>!</code> puis <code>Tab</code></td></tr></table>
+<div class="challenge"><b>🎯 À vous de jouer</b>Tapez <code>git --version</code> dans le terminal de VS Code. Si Git répond avec un numéro de version, vous êtes prêt.</div>
 </article>
 
 <article class="step" id="s3">
@@ -166,6 +345,7 @@ git config --global user.email "vous@exemple.com"</textarea></div>
 <li><code>alt</code> décrit l'image ; <code>id</code> sert de cible aux liens internes (<code>href="#apropos"</code>).</li>
 </ul>
 <figure class="fig"><svg viewBox="0 0 320 160" role="img" aria-label="Arbre d'une page HTML"><g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M160 32L80 62M160 32L240 62M80 86L40 116M80 86L110 116M240 86L205 116M240 86L277 116"/></g><g font-size="12" text-anchor="middle" fill="#fff"><rect x="110" y="8" width="100" height="24" rx="6" fill="#1f3fa0"/><text x="160" y="25">&lt;html&gt;</text><rect x="40" y="62" width="80" height="24" rx="6" fill="#6a3fb5"/><text x="80" y="79">&lt;head&gt;</text><rect x="200" y="62" width="80" height="24" rx="6" fill="#ee8a1f"/><text x="240" y="79">&lt;body&gt;</text><rect x="10" y="116" width="60" height="24" rx="6" fill="#6a3fb5"/><text x="40" y="133">meta</text><rect x="80" y="116" width="60" height="24" rx="6" fill="#6a3fb5"/><text x="110" y="133">title</text><rect x="175" y="116" width="60" height="24" rx="6" fill="#ee8a1f"/><text x="205" y="133">header</text><rect x="245" y="116" width="65" height="24" rx="6" fill="#ee8a1f"/><text x="277" y="133">section</text></g></svg><figcaption>Figure 2 : <span style="color:#6a3fb5">head</span> = invisible (infos), <span style="color:#ee8a1f">body</span> = ce qui s'affiche.</figcaption></figure>
+<div class="challenge"><b>🎯 À vous de jouer</b>Changez le <code>&lt;h1&gt;</code> par votre vrai nom, puis ajoutez une nouvelle section <code>Loisirs</code> avec une liste de 3 éléments. Rechargez la page : elle se met à jour automatiquement.</div>
 </article>
 
 <article class="step" id="s4">
@@ -194,6 +374,7 @@ git config --global user.email "vous@exemple.com"</textarea></div>
 </table>
 <div class="warn"><code>col</code> doit être dans <code>row</code>, lui-même dans <code>container</code>. Sans le script bundle, le burger ne s'ouvre pas.</div>
 <figure class="fig"><svg viewBox="0 0 320 196" role="img" aria-label="Grille Bootstrap à 12 colonnes"><g font-size="11" text-anchor="middle" fill="#fff"><g fill="#94a3b8"><rect x="8" y="8" width="24" height="22" rx="3"/><rect x="34" y="8" width="24" height="22" rx="3"/><rect x="60" y="8" width="24" height="22" rx="3"/><rect x="86" y="8" width="24" height="22" rx="3"/><rect x="112" y="8" width="24" height="22" rx="3"/><rect x="138" y="8" width="24" height="22" rx="3"/><rect x="164" y="8" width="24" height="22" rx="3"/><rect x="190" y="8" width="24" height="22" rx="3"/><rect x="216" y="8" width="24" height="22" rx="3"/><rect x="242" y="8" width="24" height="22" rx="3"/><rect x="268" y="8" width="24" height="22" rx="3"/><rect x="294" y="8" width="24" height="22" rx="3"/></g><text x="160" y="46" fill="var(--ink)">12 colonnes par ligne</text><rect x="8" y="54" width="154" height="26" rx="4" fill="#1f3fa0"/><text x="85" y="71">col-md-6</text><rect x="166" y="54" width="152" height="26" rx="4" fill="#1f3fa0"/><text x="242" y="71">col-md-6</text><rect x="8" y="88" width="100" height="26" rx="4" fill="#2e9e57"/><text x="58" y="105">col-md-4</text><rect x="110" y="88" width="100" height="26" rx="4" fill="#2e9e57"/><text x="160" y="105">col-md-4</text><rect x="212" y="88" width="106" height="26" rx="4" fill="#2e9e57"/><text x="265" y="105">col-md-4</text><rect x="8" y="122" width="76" height="26" rx="4" fill="#ee8a1f"/><text x="46" y="139">col-md-3</text><rect x="86" y="122" width="232" height="26" rx="4" fill="#ee8a1f"/><text x="202" y="139">col-md-9</text></g><g font-size="11" text-anchor="middle" fill="var(--ink)"><text x="160" y="170">sm 576 px · md 768 px · lg 992 px · xl 1200 px</text><text x="160" y="186">En dessous du point de rupture : chaque colonne prend 100 % de la largeur</text></g></svg><figcaption>Figure 3 : la grille Bootstrap et ses points de rupture.</figcaption></figure>
+<div class="challenge"><b>🎯 À vous de jouer</b>Passez la grille de test à <code>col-md-4</code> (trois colonnes), puis à <code>col-lg-3</code>. Réduisez la fenêtre du navigateur : à quelle largeur bascule-t-elle ?</div>
 </article>
 
 <article class="step" id="s5">
@@ -322,6 +503,7 @@ git config --global user.email "vous@exemple.com"</textarea></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html></textarea></div>
+<div class="challenge"><b>🎯 À vous de jouer</b>Dupliquez trois fois le bloc <code>col-12 col-md-6 col-lg-4</code> pour obtenir 3 projets. Renommez-les (Projet 2, Projet 3) et changez les badges.</div>
 </article>
 
 <article class="step" id="s6">
@@ -349,6 +531,7 @@ section,header{scroll-margin-top:70px}
   .hero h1{font-size:1.8rem}
   .hero .btn{display:block;margin:.5rem auto}
 }</textarea></div>
+<div class="challenge"><b>🎯 À vous de jouer</b>Changez <code>--couleur-principale</code> en violet (<code>#6a3fb5</code>), rechargez, observez. Puis testez <code>#d6335b</code> (rose) pour voir l'effet du dégradé.</div>
 </article>
 
 <article class="step" id="s7">
@@ -385,6 +568,14 @@ git branch -d feature-contact   # supprime la branche fusionnée</textarea></div
 <tr><td>Corriger le dernier message</td><td><code>git commit --amend -m "Nouveau message"</code></td></tr>
 <tr><td>Récupérer les changements distants</td><td><code>git pull</code></td></tr></table>
 <div class="warn">Bon commit : un commit = une idée, message court à l'infinitif (« Ajouter la section contact »).</div>
+<h3 class="h">Conventional Commits (bonus)</h3>
+<table><tr><th>Préfixe</th><th>Usage</th></tr>
+<tr><td><code>feat:</code></td><td>nouvelle fonctionnalité</td></tr>
+<tr><td><code>fix:</code></td><td>correction de bug</td></tr>
+<tr><td><code>style:</code></td><td>CSS, mise en forme</td></tr>
+<tr><td><code>docs:</code></td><td>README, documentation</td></tr>
+<tr><td><code>chore:</code></td><td>configuration, .gitignore</td></tr></table>
+<div class="challenge"><b>🎯 À vous de jouer</b>Modifiez <code>index.html</code>, puis <code>git add index.html</code>. Changez d'avis : <code>git restore --staged index.html</code>, puis <code>git restore index.html</code>. Vérifiez que tout est revenu.</div>
 </article>
 
 <article class="step" id="s8">
@@ -418,23 +609,129 @@ Thumbs.db
 
 Portfolio personnel réalisé avec HTML5, CSS3 et Bootstrap 5.
 
-🔗 Démo : https://VOTRE-PSEUDO.github.io/portfolio/
+🔗 Démo : https://portfolio-prenom-nom.onrender.com
 
 ## Technologies
 - HTML5 et CSS3
 - Bootstrap 5.3
-- Git et GitHub Pages
+- Git et Render
 
 ## Lancer en local
 Ouvrir index.html avec Live Server.</textarea></div>
 <h3 class="h">Récupérer un dépôt existant</h3>
 <div class="code" data-l="bash"><textarea class="src">git clone https://github.com/VOTRE-PSEUDO/portfolio.git   # copie le dépôt
 git pull                                                   # met à jour</textarea></div>
+<div class="challenge"><b>🎯 À vous de jouer</b>Après le <code>git push</code>, ouvrez la page GitHub de votre dépôt et vérifiez que vous voyez bien tous vos fichiers : <code>index.html</code>, <code>css/style.css</code>, <code>img/</code>, <code>README.md</code>.</div>
 </article>
 
 <article class="step" id="s9">
-<h2><span class="n">9</span>Publier avec GitHub Pages</h2>
-<p class="goal">Obtenir une URL publique.</p>
+<h2><span class="n">9</span>Déployer sur Render</h2>
+<p class="goal">Mettre le portfolio en ligne automatiquement, à chaque push.</p>
+
+<p>Render est une plateforme d'hébergement moderne qui se connecte à votre dépôt GitHub. Chaque <code>git push</code> sur <code>main</code> déclenche un nouveau déploiement, visible en direct dans l'onglet <b>Events</b>. Le site est en ligne en une trentaine de secondes.</p>
+
+<div class="warn"><b>Static Site, pas Web Service.</b> Un portfolio HTML/CSS/Bootstrap ne nécessite aucun serveur : c'est un site <i>statique</i>. Choisissez le type <b>Static Site</b>. Un <i>Web Service</i> s'endort après 15 minutes d'inactivité et met environ 50 s à se réveiller — mauvais plan devant un recruteur.</div>
+
+<h3 class="h">Créer le service sur Render</h3>
+<ol>
+<li>Allez sur <b>render.com</b> puis cliquez sur <b>Sign in with GitHub</b>.</li>
+<li>Autorisez Render à lire vos dépôts (vous pouvez restreindre l'accès au seul dépôt <code>portfolio</code>).</li>
+<li>Sur le Dashboard : <b>New +</b> → <b>Static Site</b>.</li>
+<li>Sélectionnez le dépôt <code>portfolio</code>, puis <b>Connect</b>.</li>
+<li>Remplissez le formulaire exactement comme ci-dessous :</li>
+</ol>
+
+<div class="code" data-l="url"><textarea class="src">Name               : portfolio-prenom-nom
+Branch             : main
+Build Command      : (laisser vide)
+Publish Directory  : .
+Auto-Deploy        : Yes</textarea></div>
+
+<ol start="6">
+<li>Cliquez sur <b>Create Static Site</b>.</li>
+<li>Attendez une minute. L'URL publique apparaît en haut du dashboard.</li>
+</ol>
+
+<div class="code" data-l="url"><textarea class="src">https://portfolio-prenom-nom.onrender.com</textarea></div>
+
+<figure class="fig"><svg viewBox="0 0 400 100" role="img" aria-label="Déploiement automatique via Render"><g font-size="12" text-anchor="middle"><rect x="4" y="28" width="84" height="48" rx="8" fill="#1e293b"/><text x="46" y="48" fill="#fff" font-weight="700">GitHub</text><text x="46" y="64" fill="#c3cdee" font-size="10">git push main</text><rect x="126" y="28" width="96" height="48" rx="8" fill="#46e3b7"/><text x="174" y="48" fill="#0a1a2f" font-weight="700">Render</text><text x="174" y="64" fill="#0a1a2f" font-size="10">build + déploie</text><rect x="260" y="28" width="136" height="48" rx="8" fill="#2e9e57"/><text x="328" y="48" fill="#fff" font-weight="700">🌍 En ligne</text><text x="328" y="64" fill="#fff" font-size="10">.onrender.com</text></g><g stroke="var(--accent)" stroke-width="2.5" fill="none"><path class="flw" d="M88 52H126M222 52H260"/></g><g font-size="10" text-anchor="middle" fill="var(--ink)" font-weight="700"><text x="107" y="20">webhook</text><text x="241" y="20">~30 s</text></g></svg><figcaption>Figure 6 : GitHub déclenche Render, Render construit, le site est en ligne en ~30 secondes.</figcaption></figure>
+
+<div class="urlx"><span>https://</span><b>portfolio-prenom-nom</b><span>.onrender.com</span></div>
+<div class="ul2">nom du service Render (choisi à l'étape 5)</div>
+
+<h3 class="h">Le cycle « push = redéploiement »</h3>
+<p>C'est le vrai intérêt de Render : plus rien à cliquer, plus rien à configurer. Modifiez un fichier, poussez, rechargez.</p>
+
+<div class="code" data-l="bash"><textarea class="src">git add .
+git commit -m "Ajout du projet 4"
+git push
+# → Render détecte le push via le webhook GitHub
+# → Onglet Events : Build in progress, puis Deploy live</textarea></div>
+
+<div class="warn">Pendant la séance, ouvrez l'onglet <b>Events</b> de Render dans un onglet voisin du terminal. Vos étudiants voient le déploiement se dérouler en direct : c'est bien plus parlant qu'un long discours.</div>
+
+<h3 class="h">Mettre à jour le site</h3>
+<div class="code" data-l="bash"><textarea class="src">git add .
+git commit -m "style: nouvelle couleur du hero"
+git push</textarea></div>
+<p>Attendez 30 secondes, puis rechargez la page Render avec <code>Ctrl + F5</code> (ou <code>Cmd + Shift + R</code>) pour contourner le cache du navigateur.</p>
+
+<h3 class="h">Bonus : le fichier render.yaml (Blueprint)</h3>
+<details><summary>Pour aller plus loin — configurer Render depuis un fichier versionné</summary>
+<p>À la racine du dépôt, créez un fichier <code>render.yaml</code>. Au prochain branchement, Render lira ce fichier et configurera tout automatiquement. C'est de l'<i>Infrastructure-as-Code</i> : la configuration du déploiement est versionnée avec le code.</p>
+<div class="code" data-l="render.yaml"><textarea class="src">services:
+  - type: web
+    name: portfolio
+    runtime: static
+    branch: main
+    buildCommand: ""
+    staticPublishPath: ./
+    pullRequestPreviewsEnabled: true</textarea></div>
+</details>
+
+<h3 class="h">Preview Deployments — workflow professionnel</h3>
+<p>Quand vous poussez sur une branche autre que <code>main</code> et que vous ouvrez une Pull Request, Render crée une URL de préversion. On teste avant de fusionner.</p>
+
+<div class="code" data-l="bash"><textarea class="src">git switch -c feature-contact
+# ... modifier index.html ...
+git add .
+git commit -m "feat: ajout du formulaire de contact"
+git push -u origin feature-contact
+# → ouvrir une Pull Request sur GitHub
+# → Render génère automatiquement une URL de preview
+# → tester la preview AVANT de fusionner
+git switch main
+git merge feature-contact
+git push
+# → déploiement en production</textarea></div>
+
+<h3 class="h">GitHub Pages ou Render ?</h3>
+<table>
+<tr><th>Critère</th><th>GitHub Pages</th><th>Render Static</th></tr>
+<tr><td>Mise en place</td><td>Settings → Pages</td><td>Dashboard + Git</td></tr>
+<tr><td>Délai de mise à jour</td><td>1 à 3 minutes</td><td>~30 secondes</td></tr>
+<tr><td>Preview par Pull Request</td><td>Non</td><td>Oui</td></tr>
+<tr><td>Logs de déploiement</td><td>Limités</td><td>Détaillés (Events)</td></tr>
+<tr><td>URL par défaut</td><td><code>pseudo.github.io/repo</code></td><td><code>nom.onrender.com</code></td></tr>
+<tr><td>Domaine personnalisé</td><td>Oui</td><td>Oui (gratuit)</td></tr>
+<tr><td>HTTPS automatique</td><td>Oui</td><td>Oui</td></tr>
+</table>
+<div class="warn">Les deux sont gratuits. Vous pouvez garder les deux en parallèle : GitHub Pages comme sauvegarde, Render comme vitrine principale.</div>
+
+<h3 class="h">Si ça ne marche pas</h3>
+<details><summary>Render affiche « Build failed »</summary><p>Vérifiez trois choses : <code>Build Command</code> vide, <code>Publish Directory</code> = <code>.</code>, et que <code>index.html</code> est bien à la racine du dépôt.</p></details>
+<details><summary>La page déployée est vide ou blanche</summary><p>Le <code>index.html</code> est probablement dans un sous-dossier. Corrigez <code>Publish Directory</code> (ex. <code>public</code> ou <code>src</code>), puis <b>Manual Deploy</b> → <b>Clear build cache & deploy</b>.</p></details>
+<details><summary>Mon style.css ne charge pas en ligne (mais oui en local)</summary><p>Les serveurs Linux sont sensibles à la casse : <code>Style.css</code> n'est pas égal à <code>style.css</code>. Vérifiez aussi les espaces et accents dans les noms de fichiers.</p></details>
+<details><summary>J'ai poussé mais rien ne change en ligne</summary><p>Ouvrez l'onglet <b>Events</b> de Render : le déploiement est-il terminé ? Puis rechargez avec <code>Ctrl + F5</code> pour vider le cache du navigateur.</p></details>
+<details><summary>Render redemande de se connecter à GitHub</summary><p>Rendez-vous dans <b>Account Settings</b> → <b>GitHub</b> → <b>Configure account</b>. Vérifiez que le dépôt <code>portfolio</code> est bien dans la liste autorisée.</p></details>
+
+<div class="challenge"><b>🎯 À vous de jouer</b>Faites un commit avec une faute de frappe volontaire dans un titre, poussez, observez Render redéployer dans l'onglet Events, puis corrigez la faute et poussez à nouveau. C'est exactement le cycle de travail quotidien d'un développeur.</div>
+</article>
+
+<article class="step" id="s10">
+<h2><span class="n">10</span>Publier avec GitHub Pages (alternative)</h2>
+<p class="goal">Obtenir une seconde URL publique, hébergée par GitHub.</p>
+<p>GitHub Pages est une alternative gratuite à Render. Utile comme sauvegarde, ou si vous préférez une URL en <code>github.io</code>. Cette étape est facultative si Render fonctionne déjà.</p>
 <ol>
 <li>Dans le dépôt : <b>Settings</b>.</li>
 <li>Menu de gauche : <b>Pages</b>.</li>
@@ -444,7 +741,7 @@ git pull                                                   # met à jour</textar
 </ol>
 <div class="code" data-l="url"><textarea class="src">https://VOTRE-PSEUDO.github.io/portfolio/</textarea></div>
 <div class="warn">Erreur 404 ? Vérifiez que le dépôt est public et que <code>index.html</code> est bien à la racine.</div>
-<figure class="fig"><svg viewBox="0 0 340 100" role="img" aria-label="Déploiement GitHub Pages"><g font-size="12" text-anchor="middle" fill="#fff"><rect x="6" y="26" width="86" height="46" rx="8" fill="#1f3fa0"/><text x="49" y="47">git push</text><text x="49" y="62" font-size="10">sur main</text><rect x="126" y="26" width="92" height="46" rx="8" fill="#ee8a1f"/><text x="172" y="47">GitHub Pages</text><text x="172" y="62" font-size="10">construit le site</text><rect x="252" y="26" width="82" height="46" rx="8" fill="#2e9e57"/><text x="293" y="47">🌍 En ligne</text><text x="293" y="62" font-size="10">URL publique</text></g><g stroke="var(--accent)" stroke-width="2.5" fill="none"><path class="flw" d="M92 49H126M218 49H252"/></g></svg><figcaption>Figure 6 : chaque push met le site à jour en 1 à 3 minutes.</figcaption></figure>
+<figure class="fig"><svg viewBox="0 0 340 100" role="img" aria-label="Déploiement GitHub Pages"><g font-size="12" text-anchor="middle" fill="#fff"><rect x="6" y="26" width="86" height="46" rx="8" fill="#1f3fa0"/><text x="49" y="47">git push</text><text x="49" y="62" font-size="10">sur main</text><rect x="126" y="26" width="92" height="46" rx="8" fill="#ee8a1f"/><text x="172" y="47">GitHub Pages</text><text x="172" y="62" font-size="10">construit le site</text><rect x="252" y="26" width="82" height="46" rx="8" fill="#2e9e57"/><text x="293" y="47">🌍 En ligne</text><text x="293" y="62" font-size="10">URL publique</text></g><g stroke="var(--accent)" stroke-width="2.5" fill="none"><path class="flw" d="M92 49H126M218 49H252"/></g></svg><figcaption>Figure 7 : chaque push met le site à jour en 1 à 3 minutes.</figcaption></figure>
 <div class="urlx"><span>https://</span><b>pseudo</b><span>.github.io/</span><b>portfolio</b></div>
 <div class="ul2">pseudo GitHub · nom du dépôt</div>
 <h3 class="h">Mettre à jour le site</h3>
@@ -452,10 +749,11 @@ git pull                                                   # met à jour</textar
 git commit -m "Ajout du projet 4"
 git push</textarea></div>
 <p>Attendez 1 à 2 minutes puis rechargez avec <code>Ctrl + F5</code>.</p>
+<div class="challenge"><b>🎯 À vous de jouer</b>Activez GitHub Pages et notez l'URL obtenue. Vous avez maintenant deux URLs publiques : une sur Render, une sur GitHub Pages. Laquelle est la plus rapide à mettre à jour ?</div>
 </article>
 
-<article class="step" id="s10">
-<h2><span class="n">10</span>Projet final et vérification</h2>
+<article class="step" id="s11">
+<h2><span class="n">11</span>Projet final et vérification</h2>
 <p class="goal">Rendre un portfolio complet.</p>
 <ul>
 <li>Toutes les sections sont présentes et personnalisées.</li>
@@ -463,13 +761,29 @@ git push</textarea></div>
 <li>Images avec <code>alt</code>, burger testé, liens testés.</li>
 <li>Au moins 8 commits, messages clairs.</li>
 <li>Dépôt public, README complet avec l'URL de démo.</li>
-<li>GitHub Pages actif.</li>
+<li>Render actif avec URL fonctionnelle.</li>
+<li>(Bonus) GitHub Pages actif en parallèle.</li>
 </ul>
-<p><b>À rendre :</b> l'URL du dépôt et l'URL GitHub Pages.</p>
+<p><b>À rendre :</b> l'URL du dépôt et l'URL Render publique.</p>
 <h3 class="h">Barème indicatif sur 20</h3>
 <table><tr><th>Critère</th><th>Points</th></tr>
-<tr><td>Structure HTML</td><td>3</td></tr><tr><td>Utilisation de Bootstrap</td><td>3</td></tr><tr><td>Responsive design</td><td>2</td></tr><tr><td>Contenu</td><td>2</td></tr><tr><td>Design</td><td>2</td></tr><tr><td>Section projets</td><td>2</td></tr><tr><td>Qualité du code</td><td>1</td></tr><tr><td>Utilisation de Git</td><td>2</td></tr><tr><td>Repository GitHub</td><td>1</td></tr><tr><td>Publication GitHub Pages</td><td>2</td></tr></table>
+<tr><td>Structure HTML</td><td>3</td></tr><tr><td>Utilisation de Bootstrap</td><td>3</td></tr><tr><td>Responsive design</td><td>2</td></tr><tr><td>Contenu</td><td>2</td></tr><tr><td>Design</td><td>2</td></tr><tr><td>Section projets</td><td>2</td></tr><tr><td>Qualité du code</td><td>1</td></tr><tr><td>Utilisation de Git (commits, messages)</td><td>2</td></tr><tr><td>Repository GitHub public</td><td>1</td></tr><tr><td>Déploiement Render (URL fonctionnelle)</td><td>2</td></tr></table>
+<div class="challenge"><b>🎯 À vous de jouer</b>Relisez votre checklist, ouvrez votre URL Render sur un téléphone, testez le menu burger et cliquez sur tous les liens. Tout doit fonctionner.</div>
 </article>
+
+<article class="step" id="templates">
+<h2><span class="n">🎨</span>Choisir un modèle de portfolio</h2>
+<p class="goal">Prévisualisez un modèle, copiez son code ou téléchargez son fichier HTML pour le personnaliser.</p>
+<p>Les modèles sont des pages HTML autonomes. Cliquez sur <b>Ouvrir le code</b>, puis affichez le code source du navigateur (<code>Ctrl + U</code>) pour le copier. Le téléchargement vous permet de commencer directement dans VS Code.</p>
+<div class="template-grid">
+<section class="template-card"><h3>Portfolio Bento</h3><p>Une mise en page en cartes colorées, moderne et originale.</p><div class="template-actions"><a href="templates/portfolio-bento.html" target="_blank" rel="noopener">Aperçu</a><a class="secondary" href="templates/portfolio-bento.html" target="_blank" rel="noopener">Ouvrir le code</a><a href="templates/portfolio-bento.html" download="portfolio-bento.html">Télécharger</a></div></section>
+<section class="template-card"><h3>Portfolio latéral</h3><p>Une barre latérale de navigation et un contenu clair, adapté à un CV en ligne.</p><div class="template-actions"><a href="templates/portfolio-lateral.html" target="_blank" rel="noopener">Aperçu</a><a class="secondary" href="templates/portfolio-lateral.html" target="_blank" rel="noopener">Ouvrir le code</a><a href="templates/portfolio-lateral.html" download="portfolio-lateral.html">Télécharger</a></div></section>
+<section class="template-card"><h3>Portfolio professionnel</h3><p>Un thème sombre avec une présentation soignée et des accents lumineux.</p><div class="template-actions"><a href="templates/portfolio-pro.html" target="_blank" rel="noopener">Aperçu</a><a class="secondary" href="templates/portfolio-pro.html" target="_blank" rel="noopener">Ouvrir le code</a><a href="templates/portfolio-pro.html" download="portfolio-pro.html">Télécharger</a></div></section>
+<section class="template-card"><h3>Portfolio rose</h3><p>Un style doux et coloré, avec une palette rose et des formes arrondies.</p><div class="template-actions"><a href="templates/portfolio-rose.html" target="_blank" rel="noopener">Aperçu</a><a class="secondary" href="templates/portfolio-rose.html" target="_blank" rel="noopener">Ouvrir le code</a><a href="templates/portfolio-rose.html" download="portfolio-rose.html">Télécharger</a></div></section>
+</div>
+<div class="warn">Après téléchargement, ouvrez le fichier dans VS Code et remplacez les textes, liens et coordonnées d'exemple par vos propres informations.</div>
+</article>
+
 <article class="step" id="extra">
 <h2><span class="n">📚</span>Glossaire et erreurs fréquentes</h2>
 <table><tr><th>Terme</th><th>Définition</th></tr>
@@ -481,15 +795,19 @@ git push</textarea></div>
 <tr><td>Push / Pull / Clone</td><td>Envoyer / récupérer / copier un dépôt</td></tr>
 <tr><td>CDN</td><td>Serveur qui héberge Bootstrap pour vous</td></tr>
 <tr><td>Responsive</td><td>Page qui s'adapte à la taille de l'écran</td></tr>
-<tr><td>Breakpoint</td><td>Largeur à partir de laquelle la mise en page change</td></tr></table>
+<tr><td>Breakpoint</td><td>Largeur à partir de laquelle la mise en page change</td></tr>
+<tr><td>Static Site</td><td>Site sans serveur : HTML/CSS/JS servis tels quels (Render)</td></tr>
+<tr><td>Webhook</td><td>Notification automatique GitHub → Render au push</td></tr>
+<tr><td>Preview Deployment</td><td>URL temporaire générée pour une Pull Request</td></tr></table>
 <details><summary>Mon image ne s'affiche pas</summary><p>Vérifiez le chemin (<code>img/photo.jpg</code>), les majuscules/minuscules et l'extension réelle du fichier.</p></details>
 <details><summary>Le menu burger ne s'ouvre pas</summary><p>Le script <code>bootstrap.bundle.min.js</code> est absent ou placé avant le reste de la page.</p></details>
 <details><summary>Git refuse le push</summary><p>Vérifiez l'URL avec <code>git remote -v</code> et votre authentification (token ou connexion GitHub dans VS Code).</p></details>
+<details><summary>Render affiche « Build failed »</summary><p>Vérifiez <code>Build Command</code> vide, <code>Publish Directory</code> = <code>.</code>, et <code>index.html</code> à la racine.</p></details>
 <details><summary>GitHub Pages affiche une erreur 404</summary><p>Dépôt public ? Branche <code>main</code> ? <code>index.html</code> à la racine ? Attendez quelques minutes.</p></details>
 <details><summary>Mon style Bootstrap ne s'applique pas</summary><p>Le lien CDN est mal copié, ou votre <code>style.css</code> est chargé avant Bootstrap.</p></details>
 </article>
 </main>
-<footer>Support de cours : portfolio HTML + Bootstrap + Git/GitHub</footer>
+<footer>Support de cours : portfolio HTML + Bootstrap + Git/GitHub/Render</footer>
 
 <script>
 function esc(x){return x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
@@ -502,20 +820,23 @@ document.querySelectorAll('.code').forEach(function(d){
   var raw=d.querySelector('textarea').value,lb=d.dataset.l||'',name=M[lb]||lb,lang=/\.css$/.test(lb)?'css':(lb==='bash'?'bash':(/html$/.test(lb)?'html':'txt'));
   var lines=raw.split('\n').map(function(l){var h=lang==='html'?tk(l,RH,CH):lang==='css'?cssl(l):lang==='bash'?tk(l,RB,CB):esc(l);return '<span class="ln">'+(h||'&#8203;')+'</span>'}).join('');
   var w=document.createElement('div');w.className='vs';
-  w.innerHTML='<div class="vt"><i></i><i></i><i></i><em>'+esc(name)+' — Visual Studio Code</em></div><div class="vb"><div class="ab"><span>📁</span><span>🔍</span><span>🌿</span><span>🧩</span></div><div class="vm"><button class="cp" type="button">📋 Copier</button><div class="tabs"><div class="tab">'+IC[lang]+' '+esc(name)+'</div></div><pre><code>'+lines+'</code></pre></div></div><div class="sb"><span>⎇ main</span><span>UTF-8</span><span>'+LN[lang]+'</span></div>';
+  w.innerHTML='<div class="vt"><i></i><i></i><i></i><em>'+esc(name)+' — Visual Studio Code</em></div><div class="vb"><div class="ab"><span>📁</span><span>🔍</span><span>🌿</span><span>🧩</span></div><div class="vm"><button class="cp" type="button" aria-label="Copier le code">📋 Copier</button><div class="tabs"><div class="tab">'+IC[lang]+' '+esc(name)+'</div></div><pre><code>'+lines+'</code></pre></div></div><div class="sb"><span>⎇ main</span><span>UTF-8</span><span>'+LN[lang]+'</span></div>';
   var b=w.querySelector('.cp');
   b.onclick=function(){function ok(){b.textContent='✅ Copié';setTimeout(function(){b.textContent='📋 Copier'},1500)}
     if(navigator.clipboard){navigator.clipboard.writeText(raw).then(ok,function(){})}else{var t=document.createElement('textarea');t.value=raw;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();ok()}};
   d.replaceWith(w);
 });
-var V={s1:['🎯|Objectif','📁|Structure','🌐|Résultat'],s2:['💻|VS Code','🔧|Git','🐙|GitHub'],s3:['📄|HTML','🏷️|Balises','🖼️|Image'],s4:['🎨|Bootstrap','🧱|Grille','📱|Responsive'],s5:['🧭|Navbar','🦸|Hero','🃏|Cartes','✉️|Contact'],s6:['🎨|Couleurs','📸|Photo','✍️|Textes'],s7:['📝|Modifier','➕|Add','💾|Commit','📜|Historique'],s8:['📂|Dépôt','🔗|Remote','☁️|Push'],s9:['⚙️|Settings','🚀|Pages','🌍|URL'],s10:['✅|Checklist','📦|Rendu','🏆|Réussite']};
+var V={s1:['🎯|Objectif','📁|Structure','🌐|Résultat'],s2:['💻|VS Code','🔧|Git','🐙|GitHub'],s3:['📄|HTML','🏷️|Balises','🖼️|Image'],s4:['🎨|Bootstrap','🧱|Grille','📱|Responsive'],s5:['🧭|Navbar','🦸|Hero','🃏|Cartes','✉️|Contact'],s6:['🎨|Couleurs','📸|Photo','✍️|Textes'],s7:['📝|Modifier','➕|Add','💾|Commit','📜|Historique'],s8:['📂|Dépôt','🔗|Remote','☁️|Push'],s9:['🎛️|Static Site','🔗|Connect','🚀|Deploy','🌍|URL'],s10:['⚙️|Settings','🚀|Pages','🌍|URL'],s11:['✅|Checklist','📦|Rendu','🏆|Réussite']};
 document.querySelectorAll('.step').forEach(function(s){var v=V[s.id];if(!v)return;var h='';
   v.forEach(function(x,i){var q=x.split('|');h+=(i?'<i class="va">›</i>':'')+'<div class="vi" style="--i:'+i+'"><span>'+q[0]+'</span>'+q[1]+'</div>'});
   var d=document.createElement('div');d.className='vis';d.innerHTML=h;s.querySelector('.goal').after(d)});
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});document.querySelectorAll('.step').forEach(function(s){io.observe(s)})}else document.querySelectorAll('.step').forEach(function(s){s.classList.add('in')});
 var nv=document.getElementById('nav'),st=[].slice.call(document.querySelectorAll('.step'));
-st.forEach(function(x,i){var h=x.querySelector('h2').textContent.slice(x.querySelector('.n').textContent.length).trim();var a=document.createElement('a');a.href='#'+x.id;a.textContent=(x.id==='extra'?'📚 ':(i+1)+'. ')+(h.length>24?h.slice(0,24)+'…':h);nv.appendChild(a)});
+st.forEach(function(x,i){var h=x.querySelector('h2').textContent.slice(x.querySelector('.n').textContent.length).trim();var a=document.createElement('a');a.href='#'+x.id;a.textContent=(x.id==='extra'?'📚 ':(x.id==='templates'?'🎨 ':(x.id==='compare'?'⚖️ ':(x.id==='cvia'?'🤖 ':st.slice(0,i+1).filter(function(y){return /^s\d+$/.test(y.id)}).length+'. '))))+(h.length>24?h.slice(0,24)+'…':h);nv.appendChild(a)});
 if('IntersectionObserver' in window){var ls=[].slice.call(nv.querySelectorAll('a')),so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)ls.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-30% 0px -60% 0px'});st.forEach(function(x){so.observe(x)})}
 </script>
+<script src="assets/js/guide-animations.js"></script>
+<script src="assets/js/guide-clarity.js"></script>
+<script src="assets/js/guide-ats.js"></script>
 </body>
 </html>

@@ -33,21 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    const iaSubmenu = dropdown.querySelector('.dropdown-submenu');
-    const iaSubmenuToggle = dropdown.querySelector('.dropdown-submenu-toggle');
-    if (iaSubmenu && iaSubmenuToggle) {
-      iaSubmenuToggle.addEventListener('click', () => {
-        const isOpen = iaSubmenu.classList.toggle('open');
-        iaSubmenuToggle.setAttribute('aria-expanded', String(isOpen));
-      });
-      iaSubmenu.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          iaSubmenu.classList.remove('open');
-          iaSubmenuToggle.setAttribute('aria-expanded', 'false');
-          iaSubmenuToggle.focus();
-        }
-      });
-    }
   }
 
   if (burger && navLinks) {
@@ -153,6 +138,74 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEls = document.querySelectorAll('.footer-year');
   const currentYear = new Date().getFullYear();
   yearEls.forEach(el => (el.textContent = currentYear));
+
+  /* --------------------------------------------
+     5. GALLERY SLIDESHOW
+     -------------------------------------------- */
+  const gallery = document.querySelector('.gallery-carousel');
+  if (gallery) {
+    const track = gallery.querySelector('.gallery-track');
+    const slides = Array.from(track.querySelectorAll('.gallery-item'));
+    const dots = gallery.querySelector('.gallery-dots');
+    const previous = gallery.querySelector('.gallery-prev');
+    const next = gallery.querySelector('.gallery-next');
+    let activeSlide = 0;
+    let timer;
+    let touchStartX = 0;
+    let suppressSwipeClick = false;
+
+    const setSlide = (index) => {
+      activeSlide = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${slides[activeSlide].offsetLeft}px)`;
+      dots.querySelectorAll('button').forEach((dot, dotIndex) => {
+        dot.setAttribute('aria-current', String(dotIndex === activeSlide));
+      });
+    };
+
+    slides.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'gallery-dot';
+      dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+      dot.setAttribute('aria-current', String(index === 0));
+      dot.addEventListener('click', () => setSlide(index));
+      dots.append(dot);
+    });
+
+    previous.addEventListener('click', () => setSlide(activeSlide - 1));
+    next.addEventListener('click', () => setSlide(activeSlide + 1));
+
+    const stopAutoplay = () => window.clearInterval(timer);
+    const startAutoplay = () => {
+      stopAutoplay();
+      if (!document.hidden) {
+        timer = window.setInterval(() => setSlide(activeSlide + 1), 5000);
+      }
+    };
+
+    gallery.addEventListener('focusin', stopAutoplay);
+    gallery.addEventListener('focusout', startAutoplay);
+    document.addEventListener('visibilitychange', startAutoplay);
+    track.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+    track.addEventListener('touchend', (event) => {
+      const distance = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(distance) > 45) {
+        suppressSwipeClick = true;
+        setSlide(activeSlide + (distance < 0 ? 1 : -1));
+        window.setTimeout(() => { suppressSwipeClick = false; }, 350);
+      }
+    }, { passive: true });
+    slides.forEach((slide) => slide.addEventListener('click', (event) => {
+      if (suppressSwipeClick) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true));
+    startAutoplay();
+  }
+
     /* --------------------------------------------
      6. CONTACT FORM (Formspree AJAX submit)
      -------------------------------------------- */

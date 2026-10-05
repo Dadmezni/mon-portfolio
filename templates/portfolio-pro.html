@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portfolio de Prénom Nom, développeur web front-end.">
+<title>Prénom Nom | Développeur web</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+:root{--bg:#0a0f1e;--surf:#111830;--line:#222c4a;--acc:#4f8cff;--acc2:#22d3ee;--mut:#94a3b8}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:#e2e8f0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7}
+section{padding:96px 0;scroll-margin-top:56px}
+.eyebrow{color:var(--acc2);font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.sec-title{font-weight:700;letter-spacing:-.02em;margin:6px 0 40px}
+.text-mut{color:var(--mut)}
+.navbar{background:rgba(10,15,30,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.navbar-brand{font-weight:800;letter-spacing:-.02em}
+.nav-link{font-size:.92rem;color:var(--mut)}.nav-link:hover{color:#fff}
+.btn-acc{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600;padding:.65rem 1.4rem}
+.btn-acc:hover{background:#3b78ee;color:#fff}
+.btn-ghost{border:1px solid var(--line);color:#e2e8f0;padding:.65rem 1.4rem;font-weight:600}
+.btn-ghost:hover{border-color:var(--acc);color:#fff}
+.hero{min-height:100vh;display:flex;align-items:center;padding:110px 0 70px;background:radial-gradient(900px 400px at 80% 0,rgba(79,140,255,.18),transparent),radial-gradient(600px 300px at 0 100%,rgba(34,211,238,.08),transparent)}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.grad{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.status{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:.85rem;color:var(--mut);background:var(--surf)}
+.dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.2)}
+.avatar{width:100%;max-width:340px;aspect-ratio:1;border-radius:24px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-size:5rem;font-weight:800;color:#0a0f1e;margin-inline:auto;box-shadow:0 30px 60px rgba(79,140,255,.25)}
+.stat b{display:block;font-size:2rem;font-weight:800;color:#fff}
+.stat span{color:var(--mut);font-size:.9rem}
+.panel{background:var(--surf);border:1px solid var(--line);border-radius:16px}
+.skill{padding:22px;height:100%}
+.skill svg{width:28px;height:28px;stroke:var(--acc2);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-bottom:12px}
+.tag{display:inline-block;font-size:.78rem;padding:2px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mut);margin:0 4px 4px 0}
+.proj{overflow:hidden;height:100%;transition:transform .25s,border-color .25s}
+.proj:hover{transform:translateY(-6px);border-color:var(--acc)}
+.shot{height:190px;padding:18px 18px 0;background:linear-gradient(135deg,var(--c1),var(--c2))}
+.win{height:100%;background:rgba(10,15,30,.92);border-radius:10px 10px 0 0;padding:10px}
+.win i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#475569;margin-right:4px}
+.win p{height:8px;border-radius:4px;background:#334155;margin:10px 0 0}
+.win .blk{height:46px;border-radius:6px;background:linear-gradient(135deg,var(--c1),var(--c2));margin-top:12px;opacity:.85}
+.proj a{color:var(--acc2);text-decoration:none;font-weight:600;font-size:.92rem}
+.tl{position:relative;padding-left:28px;border-left:2px solid var(--line);margin-left:6px}
+.tl .it{position:relative;margin-bottom:30px}
+.tl .it:before{content:"";position:absolute;left:-36px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--acc);border:3px solid var(--bg)}
+.tl small{color:var(--acc2);font-weight:600}
+.quote{padding:26px;height:100%}
+.form-control{background:var(--bg);border-color:var(--line);color:#fff;padding:.7rem 1rem}
+.form-control:focus{background:var(--bg);color:#fff;border-color:var(--acc);box-shadow:0 0 0 3px rgba(79,140,255,.2)}
+footer{border-top:1px solid var(--line);padding:50px 0 24px;background:var(--surf)}
+footer a{color:var(--mut);text-decoration:none}footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></symbol>
+<symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></symbol>
+<symbol id="i-git" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M18 11.5c0 4-8 2-12 4"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+</defs></svg>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+ <div class="container">
+  <a class="navbar-brand" href="#accueil">PN<span class="grad">.dev</span></a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Menu"><span class="navbar-toggler-icon"></span></button>
+  <div class="collapse navbar-collapse" id="menu">
+   <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+    <li class="nav-item"><a class="nav-link" href="#apropos">À propos</a></li>
+    <li class="nav-item"><a class="nav-link" href="#competences">Compétences</a></li>
+    <li class="nav-item"><a class="nav-link" href="#projets">Projets</a></li>
+    <li class="nav-item"><a class="nav-link" href="#parcours">Parcours</a></li>
+    <li class="nav-item"><a class="btn btn-acc btn-sm ms-lg-2" href="#contact">Me contacter</a></li>
+   </ul>
+  </div>
+ </div>
+</nav>
+
+<header id="accueil" class="hero"><div class="container"><div class="row align-items-center g-5">
+ <div class="col-lg-7">
+  <span class="status mb-4"><span class="dot"></span>Disponible pour un stage</span>
+  <h1>Je conçois des sites <span class="grad">rapides, accessibles</span> et bien structurés.</h1>
+  <p class="fs-5 text-mut mt-3 mb-4" style="max-width:540px">Prénom Nom, étudiant en développement web. J'aime transformer une idée en interface claire, du code à la mise en ligne.</p>
+  <a href="#projets" class="btn btn-acc me-2">Voir mes projets</a>
+  <a href="#" class="btn btn-ghost">Télécharger mon CV</a>
+  <div class="row mt-5 g-4" style="max-width:480px">
+   <div class="col-4 stat"><b>12+</b><span>Projets réalisés</span></div>
+   <div class="col-4 stat"><b>2 ans</b><span>De pratique</span></div>
+   <div class="col-4 stat"><b>100%</b><span>Responsive</span></div>
+  </div>
+ </div>
+ <div class="col-lg-5 text-center"><div class="avatar" role="img" aria-label="Photo de Prénom Nom (à remplacer)">PN</div></div>
+</div></div></header>
+
+<section id="apropos"><div class="container"><div class="row g-5">
+ <div class="col-lg-5"><span class="eyebrow">À propos</span><h2 class="sec-title">Un profil curieux et rigoureux</h2></div>
+ <div class="col-lg-7 text-mut">
+  <p>Étudiant en licence, je construis des sites web depuis deux ans. Je m'intéresse à la qualité du code, à l'accessibilité et à l'expérience utilisateur.</p>
+  <p>Je travaille avec HTML5, CSS3, Bootstrap et Git, et je me forme à JavaScript. Je cherche un stage pour progresser au sein d'une équipe et contribuer à de vrais projets.</p>
+ </div>
+</div></div></section>
+
+<section id="competences" style="background:var(--surf)"><div class="container">
+ <span class="eyebrow">Compétences</span><h2 class="sec-title">Ce que je maîtrise</h2>
+ <div class="row g-4">
+  <div class="col-md-6 col-lg-3"><div class="panel skill" style="background:var(--bg)"><svg><use href="#i-code"/></svg><h3 class="h6">Développement</h3><p class="small text-mut mb-2">Code sémantique et maintenable.</p><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span></div></div>
+  <div class="col-md-6 col-lg-3"><div class="panel skill" style="background:var(--bg)"><svg><use href="#i-layout"/></svg><h3 class="h6">Interface</h3><p class="small text-mut mb-2">Mises en page propres et cohérentes.</p><span class="tag">Bootstrap 5</span><span class="tag">Flexbox</span><span class="tag">Grid</span></div></div>
+  <div class="col-md-6 col-lg-3"><div class="panel skill" style="background:var(--bg)"><svg><use href="#i-phone"/></svg><h3 class="h6">Responsive</h3><p class="small text-mut mb-2">Sites adaptés à tous les écrans.</p><span class="tag">Mobile first</span><span class="tag">Accessibilité</span></div></div>
+  <div class="col-md-6 col-lg-3"><div class="panel skill" style="background:var(--bg)"><svg><use href="#i-git"/></svg><h3 class="h6">Outils</h3><p class="small text-mut mb-2">Travail en équipe et déploiement.</p><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span></div></div>
+ </div>
+</div></section>
+
+<section id="projets"><div class="container">
+ <span class="eyebrow">Projets</span><h2 class="sec-title">Réalisations sélectionnées</h2>
+ <div class="row g-4">
+  <div class="col-md-6 col-lg-4"><article class="panel proj">
+   <div class="shot" style="--c1:#4f8cff;--c2:#22d3ee"><div class="win"><i></i><i></i><i></i><p style="width:70%"></p><p style="width:45%"></p><div class="blk"></div></div></div>
+   <div class="p-4"><h3 class="h5">Site vitrine restaurant</h3><p class="small text-mut">Site responsive de 4 pages avec menu, galerie et formulaire de réservation.</p><span class="tag">HTML</span><span class="tag">Bootstrap</span><div class="mt-3"><a href="#">Voir le code →</a> &nbsp; <a href="#">Démo →</a></div></div></article></div>
+  <div class="col-md-6 col-lg-4"><article class="panel proj">
+   <div class="shot" style="--c1:#a855f7;--c2:#ec4899"><div class="win"><i></i><i></i><i></i><p style="width:55%"></p><p style="width:80%"></p><div class="blk"></div></div></div>
+   <div class="p-4"><h3 class="h5">Application de tâches</h3><p class="small text-mut">Liste de tâches avec filtres et sauvegarde locale du navigateur.</p><span class="tag">JavaScript</span><span class="tag">CSS</span><div class="mt-3"><a href="#">Voir le code →</a> &nbsp; <a href="#">Démo →</a></div></div></article></div>
+  <div class="col-md-6 col-lg-4"><article class="panel proj">
+   <div class="shot" style="--c1:#f59e0b;--c2:#ef4444"><div class="win"><i></i><i></i><i></i><p style="width:65%"></p><p style="width:35%"></p><div class="blk"></div></div></div>
+   <div class="p-4"><h3 class="h5">Blog personnel</h3><p class="small text-mut">Pages d'articles, navigation claire et publication via GitHub Pages.</p><span class="tag">Git</span><span class="tag">GitHub Pages</span><div class="mt-3"><a href="#">Voir le code →</a> &nbsp; <a href="#">Démo →</a></div></div></article></div>
+ </div>
+</div></section>
+
+<section id="parcours" style="background:var(--surf)"><div class="container"><div class="row g-5">
+ <div class="col-lg-5"><span class="eyebrow">Parcours</span><h2 class="sec-title">Formation et expérience</h2></div>
+ <div class="col-lg-7"><div class="tl">
+  <div class="it"><small>2025 – aujourd'hui</small><h3 class="h6 mb-1">Licence informatique, Établissement X</h3><p class="small text-mut">Algorithmique, web, bases de données, gestion de projet.</p></div>
+  <div class="it"><small>2024</small><h3 class="h6 mb-1">Stage d'observation, Entreprise Y</h3><p class="small text-mut">Découverte des métiers du numérique et d'un projet web en équipe.</p></div>
+  <div class="it"><small>2023</small><h3 class="h6 mb-1">Baccalauréat, Lycée Z</h3><p class="small text-mut">Spécialités scientifiques, mention bien.</p></div>
+ </div></div>
+</div></div></section>
+
+<section><div class="container">
+ <span class="eyebrow">Avis</span><h2 class="sec-title">Ce qu'on dit de mon travail</h2>
+ <div class="row g-4">
+  <div class="col-md-6"><div class="panel quote"><p>« Un travail soigné, livré dans les temps, avec un code propre et facile à reprendre. »</p><small class="text-mut">Prénom Nom, enseignant référent</small></div></div>
+  <div class="col-md-6"><div class="panel quote"><p>« Très autonome et à l'écoute, il a su transformer nos retours en améliorations concrètes. »</p><small class="text-mut">Prénom Nom, tuteur de stage</small></div></div>
+ </div>
+</div></section>
+
+<section id="contact" style="background:var(--surf)"><div class="container"><div class="row g-5">
+ <div class="col-lg-5"><span class="eyebrow">Contact</span><h2 class="sec-title">Parlons de votre projet</h2>
+  <p class="text-mut">Une proposition de stage, une question, une collaboration ? Je réponds sous 48 h.</p>
+  <p class="mb-1"><a class="text-white" href="mailto:vous@exemple.com">vous@exemple.com</a></p>
+  <p class="text-mut">Tunis, Tunisie</p></div>
+ <div class="col-lg-7"><form class="panel p-4" action="mailto:vous@exemple.com" method="post" enctype="text/plain">
+  <div class="row g-3">
+   <div class="col-md-6"><label class="form-label small" for="nom">Nom</label><input class="form-control" id="nom" name="nom" required></div>
+   <div class="col-md-6"><label class="form-label small" for="email">E-mail</label><input type="email" class="form-control" id="email" name="email" required></div>
+   <div class="col-12"><label class="form-label small" for="msg">Message</label><textarea class="form-control" id="msg" name="message" rows="5" required></textarea></div>
+   <div class="col-12"><button class="btn btn-acc w-100" type="submit">Envoyer le message</button></div>
+  </div></form></div>
+</div></div></section>
+
+<footer><div class="container"><div class="row g-4">
+ <div class="col-md-6"><strong>PN<span class="grad">.dev</span></strong><p class="small text-mut mt-2 mb-0" style="max-width:340px">Portfolio réalisé avec HTML5, CSS3 et Bootstrap 5, publié via GitHub Pages.</p></div>
+ <div class="col-md-3 small"><strong class="d-block mb-2">Navigation</strong><a href="#apropos">À propos</a><br><a href="#projets">Projets</a><br><a href="#contact">Contact</a></div>
+ <div class="col-md-3 small"><strong class="d-block mb-2">Réseaux</strong><a href="https://github.com/votre-pseudo" target="_blank" rel="noopener">GitHub</a><br><a href="https://www.linkedin.com/in/votre-profil" target="_blank" rel="noopener">LinkedIn</a></div>
+</div><hr style="border-color:var(--line)"><p class="small text-mut text-center mb-0">&copy; 2026 Prénom Nom. Tous droits réservés.</p></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
