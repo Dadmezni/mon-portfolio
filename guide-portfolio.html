@@ -9,7 +9,7 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1226;--card:#182142;--ink:#dfe7ff;--txt:#c3cdee;--accent:#8fa8ff;--line:#26325c}}
 :root[data-theme="dark"]{--bg:#0c1226;--card:#182142;--ink:#dfe7ff;--txt:#c3cdee;--accent:#8fa8ff;--line:#26325c}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:70px;overflow-x:clip}
+html{scroll-behavior:smooth;scroll-padding-top:0;overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65}
 header{text-align:center;padding:32px 16px 12px}
 h1{margin:0;color:var(--ink);font-size:clamp(24px,5vw,38px)}
@@ -159,6 +159,184 @@ nav#nav a:hover{transform:translateY(-2px)}nav#nav a.on{background:#ffd93b;color
 .t3 kbd{padding:1px 7px;border-radius:5px;border:1px solid var(--line);border-bottom-width:3px;background:var(--bg);font:700 12px Consolas,monospace}
 @keyframes tp{0%,30%{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--card));transform:translateY(-4px)}34%,100%{border-color:var(--line);background:var(--card);transform:none}}
 @media (prefers-reduced-motion:reduce){.t3>div{animation:none}.pr{transition:none;opacity:1;transform:none}.vo,.ext,.kwr,.gauge i{transition:none}}
+
+.rm{max-width:1100px;margin:0 auto;width:100%;padding:16px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 9%,var(--card)),var(--card));box-shadow:0 8px 24px rgba(20,35,92,.08)}
+.rm-top{display:flex;flex-direction:column;gap:2px;margin-bottom:14px}
+.rm-top b{color:var(--ink);font-size:clamp(18px,3.5vw,22px)}
+.rm-row{display:flex;align-items:stretch;gap:6px}
+.rm-c{flex:1;min-width:0;position:relative;display:flex;flex-direction:column;gap:4px;padding:14px;border-radius:14px;border:2px solid var(--line);border-top:6px solid var(--c);background:var(--card);text-decoration:none;color:var(--txt);transition:transform .25s,box-shadow .25s,border-color .25s}
+.rm-c:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(20,35,92,.14)}
+.rm-c.on{border-color:var(--c);box-shadow:0 10px 28px color-mix(in srgb,var(--c) 30%,transparent);transform:translateY(-4px)}
+.rm-n{position:absolute;top:-14px;right:10px;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;font:800 14px/28px system-ui,sans-serif;text-align:center}
+.rm-i{font-size:34px;line-height:1.1}
+.rm-c b{color:var(--ink);font-size:17px}
+.rm-c small{font-size:13px}
+.rm-s{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.rm-s i{font-style:normal;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:color-mix(in srgb,var(--c) 14%,var(--card));color:var(--ink)}
+.rm-a{flex:none;align-self:center;width:34px;height:4px;border-radius:99px;background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 12px);background-size:24px 4px;animation:rmf 1s linear infinite}
+@keyframes rmf{to{background-position:24px 0}}
+.rm-flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:14px;font-size:13px;font-weight:700;color:var(--ink)}
+.rm-flow span{padding:4px 10px;border-radius:99px;border:1px solid var(--line);background:var(--card)}
+.rm-flow em{font-style:normal;color:var(--accent);font-weight:800}
+@media (max-width:720px){.rm-row{flex-direction:column}.rm-a{width:4px;height:22px;background:repeating-linear-gradient(180deg,var(--accent) 0 6px,transparent 6px 12px);background-size:4px 24px;animation:rmv 1s linear infinite}@keyframes rmv{to{background-position:0 24px}}}
+.phase{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px;padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 70%,#000));color:#fff;box-shadow:0 10px 26px color-mix(in srgb,var(--c) 35%,transparent);scroll-margin-top:70px}
+.ph-ic{flex:none;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:30px;background:rgba(255,255,255,.18)}
+.ph-tx{flex:1;min-width:200px}
+.ph-tx small{font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.9;font-size:11px}
+.ph-tx h2{margin:0;color:#fff;font-size:clamp(19px,4vw,26px)}
+.ph-tx p{margin:2px 0 0;opacity:.95;font-size:14px}
+.ph-st{flex:none;padding:4px 12px;border-radius:99px;background:rgba(255,255,255,.2);font-weight:700;font-size:13px}
+.ph{flex:none;margin-left:auto;padding:2px 10px;border-radius:99px;font:700 11px system-ui,sans-serif;background:color-mix(in srgb,var(--c) 15%,var(--card));color:var(--ink);border:1px solid var(--c);white-space:nowrap}
+.ckp{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-radius:12px;border:2px dashed var(--c);background:color-mix(in srgb,var(--c) 8%,var(--card));color:var(--ink)}
+.ckp>span{font-size:24px}
+.ckp>div{flex:1;min-width:180px}
+.ckp a{padding:6px 14px;border-radius:99px;background:var(--c);color:#fff;text-decoration:none;font-weight:700;font-size:14px}
+.ckp a:hover{filter:brightness(1.1)}
+@media (prefers-reduced-motion:reduce){.rm-a{animation:none}.rm-c{transition:none}}
+main{grid-template-columns:minmax(0,1fr)}
+main>*{min-width:0;max-width:100%}
+.rm{max-width:none}
+.step li,.step p,.step td,.step summary,.ckp>div,.phase{overflow-wrap:anywhere}
+.step :not(pre)>code{overflow-wrap:anywhere;white-space:normal}
+.az{padding:14px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 8%,var(--card)),var(--card))}
+.az-pl{display:flex;align-items:stretch;gap:6px}
+.az-p{flex:1;min-width:0;padding:10px;border-radius:12px;border:2px solid var(--line);border-top:5px solid var(--c);background:var(--card);opacity:.7;transition:all .35s}
+.az-p.on{opacity:1;border-color:var(--c);box-shadow:0 8px 22px color-mix(in srgb,var(--c) 30%,transparent);transform:translateY(-3px)}
+.az-pi{display:block;font-size:26px;line-height:1.2}
+.az-p b{display:block;color:var(--ink);font-size:15px}
+.az-p small{display:block;font-size:12px}
+.az-p ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px;min-height:52px;align-content:start}
+.az-p li{margin:0;font-size:12px;padding:2px 8px;border-radius:8px;background:color-mix(in srgb,var(--c) 12%,var(--card));color:var(--ink);opacity:0;transform:translateX(-8px);transition:opacity .4s,transform .4s}
+.az-p li.show{opacity:1;transform:none}
+.az-ar{flex:none;align-self:center;width:24px;height:4px;border-radius:99px;background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 12px);background-size:24px 4px;animation:rmf 1s linear infinite}
+@media (max-width:640px){.az-pl{flex-direction:column}.az-ar{width:4px;height:18px;background:repeating-linear-gradient(180deg,var(--accent) 0 6px,transparent 6px 12px);background-size:4px 24px;animation:rmv 1s linear infinite}}
+.az-tr{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:16px 0 10px}
+.az-tr button{width:38px;height:38px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--ink);font:800 14px system-ui,sans-serif;cursor:pointer;transition:all .25s}
+.az-tr button.done{border-color:var(--ok);background:var(--ok);color:#fff}
+.az-tr button.act{border-color:var(--accent);background:var(--accent);color:#fff;transform:scale(1.18);box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 40%,transparent)}
+.az-tr button:focus-visible,.az-ct button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.az-bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:10px}
+.az-bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--ok));transition:width .5s}
+.az-cd{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--card);min-height:190px}
+.az-l{flex:none;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:var(--c);color:#fff;font:800 28px system-ui,sans-serif}
+.az-b{flex:1;min-width:200px;animation:azf .4s both}
+@keyframes azf{from{opacity:0;transform:translateY(6px)}}
+.az-b h4{margin:0;color:var(--ink);font-size:18px}
+.az-chip{display:inline-block;margin:3px 0 4px;padding:1px 10px;border-radius:99px;background:var(--c);color:#fff;font-weight:700;font-size:12px}
+.az-b p{margin:2px 0 6px}
+.az-b pre{margin:6px 0;padding:10px 12px;border-radius:8px;background:#1e1e1e;color:#d4d4d4;font:12.5px/1.55 Consolas,Menlo,monospace;overflow:auto;white-space:pre}
+.az-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.az-row a{font-weight:700;color:var(--accent)}
+.az-cp{padding:4px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:600 12px system-ui,sans-serif;cursor:pointer}
+.az-ct{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.az-ct button{padding:6px 16px;border-radius:99px;border:2px solid var(--accent);background:var(--card);color:var(--ink);font:700 14px system-ui,sans-serif;cursor:pointer}
+.azloop rect{fill:var(--card);stroke:var(--s);stroke-width:2.5;transition:fill .3s}
+.azloop text{font-size:12px;font-weight:700;fill:var(--ink);transition:fill .3s}
+.azloop .ln.act rect{fill:var(--s)}
+.azloop .ln.act text{fill:#fff}
+.rm-go{display:inline-block;margin:12px auto 0;padding:7px 16px;border-radius:99px;background:#d6335b;color:#fff;font-weight:700;text-decoration:none;font-size:14px}
+.rm-go:hover{filter:brightness(1.1)}
+.rm-gw{text-align:center}
+@media (prefers-reduced-motion:reduce){.az-ar{animation:none}.az-b{animation:none}.az-p,.az-p li,.az-tr button,.az-bar i,.azloop rect,.azloop text{transition:none}}
+
+.ov{display:flex;align-items:stretch;gap:8px}
+.ov-c{flex:1;min-width:0;padding:12px;border-radius:14px;border:2px solid var(--line);border-top:6px solid var(--c);background:var(--card);text-align:center}
+.ov-i{display:block;width:100%;max-width:170px;height:auto;margin:0 auto}
+.ov-c b{display:block;margin-top:4px;color:var(--ink);font-size:16px}
+.ov-c small{display:block;font-size:12px}
+.ov-c ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px;text-align:left}
+.ov-c li{margin:0;padding:3px 8px;border-radius:8px;font-size:12.5px;background:color-mix(in srgb,var(--c) 11%,var(--card));color:var(--ink)}
+.ov-a{flex:none;width:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:700;color:var(--ink);text-align:center}
+.ov-a i{position:relative;display:block;width:64px;height:4px;border-radius:99px;background:var(--line)}
+.ov-a i:after{content:"";position:absolute;top:-4px;left:0;width:12px;height:12px;border-radius:50%;background:var(--accent);animation:ovd 1.6s ease-in-out infinite}
+@keyframes ovd{0%{transform:translateX(0);opacity:0}15%,85%{opacity:1}100%{transform:translateX(52px);opacity:0}}
+@keyframes ovv{0%{transform:translateY(0);opacity:0}15%,85%{opacity:1}100%{transform:translateY(24px);opacity:0}}
+@media (max-width:720px){.ov{flex-direction:column}.ov-a{width:auto;flex-direction:row;padding:2px 0}.ov-a i{width:4px;height:36px}.ov-a i:after{top:0;left:-4px;animation:ovv 1.6s ease-in-out infinite}}
+.cl{transform-box:fill-box;transform-origin:left;animation:cl 2.4s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes cl{0%,100%{transform:scaleX(.35)}50%{transform:scaleX(1)}}
+.fi{opacity:0;animation:fiA .5s forwards;animation-delay:var(--d,0s)}
+@keyframes fiA{to{opacity:1}}
+.pls{animation:plsA 1.6s ease-in-out infinite}
+@keyframes plsA{50%{opacity:.4}}
+.sw{transform-box:fill-box;transform-origin:center;animation:swA 2s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes swA{50%{transform:scale(1.3)}}
+.pal{animation:palA 6s linear infinite}
+@keyframes palA{0%,100%{fill:#007acc}25%{fill:#6e40c9}50%{fill:#d6335b}75%{fill:#ee8a1f}}
+.mvd{animation:mvdA 1.6s ease-in-out infinite}
+@keyframes mvdA{0%{transform:translateX(0);opacity:0}15%,85%{opacity:1}100%{transform:translateX(var(--dx,60px));opacity:0}}
+.prg{transform-box:fill-box;transform-origin:left;animation:prgA 2.6s ease-in-out infinite}
+@keyframes prgA{0%{transform:scaleX(0)}80%,100%{transform:scaleX(1)}}
+.cb{animation:cbA 1s steps(2) infinite}
+@keyframes cbA{50%{opacity:0}}
+.hl{animation:hlA 1.4s ease-in-out infinite}
+@keyframes hlA{50%{stroke-width:3.5}}
+.az-cd{display:grid;grid-template-columns:minmax(210px,270px) minmax(0,1fr);gap:16px;align-items:center;min-height:0}
+.az-ill{padding:8px;border-radius:12px;background:color-mix(in srgb,var(--c) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--c) 30%,var(--line))}
+.az-ill svg{display:block;width:100%;height:auto}
+.az-b{flex:none;min-width:0}
+.az-h{display:flex;gap:10px;align-items:center;margin-bottom:4px}
+.az-l{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--c);color:#fff;font:800 22px system-ui,sans-serif}
+.az-tip{margin:6px 0;padding:6px 10px;border-radius:8px;background:color-mix(in srgb,#ee8a1f 16%,var(--card));color:var(--ink);font-size:13px}
+@media (max-width:640px){.az-cd{grid-template-columns:1fr}}
+.mks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:8px 0}
+.mk{border-radius:12px;overflow:hidden;border:2px solid var(--c);background:var(--card);box-shadow:0 6px 16px rgba(20,35,92,.1)}
+.mk-bar{display:flex;align-items:center;gap:5px;padding:6px 8px;background:var(--c)}
+.mk-bar i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7)}
+.mk-bar span{flex:1;margin-left:4px;padding:1px 8px;border-radius:99px;background:rgba(255,255,255,.9);color:#14235c;font:11px Consolas,Menlo,monospace;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.mk-body{padding:10px;min-height:118px}
+.mk-hero{display:flex;gap:8px;align-items:center;padding:10px;border-radius:8px;background:var(--c)}
+.mk-hero u{width:26px;height:26px;border-radius:50%;background:#fff}
+.mk-hero b{flex:1;height:8px;border-radius:4px;background:#fff;opacity:.85}
+.mk-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.mk-row b{height:34px;border-radius:6px;background:var(--line)}
+.mk-hd{display:flex;align-items:center;gap:8px;color:var(--ink);font-size:13px}
+.mk-hd em{font-style:normal;font-size:11px;padding:0 8px;border-radius:99px;border:1px solid var(--line)}
+.mk-hd em.live{border-color:var(--ok);color:var(--ok);font-weight:700}
+.mk-br{margin:6px 0;font:12px Consolas,Menlo,monospace;color:var(--ink)}
+.mk-f{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.mk-f li{display:flex;justify-content:space-between;gap:8px;margin:0;padding:4px 8px;font-size:12px;color:var(--ink);border-bottom:1px solid var(--line)}
+.mk-f li:last-child{border-bottom:0}
+.mk-f li span{opacity:.6;font-size:11px}
+.mk-u{margin-top:8px;color:var(--accent);font:12px Consolas,Menlo,monospace;word-break:break-all}
+.mk-cm{margin-top:6px;font:11px Consolas,Menlo,monospace;color:var(--txt)}
+.mk-cap{padding:8px 10px;background:color-mix(in srgb,var(--c) 12%,var(--card));color:var(--ink);font-size:13px;font-weight:600}
+.pit{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin:8px 0}
+.pit-c{display:grid;gap:6px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);border-left:5px solid #d6335b;background:var(--card)}
+.pit-e{display:block;padding:4px 8px;border-radius:6px;background:color-mix(in srgb,#d6335b 12%,var(--card));color:#d6335b;font:600 12px Consolas,Menlo,monospace;overflow-wrap:anywhere}
+.pit-w{font-size:13px;color:var(--ink)}
+.pit-s{font-size:13px;color:var(--ink);padding:4px 8px;border-radius:6px;background:color-mix(in srgb,var(--ok) 13%,var(--card))}
+@media (prefers-reduced-motion:reduce){.ov-a i:after,.cl,.pls,.sw,.pal,.mvd,.prg,.cb,.hl{animation:none}.fi{opacity:1;animation:none}.prg{transform:none}}
+nav#nav{display:block;overflow:visible;padding:0;white-space:normal;gap:0}
+nav#nav:before{display:none}
+.rm{scroll-margin-top:70px}
+.nv-bar{display:flex;align-items:center;gap:8px;min-height:54px;padding:6px 12px}
+.nv-menu{flex:none;display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:10px;border:2px solid var(--accent);background:var(--accent);color:#fff;font:700 14px system-ui,sans-serif;cursor:pointer}
+.nv-menu[aria-expanded="true"]{background:var(--card);color:var(--accent)}
+.nv-ic{font-size:16px;line-height:1}
+.nv-ph{flex:none;display:flex;gap:6px}
+nav#nav .nv-ph a{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--c);border-radius:99px;padding:3px 10px;font-size:13px;font-weight:700;background:var(--card);color:var(--ink);transform:none;white-space:nowrap}
+nav#nav .nv-ph a:hover{transform:none;background:color-mix(in srgb,var(--c) 14%,var(--card))}
+nav#nav .nv-ph a.on{background:var(--c);color:#fff;border-color:var(--c)}
+.nv-cur{flex:1;min-width:0}
+.nv-cur b{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:var(--ink);font-size:14px}
+.nv-pn{flex:none;display:flex;gap:4px}
+.nv-pn button{width:34px;height:34px;border-radius:50%;border:2px solid var(--accent);background:var(--card);color:var(--ink);font:800 18px/1 system-ui,sans-serif;cursor:pointer}
+.nv-pn button:disabled{opacity:.35;cursor:default}
+.nv-pn button:focus-visible,.nv-menu:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.nv-pr{flex:none}
+nav#nav #prog{position:static;top:auto;margin:0;padding:0 0 0 4px;border:0;box-shadow:none;background:none;gap:8px;font-size:13px;white-space:nowrap}
+nav#nav #prog .pb{flex:none;width:90px;height:8px}
+.nv-panel{position:absolute;left:0;right:0;top:100%;max-height:calc(100vh - 64px);overflow:auto;padding:12px;background:var(--card);border-bottom:2px solid var(--line);box-shadow:0 18px 30px rgba(20,35,92,.25)}
+.nv-panel[hidden]{display:none}
+.nv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;max-width:1100px;margin:0 auto}
+.nv-g{padding:8px 10px;border-radius:12px;border:1px solid var(--line);border-top:4px solid var(--c);background:var(--card)}
+.nv-g h4{margin:2px 0 6px;color:var(--ink);font-size:13px}
+nav#nav .nv-panel a{display:block;border:0;border-left:4px solid var(--c);border-radius:8px;padding:7px 10px;margin:4px 0;font-size:14px;font-weight:600;background:var(--bg);color:var(--ink);white-space:normal;transform:none}
+nav#nav .nv-panel a:hover{transform:none;background:color-mix(in srgb,var(--c) 14%,var(--bg))}
+nav#nav .nv-panel a.on{background:color-mix(in srgb,var(--c) 22%,var(--card));color:var(--ink);box-shadow:inset 0 0 0 2px var(--c)}
+@media (max-width:1100px){.nv-ph{display:none}.nv-cur{display:block}}
+@media (max-width:640px){.nv-ph{display:none}.nv-cur{display:block}.nv-tx{display:none}.nv-menu{padding:7px 11px}.nv-bar{padding:6px 8px;gap:6px}nav#nav #prog .pb{display:none}}
+.step h2{flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -171,6 +349,91 @@ nav#nav a:hover{transform:translateY(-2px)}nav#nav a.on{background:#ffd93b;color
 <nav id="nav" aria-label="Étapes"></nav>
 <main>
 
+<section class="rm" id="roadmap" aria-label="Plan du parcours">
+<div class="rm-top"><b>Le parcours en 3 phases</b><span>Du code sur votre ordinateur à un site visible par tous</span></div>
+<div class="rm-row">
+<a class="rm-c" href="#p1" data-p="p1" style="--c:#007acc"><span class="rm-n">1</span><span class="rm-i">💻</span><b>VS Code</b><small>Construire le site</small><span class="rm-s"><i>1 Projet</i><i>2 Outils</i><i>3 HTML</i><i>4 Bootstrap</i><i>5 Page</i><i>6 Style</i></span></a>
+<i class="rm-a" aria-hidden="true"></i>
+<a class="rm-c" href="#p2" data-p="p2" style="--c:#6e40c9"><span class="rm-n">2</span><span class="rm-i">🐙</span><b>Git + GitHub</b><small>Sauvegarder en ligne</small><span class="rm-s"><i>7 Git</i><i>8 GitHub</i></span></a>
+<i class="rm-a" aria-hidden="true"></i>
+<a class="rm-c" href="#p3" data-p="p3" style="--c:#0b7a6b"><span class="rm-n">3</span><span class="rm-i">🚀</span><b>Render</b><small>Publier le site</small><span class="rm-s"><i>9 Render</i><i>10 Pages</i><i>11 Rendu</i></span></a>
+</div>
+<div class="rm-flow" aria-hidden="true"><span>📁 Dossier</span><em>›</em><span>💻 VS Code</span><em>›</em><span>🔀 git push</span><em>›</em><span>🐙 GitHub</span><em>›</em><span>🚀 Render</span><em>›</em><span>🌍 URL publique</span></div>
+<div class="rm-gw"><a class="rm-go" href="#cycle">▶ Voir le cycle complet de A à Z</a></div>
+</section>
+
+<section class="phase" id="pa" style="--c:#d6335b"><div class="ph-ic">🔁</div><div class="ph-tx"><small>Résumé</small><h2>Le cycle complet</h2><p>De A à Z sur une seule page</p></div><div class="ph-st">10 étapes, A à J</div></section>
+<article class="step" id="cycle">
+<h2><span class="n">🔁</span>Cycle complet de A à Z</h2>
+<p class="goal">Du dossier vide au site en ligne, sans rien oublier.</p>
+
+<h3 class="h">1. Les 3 lieux en un coup d'œil</h3>
+<div class="ov">
+<div class="ov-c" style="--c:#007acc"><svg class="ov-i" viewBox="0 0 150 100" role="img" aria-label="Ordinateur avec VS Code"><rect x="22" y="6" width="106" height="68" rx="6" fill="#1e1e1e" stroke="var(--c)" stroke-width="3"/><rect x="22" y="6" width="106" height="11" rx="5" fill="#3c3c3c"/><circle cx="31" cy="11.5" r="2" fill="#ff5f56"/><circle cx="38" cy="11.5" r="2" fill="#ffbd2e"/><circle cx="45" cy="11.5" r="2" fill="#27c93f"/><rect x="26" y="21" width="16" height="48" fill="#252526"/><rect class="cl" style="--d:0s" x="48" y="24" width="40" height="4" rx="2" fill="#569cd6"/><rect class="cl" style="--d:.4s" x="52" y="33" width="62" height="4" rx="2" fill="#9cdcfe"/><rect class="cl" style="--d:.8s" x="52" y="42" width="48" height="4" rx="2" fill="#ce9178"/><rect class="cl" style="--d:1.2s" x="52" y="51" width="66" height="4" rx="2" fill="#9cdcfe"/><rect class="cl" style="--d:1.6s" x="48" y="60" width="30" height="4" rx="2" fill="#6a9955"/><path d="M8 78h134l-9 13H17z" fill="var(--c)" opacity=".85"/></svg><b>Mon ordinateur</b><small>VS Code + Git</small><ul><li>📁 le dossier portfolio</li><li>✏️ vous écrivez le code</li><li>💾 Git garde l'historique</li></ul></div>
+<div class="ov-a"><span>git push</span><i></i></div>
+<div class="ov-c" style="--c:#6e40c9"><svg class="ov-i" viewBox="0 0 150 100" role="img" aria-label="Page d'un dépôt GitHub"><rect x="14" y="6" width="122" height="88" rx="8" fill="var(--card)" stroke="var(--c)" stroke-width="3"/><rect x="14" y="6" width="122" height="20" rx="8" fill="var(--c)"/><text x="24" y="20" font-size="10" font-weight="700" fill="#fff">portfolio</text><rect x="98" y="10" width="32" height="12" rx="6" fill="#fff" opacity=".28"/><text x="114" y="19" font-size="8" font-weight="700" fill="#fff" text-anchor="middle">main</text><g font-size="8" fill="var(--ink)"><rect x="22" y="34" width="9" height="7" rx="2" fill="#ee8a1f"/><text x="36" y="40">css</text><rect x="22" y="49" width="9" height="7" rx="2" fill="#ee8a1f"/><text x="36" y="55">img</text><rect x="23" y="64" width="7" height="9" rx="1.5" fill="#6e40c9"/><text x="36" y="71">index.html</text></g><g font-size="7.5" fill="var(--ink)" opacity=".65"><text x="78" y="40">Initial commit</text><text x="78" y="55">Initial commit</text><text x="78" y="71">Initial commit</text></g><text class="pls" x="122" y="86" font-size="12" fill="var(--ok)" font-weight="700">✓</text></svg><b>GitHub</b><small>Le dépôt en ligne</small><ul><li>📦 une copie de votre code</li><li>🕘 tout l'historique</li><li>🔗 relié à Render</li></ul></div>
+<div class="ov-a"><span>déploiement auto</span><i></i></div>
+<div class="ov-c" style="--c:#0b7a6b"><svg class="ov-i" viewBox="0 0 150 100" role="img" aria-label="Serveur Render et site en ligne"><rect x="10" y="10" width="62" height="24" rx="5" fill="var(--card)" stroke="var(--c)" stroke-width="3"/><circle class="pls" cx="21" cy="22" r="4" fill="var(--ok)"/><rect x="30" y="19" width="34" height="6" rx="3" fill="var(--c)" opacity=".6"/><rect x="10" y="40" width="62" height="24" rx="5" fill="var(--card)" stroke="var(--c)" stroke-width="3"/><circle class="pls" style="animation-delay:.5s" cx="21" cy="52" r="4" fill="var(--ok)"/><rect x="30" y="49" width="26" height="6" rx="3" fill="var(--c)" opacity=".6"/><path class="flw" d="M72 40h14" stroke="var(--c)" stroke-width="2.5" fill="none"/><circle cx="112" cy="40" r="24" fill="var(--card)" stroke="var(--c)" stroke-width="3"/><path d="M88 40h48M112 16c10 8 10 40 0 48M112 16c-10 8-10 40 0 48" fill="none" stroke="var(--c)" stroke-width="2"/><rect x="26" y="76" width="98" height="16" rx="8" fill="var(--c)"/><text x="75" y="87.5" font-size="8" font-weight="700" fill="#fff" text-anchor="middle">….onrender.com</text></svg><b>Render</b><small>Le site publié</small><ul><li>⚙️ lit le dépôt GitHub</li><li>🚀 publie en ~30 s</li><li>🌍 donne l'URL publique</li></ul></div>
+</div>
+
+<h3 class="h">2. Le film du parcours : A → J</h3>
+<div class="az" id="az"></div>
+
+<h3 class="h">3. Ce que vous devez voir à chaque phase</h3>
+<div class="mks">
+<div class="mk" style="--c:#007acc"><div class="mk-bar"><i></i><i></i><i></i><span>127.0.0.1:5500/index.html</span></div><div class="mk-body"><div class="mk-hero"><u></u><b></b></div><div class="mk-row"><b></b><b></b><b></b></div></div><div class="mk-cap"><span>✅</span> Phase 1 : votre page s'affiche avec Live Server</div></div>
+<div class="mk" style="--c:#6e40c9"><div class="mk-bar"><i></i><i></i><i></i><span>github.com/VOTRE-PSEUDO/portfolio</span></div><div class="mk-body"><div class="mk-hd"><b>VOTRE-PSEUDO / portfolio</b><em>Public</em></div><div class="mk-br">⎇ main</div><ul class="mk-f"><li>📁 css<span>Initial commit</span></li><li>📁 img<span>Initial commit</span></li><li>📄 index.html<span>Initial commit</span></li></ul></div><div class="mk-cap"><span>✅</span> Phase 2 : vos fichiers apparaissent sur GitHub</div></div>
+<div class="mk" style="--c:#0b7a6b"><div class="mk-bar"><i></i><i></i><i></i><span>dashboard.render.com</span></div><div class="mk-body"><div class="mk-hd"><b>portfolio</b><em class="live">● Live</em></div><div class="mk-u">https://portfolio-xxxx.onrender.com</div><div class="mk-cm">⎇ main · a1b2c3d Initial commit</div></div><div class="mk-cap"><span>✅</span> Phase 3 : le service est « Live » et l'URL s'ouvre</div></div>
+</div>
+
+<h3 class="h">4. Toutes les commandes, dans l'ordre</h3>
+<div class="code" data-l="bash"><textarea class="src"># 1. Une seule fois : configurer Git
+git config --global user.name "Prénom Nom"
+git config --global user.email "vous@exemple.com"
+
+# 2. Dans le dossier portfolio (terminal de VS Code)
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+
+# 3. Après avoir créé le dépôt vide sur github.com
+git remote add origin https://github.com/VOTRE-PSEUDO/portfolio.git
+git push -u origin main
+
+# 4. Sur Render : New + > Static Site > dépôt portfolio
+#    Branch main, Build Command vide, Publish Directory .
+
+# 5. Chaque mise à jour : la boucle
+git add .
+git commit -m "Ajout du projet 4"
+git push</textarea></div>
+
+<h3 class="h">5. La boucle de chaque jour</h3>
+<figure class="fig azloop"><svg viewBox="0 0 340 222" role="img" aria-label="Boucle de mise à jour : modifier, add, commit, push, Render déploie, recharger la page">
+<ellipse class="flw" cx="170" cy="111" rx="120" ry="78" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+<g class="ln" style="--s:#007acc" transform="translate(170,33)"><rect x="-52" y="-14" width="104" height="28" rx="14"/><text y="5" text-anchor="middle">✏️ Modifier</text></g>
+<g class="ln" style="--s:#007acc" transform="translate(274,72)"><rect x="-52" y="-14" width="104" height="28" rx="14"/><text y="5" text-anchor="middle">➕ git add</text></g>
+<g class="ln" style="--s:#007acc" transform="translate(274,150)"><rect x="-52" y="-14" width="104" height="28" rx="14"/><text y="5" text-anchor="middle">💾 git commit</text></g>
+<g class="ln" style="--s:#6e40c9" transform="translate(170,189)"><rect x="-52" y="-14" width="104" height="28" rx="14"/><text y="5" text-anchor="middle">☁️ git push</text></g>
+<g class="ln" style="--s:#0b7a6b" transform="translate(66,150)"><rect x="-52" y="-14" width="104" height="28" rx="14"/><text y="5" text-anchor="middle">🚀 Déploie</text></g>
+<g class="ln" style="--s:#0b7a6b" transform="translate(66,72)"><rect x="-52" y="-14" width="104" height="28" rx="14"/><text y="5" text-anchor="middle">🌍 Recharger</text></g>
+<text x="170" y="108" text-anchor="middle" style="font-size:24px">↻</text><text x="170" y="128" text-anchor="middle" style="font-size:11px;font-weight:600">≈ 1 minute</text>
+</svg><figcaption>Bleu : sur votre ordinateur · violet : GitHub · vert : Render (30 s). Rechargez avec Ctrl + F5.</figcaption></figure>
+
+<h3 class="h">6. Pièges fréquents et solutions</h3>
+<div class="pit">
+<div class="pit-c"><code class="pit-e">git: 'add.' is not a git command</code><div class="pit-w">Il manque l'espace avant le point.</div><div class="pit-s">✓ <code>git add .</code></div></div>
+<div class="pit-c"><code class="pit-e">error: src refspec main does not match any</code><div class="pit-w">Aucun commit n'existe encore sur la branche.</div><div class="pit-s">✓ <code>git add .</code> puis <code>git commit -m "Initial commit"</code></div></div>
+<div class="pit-c"><code class="pit-e">Using 'master' as the name for the initial branch</code><div class="pit-w">Git crée « master » par défaut.</div><div class="pit-s">✓ <code>git branch -M main</code></div></div>
+<div class="pit-c"><code class="pit-e">Author identity unknown</code><div class="pit-w">Git ne connaît pas encore votre nom.</div><div class="pit-s">✓ <code>git config --global user.name "Prénom Nom"</code> et <code>user.email</code></div></div>
+<div class="pit-c"><code class="pit-e">Permission denied to … 403</code><div class="pit-w">Windows a mémorisé un autre compte GitHub.</div><div class="pit-s">✓ <code>cmdkey /delete:git:https://github.com</code> puis relancer le push avec le bon compte</div></div>
+<div class="pit-c"><code class="pit-e">Render : « Not Found »</code><div class="pit-w">Mauvaise URL (suffixe ajouté) ou pas de fichier index.html.</div><div class="pit-s">✓ Copiez l'URL exacte du tableau de bord. Vérifiez <code>index.html</code> à la racine (pas index.php).</div></div>
+</div>
+<div class="warn">Une fois le site en ligne, vous ne répétez que la boucle : modifier, add, commit, push.</div>
+</article>
+
+<section class="phase" id="p0" style="--c:#475569"><div class="ph-ic">🧭</div><div class="ph-tx"><small>Avant de commencer</small><h2>Pourquoi un portfolio ?</h2><p>CV, portfolio, LinkedIn : le rôle de chacun</p></div><div class="ph-st">1 lecture</div></section>
 <article class="step" id="compare">
 <h2><span class="n">⚖️</span>CV, portfolio, LinkedIn : la différence</h2>
 <p class="goal">Trois outils, trois rôles. Ils se complètent.</p>
@@ -197,75 +460,7 @@ nav#nav a:hover{transform:translateY(-2px)}nav#nav a.on{background:#ffd93b;color
 <div class="challenge"><b>🎯 À vous de jouer</b>Ajoutez l'URL de votre portfolio (Render) dans l'en-tête de votre CV et dans la section « Coordonnées » de LinkedIn.</div>
 </article>
 
-<article class="step" id="cvia">
-<h2><span class="n">🤖</span>CV lu par une IA (ATS)</h2>
-<p class="goal">Avant le recruteur, un logiciel lit votre CV.</p>
-<div class="cmp">
-<div class="cmp-c" style="--c:#ee8a1f"><span class="cmp-i">👀</span><h3>CV classique</h3><p class="cmp-r">Pour un humain</p><ul><li>Design, couleurs, photo</li><li>Mise en page libre</li></ul></div>
-<div class="cmp-c" style="--c:#0e7490"><span class="cmp-i">🤖</span><h3>CV lu par IA</h3><p class="cmp-r">Pour un logiciel (ATS)</p><ul><li>Texte simple, 1 colonne</li><li>Titres et mots-clés clairs</li></ul></div>
-</div>
-
-<h3 class="h">1. Humain contre IA : testez</h3>
-<div class="ats-demo" id="atsDemo">
-<div class="ats-tabs"><button type="button" class="on" data-m="h" aria-pressed="true">👀 Humain</button><button type="button" data-m="i" aria-pressed="false">🤖 IA</button></div>
-<div class="ats-stage">
-<div class="cvm">
-<div class="cvm-head"><span class="vo avatar">👤</span><div><b>Sara Ben Ali</b><small>Développeuse web</small></div></div>
-<div class="cvm-cols">
-<aside><h4>Compétences</h4>
-<div class="sk">Laravel<i class="vo"><u style="--w:85%"></u></i></div>
-<div class="sk">PHP<i class="vo"><u style="--w:80%"></u></i></div>
-<div class="sk">Git<i class="vo"><u style="--w:65%"></u></i></div>
-<span class="vo badge-img">★ Certifié Laravel</span></aside>
-<div><h4>Expérience</h4><div>2024-2025 · Stage, Agence Web</div><div>Projet portfolio en Laravel</div><h4>Formation</h4><div>Licence informatique, 2025</div></div>
-</div></div>
-<div class="ext"><span class="ext-t">Texte extrait par l'IA</span>
-<code>Sara Ben Ali<br>Développeuse web<br>Compétences<br>Laravel · PHP · Git<br><em>[photo ignorée]</em><br><em>[barres de niveau ignorées]</em><br><em>[image « Certifié » ignorée]</em><br>Expérience<br>2024-2025 · Stage, Agence Web<br>Formation<br>Licence informatique, 2025</code></div>
-</div>
-<p class="ats-note">En mode 🤖, les éléments en pointillés rouges sont perdus.</p>
-</div>
-
-<h3 class="h">2. Le jeu des mots-clés</h3>
-<div class="kw" id="kw">
-<p class="kw-l"><b>📋 L'offre demande :</b> Développeur Laravel junior</p>
-<div class="kw-row"><span class="kwr" data-k="Laravel">Laravel</span><span class="kwr" data-k="PHP">PHP</span><span class="kwr" data-k="MySQL">MySQL</span><span class="kwr" data-k="Git">Git</span><span class="kwr" data-k="API REST">API REST</span><span class="kwr" data-k="Bootstrap">Bootstrap</span></div>
-<p class="kw-l"><b>📄 Mon CV contient :</b> cliquez pour tester</p>
-<div class="kw-row"><button type="button" class="kwc" data-k="Laravel">Laravel</button><button type="button" class="kwc" data-k="PHP">PHP</button><button type="button" class="kwc" data-k="MySQL">MySQL</button><button type="button" class="kwc" data-k="Git">Git</button><button type="button" class="kwc" data-k="API REST">API REST</button><button type="button" class="kwc" data-k="Bootstrap">Bootstrap</button><button type="button" class="kwc" data-k="Photoshop">Photoshop</button><button type="button" class="kwc" data-k="Excel">Excel</button></div>
-<div class="gauge"><i></i></div>
-<p class="kw-s"><b id="kwPct">0 %</b> <span id="kwMsg">Cliquez sur vos compétences.</span></p>
-<p class="ats-note">Exemple pédagogique : chaque logiciel calcule son score à sa façon. N'écrivez que ce que vous maîtrisez.</p>
-</div>
-
-<h3 class="h">3. Titres que le logiciel reconnaît</h3>
-<div class="pairs">
-<div class="pr" style="--i:0"><b class="g">✓ Expérience</b><b class="r">✗ Mon aventure pro</b></div>
-<div class="pr" style="--i:1"><b class="g">✓ Formation</b><b class="r">✗ Mon parcours</b></div>
-<div class="pr" style="--i:2"><b class="g">✓ Compétences</b><b class="r">✗ Mes super-pouvoirs</b></div>
-</div>
-
-<h3 class="h">4. Format du fichier</h3>
-<div class="pairs">
-<div class="pr" style="--i:0"><b class="g">✓ PDF texte</b><b class="r">✗ Scan ou image</b></div>
-<div class="pr" style="--i:1"><b class="g">✓ 1 colonne</b><b class="r">✗ Tableaux</b></div>
-<div class="pr" style="--i:2"><b class="g">✓ Arial, Calibri</b><b class="r">✗ Police fantaisie</b></div>
-<div class="pr" style="--i:3"><b class="g">✓ Infos dans la page</b><b class="r">✗ En-tête, pied de page</b></div>
-<div class="pr" style="--i:4"><b class="g">✓ Mots écrits</b><b class="r">✗ Icônes seules</b></div>
-<div class="pr" style="--i:5"><b class="g">✓ prenom-nom-cv.pdf</b><b class="r">✗ cv_final_v3(2).pdf</b></div>
-</div>
-
-<h3 class="h">5. Test en 10 secondes</h3>
-<div class="t3">
-<div style="--i:0"><span>1</span><kbd>Ctrl</kbd> + <kbd>A</kbd><small>tout sélectionner</small></div>
-<div style="--i:1"><span>2</span><kbd>Ctrl</kbd> + <kbd>C</kbd><small>copier</small></div>
-<div style="--i:2"><span>3</span>📝 Bloc-notes<small>coller : texte lisible ✓</small></div>
-</div>
-<div class="warn">Gardez deux versions : un CV design pour l'envoi direct, un CV simple pour les plateformes de recrutement.</div>
-<div class="challenge"><b>🎯 À vous de jouer</b>Faites le test sur votre CV. Si le texte est illisible ou dans le désordre, simplifiez la mise en page et recommencez.</div>
-</article>
-
-
-
-
+<section class="phase" id="p1" style="--c:#007acc"><div class="ph-ic">💻</div><div class="ph-tx"><small>Phase 1 sur 3</small><h2>VS Code : construire le site</h2><p>Tout se passe sur votre ordinateur</p></div><div class="ph-st">Étapes 1 à 6</div></section>
 <article class="step" id="s1">
 <h2><span class="n">1</span>Comprendre le projet</h2>
 <p class="goal">Savoir ce que l'on va construire.</p>
@@ -534,6 +729,9 @@ section,header{scroll-margin-top:70px}
 <div class="challenge"><b>🎯 À vous de jouer</b>Changez <code>--couleur-principale</code> en violet (<code>#6a3fb5</code>), rechargez, observez. Puis testez <code>#d6335b</code> (rose) pour voir l'effet du dégradé.</div>
 </article>
 
+<div class="ckp" style="--c:#007acc"><span>✅</span><div><b>Checkpoint 1</b> Le site s'affiche en local avec Live Server.</div><a href="#p2">Phase 2 ›</a></div>
+
+<section class="phase" id="p2" style="--c:#6e40c9"><div class="ph-ic">🐙</div><div class="ph-tx"><small>Phase 2 sur 3</small><h2>Git + GitHub : sauvegarder en ligne</h2><p>Historique local, puis dépôt public</p></div><div class="ph-st">Étapes 7 à 8</div></section>
 <article class="step" id="s7">
 <h2><span class="n">7</span>Git : versionner</h2>
 <p class="goal">Enregistrer l'historique du projet.</p>
@@ -624,6 +822,9 @@ git pull                                                   # met à jour</textar
 <div class="challenge"><b>🎯 À vous de jouer</b>Après le <code>git push</code>, ouvrez la page GitHub de votre dépôt et vérifiez que vous voyez bien tous vos fichiers : <code>index.html</code>, <code>css/style.css</code>, <code>img/</code>, <code>README.md</code>.</div>
 </article>
 
+<div class="ckp" style="--c:#6e40c9"><span>✅</span><div><b>Checkpoint 2</b> Vos fichiers apparaissent sur github.com.</div><a href="#p3">Phase 3 ›</a></div>
+
+<section class="phase" id="p3" style="--c:#0b7a6b"><div class="ph-ic">🚀</div><div class="ph-tx"><small>Phase 3 sur 3</small><h2>Render : publier le site</h2><p>Chaque git push met le site à jour</p></div><div class="ph-st">Étapes 9 à 11</div></section>
 <article class="step" id="s9">
 <h2><span class="n">9</span>Déployer sur Render</h2>
 <p class="goal">Mettre le portfolio en ligne automatiquement, à chaque push.</p>
@@ -771,6 +972,9 @@ git push</textarea></div>
 <div class="challenge"><b>🎯 À vous de jouer</b>Relisez votre checklist, ouvrez votre URL Render sur un téléphone, testez le menu burger et cliquez sur tous les liens. Tout doit fonctionner.</div>
 </article>
 
+<div class="ckp" style="--c:#0b7a6b"><span>✅</span><div><b>Checkpoint 3</b> Votre URL .onrender.com s'ouvre sur un téléphone.</div><a href="#pb">Bonus ›</a></div>
+
+<section class="phase" id="pb" style="--c:#b45309"><div class="ph-ic">🎁</div><div class="ph-tx"><small>Bonus</small><h2>Aller plus loin</h2><p>Modèles, CV lisible par une IA, glossaire</p></div><div class="ph-st">3 sections</div></section>
 <article class="step" id="templates">
 <h2><span class="n">🎨</span>Choisir un modèle de portfolio</h2>
 <p class="goal">Prévisualisez un modèle, copiez son code ou téléchargez son fichier HTML pour le personnaliser.</p>
@@ -782,6 +986,74 @@ git push</textarea></div>
 <section class="template-card"><h3>Portfolio rose</h3><p>Un style doux et coloré, avec une palette rose et des formes arrondies.</p><div class="template-actions"><a href="templates/portfolio-rose.html" target="_blank" rel="noopener">Aperçu</a><a class="secondary" href="templates/portfolio-rose.html" target="_blank" rel="noopener">Ouvrir le code</a><a href="templates/portfolio-rose.html" download="portfolio-rose.html">Télécharger</a></div></section>
 </div>
 <div class="warn">Après téléchargement, ouvrez le fichier dans VS Code et remplacez les textes, liens et coordonnées d'exemple par vos propres informations.</div>
+</article>
+
+<article class="step" id="cvia">
+<h2><span class="n">🤖</span>CV lu par une IA (ATS)</h2>
+<p class="goal">Avant le recruteur, un logiciel lit votre CV.</p>
+<div class="cmp">
+<div class="cmp-c" style="--c:#ee8a1f"><span class="cmp-i">👀</span><h3>CV classique</h3><p class="cmp-r">Pour un humain</p><ul><li>Design, couleurs, photo</li><li>Mise en page libre</li></ul></div>
+<div class="cmp-c" style="--c:#0e7490"><span class="cmp-i">🤖</span><h3>CV lu par IA</h3><p class="cmp-r">Pour un logiciel (ATS)</p><ul><li>Texte simple, 1 colonne</li><li>Titres et mots-clés clairs</li></ul></div>
+</div>
+
+<h3 class="h">1. Humain contre IA : testez</h3>
+<div class="ats-demo" id="atsDemo">
+<div class="ats-tabs"><button type="button" class="on" data-m="h" aria-pressed="true">👀 Humain</button><button type="button" data-m="i" aria-pressed="false">🤖 IA</button></div>
+<div class="ats-stage">
+<div class="cvm">
+<div class="cvm-head"><span class="vo avatar">👤</span><div><b>Sara Ben Ali</b><small>Développeuse web</small></div></div>
+<div class="cvm-cols">
+<aside><h4>Compétences</h4>
+<div class="sk">Laravel<i class="vo"><u style="--w:85%"></u></i></div>
+<div class="sk">PHP<i class="vo"><u style="--w:80%"></u></i></div>
+<div class="sk">Git<i class="vo"><u style="--w:65%"></u></i></div>
+<span class="vo badge-img">★ Certifié Laravel</span></aside>
+<div><h4>Expérience</h4><div>2024-2025 · Stage, Agence Web</div><div>Projet portfolio en Laravel</div><h4>Formation</h4><div>Licence informatique, 2025</div></div>
+</div></div>
+<div class="ext"><span class="ext-t">Texte extrait par l'IA</span>
+<code>Sara Ben Ali<br>Développeuse web<br>Compétences<br>Laravel · PHP · Git<br><em>[photo ignorée]</em><br><em>[barres de niveau ignorées]</em><br><em>[image « Certifié » ignorée]</em><br>Expérience<br>2024-2025 · Stage, Agence Web<br>Formation<br>Licence informatique, 2025</code></div>
+</div>
+<p class="ats-note">En mode 🤖, les éléments en pointillés rouges sont perdus.</p>
+</div>
+
+<h3 class="h">2. Le jeu des mots-clés</h3>
+<div class="kw" id="kw">
+<p class="kw-l"><b>📋 L'offre demande :</b> Développeur Laravel junior</p>
+<div class="kw-row"><span class="kwr" data-k="Laravel">Laravel</span><span class="kwr" data-k="PHP">PHP</span><span class="kwr" data-k="MySQL">MySQL</span><span class="kwr" data-k="Git">Git</span><span class="kwr" data-k="API REST">API REST</span><span class="kwr" data-k="Bootstrap">Bootstrap</span></div>
+<p class="kw-l"><b>📄 Mon CV contient :</b> cliquez pour tester</p>
+<div class="kw-row"><button type="button" class="kwc" data-k="Laravel">Laravel</button><button type="button" class="kwc" data-k="PHP">PHP</button><button type="button" class="kwc" data-k="MySQL">MySQL</button><button type="button" class="kwc" data-k="Git">Git</button><button type="button" class="kwc" data-k="API REST">API REST</button><button type="button" class="kwc" data-k="Bootstrap">Bootstrap</button><button type="button" class="kwc" data-k="Photoshop">Photoshop</button><button type="button" class="kwc" data-k="Excel">Excel</button></div>
+<div class="gauge"><i></i></div>
+<p class="kw-s"><b id="kwPct">0 %</b> <span id="kwMsg">Cliquez sur vos compétences.</span></p>
+<p class="ats-note">Exemple pédagogique : chaque logiciel calcule son score à sa façon. N'écrivez que ce que vous maîtrisez.</p>
+</div>
+
+<h3 class="h">3. Titres que le logiciel reconnaît</h3>
+<div class="pairs">
+<div class="pr" style="--i:0"><b class="g">✓ Expérience</b><b class="r">✗ Mon aventure pro</b></div>
+<div class="pr" style="--i:1"><b class="g">✓ Formation</b><b class="r">✗ Mon parcours</b></div>
+<div class="pr" style="--i:2"><b class="g">✓ Compétences</b><b class="r">✗ Mes super-pouvoirs</b></div>
+</div>
+
+<h3 class="h">4. Format du fichier</h3>
+<div class="pairs">
+<div class="pr" style="--i:0"><b class="g">✓ PDF texte</b><b class="r">✗ Scan ou image</b></div>
+<div class="pr" style="--i:1"><b class="g">✓ 1 colonne</b><b class="r">✗ Tableaux</b></div>
+<div class="pr" style="--i:2"><b class="g">✓ Arial, Calibri</b><b class="r">✗ Police fantaisie</b></div>
+<div class="pr" style="--i:3"><b class="g">✓ Infos dans la page</b><b class="r">✗ En-tête, pied de page</b></div>
+<div class="pr" style="--i:4"><b class="g">✓ Mots écrits</b><b class="r">✗ Icônes seules</b></div>
+<div class="pr" style="--i:5"><b class="g">✓ prenom-nom-cv.pdf</b><b class="r">✗ cv_final_v3(2).pdf</b></div>
+</div>
+
+<h3 class="h">5. Mon CV est-il lisible ? Test en 10 secondes</h3>
+<p class="ats-note" style="font-size:14px;opacity:1">Vous copiez le texte de votre PDF dans le Bloc-notes : si c'est lisible, le logiciel le lira aussi.</p>
+<div class="t3">
+<div style="--i:0"><span>1</span><kbd>Ctrl</kbd> + <kbd>A</kbd><small>tout sélectionner</small></div>
+<div style="--i:1"><span>2</span><kbd>Ctrl</kbd> + <kbd>C</kbd><small>copier</small></div>
+<div style="--i:2"><span>3</span>📝 Bloc-notes<small>coller : texte lisible ✓</small></div>
+</div>
+<div class="pairs"><div class="pr" style="--i:0"><b class="g">✓ Texte lisible, dans l'ordre</b><b class="r">✗ Texte vide ou mélangé</b></div></div>
+<div class="warn">Gardez deux versions : un CV design pour l'envoi direct, un CV simple pour les plateformes de recrutement.</div>
+<div class="challenge"><b>🎯 À vous de jouer</b>Faites le test sur votre CV. Si le texte est illisible ou dans le désordre, simplifiez la mise en page et recommencez.</div>
 </article>
 
 <article class="step" id="extra">
@@ -806,6 +1078,7 @@ git push</textarea></div>
 <details><summary>GitHub Pages affiche une erreur 404</summary><p>Dépôt public ? Branche <code>main</code> ? <code>index.html</code> à la racine ? Attendez quelques minutes.</p></details>
 <details><summary>Mon style Bootstrap ne s'applique pas</summary><p>Le lien CDN est mal copié, ou votre <code>style.css</code> est chargé avant Bootstrap.</p></details>
 </article>
+
 </main>
 <footer>Support de cours : portfolio HTML + Bootstrap + Git/GitHub/Render</footer>
 
@@ -832,11 +1105,14 @@ document.querySelectorAll('.step').forEach(function(s){var v=V[s.id];if(!v)retur
   var d=document.createElement('div');d.className='vis';d.innerHTML=h;s.querySelector('.goal').after(d)});
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});document.querySelectorAll('.step').forEach(function(s){io.observe(s)})}else document.querySelectorAll('.step').forEach(function(s){s.classList.add('in')});
 var nv=document.getElementById('nav'),st=[].slice.call(document.querySelectorAll('.step'));
-st.forEach(function(x,i){var h=x.querySelector('h2').textContent.slice(x.querySelector('.n').textContent.length).trim();var a=document.createElement('a');a.href='#'+x.id;a.textContent=(x.id==='extra'?'📚 ':(x.id==='templates'?'🎨 ':(x.id==='compare'?'⚖️ ':(x.id==='cvia'?'🤖 ':st.slice(0,i+1).filter(function(y){return /^s\d+$/.test(y.id)}).length+'. '))))+(h.length>24?h.slice(0,24)+'…':h);nv.appendChild(a)});
+st.forEach(function(x,i){var h=x.querySelector('h2').textContent.slice(x.querySelector('.n').textContent.length).trim();var a=document.createElement('a');a.href='#'+x.id;a.textContent=(x.id==='extra'?'📚 ':(x.id==='templates'?'🎨 ':(x.id==='cycle'?'🔁 ':(x.id==='compare'?'⚖️ ':(x.id==='cvia'?'🤖 ':st.slice(0,i+1).filter(function(y){return /^s\d+$/.test(y.id)}).length+'. ')))))+(h.length>24?h.slice(0,24)+'…':h);nv.appendChild(a)});
 if('IntersectionObserver' in window){var ls=[].slice.call(nv.querySelectorAll('a')),so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)ls.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-30% 0px -60% 0px'});st.forEach(function(x){so.observe(x)})}
 </script>
 <script src="assets/js/guide-animations.js"></script>
 <script src="assets/js/guide-clarity.js"></script>
 <script src="assets/js/guide-ats.js"></script>
+<script src="assets/js/guide-phases.js"></script>
+<script src="assets/js/guide-cycle.js"></script>
+<script src="assets/js/guide-nav.js"></script>
 </body>
 </html>
