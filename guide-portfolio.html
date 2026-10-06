@@ -337,6 +337,44 @@ nav#nav .nv-panel a.on{background:color-mix(in srgb,var(--c) 22%,var(--card));co
 @media (max-width:1100px){.nv-ph{display:none}.nv-cur{display:block}}
 @media (max-width:640px){.nv-ph{display:none}.nv-cur{display:block}.nv-tx{display:none}.nv-menu{padding:7px 11px}.nv-bar{padding:6px 8px;gap:6px}nav#nav #prog .pb{display:none}}
 .step h2{flex-wrap:wrap}
+
+.cv4{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:8px 0}
+.cv4-c{display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:14px;border:2px solid var(--line);border-top:6px solid var(--c);background:var(--card);transition:transform .25s,box-shadow .25s,border-color .25s}
+.cv4-c:hover{transform:translateY(-3px)}
+.cv4-c.pk{border-color:var(--c);box-shadow:0 12px 28px color-mix(in srgb,var(--c) 35%,transparent);transform:translateY(-6px)}
+.cv4-i{display:block;width:100%;max-width:150px;height:auto;margin:0 auto}
+.cv4-c h3{margin:0;color:var(--ink);font-size:18px;text-align:center}
+.cv4-r{align-self:center;padding:1px 12px;border-radius:99px;background:var(--c);color:#fff;font-weight:700;font-size:12px;text-align:center}
+.cv4-q{min-height:40px;display:grid;place-items:center;text-align:center;font-style:italic;font-size:14px;color:var(--ink)}
+.cv4-c ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.cv4-c li{margin:0;padding:4px 8px;border-radius:8px;background:color-mix(in srgb,var(--c) 10%,var(--card));font-size:13px;color:var(--ink)}
+.cv4-c li b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;opacity:.7}
+.cv4-s{text-align:center;font-size:14px;letter-spacing:2px;margin-top:auto}
+.pick{padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--bg)}
+.pk-q{display:flex;flex-wrap:wrap;gap:8px}
+.pk-q button{padding:7px 14px;border-radius:99px;border:2px solid var(--accent);background:var(--card);color:var(--ink);font:600 13.5px system-ui,sans-serif;cursor:pointer;transition:all .25s}
+.pk-q button:hover{transform:translateY(-2px)}
+.pk-q button.on{background:var(--accent);color:#fff}
+.pk-q button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pk-a{display:flex;gap:12px;align-items:center;margin-top:10px;padding:12px 14px;border-radius:12px;border-left:6px solid var(--c);background:var(--card);color:var(--ink);min-height:70px}
+.pk-a>div b{display:block;font-size:17px}
+.pk-i{flex:none;font-size:34px;line-height:1}
+.cv4-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin:10px 0}
+.cv4-sum span{padding:8px 12px;border-radius:10px;border-left:5px solid var(--c);background:color-mix(in srgb,var(--c) 9%,var(--card));color:var(--ink);font-weight:700;font-size:14px}
+.cv4-sum i{font-style:normal;color:var(--accent);margin:0 4px}
+.scn2{animation:scn2 2.4s ease-in-out infinite}
+@keyframes scn2{0%,100%{transform:translateY(0)}50%{transform:translateY(62px)}}
+.smap{padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--bg);text-align:center}
+.sm-root{display:inline-block;padding:6px 18px;border-radius:99px;background:var(--accent);color:#fff;font-weight:800}
+.sm-row{position:relative;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px;padding-top:14px;border-top:3px dashed var(--accent)}
+.sm-row>span{display:inline-block;padding:5px 12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-weight:600;font-size:13.5px;opacity:0;transform:translateY(10px);transition:opacity .45s,transform .45s;transition-delay:calc(var(--i)*90ms)}
+.step.in .sm-row>span{opacity:1;transform:none}
+.sm-p{border-color:var(--accent)!important}
+.sm-p em{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:6px;font-style:normal}
+.sm-p em i{font-style:normal;padding:1px 8px;border-radius:99px;background:color-mix(in srgb,var(--accent) 14%,var(--card));font-size:11.5px;font-weight:700}
+@media (prefers-reduced-motion:reduce){.scn2{animation:none}.sm-row>span{opacity:1;transform:none;transition:none}.cv4-c,.pk-q button{transition:none}}
+.tw{overflow-x:auto;margin:8px 0}
+.tw .cmpt{display:table;width:100%;min-width:560px;margin:0}
 </style>
 </head>
 <body>
@@ -435,29 +473,50 @@ git push</textarea></div>
 
 <section class="phase" id="p0" style="--c:#475569"><div class="ph-ic">🧭</div><div class="ph-tx"><small>Avant de commencer</small><h2>Pourquoi un portfolio ?</h2><p>CV, portfolio, LinkedIn : le rôle de chacun</p></div><div class="ph-st">1 lecture</div></section>
 <article class="step" id="compare">
-<h2><span class="n">⚖️</span>CV, portfolio, LinkedIn : la différence</h2>
-<p class="goal">Trois outils, trois rôles. Ils se complètent.</p>
-<div class="cmp">
-<div class="cmp-c" style="--c:#ee8a1f"><span class="cmp-i">📄</span><h3>CV</h3><p class="cmp-r">Résumer</p><ul><li>1 page, en PDF</li><li>Dates, diplômes, outils</li><li>Envoyé au recruteur</li></ul></div>
-<div class="cmp-c" style="--c:var(--accent)"><span class="cmp-i">🌐</span><h3>Portfolio</h3><p class="cmp-r">Prouver</p><ul><li>Site web en ligne</li><li>Projets, captures, code</li><li>Partagé par un lien</li></ul></div>
-<div class="cmp-c" style="--c:#0e7490"><span class="cmp-i">💼</span><h3>LinkedIn</h3><p class="cmp-r">Être trouvé</p><ul><li>Profil en ligne</li><li>Parcours + réseau</li><li>Les recruteurs vous contactent</li></ul></div>
+<h2><span class="n">⚖️</span>CV, ATS, LinkedIn, portfolio : la différence</h2>
+<p class="goal">4 outils, 4 questions auxquelles un recruteur cherche une réponse.</p>
+
+<h3 class="h">1. Les 4 outils face à face</h3>
+<div class="cv4">
+<div class="cv4-c" data-t="cl" style="--c:#ee8a1f"><svg class="cv4-i" viewBox="0 0 120 80" role="img" aria-label="CV classique : page à deux colonnes avec photo"><rect x="30" y="4" width="60" height="72" rx="4" fill="var(--card)" stroke="var(--c)" stroke-width="2.5"/><path d="M34 4h16v72H34a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4z" fill="var(--c)" opacity=".9"/><circle cx="42" cy="20" r="7" fill="#fff"/><rect x="34" y="32" width="14" height="3" rx="1.5" fill="#fff" opacity=".9"/><rect x="34" y="39" width="10" height="3" rx="1.5" fill="#fff" opacity=".7"/><rect x="34" y="46" width="13" height="3" rx="1.5" fill="#fff" opacity=".7"/><rect x="55" y="12" width="30" height="5" rx="2.5" fill="var(--c)"/><rect x="55" y="23" width="28" height="3" rx="1.5" fill="var(--line)"/><rect x="55" y="30" width="22" height="3" rx="1.5" fill="var(--line)"/><rect x="55" y="42" width="30" height="5" rx="2.5" fill="var(--c)" opacity=".6"/><rect x="55" y="52" width="26" height="3" rx="1.5" fill="var(--line)"/><rect x="55" y="59" width="29" height="3" rx="1.5" fill="var(--line)"/></svg><h3>CV classique</h3><span class="cv4-r">Convaincre le recruteur</span><div class="cv4-q">« Son parcours est-il intéressant et professionnel ? »</div><ul><li><b>Lu par</b>Recruteur / RH</li><li><b>Contient</b>Expériences, études, compétences</li><li><b>Où l'utiliser</b>Entretien, contact direct, dossier pro</li></ul><div class="cv4-s" role="img" aria-label="Importance 4 sur 5">⭐⭐⭐⭐</div></div>
+<div class="cv4-c" data-t="ats" style="--c:#0e7490"><svg class="cv4-i" viewBox="0 0 120 80" role="img" aria-label="CV ATS : page simple analysée par un logiciel"><rect x="24" y="4" width="60" height="72" rx="4" fill="var(--card)" stroke="var(--c)" stroke-width="2.5"/><rect x="31" y="11" width="34" height="5" rx="2.5" fill="var(--ink)"/><rect x="31" y="21" width="22" height="3" rx="1.5" fill="var(--c)"/><rect x="31" y="28" width="46" height="3" rx="1.5" fill="var(--line)"/><rect x="31" y="34" width="40" height="3" rx="1.5" fill="var(--line)"/><rect x="31" y="43" width="22" height="3" rx="1.5" fill="var(--c)"/><rect x="31" y="50" width="46" height="3" rx="1.5" fill="var(--line)"/><rect x="31" y="56" width="36" height="3" rx="1.5" fill="var(--line)"/><rect x="31" y="65" width="14" height="3" rx="1.5" fill="var(--c)"/><text x="72" y="36" font-size="9" font-weight="800" fill="var(--ok)">✓</text><text x="72" y="58" font-size="9" font-weight="800" fill="var(--ok)">✓</text><rect class="scn2" x="26" y="6" width="56" height="3" rx="1.5" fill="var(--c)" opacity=".8"/><circle cx="94" cy="50" r="11" fill="var(--card)" stroke="var(--c)" stroke-width="3"/><path d="M102 58l9 9" stroke="var(--c)" stroke-width="4" stroke-linecap="round"/></svg><h3>CV ATS</h3><span class="cv4-r">Décrocher le filtre</span><div class="cv4-q">« Correspond-elle techniquement à l'offre ? »</div><ul><li><b>Lu par</b>Logiciel, puis recruteur</li><li><b>Contient</b>Mots-clés + structure simple</li><li><b>Où l'utiliser</b>Indeed, Easy Apply, plateformes, e-mail</li></ul><div class="cv4-s" role="img" aria-label="Importance 5 sur 5">⭐⭐⭐⭐⭐</div></div>
+<div class="cv4-c" data-t="li" style="--c:#6e40c9"><svg class="cv4-i" viewBox="0 0 120 80" role="img" aria-label="LinkedIn : profil en ligne et réseau"><rect x="14" y="4" width="92" height="72" rx="7" fill="var(--card)" stroke="var(--c)" stroke-width="2.5"/><path d="M14 11a7 7 0 0 1 7-7h78a7 7 0 0 1 7 7v16H14z" fill="var(--c)" opacity=".9"/><circle cx="34" cy="30" r="10" fill="var(--bg)" stroke="var(--c)" stroke-width="3"/><circle cx="34" cy="27" r="3.5" fill="var(--c)"/><path d="M28 36c1-4 11-4 12 0" fill="var(--c)"/><rect x="50" y="32" width="46" height="4" rx="2" fill="var(--ink)"/><rect x="50" y="40" width="34" height="3" rx="1.5" fill="var(--line)"/><g stroke="var(--c)" stroke-width="1.5" opacity=".7"><path d="M30 62L58 54L90 64M58 54L74 66"/></g><circle class="pls" cx="30" cy="62" r="4.5" fill="var(--c)"/><circle class="pls" style="animation-delay:.4s" cx="58" cy="54" r="4.5" fill="var(--c)"/><circle class="pls" style="animation-delay:.8s" cx="90" cy="64" r="4.5" fill="var(--c)"/><circle class="pls" style="animation-delay:1.2s" cx="74" cy="66" r="3.5" fill="var(--c)"/></svg><h3>LinkedIn</h3><span class="cv4-r">Être visible</span><div class="cv4-q">« Qui est cette personne, quelle est son activité ? »</div><ul><li><b>Lu par</b>Recruteurs, entreprises, réseau</li><li><b>Contient</b>Profil, expériences, posts, recommandations</li><li><b>Où l'utiliser</b>Profil complet, projets, certifications</li></ul><div class="cv4-s" role="img" aria-label="Importance 4 sur 5">⭐⭐⭐⭐</div></div>
+<div class="cv4-c" data-t="po" style="--c:#1f4260"><svg class="cv4-i" viewBox="0 0 120 80" role="img" aria-label="Portfolio : site avec cartes de projets"><rect x="10" y="4" width="100" height="72" rx="6" fill="var(--card)" stroke="var(--c)" stroke-width="2.5"/><path d="M10 10a6 6 0 0 1 6-6h88a6 6 0 0 1 6 6v6H10z" fill="var(--c)"/><circle cx="18" cy="10" r="2" fill="#fff"/><circle cx="25" cy="10" r="2" fill="#fff"/><rect x="34" y="7" width="66" height="6" rx="3" fill="#fff" opacity=".85"/><rect x="16" y="22" width="88" height="3.5" rx="1.75" fill="var(--ink)" opacity=".8"/><g fill="var(--line)"><rect x="16" y="32" width="28" height="22" rx="3"/><rect x="46" y="32" width="28" height="22" rx="3"/><rect x="76" y="32" width="28" height="22" rx="3"/></g><g fill="var(--ok)"><rect class="pls" x="18" y="59" width="24" height="7" rx="3.5"/><rect class="pls" style="animation-delay:.5s" x="48" y="59" width="24" height="7" rx="3.5"/><rect class="pls" style="animation-delay:1s" x="78" y="59" width="24" height="7" rx="3.5"/></g></svg><h3>Portfolio</h3><span class="cv4-r">Démontrer</span><div class="cv4-q">« Sait-elle vraiment développer ? Montrez-moi. »</div><ul><li><b>Lu par</b>Client, recruteur, entreprise</li><li><b>Contient</b>Projets, démos, captures, technologies</li><li><b>Où l'utiliser</b>Projets, démos, GitHub, contact</li></ul><div class="cv4-s" role="img" aria-label="Importance 5 sur 5">⭐⭐⭐⭐⭐</div></div>
 </div>
-<figure class="fig"><svg viewBox="0 0 340 120" role="img" aria-label="Le CV et LinkedIn renvoient vers le portfolio"><g font-size="12" text-anchor="middle" fill="#fff"><rect x="4" y="12" width="84" height="40" rx="8" fill="#ee8a1f"/><text x="46" y="37">📄 CV</text><rect x="4" y="70" width="84" height="40" rx="8" fill="#0e7490"/><text x="46" y="95">💼 LinkedIn</text><rect x="222" y="40" width="112" height="40" rx="8" fill="#1f3fa0"/><text x="278" y="65">🌐 Portfolio</text></g><g stroke="var(--accent)" stroke-width="2.5" fill="none"><path class="flw" d="M88 32C150 32 160 56 222 56"/><path class="flw" d="M88 90C150 90 160 66 222 66"/></g><g font-size="11" font-weight="700" text-anchor="middle" fill="var(--ink)"><text x="155" y="22">lien</text><text x="155" y="112">lien</text></g></svg><figcaption>Le CV et LinkedIn renvoient vers votre portfolio.</figcaption></figure>
-<table class="cmpt"><tr><th>Critère</th><th>CV</th><th>Portfolio</th><th>LinkedIn</th></tr>
-<tr><td>Lecture</td><td>30 s</td><td>2 à 5 min</td><td>1 min</td></tr>
-<tr><td>Montre des projets réels</td><td class="no">✗</td><td class="yes">✓</td><td class="mid">~</td></tr>
-<tr><td>Lien vers le code</td><td class="no">✗</td><td class="yes">✓</td><td class="mid">~</td></tr>
-<tr><td>Design libre</td><td class="mid">~</td><td class="yes">✓</td><td class="no">✗</td></tr>
-<tr><td>Réseau et contacts</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
-<tr><td>Mise à jour</td><td>à chaque candidature</td><td>à chaque projet</td><td>chaque mois</td></tr></table>
-<h3 class="h">Lequel utiliser ?</h3>
-<div class="when">
-<div><span>Je postule</span><i>›</i><b>📄 CV + lien portfolio</b></div>
-<div><span>Je prouve mon niveau</span><i>›</i><b>🌐 Portfolio</b></div>
-<div><span>Je veux être repéré</span><i>›</i><b>💼 LinkedIn</b></div>
+
+<h3 class="h">2. Quelle situation, quel outil ?</h3>
+<div class="pick" id="cvPick">
+<div class="pk-q"><button type="button" data-t="ats" aria-pressed="true">📨 Je postule sur Indeed</button><button type="button" data-t="cl" aria-pressed="false">🤝 J'ai un entretien demain</button><button type="button" data-t="li" aria-pressed="false">🔎 Un recruteur me cherche</button><button type="button" data-t="po" aria-pressed="false">🧪 Un client veut voir mon travail</button></div>
+<div class="pk-a" aria-live="polite"></div>
 </div>
-<div class="warn">Mettez l'URL de votre portfolio dans votre CV et dans votre profil LinkedIn.</div>
-<div class="challenge"><b>🎯 À vous de jouer</b>Ajoutez l'URL de votre portfolio (Render) dans l'en-tête de votre CV et dans la section « Coordonnées » de LinkedIn.</div>
+
+<h3 class="h">3. Comment ils travaillent ensemble</h3>
+<figure class="fig"><svg viewBox="0 0 360 236" role="img" aria-label="Écosystème : le profil pro alimente le CV ATS, LinkedIn et le portfolio, qui mènent aux opportunités"><g stroke="var(--accent)" stroke-width="2.5" fill="none"><path class="flw" d="M180 42C180 56 60 54 60 84"/><path class="flw" d="M180 42V84"/><path class="flw" d="M180 42C180 56 300 54 300 84"/><path class="flw" d="M60 134C60 164 180 160 180 186"/><path class="flw" d="M180 134V186"/><path class="flw" d="M300 134C300 164 180 160 180 186"/></g><g font-size="12" text-anchor="middle" fill="#fff"><rect x="110" y="12" width="140" height="30" rx="15" fill="#1f3fa0"/><text x="180" y="32" font-weight="700">👤 Votre profil pro</text><rect x="8" y="84" width="104" height="50" rx="10" fill="#0e7490"/><text x="60" y="106" font-weight="700">🤖 CV ATS</text><text x="60" y="122" font-size="10.5">Candidatures</text><rect x="128" y="84" width="104" height="50" rx="10" fill="#6e40c9"/><text x="180" y="106" font-weight="700">💼 LinkedIn</text><text x="180" y="122" font-size="10.5">Réseau</text><rect x="248" y="84" width="104" height="50" rx="10" fill="#1f4260"/><text x="300" y="106" font-weight="700">🌐 Portfolio</text><text x="300" y="122" font-size="10.5">Preuves, projets</text><rect x="100" y="186" width="160" height="34" rx="17" fill="var(--ok)"/><text x="180" y="208" font-weight="800" font-size="13">🎯 Opportunités</text></g></svg><figcaption>Trois outils qui travaillent ensemble. Le 📄 CV classique sert pour l'entretien et le contact direct.</figcaption></figure>
+
+<h3 class="h">4. Tableau comparatif</h3>
+<div class="tw"><table class="cmpt"><tr><th>Critère</th><th>📄 CV classique</th><th>🤖 CV ATS</th><th>💼 LinkedIn</th><th>🌐 Portfolio</th></tr>
+<tr><td>Format</td><td>PDF, 1 à 2 pages</td><td>PDF simple, 1 à 2 pages</td><td>Profil en ligne</td><td>Site web</td></tr>
+<tr><td>Montre des projets réels</td><td class="no">✗</td><td class="no">✗</td><td class="mid">~</td><td class="yes">✓</td></tr>
+<tr><td>Mots-clés de l'offre</td><td class="mid">~</td><td class="yes">✓</td><td class="yes">✓</td><td class="mid">~</td></tr>
+<tr><td>Design libre</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
+<tr><td>Être trouvé sans candidater</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="mid">~</td></tr>
+<tr><td>Mise à jour</td><td>À chaque candidature</td><td>À chaque offre</td><td>Chaque mois</td><td>À chaque projet</td></tr></table></div>
+<div class="cv4-sum"><span style="--c:#0e7490">🤖 CV ATS <i>›</i> décrocher le filtre</span><span style="--c:#ee8a1f">📄 CV classique <i>›</i> convaincre le recruteur</span><span style="--c:#6e40c9">💼 LinkedIn <i>›</i> être visible</span><span style="--c:#1f4260">🌐 Portfolio <i>›</i> démontrer</span></div>
+
+<h3 class="h">5. Exemples concrets</h3>
+<div class="pairs">
+<div class="pr" style="--i:0"><b class="g">✓ COMPÉTENCES : PHP, Laravel, MySQL, Git, REST API</b><b class="r">✗ 💻 Expert Web</b></div>
+<div class="pr" style="--i:1"><b class="g">✓ Développeur Full Stack | Laravel &amp; PHP | React Native | Formateur</b><b class="r">✗ Full Stack Developer</b></div>
+</div>
+<div class="ats-note" style="margin:0 0 6px">Haut : un CV ATS aligne les mots-clés. Bas : un titre LinkedIn précis fait ressortir votre profil dans les recherches.</div>
+
+<h3 class="h">6. Plan d'un portfolio complet</h3>
+<div class="smap">
+<div class="sm-root">🏠 Accueil</div>
+<div class="sm-row"><span style="--i:0">👤 À propos</span><span style="--i:1">🛠️ Compétences</span><span style="--i:2">💼 Expérience</span><span class="sm-p" style="--i:3">📁 Projets<em><i>Laravel</i><i>React Native</i><i>PHP / MySQL</i><i>IA</i></em></span><span style="--i:4">🎓 Formations</span><span style="--i:5">🖼️ Galerie</span><span style="--i:6">🐙 GitHub</span><span style="--i:7">✉️ Contact</span></div>
+</div>
+<div class="warn">Mettez l'URL de votre portfolio dans votre CV et dans votre profil LinkedIn. Détails ATS : <a href="#cvia">section « CV lu par une IA »</a>.</div>
+<div class="challenge"><b>🎯 À vous de jouer</b>Ajoutez l'URL de votre portfolio (Render) dans l'en-tête de votre CV et dans « Coordonnées » de LinkedIn. Réécrivez ensuite votre titre LinkedIn avec 3 mots-clés de votre métier.</div>
 </article>
 
 <section class="phase" id="p1" style="--c:#007acc"><div class="ph-ic">💻</div><div class="ph-tx"><small>Phase 1 sur 3</small><h2>VS Code : construire le site</h2><p>Tout se passe sur votre ordinateur</p></div><div class="ph-st">Étapes 1 à 6</div></section>
@@ -1114,5 +1173,6 @@ if('IntersectionObserver' in window){var ls=[].slice.call(nv.querySelectorAll('a
 <script src="assets/js/guide-phases.js"></script>
 <script src="assets/js/guide-cycle.js"></script>
 <script src="assets/js/guide-nav.js"></script>
+<script src="assets/js/guide-compare.js"></script>
 </body>
 </html>
