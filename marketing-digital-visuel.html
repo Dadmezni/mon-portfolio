@@ -95,10 +95,19 @@ footer{padding:40px 0 60px;color:var(--mut);font-size:.9rem}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body::before{content:'';position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
 section{scroll-margin-top:64px}
+
+/* === Barre supérieure : Accueil + Langues === */
 .lg{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0}
-.lg .w{display:flex;gap:8px;align-items:center;justify-content:center}
+.lg .w{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.home-btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:99px;padding:6px 14px;font:700 .95rem var(--bd);transition:.2s;white-space:nowrap}
+.home-btn:hover,.home-btn:focus-visible{border-color:var(--or);background:var(--soft);color:var(--or)}
+.home-btn .hb-arrow{display:inline-block;transition:transform .2s}
+.home-btn:hover .hb-arrow{transform:translateX(-3px)}
+[dir="rtl"] .home-btn:hover .hb-arrow{transform:translateX(3px)}
+.lang-btns{display:flex;gap:8px}
 .lg button{font:700 1rem "Cairo","Nunito Sans",sans-serif;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:99px;padding:6px 20px;cursor:pointer}
 .lg button[aria-pressed="true"]{background:var(--or);border-color:var(--or);color:#fff}
+
 #ar{--hd:"Cairo","Segoe UI",sans-serif;--bd:"Cairo","Segoe UI",sans-serif;font-family:var(--bd);font-size:18px;line-height:1.85}
 #ar h1,#ar h2,#ar h3{line-height:1.35}
 #ar .say{border-left:0;border-right:5px solid var(--or);border-radius:10px 0 0 10px}
@@ -109,7 +118,19 @@ section{scroll-margin-top:64px}
 </style>
 </head>
 <body>
-<div class="lg"><div class="w"><button id="bf" aria-pressed="true">Français</button><button id="ba" aria-pressed="false">العربية</button></div></div>
+
+<!-- ============ BARRE SUPÉRIEURE (Accueil + Langues) ============ -->
+<div class="lg">
+  <div class="w">
+    <a href="index.html" class="home-btn" aria-label="Retour à la page d'accueil">
+      <span class="hb-arrow">←</span> 🏠 <span class="hb-fr">Accueil</span><span class="hb-ar" hidden>الرئيسية</span> <span class="hb-arrow">→</span>
+    </a>
+    <div class="lang-btns">
+      <button id="bf" aria-pressed="true">Français</button>
+      <button id="ba" aria-pressed="false">العربية</button>
+    </div>
+  </div>
+</div>
 
 <!-- ======================= FR ======================= -->
 <div id="fr" lang="fr">
@@ -225,16 +246,13 @@ section{scroll-margin-top:64px}
 <tr><td>Bénéfice</td><td>4 250 × 40 % de marge − 1 000 €</td><td>+ 700 €</td></tr></tbody></table></div>
 <div class="say"><b>À retenir :</b> avec 40 % de marge, il faut un ROAS d’au moins 2,5 (1 ÷ 0,40) pour ne pas perdre d’argent. Ici 4,25 : la campagne est rentable.</div></section>
 
-<!-- ============== IA FR ============== -->
 <section id="ia"><h2>L’intelligence artificielle dans le marketing digital</h2>
 <p class="lede">L’IA n’est pas un outil magique : c’est un ensemble de techniques (apprentissage automatique, modèles de langage, vision par ordinateur) qui <b>augmentent</b> le travail du marketeur. Voici comment l’utiliser intelligemment.</p>
 <div class="say"><b>En clair :</b> l’IA ne remplace pas la stratégie. Elle accélère l’exécution, personnalise à grande échelle et révèle des signaux invisibles à l’œil humain. Le marketeur reste celui qui décide du <b>quoi</b> et du <b>pourquoi</b>.</div>
-
 <h3 style="margin-top:22px">1. Les 5 grandes familles d’usages</h3>
 <p>Cliquez sur une famille pour voir des exemples concrets et les outils associés.</p>
 <div class="steps" id="iaT" role="tablist"></div>
 <div class="box det" id="iaD" aria-live="polite"></div>
-
 <h3 style="margin-top:26px">2. L’IA par canal marketing</h3>
 <div class="tw"><table><thead><tr><th>Canal</th><th>Usage de l’IA</th><th>Bénéfice mesurable</th><th>Exemple d’outil</th></tr></thead><tbody>
 <tr><td><b>🔎 SEO</b></td><td>Analyse sémantique, clustering de mots-clés, rédaction assistée, audit technique</td><td>Temps de production ÷ 3, couverture de mots-clés × 2</td><td>Surfer, Clearscope, ChatGPT</td></tr>
@@ -245,7 +263,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>💬 Service client</b></td><td>Chatbot qui qualifie, résume, propose une réponse</td><td>−40 % de tickets traités par un humain</td><td>Zendesk AI, Intercom Fin</td></tr>
 <tr><td><b>📊 Analytics</b></td><td>Détection d’anomalies, attribution multi-touch, prédiction de churn</td><td>Alertes avant baisse de CA</td><td>GA4 + BigQuery, Segment</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:26px">3. L’art du prompt : la compétence clé</h3>
 <p>Un prompt efficace suit la méthode <b>PRECISE</b> :</p>
 <div class="box">
@@ -261,7 +278,6 @@ section{scroll-margin-top:64px}
 <div class="box b"><h3>❌ Prompt faible</h3><p class="ex">« Écris un article sur les chaussures de randonnée. »</p><p class="ex">→ Résultat générique, hors sujet, sans structure.</p></div>
 <div class="box a"><h3>✅ Prompt fort</h3><p class="ex">« Tu es rédacteur SEO pour une marque outdoor. Écris un article de 800 mots pour des débutants de 25–40 ans qui veulent choisir leur première paire. Structure : intro + 5 critères + 3 erreurs + conclusion avec CTA « Découvrir la collection ». Ton : simple, direct, sans jargon. Termine par 3 variantes de méta-description de 150 caractères. »</p></div>
 </div>
-
 <h3 style="margin-top:26px">4. Limites et éthique : les 6 règles d’or</h3>
 <div class="grid">
 <div class="box"><p><b>1. Hallucinations.</b> Un modèle peut inventer chiffres, sources ou citations. <b>Vérifiez chaque fait</b> avant publication.</p></div>
@@ -271,7 +287,6 @@ section{scroll-margin-top:64px}
 <div class="box"><p><b>5. Transparence.</b> L’AI Act européen impose de signaler les contenus générés par IA. Dites-le à votre audience.</p></div>
 <div class="box"><p><b>6. Supervision humaine.</b> L’IA propose, l’humain valide. C’est la règle d’or : <b>human in the loop</b>.</p></div>
 </div>
-
 <h3 style="margin-top:26px">5. Ce que l’IA change dans vos KPI</h3>
 <div class="tw"><table><thead><tr><th>Nouveau KPI</th><th>Définition</th><th>Exemple</th></tr></thead><tbody>
 <tr><td><b>Time saved per asset</b></td><td>Heures économisées par livrable grâce à l’IA</td><td>4 h → 1 h 30 par article</td></tr>
@@ -280,7 +295,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Cost per qualified lead</b></td><td>Coût d’un lead qualifié quand l’IA pré-qualifie</td><td>−25 % de coût</td></tr>
 <tr><td><b>Hallucination rate</b></td><td>% de faits erronés détectés avant publication</td><td>&lt; 2 % (avec relecture)</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:26px">6. Mini-cas : le content marketing augmenté</h3>
 <p>Une boutique de cosmétiques naturels veut publier 8 articles par mois au lieu de 2, sans recruter.</p>
 <div class="tl">
@@ -291,14 +305,12 @@ section{scroll-margin-top:64px}
 <h3>Étape 5 — Mesure</h3><p>Après 60 jours : temps de production par article ÷ 2,5 ; trafic organique × 2,4 ; 12 leads qualifiés supplémentaires.</p>
 </div>
 <div class="say"><b>À retenir :</b> l’IA ne remplace pas le rédacteur, elle lui donne un assistant qui ne dort jamais. Le jugement, la voix de marque et la vérification restent humains.</div>
-
 <h3 style="margin-top:26px">7. Ce que l’IA change pour vous, étudiant</h3>
 <div class="grid">
 <div class="box"><h3>🎓 Compétences à développer</h3><p>Rédiger un prompt, auditer une réponse IA, détecter un biais, mesurer l’impact réel sur un KPI.</p></div>
 <div class="box"><h3>🧪 À éviter</h3><p>Copier-coller sans relire, publier une donnée non vérifiée, nourrir un outil public avec des données clients.</p></div>
 <div class="box"><h3>📚 Portfolio</h3><p>Présentez un avant/après : « sans IA » vs « avec IA » sur un même livrable, avec les métriques.</p></div>
 </div>
-
 <h3 style="margin-top:26px">8. Panorama d’outils (2025)</h3>
 <div class="tw"><table><thead><tr><th>Famille</th><th>Outils</th><th>Quand l’utiliser</th></tr></thead><tbody>
 <tr><td>Texte</td><td>ChatGPT, Claude, Gemini, Jasper, Copy.ai</td><td>Posts, emails, fiches produit, scripts</td></tr>
@@ -310,17 +322,13 @@ section{scroll-margin-top:64px}
 <tr><td>Analyse</td><td>GA4 insights, Hotjar AI, Segment</td><td>Détection d’anomalies, prédictions</td></tr>
 </tbody></table></div>
 <p class="ex">Les outils évoluent vite : vérifiez toujours la politique de confidentialité et les conditions d’usage avant de les brancher sur des données clients.</p>
-
 <h3 style="margin-top:26px">9. Quiz express IA</h3>
 <div class="box" id="iaQ" style="max-width:660px"></div>
 </section>
-<!-- ============== FIN IA FR ============== -->
 
-<!-- ============== OUTILS FR ============== -->
 <section id="outils"><h2>Boîte à outils IA du marketeur (2026)</h2>
 <p class="lede">Il existe des centaines d’outils. Le piège est d’en empiler trop. Voici une sélection classée par <b>métier</b>, avec le prix de départ et le cas d’usage réel.</p>
 <div class="say"><b>Règle d’or :</b> 3 à 5 outils bien intégrés battent 15 outils isolés. Commencez par un outil par catégorie, mesurez le gain de temps, puis étendez.</div>
-
 <h3 style="margin-top:22px">1. Recherche et SEO</h3>
 <div class="tw"><table><thead><tr><th>Outil</th><th>Usage IA</th><th>Prix de départ</th><th>Quand le choisir</th></tr></thead><tbody>
 <tr><td><b>Semrush (AI)</b></td><td>Recherche de mots-clés, analyse concurrentielle, audit</td><td>≈ 140 $/mois</td><td>Suite complète SEO + veille concurrentielle</td></tr>
@@ -328,7 +336,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Surfer SEO</b></td><td>Scoring on-page en temps réel, briefs NLP</td><td>≈ 89 $/mois</td><td>Optimiser un article avant publication</td></tr>
 <tr><td><b>Frase</b></td><td>Recherche SERP + génération de plan</td><td>≈ 45 $/mois</td><td>Créer des briefs rapidement</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">2. Création de contenu (texte)</h3>
 <div class="tw"><table><thead><tr><th>Outil</th><th>Force</th><th>Prix de départ</th><th>Limite</th></tr></thead><tbody>
 <tr><td><b>ChatGPT</b></td><td>Idéation, brainstorming, rédaction polyvalente</td><td>Gratuit / 20 $/mois</td><td>Pas de mémoire de marque native</td></tr>
@@ -336,7 +343,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Jasper</b></td><td>Contenu de marque à volume, voix de marque entraînable</td><td>≈ 49–69 $/mois</td><td>Sortie confiante mais à relire</td></tr>
 <tr><td><b>Copy.ai</b></td><td>Copies courtes, workflows GTM</td><td>≈ 36 $/mois</td><td>Sortie peut sembler « templatée »</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">3. Image, vidéo et audio</h3>
 <div class="tw"><table><thead><tr><th>Outil</th><th>Média</th><th>Usage marketing</th><th>Prix de départ</th></tr></thead><tbody>
 <tr><td><b>Midjourney</b></td><td>Image</td><td>Visuels créatifs, moodboards</td><td>≈ 10 $/mois</td></tr>
@@ -347,7 +353,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Descript</b></td><td>Vidéo + audio</td><td>Montage par texte, nettoyage audio, podcast</td><td>Gratuit / ≈ 24 $/mois</td></tr>
 <tr><td><b>ElevenLabs</b></td><td>Audio</td><td>Voix off multilingue</td><td>Gratuit / ≈ 5 $/mois</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">4. Publicité et médias payants</h3>
 <div class="tw"><table><thead><tr><th>Outil</th><th>Usage</th><th>Prix de départ</th><th>Point fort</th></tr></thead><tbody>
 <tr><td><b>Google Ads (Performance Max)</b></td><td>Enchères auto, créations adaptatives</td><td>Budget média</td><td>Optimisation native Google</td></tr>
@@ -356,7 +361,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Smartly.io AI</b></td><td>Optimisation paid social avancée</td><td>Sur devis</td><td>Boucle créa → performance</td></tr>
 <tr><td><b>Optmyzr / Madgicx</b></td><td>Automatisation et audit des campagnes</td><td>≈ 249 $/mois</td><td>Pour les comptes publicitaires complexes</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">5. Réseaux sociaux et email</h3>
 <div class="tw"><table><thead><tr><th>Outil</th><th>Canal</th><th>Fonction IA</th><th>Prix de départ</th></tr></thead><tbody>
 <tr><td><b>Hootsuite AI</b></td><td>Social</td><td>Planification, génération de posts, listening</td><td>≈ 99 $/mois</td></tr>
@@ -365,7 +369,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Klaviyo AI</b></td><td>Email / SMS</td><td>Heure d’envoi prédictive, scoring churn</td><td>Gratuit jusqu’à 250 contacts / puis ≈ 20 $/mois</td></tr>
 <tr><td><b>Mailchimp AI</b></td><td>Email</td><td>Objets optimisés, segments intelligents</td><td>Gratuit / ≈ 13 $/mois</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">6. Analytics, CRO et automatisation</h3>
 <div class="tw"><table><thead><tr><th>Outil</th><th>Usage</th><th>Prix de départ</th><th>Pourquoi c’est utile</th></tr></thead><tbody>
 <tr><td><b>GA4 + Looker Studio</b></td><td>Analytics + dashboards</td><td>Gratuit</td><td>Base de tout suivi data-driven</td></tr>
@@ -374,7 +377,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Zapier</b></td><td>Automatisation inter-outils</td><td>Gratuit / ≈ 20 $/mois</td><td>Connecter CRM, email, ads, sheets</td></tr>
 </tbody></table></div>
 <p class="ex">Les prix sont des ordres de grandeur (avril–octobre 2026). Vérifiez les grilles tarifaires officielles : beaucoup d’outils facturent à l’usage ou par siège.</p>
-
 <h3 style="margin-top:22px">7. Comment choisir sans se tromper</h3>
 <div class="grid">
 <div class="box"><h3>1. Partez du problème</h3><p>Ne cherchez pas « un outil IA ». Cherchez une tâche qui vous coûte du temps : briefs SEO ? montage vidéo ? relance email ?</p></div>
@@ -384,7 +386,6 @@ section{scroll-margin-top:64px}
 <div class="box"><h3>5. Prévoyez la sortie</h3><p>Export des données, annulation, portabilité. Un outil sans export est une prison.</p></div>
 <div class="box"><h3>6. Mesurez le ROI</h3><p>Si l’outil coûte 100 €/mois, il doit faire gagner au moins 100 € de temps ou de revenu. Sinon, coupez.</p></div>
 </div>
-
 <h3 style="margin-top:22px">8. Exemple de stack réaliste pour un étudiant</h3>
 <div class="box">
 <p><b>Budget 0–30 €/mois :</b> ChatGPT (gratuit) + Canva (gratuit) + Buffer (gratuit) + GA4 (gratuit) + Google Search Console (gratuit).</p>
@@ -393,10 +394,8 @@ section{scroll-margin-top:64px}
 </div>
 </section>
 
-<!-- ============== KPI IA FR ============== -->
 <section id="kpi-ia"><h2>Les KPI changent : mesurer la visibilité et la décision</h2>
 <p class="lede">Le clic n’est plus le seul signal. En 2026, plus de <b>80 % des recherches Google se terminent sans clic</b>, et le trafic venant de ChatGPT ou Perplexity convertit <b>4,4 fois mieux</b> que le trafic organique classique. Voici les indicateurs à ajouter à votre tableau de bord.</p>
-
 <h3 style="margin-top:22px">1. Les nouveaux KPI de visibilité IA</h3>
 <div class="tw"><table><thead><tr><th>KPI</th><th>Définition</th><th>Comment le mesurer</th><th>Exemple cible</th></tr></thead><tbody>
 <tr><td><b>Share of Answer (AEO)</b></td><td>Nombre de fois où votre marque est citée dans les réponses d’IA (ChatGPT, Gemini, Perplexity) sur vos sujets.</td><td>Requêtes test régulières + outil de monitoring AEO (HubSpot AEO Sensor, Semrush AI).</td><td>Être cité dans 3 réponses sur 10 requêtes clés</td></tr>
@@ -404,7 +403,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Citation rate</b></td><td>Fréquence à laquelle votre site est référencé comme source dans les réponses IA.</td><td>Veille manuelle + outils de LLM monitoring.</td><td>1 citation par semaine sur 5 sujets</td></tr>
 <tr><td><b>AI visibility score</b></td><td>Score composite de présence dans les AI Overviews, snippets et réponses chat.</td><td>Tableau de bord dédié (Yext, Semrush AI).</td><td>En progression mensuelle</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">2. Les KPI de décision (quand l’IA pilote les campagnes)</h3>
 <p>Quand une IA ajuste les enchères, les budgets ou les créations, mesurer le <i>résultat</i> ne suffit plus : il faut mesurer la <b>qualité de la décision</b>.</p>
 <div class="grid">
@@ -415,7 +413,6 @@ section{scroll-margin-top:64px}
 <div class="box"><h3>Automation coverage</h3><p>% des actions et du budget sous contrôle IA. À suivre avec le taux de rollback (annulations).</p></div>
 <div class="box"><h3>Human-in-the-loop rate</h3><p>% d’interventions humaines. L’objectif n’est pas zéro : c’est que l’humain garde la main sur les décisions stratégiques.</p></div>
 </div>
-
 <h3 style="margin-top:22px">3. Ce qu’il faut arrêter de sur-optimiser</h3>
 <div class="two">
 <div class="box b"><h3>❌ À relativiser</h3><p><b>CTR seul</b> : chute de 61 % sur les requêtes informationnelles avec AI Overviews.</p><p><b>Trafic brut</b> : 80 % des recherches sans clic.</p><p><b>Last-click</b> : ignore les points de contact IA en amont.</p></div>
@@ -424,7 +421,6 @@ section{scroll-margin-top:64px}
 <div class="say"><b>À retenir :</b> en 2026, le KPI qui monte n’est pas « combien de clics », mais « <b>combien de revenus attribuables, avec quelle confiance, et à quelle vitesse la décision a été prise</b> ».</div>
 </section>
 
-<!-- ============== FRAMEWORKS FR ============== -->
 <section id="frameworks"><h2>Les frameworks à connaître (au-delà du cours)</h2>
 <p>L’entonnoir inbound de votre cours est un framework parmi d’autres. En entretien ou en agence, on vous demandera souvent de choisir le bon cadre.</p>
 <div class="tw"><table><thead><tr><th>Framework</th><th>Étapes</th><th>Quand l’utiliser</th><th>Limite</th></tr></thead><tbody>
@@ -436,7 +432,6 @@ section{scroll-margin-top:64px}
 <div class="say"><b>Comment choisir :</b> inbound pour du contenu ; RACE pour un plan annuel ; AAARRR pour un produit digital ; flywheel pour une marque qui vit de sa communauté.</div>
 </section>
 
-<!-- ============== CERTIFS FR ============== -->
 <section id="certifs"><h2>Se certifier gratuitement (IA + marketing)</h2>
 <p>Ces parcours sont gratuits, en ligne, et délivrent un certificat affichable sur LinkedIn. Idéal pour un portfolio étudiant.</p>
 <div class="grid">
@@ -448,7 +443,6 @@ section{scroll-margin-top:64px}
 <div class="say"><b>Conseil portfolio :</b> ne collectionnez pas les badges. Pour chaque certification, publiez un mini-projet : « voici ce que j’ai produit avec cet outil, et le résultat mesuré ».</div>
 </section>
 
-<!-- ============== LEGAL FR ============== -->
 <section id="legal"><h2>AI Act : ce que le marketeur doit savoir (2026)</h2>
 <p class="lede">Depuis le <b>2 août 2026</b>, l’article 50 de l’AI Act européen impose des obligations de transparence aux entreprises qui utilisent l’IA en marketing.</p>
 <div class="tw"><table><thead><tr><th>Obligation</th><th>Ce que ça veut dire concrètement</th><th>Qui est responsable</th></tr></thead><tbody>
@@ -569,16 +563,13 @@ section{scroll-margin-top:64px}
 <tr><td>الربح</td><td>4250 × 40 % هامش − 1000 €</td><td>+ 700 €</td></tr></tbody></table></div>
 <div class="say"><b>تذكّر:</b> بهامش 40 % يلزم ROAS لا يقل عن 2.5 كي لا تخسر. هنا 4.25، فالحملة رابحة.</div></section>
 
-<!-- ============== IA AR ============== -->
 <section id="ia"><h2>الذكاء الاصطناعي في التسويق الرقمي</h2>
 <p class="lede">الذكاء الاصطناعي ليس عصا سحرية: هو مجموعة تقنيات (تعلم الآلة، النماذج اللغوية، الرؤية الحاسوبية) <b>تعزز</b> عمل المسوّق.</p>
 <div class="say"><b>بالمختصر:</b> الذكاء الاصطناعي لا يستبدل الاستراتيجية. يسرّع التنفيذ ويخصص على نطاق واسع ويكشف إشارات لا تراها العين البشرية.</div>
-
 <h3 style="margin-top:22px">1. العائلات الخمس الكبرى للاستخدام</h3>
 <p>اضغط على عائلة لرؤية أمثلة ملموسة والأدوات المرتبطة.</p>
 <div class="steps" id="iaT" role="tablist"></div>
 <div class="box det" id="iaD" aria-live="polite"></div>
-
 <h3 style="margin-top:26px">2. الذكاء الاصطناعي حسب القناة</h3>
 <div class="tw"><table><thead><tr><th>القناة</th><th>استخدام الذكاء الاصطناعي</th><th>الفائدة القابلة للقياس</th><th>أداة مثال</th></tr></thead><tbody>
 <tr><td><b>🔎 SEO</b></td><td>تحليل دلالي، تجميع الكلمات، كتابة بمساعدة، تدقيق تقني</td><td>زمن الإنتاج ÷ 3، تغطية الكلمات × 2</td><td>Surfer, Clearscope, ChatGPT</td></tr>
@@ -589,7 +580,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>💬 خدمة العملاء</b></td><td>روبوت يؤهل ويلخص ويقترح ردًا</td><td>−40 % تذاكر يعالجها إنسان</td><td>Zendesk AI, Intercom Fin</td></tr>
 <tr><td><b>📊 التحليلات</b></td><td>كشف الشذوذ، إسناد متعدد اللمسات، توقع الفقدان</td><td>تنبيهات قبل انخفاض المبيعات</td><td>GA4 + BigQuery, Segment</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:26px">3. فن الـPrompt: المهارة الأساسية</h3>
 <p>الـPrompt الفعال يتبع منهجية <b>PRECISE</b>:</p>
 <div class="box">
@@ -605,7 +595,6 @@ section{scroll-margin-top:64px}
 <div class="box b"><h3>❌ Prompt ضعيف</h3><p class="ex">«اكتب مقالًا عن أحذية المشي.»</p><p class="ex">← نتيجة عامة، خارج الموضوع، بلا بنية.</p></div>
 <div class="box a"><h3>✅ Prompt قوي</h3><p class="ex">«أنت كاتب SEO لعلامة رياضية. اكتب مقالًا من 800 كلمة للمبتدئين 25–40 سنة. البنية: مقدمة + 5 معايير + 3 أخطاء + خاتمة مع CTA. النبرة بسيطة. اختم بـ3 بدائل لوصف ميتا من 150 حرفًا.»</p></div>
 </div>
-
 <h3 style="margin-top:26px">4. الحدود والأخلاق: القواعد الذهبية الست</h3>
 <div class="grid">
 <div class="box"><p><b>1. الهلوسة.</b> قد يختلق النموذج أرقامًا أو مصادر. <b>تحقق من كل معلومة</b> قبل النشر.</p></div>
@@ -615,7 +604,6 @@ section{scroll-margin-top:64px}
 <div class="box"><p><b>5. الشفافية.</b> AI Act الأوروبي يفرض الإشارة إلى المحتوى المولَّد بالذكاء الاصطناعي.</p></div>
 <div class="box"><p><b>6. الإشراف البشري.</b> الذكاء الاصطناعي يقترح، والإنسان يوافق. القاعدة الذهبية: <b>human in the loop</b>.</p></div>
 </div>
-
 <h3 style="margin-top:26px">5. ما يغيّره الذكاء الاصطناعي في مؤشراتك</h3>
 <div class="tw"><table><thead><tr><th>مؤشر جديد</th><th>التعريف</th><th>مثال</th></tr></thead><tbody>
 <tr><td><b>Time saved per asset</b></td><td>ساعات موفرة لكل مخرج بفضل الذكاء الاصطناعي</td><td>4 ساعات ← ساعة ونصف للمقال</td></tr>
@@ -624,7 +612,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Cost per qualified lead</b></td><td>تكلفة العميل المحتمل المؤهل</td><td>−25 % تكلفة</td></tr>
 <tr><td><b>Hallucination rate</b></td><td>% المعلومات الخاطئة المكتشفة قبل النشر</td><td>&lt; 2 % (بمراجعة)</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:26px">6. حالة مصغرة: تسويق المحتوى المعزَّز</h3>
 <p>متجر مستحضرات طبيعية يريد نشر 8 مقالات شهريًا بدل 2 دون توظيف.</p>
 <div class="tl">
@@ -635,14 +622,12 @@ section{scroll-margin-top:64px}
 <h3>الخطوة 5 — القياس</h3><p>بعد 60 يومًا: زمن الإنتاج ÷ 2.5؛ الزيارات الطبيعية × 2.4؛ 12 عميلًا محتملًا إضافيًا.</p>
 </div>
 <div class="say"><b>تذكّر:</b> الذكاء الاصطناعي لا يستبدل المحرر، بل يمنحه مساعدًا لا ينام. الحكم وصوت العلامة والتحقق تبقى بشرية.</div>
-
 <h3 style="margin-top:26px">7. ما يغيّره الذكاء الاصطناعي لك، طالبًا</h3>
 <div class="grid">
 <div class="box"><h3>🎓 مهارات يجب تطويرها</h3><p>كتابة Prompt، تدقيق إجابة ذكاء اصطناعي، كشف التحيز، قياس الأثر الحقيقي على مؤشر.</p></div>
 <div class="box"><h3>🧪 تجنّب</h3><p>نسخ ولصق دون مراجعة، نشر معلومة غير متحقق منها، تغذية أداة عامة ببيانات عملاء.</p></div>
 <div class="box"><h3>📚 ملف أعمالك</h3><p>اعرض قبل/بعد: «بدون ذكاء اصطناعي» مقابل «مع ذكاء اصطناعي» مع المقاييس.</p></div>
 </div>
-
 <h3 style="margin-top:26px">8. بانوراما الأدوات (2025)</h3>
 <div class="tw"><table><thead><tr><th>العائلة</th><th>الأدوات</th><th>متى تستخدمها</th></tr></thead><tbody>
 <tr><td>نص</td><td>ChatGPT, Claude, Gemini, Jasper, Copy.ai</td><td>منشورات، بريد، بطاقات منتج، سكربتات</td></tr>
@@ -653,16 +638,13 @@ section{scroll-margin-top:64px}
 <tr><td>إعلانات</td><td>Google Performance Max, Meta Advantage+</td><td>حملات تقودها الخوارزمية</td></tr>
 <tr><td>تحليل</td><td>GA4 insights, Hotjar AI, Segment</td><td>كشف الشذوذ، تنبؤات</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:26px">9. اختبار سريع للذكاء الاصطناعي</h3>
 <div class="box" id="iaQ" style="max-width:660px"></div>
 </section>
 
-<!-- ============== OUTILS AR ============== -->
 <section id="outils"><h2>صندوق أدوات الذكاء الاصطناعي للمسوّق (2026)</h2>
 <p class="lede">هناك مئات الأدوات. الفخ هو تكديسها. إليك اختيارًا مرتبًا حسب <b>المهنة</b>، مع سعر البداية وحالة الاستخدام.</p>
 <div class="say"><b>القاعدة الذهبية:</b> 3 إلى 5 أدوات متكاملة أفضل من 15 أداة معزولة.</div>
-
 <h3 style="margin-top:22px">1. البحث وSEO</h3>
 <div class="tw"><table><thead><tr><th>الأداة</th><th>الاستخدام</th><th>سعر البداية</th><th>متى تختارها</th></tr></thead><tbody>
 <tr><td><b>Semrush (AI)</b></td><td>بحث الكلمات، تحليل المنافسين، تدقيق</td><td>≈ 140 $/شهر</td><td>حزمة SEO شاملة</td></tr>
@@ -670,7 +652,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Surfer SEO</b></td><td>تقييم داخل الصفحة، موجزات NLP</td><td>≈ 89 $/شهر</td><td>تحسين مقال قبل النشر</td></tr>
 <tr><td><b>Frase</b></td><td>بحث SERP + توليد خطة</td><td>≈ 45 $/شهر</td><td>إنشاء موجزات بسرعة</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">2. إنتاج المحتوى (نص)</h3>
 <div class="tw"><table><thead><tr><th>الأداة</th><th>القوة</th><th>سعر البداية</th><th>حد</th></tr></thead><tbody>
 <tr><td><b>ChatGPT</b></td><td>أفكار، عصف ذهني، كتابة متعددة</td><td>مجاني / 20 $/شهر</td><td>لا ذاكرة علامة أصلية</td></tr>
@@ -678,7 +659,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Jasper</b></td><td>محتوى علامة بحجم كبير</td><td>≈ 49–69 $/شهر</td><td>مخرج يحتاج مراجعة</td></tr>
 <tr><td><b>Copy.ai</b></td><td>نصوص قصيرة، سير عمل GTM</td><td>≈ 36 $/شهر</td><td>قد يبدو «قالبيًا»</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">3. الصورة والفيديو والصوت</h3>
 <div class="tw"><table><thead><tr><th>الأداة</th><th>الوسائط</th><th>الاستخدام</th><th>سعر البداية</th></tr></thead><tbody>
 <tr><td><b>Midjourney</b></td><td>صورة</td><td>مرئيات إبداعية</td><td>≈ 10 $/شهر</td></tr>
@@ -689,7 +669,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Descript</b></td><td>فيديو + صوت</td><td>تحرير بالنص، بودكاست</td><td>مجاني / ≈ 24 $/شهر</td></tr>
 <tr><td><b>ElevenLabs</b></td><td>صوت</td><td>تعليق صوتي متعدد اللغات</td><td>مجاني / ≈ 5 $/شهر</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">4. الإعلانات والوسائط المدفوعة</h3>
 <div class="tw"><table><thead><tr><th>الأداة</th><th>الاستخدام</th><th>سعر البداية</th><th>نقطة القوة</th></tr></thead><tbody>
 <tr><td><b>Google Ads (Performance Max)</b></td><td>مزايدات تلقائية، إبداعات تكيفية</td><td>ميزانية إعلانية</td><td>تحسين أصلي</td></tr>
@@ -698,7 +677,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Smartly.io AI</b></td><td>تحسين paid social متقدم</td><td>حسب الطلب</td><td>حلقة إبداع → أداء</td></tr>
 <tr><td><b>Optmyzr / Madgicx</b></td><td>أتمتة وتدقيق الحملات</td><td>≈ 249 $/شهر</td><td>حسابات معقدة</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">5. الشبكات الاجتماعية والبريد</h3>
 <div class="tw"><table><thead><tr><th>الأداة</th><th>القناة</th><th>وظيفة الذكاء الاصطناعي</th><th>سعر البداية</th></tr></thead><tbody>
 <tr><td><b>Hootsuite AI</b></td><td>اجتماعي</td><td>جدولة، توليد منشورات، إنصات</td><td>≈ 99 $/شهر</td></tr>
@@ -707,7 +685,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Klaviyo AI</b></td><td>بريد / SMS</td><td>وقت إرسال تنبؤي، تقييم فقدان</td><td>مجاني حتى 250 جهة / ثم ≈ 20 $/شهر</td></tr>
 <tr><td><b>Mailchimp AI</b></td><td>بريد</td><td>عناوين محسّنة، شرائح ذكية</td><td>مجاني / ≈ 13 $/شهر</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">6. التحليلات وCRO والأتمتة</h3>
 <div class="tw"><table><thead><tr><th>الأداة</th><th>الاستخدام</th><th>سعر البداية</th><th>لماذا مفيدة</th></tr></thead><tbody>
 <tr><td><b>GA4 + Looker Studio</b></td><td>تحليلات + لوحات</td><td>مجاني</td><td>أساس أي تتبع</td></tr>
@@ -716,7 +693,6 @@ section{scroll-margin-top:64px}
 <tr><td><b>Zapier</b></td><td>أتمتة بين الأدوات</td><td>مجاني / ≈ 20 $/شهر</td><td>ربط CRM، بريد، إعلانات</td></tr>
 </tbody></table></div>
 <p class="ex">الأسعار تقديرية (أبريل–أكتوبر 2026). تحقق من الجداول الرسمية.</p>
-
 <h3 style="margin-top:22px">7. كيف تختار دون أخطاء</h3>
 <div class="grid">
 <div class="box"><h3>1. ابدأ من المشكلة</h3><p>لا تبحث عن «أداة ذكاء اصطناعي». ابحث عن مهمة تستهلك وقتك.</p></div>
@@ -726,7 +702,6 @@ section{scroll-margin-top:64px}
 <div class="box"><h3>5. خطط للخروج</h3><p>تصدير البيانات، الإلغاء، قابلية النقل.</p></div>
 <div class="box"><h3>6. قس ROI</h3><p>إذا كانت تكلف 100 €/شهر، يجب أن توفر 100 € على الأقل.</p></div>
 </div>
-
 <h3 style="margin-top:22px">8. مثال حزمة واقعية لطالب</h3>
 <div class="box">
 <p><b>ميزانية 0–30 €/شهر:</b> ChatGPT (مجاني) + Canva (مجاني) + Buffer (مجاني) + GA4 (مجاني) + Search Console (مجاني).</p>
@@ -735,17 +710,14 @@ section{scroll-margin-top:64px}
 </div>
 </section>
 
-<!-- ============== KPI IA AR ============== -->
 <section id="kpi-ia"><h2>المؤشرات تتغير: قياس الظهور والقرار</h2>
 <p class="lede">النقرة لم تعد الإشارة الوحيدة. في 2026، أكثر من <b>80 % من عمليات بحث Google تنتهي دون نقرة</b>، والزيارات القادمة من ChatGPT أو Perplexity تتحول <b>4.4 مرة أفضل</b>.</p>
-
 <h3 style="margin-top:22px">1. مؤشرات الظهور في الذكاء الاصطناعي</h3>
 <div class="tw"><table><thead><tr><th>المؤشر</th><th>التعريف</th><th>كيف تقيسه</th><th>هدف مثال</th></tr></thead><tbody>
 <tr><td><b>Share of Answer (AEO)</b></td><td>عدد مرات ذكر علامتك في إجابات الذكاء الاصطناعي.</td><td>اختبار دوري + أداة مراقبة AEO.</td><td>3 من 10 استعلامات</td></tr>
 <tr><td><b>AI-referred traffic</b></td><td>الزوار القادمون من إجابة ذكاء اصطناعي.</td><td>GA4: شريحة «referral» + regex على chatgpt.com، perplexity.ai.</td><td>5–10 % من إجمالي الزيارات</td></tr>
 <tr><td><b>Citation rate</b></td><td>تكرار الإشارة إلى موقعك كمصدر.</td><td>مراقبة يدوية + أدوات LLM monitoring.</td><td>اقتباس أسبوعي</td></tr>
 </tbody></table></div>
-
 <h3 style="margin-top:22px">2. مؤشرات القرار</h3>
 <div class="grid">
 <div class="box"><h3>Decision quality</h3><p>% قرارات الذكاء الاصطناعي المقبولة دون تصحيح بشري.</p></div>
@@ -755,7 +727,6 @@ section{scroll-margin-top:64px}
 <div class="box"><h3>Automation coverage</h3><p>% الإجراءات والميزانية تحت سيطرة الذكاء الاصطناعي.</p></div>
 <div class="box"><h3>Human-in-the-loop rate</h3><p>% التدخل البشري في القرارات الاستراتيجية.</p></div>
 </div>
-
 <h3 style="margin-top:22px">3. ما يجب التوقف عن الإفراط في تحسينه</h3>
 <div class="two">
 <div class="box b"><h3>❌ يجب نسبيته</h3><p><b>CTR وحده</b>: انخفض 61 % على الاستعلامات المعلوماتية.</p><p><b>حركة المرور الخام</b>: 80 % من عمليات البحث بلا نقرة.</p><p><b>Last-click</b>: يتجاهل نقاط اتصال الذكاء الاصطناعي.</p></div>
@@ -764,7 +735,6 @@ section{scroll-margin-top:64px}
 <div class="say"><b>تذكّر:</b> في 2026، المؤشر الصاعد ليس «كم نقرة»، بل «<b>كم إيرادًا قابلًا للنسبة، وبأي ثقة، وبأي سرعة اتُخذ القرار</b>».</div>
 </section>
 
-<!-- ============== FRAMEWORKS AR ============== -->
 <section id="frameworks"><h2>أطر العمل التي يجب معرفتها</h2>
 <p>قمع Inbound في دورتك هو إطار من بين أخرى. في المقابلات أو الوكالات، سيُطلب منك اختيار الإطار المناسب.</p>
 <div class="tw"><table><thead><tr><th>الإطار</th><th>المراحل</th><th>متى تستخدمه</th><th>الحد</th></tr></thead><tbody>
@@ -776,7 +746,6 @@ section{scroll-margin-top:64px}
 <div class="say"><b>كيف تختار:</b> Inbound للمحتوى؛ RACE لخطة سنوية؛ AAARRR لمنتج رقمي؛ Flywheel لعلامة تعيش من مجتمعها.</div>
 </section>
 
-<!-- ============== CERTIFS AR ============== -->
 <section id="certifs"><h2>شهادات مجانية (ذكاء اصطناعي + تسويق)</h2>
 <p>هذه المسارات مجانية، عبر الإنترنت، وتمنح شهادة قابلة للعرض على LinkedIn.</p>
 <div class="grid">
@@ -788,7 +757,6 @@ section{scroll-margin-top:64px}
 <div class="say"><b>نصيحة الملف:</b> لا تجمع الشارات. لكل شهادة، انشر مشروعًا مصغرًا: «هذا ما أنتجته بهذه الأداة، وهذه النتيجة المقاسة».</div>
 </section>
 
-<!-- ============== LEGAL AR ============== -->
 <section id="legal"><h2>AI Act: ما يجب أن يعرفه المسوّق (2026)</h2>
 <p class="lede">منذ <b>2 أغسطس 2026</b>، تفرض المادة 50 من AI Act الأوروبي التزامات شفافية على الشركات التي تستخدم الذكاء الاصطناعي في التسويق.</p>
 <div class="tw"><table><thead><tr><th>الالتزام</th><th>ماذا يعني عمليًا</th><th>من المسؤول</th></tr></thead><tbody>
@@ -849,33 +817,28 @@ section{scroll-margin-top:64px}
 const $=i=>ROOT.querySelector('#'+i),kc=(x,a,b)=>Math.max(a,Math.min(b,x)),RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.documentElement.classList.add('js');
 
-/* Inbound FR */
 var S=[{t:"Attirer",s:"Inconnus → Visiteurs",d:"Faire venir des personnes qui ne connaissent pas encore l’entreprise.",o:["Articles de blog","Référencement SEO / SEA","Réseaux sociaux","Vidéos"],e:"Un article répond à une question tapée sur Google : la personne arrive sur le site."},{t:"Convertir",s:"Visiteurs → Prospects",d:"Obtenir les coordonnées du visiteur (par exemple son email) en échange d’un contenu utile.",o:["CTA + formulaires","Ebooks / guides","Livres blancs","Webinaires"],e:"Le visiteur télécharge un guide gratuit et laisse son adresse email."},{t:"Conclure",s:"Prospects → Clients",d:"Accompagner le prospect avec des messages adaptés jusqu’à l’achat.",o:["Marketing automation","CRM / emails","Workflows"],e:"Trois jours après le téléchargement, un email automatique propose un essai gratuit."},{t:"Fidéliser",s:"Clients → Ambassadeurs",d:"Garder le client content pour qu’il rachète et recommande l’entreprise.",o:["Événements","Enquêtes","Contenu personnalisé","Réseaux sociaux"],e:"Un questionnaire de satisfaction, puis une offre réservée aux clients."}];
 function step(i){var x=S[i];ROOT.querySelectorAll("#st .st").forEach((b,k)=>b.setAttribute("aria-selected",k===i));
 $("det").innerHTML="<h3>"+(i+1)+". "+x.t+" <span class='ex'>("+x.s+")</span></h3><p>"+x.d+"</p><div class='chips'>"+x.o.map(o=>"<span>"+o+"</span>").join("")+"</div><div class='say'><b>Exemple :</b> "+x.e+"</div>"}
 $("st").innerHTML=S.map((x,i)=>"<button class='st' role='tab' data-i='"+i+"'>"+x.t+"</button>").join("");
 ROOT.querySelectorAll("#st .st").forEach(b=>b.addEventListener("click",()=>step(+b.dataset.i)));step(0);
 
-/* Plan FR */
 var P=[{t:"Objectif",d:"Écrivez un objectif SMART : précis, mesurable, atteignable, réaliste et daté.",e:"« Obtenir 50 ventes en ligne en 30 jours avec 1 000 €. »",x:"« Avoir plus de visibilité » : impossible à mesurer."},{t:"Cible",d:"Décrivez un client type (persona) : âge, besoin, réseaux utilisés, frein à l’achat.",e:"Claire, 32 ans, randonneuse du week-end, cherche sur Google et Instagram.",x:"Viser « tout le monde » : le message ne parle à personne."},{t:"Concurrence",d:"Observez 3 concurrents : prix, offre, réseaux, avis.",e:"Les concurrents ne proposent pas de retour gratuit : vous en faites un argument.",x:"Copier un concurrent au lieu de se différencier."},{t:"Canaux",d:"Choisissez 2 ou 3 canaux selon l’objectif et l’étape de l’entonnoir.",e:"Vendre vite : SEA et email. Se faire connaître : Instagram et vidéo courte.",x:"Ouvrir 6 comptes et n’en nourrir aucun."},{t:"Contenu",d:"Un message, un bénéfice, un bouton. Préparez la page d’atterrissage et un calendrier de 4 semaines.",e:"3 posts par semaine, 1 email, 1 article de guide pendant le mois.",x:"Mettre 5 boutons différents sur la même page."},{t:"Budget",d:"Commencez petit, testez, puis augmentez ce qui marche.",e:"1 000 € : 600 € de SEA, 250 € de publicité sociale, 150 € d’outils.",x:"Dépenser tout le budget la première semaine."},{t:"Mesure",d:"Un tableau de bord chaque semaine, et un test à la fois.",e:"Nouveau titre : la conversion passe de 2 % à 3 %, donc 50 % de ventes en plus.",x:"Changer titre, prix et image en même temps."}];
 function pl(i){var x=P[i];ROOT.querySelectorAll("#ps .st").forEach((b,k)=>b.setAttribute("aria-selected",k===i));
 $("pd").innerHTML="<h3>Étape "+(i+1)+" sur 7 : "+x.t+"</h3><p>"+x.d+"</p><div class='dd'><div class='ex2'><b>Exemple</b>"+x.e+"</div><div class='er'><b>Erreur à éviter</b>"+x.x+"</div></div>"}
 $("ps").innerHTML=P.map((x,i)=>"<button class='st' role='tab' data-i='"+i+"'>"+(i+1)+". "+x.t+"</button>").join("");
 ROOT.querySelectorAll("#ps .st").forEach(b=>b.addEventListener("click",()=>pl(+b.dataset.i)));pl(0);
 
-/* IA tabs FR */
 var IAT=[{t:"Génération de contenu",s:"Écrire plus vite, sans perdre la voix",d:"Produire posts, emails, fiches produit, scripts à partir d’un brief structuré.",o:["Posts réseaux","Emails","Fiches produit","Scripts vidéo","Titres SEO"],e:"Un brief PRECISE de 6 lignes → 3 variantes de titres + 1 intro en 2 minutes."},{t:"Personnalisation",s:"Le bon message, au bon moment",d:"Adapter offre, contenu et moment à chaque visiteur selon son historique et son contexte.",o:["Recommandation produit","Contenu dynamique","Prix adapté","Email personnalisé"],e:"Netflix : la vignette, le titre et l’ordre des rangées changent selon ce que vous avez regardé."},{t:"Prédiction",s:"Anticiper au lieu de subir",d:"Prévoir la valeur d’un client, sa probabilité de partir ou d’acheter, pour agir avant.",o:["Score de churn","CLV prévue","Probabilité d’achat","Prévision de stock"],e:"Un score de churn à 0,82 déclenche une offre de rétention personnalisée sous 24 h."},{t:"Conversation",s:"Répondre 24/7 sans perdre la qualité",d:"Chatbots et assistants qui qualifient, répondent, résument et passent la main à un humain.",o:["Chatbot SAV","Qualification de leads","Résumé de ticket","Assistant vocal"],e:"Un chatbot qualifie 60 % des demandes entrantes et transfère les cas complexes à un conseiller."},{t:"Optimisation",s:"Améliorer en continu",d:"Enchères, budgets, prix, SEO et créations publicitaires optimisés par l’algorithme, sous contrôle humain.",o:["Smart Bidding","A/B test automatique","Génération d’annonces","Optimisation SEO"],e:"Google Performance Max ajuste les enchères en temps réel pour maximiser les conversions."}];
 function iat(i){var x=IAT[i];ROOT.querySelectorAll("#iaT .st").forEach((b,k)=>b.setAttribute("aria-selected",k===i));
 $("iaD").innerHTML="<h3>"+(i+1)+". "+x.t+" <span class='ex'>("+x.s+")</span></h3><p>"+x.d+"</p><div class='chips'>"+x.o.map(o=>"<span>"+o+"</span>").join("")+"</div><div class='say'><b>Exemple :</b> "+x.e+"</div>"}
 $("iaT").innerHTML=IAT.map((x,i)=>"<button class='st' role='tab' data-i='"+i+"'>"+x.t+"</button>").join("");
 ROOT.querySelectorAll("#iaT .st").forEach(b=>b.addEventListener("click",()=>iat(+b.dataset.i)));iat(0);
 
-/* Glossaire FR */
 var G=[["B2B","Business to business : l’entreprise vend à d’autres entreprises."],["B2C","Business to consumer : l’entreprise vend aux particuliers."],["SEO","Référencement naturel : apparaître dans Google sans payer, grâce à un contenu de qualité."],["SEA","Publicité sur moteur de recherche : on paie pour apparaître (badge « Annonce »)."],["SMO","Social Media Optimization : bien utiliser les réseaux sociaux pour être vu gratuitement."],["SMA","Social Media Advertising : publicité payante sur les réseaux sociaux."],["CTA","Call to action : bouton qui invite à agir (« Télécharger », « Acheter »)."],["CRM","Outil qui garde la liste des clients et l’historique de chaque contact."],["Lead","Contact intéressé par l’offre, dont on a les coordonnées."],["Marque employeur","L’image de l’entreprise comme lieu de travail, pour attirer des candidats."],["Social Selling","Vendre en créant des relations sur les réseaux, surtout LinkedIn."],["Marketing automation","Emails et actions envoyés automatiquement selon le comportement de la personne."],["Webinaire","Conférence en ligne en direct."],["CTR","Taux de clic : clics ÷ affichages. 960 clics pour 120 000 affichages = 0,8 %."],["Taux de conversion","Part des visiteurs qui font l’action voulue : 30 achats pour 1 000 visites = 3 %."],["IA / AI","Intelligence artificielle : techniques qui permettent à une machine d’apprendre, de comprendre et de générer."],["LLM","Large Language Model : modèle de langage entraîné sur d’énormes textes (ChatGPT, Claude, Gemini)."],["Prompt","Instruction donnée à un modèle d’IA. Un bon prompt suit la méthode PRECISE."],["Hallucination","Quand un modèle invente un fait, une source ou un chiffre qui semble vrai mais est faux."],["Machine Learning","Apprentissage automatique : le modèle apprend à partir d’exemples, sans être programmé règle par règle."],["RGPD","Règlement européen sur la protection des données. Interdit de mettre des données clients identifiantes dans un outil public."],["AI Act","Règlement européen sur l’IA : impose la transparence des contenus générés."],["Chatbot","Programme qui dialogue avec l’utilisateur, souvent propulsé par un LLM."],["Churn","Taux de clients qui partent. On le prédit avec un score IA."],["CLV","Customer Lifetime Value : valeur totale d’un client sur la durée."],["Lookalike","Audience similaire à vos meilleurs clients, générée par la plateforme publicitaire."],["Human in the loop","Règle d’or : l’IA propose, l’humain valide."],["AEO","Answer Engine Optimization : optimiser son contenu pour être cité dans les réponses d’IA (ChatGPT, Gemini, Perplexity)."],["Share of Answer","% de réponses IA où votre marque est citée sur vos sujets."],["Decision quality","% de décisions IA acceptées sans correction humaine."],["DDA","Data-Driven Attribution : attribution des conversions par modèle statistique."],["MMM","Marketing Mix Modeling : mesure de l’impact des canaux sans tracking individuel."]];
 function dl(){var f=$("q").value.toLowerCase();$("dl").innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().indexOf(f)>-1).map(g=>"<dt>"+g[0]+"</dt><dd>"+g[1]+"</dd>").join("")||"<p>Aucun résultat. Essayez un autre mot.</p>"}
 $("q").addEventListener("input",dl);dl();
 
-/* Quiz FR */
 var Q=[{q:"Quelle différence principale entre marketing traditionnel et digital ?",o:["Le digital pousse un message à tout le monde","Le digital attire ceux qui s’intéressent déjà au sujet","Le traditionnel est plus facile à mesurer"],a:1,e:"Le digital (inbound) attire par du contenu utile. Le traditionnel pousse son message."},{q:"LinkedIn sert surtout à…",o:["Générer des leads en B2B","Vendre aux particuliers en B2C","Partager des photos de vacances"],a:0,e:"LinkedIn est le réseau professionnel : idéal pour trouver des contacts d’entreprises."},{q:"Quelle étape inbound transforme un visiteur en prospect ?",o:["Attirer","Convertir","Fidéliser"],a:1,e:"Convertir : le visiteur laisse ses coordonnées via un formulaire ou un guide."},{q:"Que veut dire SEO ?",o:["Publicité payante sur Google","Référencement naturel, sans payer","Un outil de gestion des clients"],a:1,e:"SEO = apparaître dans les résultats naturels. La publicité payante, c’est le SEA."}];
 var qi=0,sc=0;
 function qz(){var b=$("qb");if(qi>=Q.length){b.innerHTML="<h3>Score : "+sc+" sur "+Q.length+"</h3><p>"+(sc===Q.length?"Parfait, vous avez bien compris les bases.":"Relisez les sections ci-dessus, puis recommencez.")+"</p><button class='go' id='re'>Recommencer</button>";$("re").onclick=()=>{qi=0;sc=0;qz()};return}
@@ -884,7 +847,6 @@ b.querySelectorAll(".opt").forEach(o=>o.onclick=()=>{var i=+o.dataset.i;if(i===x
 $("fb").innerHTML="<p style='margin-top:10px'><b>"+(i===x.a?"Exact. ":"Pas tout à fait. ")+"</b>"+x.e+"</p><button class='go' id='nx'>"+(qi+1<Q.length?"Question suivante":"Voir mon score")+"</button>";$("nx").onclick=()=>{qi++;qz()}})}
 qz();
 
-/* IA quiz FR */
 var QIA=[{q:"Qu’est-ce qu’une « hallucination » d’IA ?",o:["Un bug d’affichage","Un fait inventé qui semble vrai","Une image générée"],a:1,e:"Le modèle invente un fait, une source ou un chiffre plausible. Vérifiez toujours."},{q:"Que ne faut-il jamais faire avec un outil d’IA public ?",o:["Lui demander un titre","Y mettre des données clients identifiantes","Lui demander une traduction"],a:1,e:"Le RGPD interdit de transmettre des données personnelles identifiantes à un service tiers non conforme."},{q:"Quelle tâche est la plus adaptée à l’IA ?",o:["Décider de la stratégie de marque","Rédiger 20 variantes d’un titre","Signer un contrat"],a:1,e:"L’IA excelle pour générer des variantes et accélérer l’exécution, pas pour décider."},{q:"Que veut dire « human in the loop » ?",o:["L’humain valide ce que l’IA propose","L’IA remplace l’humain","L’humain travaille sans IA"],a:0,e:"C’est la règle d’or : l’humain garde le contrôle et la responsabilité."}];
 var aqi=0,asc=0;
 function aqz(){var b=$("iaQ");if(aqi>=QIA.length){b.innerHTML="<h3>Score IA : "+asc+" sur "+QIA.length+"</h3><p>"+(asc===QIA.length?"Parfait, vous maîtrisez les bases de l’IA marketing.":"Relisez la section 4 (limites et éthique) puis recommencez.")+"</p><button class='go' id='aRe'>Recommencer</button>";$("aRe").onclick=()=>{aqi=0;asc=0;aqz()};return}
@@ -893,17 +855,14 @@ b.querySelectorAll(".opt").forEach(o=>o.onclick=()=>{var i=+o.dataset.i;if(i===x
 $("aFb").innerHTML="<p style='margin-top:10px'><b>"+(i===x.a?"Exact. ":"Pas tout à fait. ")+"</b>"+x.e+"</p><button class='go' id='aNx'>"+(aqi+1<QIA.length?"Question suivante":"Voir mon score")+"</button>";$("aNx").onclick=()=>{aqi++;aqz()}})}
 aqz();
 
-/* Checklist FR */
 var C=["Mon objectif est chiffré et daté","J’ai décrit mon client type","J’ai étudié 3 concurrents","J’ai choisi 2 ou 3 canaux","Mon site affiche bien sur téléphone","Ma page d’atterrissage a un seul bouton","Le suivi des visites et des achats est installé","J’ai fixé un budget et un plafond par jour","Mon calendrier de contenu est prêt","J’ai prévu un point chaque semaine pour mesurer"];
 $("cl").innerHTML=C.map(c=>"<label><input type='checkbox'><span>"+c+"</span></label>").join("");
 ROOT.querySelectorAll("#cl input").forEach(c=>c.addEventListener("change",()=>{var n=ROOT.querySelectorAll("#cl input:checked").length;$("pgb").style.width=n*10+"%";$("pgt").textContent=n+" sur 10"+(n===10?" : vous êtes prêt à lancer.":"")}));
 
-/* Icons FR */
 function ico(s,a){ROOT.querySelectorAll(s).forEach((h,i)=>{if(a[i])h.insertAdjacentHTML('beforebegin',"<div class='ic' style='animation-delay:"+(i*.25)+"s'>"+a[i]+"</div>")})}
 ico('#def .box h3',['🔎','🤝','📊']);ico('#mots .box h3',['🧭','🌐','🚀','📱','📊','📝','🔍','⭐']);ico('#social .grid .box h3',['👍','📸','💼','🐦']);ico('#marques .box h3',['🥤','🪒','🪂','🧲','🦉','🎧']);
 var nav=ROOT.querySelector('header nav');if(nav)nav.insertAdjacentHTML('afterend',"<div class='fl' aria-hidden='true'>"+['🔎','📱','✉️','📊','🚀','💬'].map((e,i)=>"<span style='animation-delay:"+(i*.3)+"s'>"+e+"</span>").join('')+"</div>");
 
-/* Film FR */
 var CT=[[0,3,'1. Claire voit une publication Instagram : la marque se fait connaître.'],[3,6.5,'2. Elle cherche « chaussures randonnée » sur Google : l’annonce apparaît.'],[6.5,9.5,'3. Elle clique sur l’annonce et arrive sur une page avec un seul bouton.'],[9.5,12,'4. Elle achète : c’est la conversion (85 € dans cet exemple).'],[12,14,'5. Un email de remerciement la fait revenir : c’est la fidélisation.']];
 var KT=1.5,KP=false,KL=0;
 function kd(){CT.forEach((c,i)=>{var e=$('s'+(i+1)),a=kc((KT-c[0])/.5,0,1),b=i===4?1:kc((c[1]-KT)/.5,0,1),o=Math.min(a,b);e.style.opacity=o;e.style.transform='translateY('+(1-o)*16+'px)'});
@@ -919,16 +878,13 @@ function ksp(p){KP=p;$('pb').textContent=p?'❚❚':'▶';$('pb').setAttribute('
 $('pb').onclick=()=>ksp(!KP);$('pr').oninput=function(){ksp(false);KT=this.value/1000*14;kd()};kd();
 var ap=new IntersectionObserver(es=>{if(es[0].isIntersecting&&!RM&&KT<2){ap.disconnect();KT=0;ksp(true)}},{threshold:.6});ap.observe($('stg'));
 
-/* Funnel FR */
 var FN=[['🙂','Notoriété',120000,'vues',100],['👀','Considération',4800,'visites',70],['🛒','Conversion',144,'achats',45],['💚','Fidélisation',43,'réachats',28]];
 $('fn').innerHTML=FN.map(f=>"<div class='fr'><div class='ic'>"+f[0]+"</div><div><div class='fl2'><span>"+f[1]+"</span><span><b class='cn' data-to='"+f[2]+"'>0</b> "+f[3]+"</span></div><div class='fbar'><i style='--w:"+f[4]+"%'></i></div></div></div>").join("");
 
-/* Canaux FR */
 var LV=['','très faible','faible','moyen','élevé','très élevé'];function mtr(n){return"<span>"+LV[n]+"</span><span class='mt'><i style='--w:"+(n*20)+"%'></i></span>"}
 var CH=[['🔎','SEO',2,1,5,'Durer dans le temps, attirer ceux qui cherchent'],['💰','SEA (Google Ads)',4,5,1,'Vendre vite, tester une offre'],['📱','Réseaux sociaux',3,3,2,'Se faire connaître, créer une communauté'],['✉️','Email',1,4,3,'Relancer et fidéliser'],['📝','Contenu / blog',2,1,5,'Gagner la confiance'],['🖼️','Display',3,3,1,'Notoriété à grande échelle']];
 $('ct').innerHTML="<table><thead><tr><th>Canal</th><th>Coût</th><th>Rapidité des résultats</th><th>Durée des effets</th><th>Idéal pour</th></tr></thead><tbody>"+CH.map(c=>"<tr><td><b>"+c[0]+" "+c[1]+"</b></td><td>"+mtr(c[2])+"</td><td>"+mtr(c[3])+"</td><td>"+mtr(c[4])+"</td><td>"+c[5]+"</td></tr>").join('')+"</tbody></table>";
 
-/* Counters + IO FR */
 function cnt(t){var t0=performance.now();t.querySelectorAll('.cn').forEach(c=>{var to=+c.dataset.to;(function s(n){var p=kc((n-t0)/1400,0,1);c.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString('fr-FR');if(p<1)requestAnimationFrame(s)})(t0)})}
 var io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;var t=e.target;t.classList.add('in');io.unobserve(t);if(t.id==='fn'){if(RM){t.querySelectorAll('.cn').forEach(c=>c.textContent=(+c.dataset.to).toLocaleString('fr-FR'))}else{cnt(t)}}}),{threshold:.15});
 ROOT.querySelectorAll('.box,.fig,.tw,#fn').forEach(e=>io.observe(e));
@@ -950,7 +906,6 @@ $("iaD").innerHTML="<h3>"+(i+1)+". "+x.t+" <span class='ex'>("+x.s+")</span></h3
 $("iaT").innerHTML=IAT.map((x,i)=>"<button class='st' role='tab' data-i='"+i+"'>"+x.t+"</button>").join("");
 ROOT.querySelectorAll("#iaT .st").forEach(b=>b.onclick=()=>iat(+b.dataset.i));iat(0);
 
-/* Film AR */
 const CT=[[0,3,'1. ترى كلير منشورًا على إنستغرام: العلامة تعرّف بنفسها.'],[3,6.5,'2. تبحث عن «أحذية المشي» في Google فيظهر الإعلان.'],[6.5,9.5,'3. تنقر على الإعلان وتصل إلى صفحة بزر واحد.'],[9.5,12,'4. تشتري: هذا هو التحويل (85 € في هذا المثال).'],[12,14,'5. رسالة شكر تعيدها إلى الموقع: هذا هو الولاء.']];
 let KT=1.5,KP=false,KL=0;
 function kd(){CT.forEach((c,i)=>{const e=$('s'+(i+1)),a=kc((KT-c[0])/.5,0,1),b=i===4?1:kc((c[1]-KT)/.5,0,1),o=Math.min(a,b);e.style.opacity=o;e.style.transform="translateY("+((1-o)*16)+"px)"});
@@ -997,12 +952,25 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return
 ROOT.querySelectorAll('.box,.fig,.tw,#fn').forEach(e=>io.observe(e));
 })();
 
-/* ============ Lang toggle ============ */
-(function(){const F=document.getElementById('fr'),A=document.getElementById('ar'),bf=document.getElementById('bf'),ba=document.getElementById('ba');
-function set(l){F.hidden=l!=='fr';A.hidden=l!=='ar';document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';bf.setAttribute('aria-pressed',l==='fr');ba.setAttribute('aria-pressed',l==='ar');try{localStorage.setItem('lang',l)}catch(e){}window.scrollTo(0,0)}
-bf.onclick=()=>set('fr');ba.onclick=()=>set('ar');
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const r=a.closest('#fr,#ar'),t=r&&r.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}})});
-let l='fr';try{l=localStorage.getItem('lang')||'fr'}catch(e){}set(l==='ar'?'ar':'fr')})();
+/* ============ Lang toggle + Home label ============ */
+(function(){
+  const F=document.getElementById('fr'),A=document.getElementById('ar'),bf=document.getElementById('bf'),ba=document.getElementById('ba');
+  const hbFr=document.querySelector('.hb-fr'),hbAr=document.querySelector('.hb-ar'),homeBtn=document.querySelector('.home-btn');
+  function set(l){
+    F.hidden=l!=='fr';A.hidden=l!=='ar';
+    document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';
+    bf.setAttribute('aria-pressed',l==='fr');ba.setAttribute('aria-pressed',l==='ar');
+    /* Bascule le texte du lien d'accueil */
+    hbFr.hidden=(l==='ar');hbAr.hidden=(l!=='ar');
+    homeBtn.setAttribute('aria-label',l==='ar'?'العودة إلى الصفحة الرئيسية':'Retour à la page d’accueil');
+    try{localStorage.setItem('lang',l)}catch(e){}
+    window.scrollTo(0,0);
+  }
+  bf.onclick=()=>set('fr');ba.onclick=()=>set('ar');
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const r=a.closest('#fr,#ar'),t=r&&r.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}})});
+  let l='fr';try{l=localStorage.getItem('lang')||'fr'}catch(e){}
+  set(l==='ar'?'ar':'fr');
+})();
 </script>
 </body>
 </html>
