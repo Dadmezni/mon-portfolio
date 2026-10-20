@@ -75,7 +75,7 @@ nav a.active::after{content:"";position:absolute;left:12px;right:12px;bottom:0;h
 .grid{display:grid;grid-template-columns:1fr;gap:22px;margin-top:8px}
 .vcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;
   box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;
-  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:26px;align-items:center}
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:26px;align-items:center}
 @media(max-width:820px){.vcard{grid-template-columns:1fr;gap:14px;padding:20px 18px}}
 .vcard:hover{transform:translateY(-3px);box-shadow:0 18px 40px -18px rgba(14,34,68,.35)}
 .vcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--c1),var(--c3));opacity:0;transition:opacity .3s}
@@ -149,6 +149,12 @@ svg .slide{opacity:0;transform:translateX(-14px);animation:slideIn .7s ease forw
   .ba-wrap{grid-template-columns:1fr;gap:8px}
   .ba-arrow{transform:rotate(90deg)}
 }
+
+/* Nouveaux exemples dans les cartes */
+.kw-examples { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; }
+.kw-examples li { font-size: 0.9rem; background: color-mix(in srgb, var(--line) 30%, var(--card)); padding: 8px 12px; border-radius: 8px; border-left: 3px solid var(--c1); }
+.kw-examples li b { color: var(--ink); }
+.kw-examples li em { color: var(--mut); font-style: italic; }
 
 /* PIPELINE */
 .pipeline-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-top:22px;box-shadow:var(--shadow)}
@@ -457,7 +463,7 @@ footer a:hover{text-decoration:underline}
       </div>
     </div>
 
-    <!-- 02. Keywords universels -->
+    <!-- 02. Keywords universels (ENRICHI AVEC EXEMPLES) -->
     <div class="vcard reveal">
       <div class="schema">
         <div class="kw-grid">
@@ -473,38 +479,141 @@ footer a:hover{text-decoration:underline}
       </div>
       <div class="body">
         <h3><span class="num">02</span> Les 8 mots-clés universels</h3>
-        <p>Un prompt pauvre devient riche en ajoutant ces briques. <b>Rôle</b> + <b>contexte</b> + <b>tâche</b> + <b>format</b> + <b>exemples</b> + <b>public</b> + <b>longueur</b> + <b>auto-vérification</b> : c'est la méthode <b>PRECISE</b>. Ces mots fonctionnent avec tous les modèles.</p>
+        <p>Un prompt pauvre devient riche en ajoutant ces briques. C'est la méthode <b>PRECISE</b>. Voici un exemple concret pour chaque mot-clé :</p>
+        <ul class="kw-examples">
+          <li><b>🎭 Rôle</b> : <em>« Agis comme un expert SEO spécialisé en e-commerce. »</em></li>
+          <li><b>🧾 Contexte</b> : <em>« Je lance une boutique de cosmétiques bio ciblant les 25-35 ans. »</em></li>
+          <li><b>📌 Tâche</b> : <em>« Rédige une description produit pour une crème hydratante. »</em></li>
+          <li><b>📋 Format</b> : <em>« Réponds sous la forme d'une liste à puces avec un titre accrocheur. »</em></li>
+          <li><b>🔍 Exemples</b> : <em>« Voici le ton attendu : [insérer un ancien texte] »</em></li>
+          <li><b>✅ Vérif.</b> : <em>« Vérifie que tu n'utilises pas de jargon médical. »</em></li>
+          <li><b>🎯 Public</b> : <em>« Le texte s'adresse à des débutants en jardinage. »</em></li>
+          <li><b>📏 Longueur</b> : <em>« Maximum 150 mots par paragraphe. »</em></li>
+        </ul>
       </div>
     </div>
 
-    <!-- 03. Keywords par outil -->
+    <!-- 03. Keywords : Tableau des mots-clés essentiels avec exemples -->
     <div class="vcard reveal">
-      <div class="schema">
-        <div class="tools-kw">
-          <div class="tool-kw" style="--c:#10a37f;--i:0">
-            <span>🟢 ChatGPT</span>
-            <em>step by step</em><em>act as</em><em>format as</em>
-          </div>
-          <div class="tool-kw" style="--c:var(--c1);--i:1">
-            <span>🧠 Claude</span>
-            <em>think deeply</em><em>reasoning</em><em>cite sources</em>
-          </div>
-          <div class="tool-kw" style="--c:#4285f4;--i:2">
-            <span>🔷 Gemini</span>
-            <em>with sources</em><em>explain why</em><em>compare</em>
-          </div>
-          <div class="tool-kw" style="--c:var(--dk);--i:3">
-            <span>👨‍💻 Copilot</span>
-            <em>refactor</em><em>add types</em><em>in the style of</em>
-          </div>
+      <div class="body" style="grid-column: 1 / -1;">
+        <h3><span class="num">03</span> Les mots-clés essentiels pour un prompt efficace</h3>
+        <p style="margin-bottom: 16px;">Chaque mot-clé est une "commande" qui indique à l'IA comment se comporter. Voici le vocabulaire de base (toujours en anglais) avec un exemple concret d'utilisation.</p>
+        
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; text-align: left;">
+            <thead>
+              <tr style="background-color: var(--line); color: var(--ink);">
+                <th style="padding: 10px 12px; border-bottom: 2px solid var(--c1); font-family: ui-monospace, monospace; width: 15%;">Keyword</th>
+                <th style="padding: 10px 12px; border-bottom: 2px solid var(--c1); width: 25%;">Signification / Utilité</th>
+                <th style="padding: 10px 12px; border-bottom: 2px solid var(--c1); width: 60%;">Exemple d'utilisation (dans un prompt)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Act as</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Demander à l'IA d'adopter un rôle</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Act as</b> a senior PHP developer. Explain how to fix this bug."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Expert in</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Définir un domaine d'expertise</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"You are an <b>expert in</b> cybersecurity and Laravel security."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Context</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Donner le contexte du projet</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Context:</b> I am building an e-commerce website with Laravel and MySQL."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Objective / Goal</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Préciser l'objectif</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>My goal is to</b> reduce the loading time of my homepage."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Task</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Décrire la tâche à réaliser</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Task:</b> Write the SQL query to select all users who bought more than 3 items."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Step-by-step</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Obtenir des étapes détaillées</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"Explain <b>step-by-step</b> how to deploy a Laravel app on Render."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Detailed</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Demander une réponse approfondie</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"Give me a <b>detailed</b> explanation of how the MVC pattern works."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Constraints</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Définir les contraintes</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Constraints:</b> The function must run in less than 50ms."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Requirements</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Préciser les exigences</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Requirements:</b> The code must be compatible with PHP 8.2."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Examples</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Demander des exemples concrets</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"Show me 3 <b>examples</b> of clean and secure PHP code."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Analyze</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Analyser une situation ou un code</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Analyze</b> this code and tell me if there is an XSS vulnerability."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Compare</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Comparer plusieurs solutions</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Compare</b> Bootstrap and Tailwind CSS for a beginner project."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Optimize</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Améliorer les performances ou la qualité</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Optimize</b> this SQL query because it takes 5 seconds to load."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Debug</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Identifier et corriger des erreurs</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Debug</b> this PHP script, it throws a 500 error on line 42."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Validate</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Vérifier la cohérence ou la conformité</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Validate</b> this HTML form according to W3C standards."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Output format</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Définir le format de la réponse</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Output format:</b> Reply with a valid JSON object only."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Do not assume</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Éviter les suppositions non vérifiées</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Do not assume</b> my database structure, ask me if needed."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Ask clarifying questions</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Demander des précisions si nécessaire</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"<b>Ask clarifying questions</b> before writing the final code."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Edge cases</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Examiner les cas particuliers</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"Handle the <b>edge cases</b> where the user inputs 0 or null."</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-weight: bold; color: var(--c1); font-family: ui-monospace, monospace;">Production-ready</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line);">Viser une solution prête pour la production</td>
+                <td style="padding: 10px 12px; border-bottom: 1px solid var(--line); font-style: italic; color: var(--mut);">"Give me a <b>production-ready</b> code with error handling."</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="body">
-        <h3><span class="num">03</span> Les mots-clés qui marchent le mieux par outil</h3>
-        <p>Les <b>mots-clés universels</b> fonctionnent partout, mais chaque outil a ses tournures favorites. <b>ChatGPT</b> aime « step by step » et « act as » ; <b>Claude</b> réagit à « think deeply » et « cite sources » ; <b>Gemini</b> valorise « compare » et « with sources » ; <b>Copilot</b> attend « refactor » et « add types ».</p>
-      </div>
     </div>
-
     <!-- 04. Avant / Après -->
     <div class="vcard reveal">
       <div class="schema">
