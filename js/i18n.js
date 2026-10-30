@@ -16,21 +16,22 @@ const translations = {
     "nav.projects": "Projects",
     "nav.gallery": "Gallery",
     "nav.contact": "Contact",
+    "nav.resume": "Resume / CV",
 
     // Hero
-    "hero.greeting": "👋 Hi, I'm",
+    "hero.greeting": "Hi, I'm",
     "hero.role": 'Full Stack Laravel Developer <span class="accent">&</span> IT Trainer',
     "hero.proof": "HR teams described a strategic project as \"a genuine success\" and recognized my contribution as exceptional.",
     "hero.desc":
-      'I build web applications with <strong>Laravel</strong>, <strong>PHP</strong> and <strong>ReactJS</strong>—from service platforms to internal business tools. I also teach practical web development.',
+      'I design and build useful web applications with <strong>Laravel</strong>, <strong>PHP</strong> and <strong>ReactJS</strong>—from service platforms to internal business tools. I also help learners and teams develop practical web skills.',
     "hero.ctaProjects": "View my projects",
-    "hero.ctaTraining": "Explore my training",
     "hero.ctaContact": "Get in touch",
-    "hero.location": "📍 Jendouba, Tunisia",
-    "hero.languages": "🌐 EN · FR · AR",
+    "hero.ctaResume": "View my CV",
+    "hero.location": "Jendouba, Tunisia",
+    "hero.languages": "EN · FR · AR",
 
     // About
-    "about.tag": "01 — About",
+    "about.tag": "About",
     "about.title": "A developer who loves to teach",
     "about.p1":
       "Full Stack Developer and IT trainer with professional experience across web development, teaching, and technical team leadership.",
@@ -40,11 +41,11 @@ const translations = {
       "On the teaching side, I've trained dozens of students in programming fundamentals and guided their first real-world projects.",
     "about.stat1": "Professional work since",
     "about.stat2": "Projects featured",
-    "about.stat3": "Years teaching (2017–2021)",
+    "about.stat3": "Years teaching",
     "about.stat4": "Languages spoken",
 
     // Skills
-    "skills.tag": "02 — Skills",
+    "skills.tag": "Skills",
     "skills.title": "Technical stack",
     "skills.backend": "Backend",
     "skills.frontend": "Frontend",
@@ -55,7 +56,7 @@ const translations = {
     "skills.additional": "Additional technologies",
 
     // Experience
-    "exp.tag": "03 — Experience",
+    "exp.tag": "Experience",
     "exp.title": "Professional experience",
     // Recommendations
     "recommendations.tag": "Recommendations",
@@ -73,7 +74,7 @@ const translations = {
     "recommendations.evidence": "Validation feedback - email addresses removed",
 
     // Services
-    "services.tag": "04 — Services",
+    "services.tag": "Services",
     "services.title": "What I can do for you",
     "services.lead":
       "Whether you need a web application, a custom platform, or practical training for your team, I can help you move the project forward.",
@@ -132,14 +133,14 @@ const translations = {
     "services.ctaBtn": "Start a project",
 
     // Certifications
-    "cert.tag": "05 — Certifications",
+    "cert.tag": "Certifications",
     "cert.title": "Training & Certificates",
 
     // Projects
-    "proj.tag": "06 — Projects",
+    "proj.tag": "Projects",
     "proj.title": "Project gallery",
     "proj.lead": "A visual overview of web applications and platforms I have built. Select an image to view it larger.",
-    "gallery.tag": "07 — Gallery",
+    "gallery.tag": "Gallery",
     "gallery.title": "Moments in pictures",
     "gallery.lead": "A few snapshots from my work and activities.",
     "proj.p1.badge": "Marketplace",
@@ -154,6 +155,9 @@ const translations = {
     "proj.p5.desc": "An onboarding application to organize employee arrival steps and related internal workflows.",
     "proj.p6.badge": "Emergency",
     "proj.p6.desc": "An internal application built to support emergency response coordination and workflows.",
+    "proj.p7.badge": "News",
+    "proj.p7.desc": "Online news platform.",
+    "proj.open": "Visit project \u2192",
     // Case studies
     "case.challenge": "Challenge:",
     "case.role": "My role:",
@@ -188,7 +192,7 @@ const translations = {
     "training.open": "Explore the course →",
 
     // Contact
-    "contact.tag": "08 — Contact",
+    "contact.tag": "Contact",
     "contact.title": "Let's work together",
     "contact.lead":
       "Got a project in mind, a freelance mission, or a teaching opportunity? Drop me a line — I reply fast.",
@@ -228,21 +232,22 @@ const translations = {
     "nav.projects": "Projets",
     "nav.gallery": "Galerie",
     "nav.contact": "Contact",
+    "nav.resume": "Mon CV",
 
     // Hero
-    "hero.greeting": "👋 Salut, je suis",
+    "hero.greeting": "Salut, je suis",
     "hero.role": 'Développeur Full Stack Laravel <span class="accent">&</span> Formateur IT',
     "hero.proof": "Les RH ont qualifi\u00e9 un projet strat\u00e9gique de \"v\u00e9ritable succ\u00e8s\" et salu\u00e9 ma contribution.",
     "hero.desc":
-      'Je développe des applications web avec <strong>Laravel</strong>, <strong>PHP</strong> et <strong>ReactJS</strong> : plateformes de services et outils métiers. Je forme aussi à la pratique du développement web.',
+      'Je conçois et développe des applications web utiles avec <strong>Laravel</strong>, <strong>PHP</strong> et <strong>ReactJS</strong> : plateformes de services et outils métiers. J’accompagne aussi les apprenants et les équipes dans le développement de compétences web pratiques.',
     "hero.ctaProjects": "Voir mes projets",
-    "hero.ctaTraining": "Découvrir mes formations",
     "hero.ctaContact": "Me contacter",
-    "hero.location": "📍 Jendouba, Tunisie",
-    "hero.languages": "🌐 FR · EN · AR",
+    "hero.ctaResume": "Voir mon CV",
+    "hero.location": "Jendouba, Tunisie",
+    "hero.languages": "FR · EN · AR",
 
     // About
-    "about.tag": "01 — À propos",
+    "about.tag": "À propos",
     "about.title": "Un développeur qui aime transmettre",
     "about.p1":
       "Développeur Full Stack et formateur IT, j'ai une expérience professionnelle en développement web, formation et encadrement d'équipes techniques.",
@@ -252,11 +257,11 @@ const translations = {
       "Côté pédagogie, j'ai formé des dizaines d'étudiants aux fondamentaux de la programmation et accompagné leurs premiers projets réels.",
     "about.stat1": "Parcours professionnel depuis",
     "about.stat2": "Projets présentés",
-    "about.stat3": "Ans d'enseignement (2017–2021)",
+    "about.stat3": "Ans d'enseignement",
     "about.stat4": "Langues parlées",
 
     // Skills
-    "skills.tag": "02 — Compétences",
+    "skills.tag": "Compétences",
     "skills.title": "Stack technique",
     "skills.backend": "Backend",
     "skills.frontend": "Frontend",
@@ -267,7 +272,7 @@ const translations = {
     "skills.additional": "Technologies complémentaires",
 
     // Experience
-    "exp.tag": "03 — Parcours",
+    "exp.tag": "Parcours",
     "exp.title": "Expérience professionnelle",
     // Recommandations
     "recommendations.tag": "T\u00e9moignages",
@@ -285,7 +290,7 @@ const translations = {
     "recommendations.evidence": "Extrait du retour de validation - adresses e-mail masqu\u00e9es",
 
     // Services
-    "services.tag": "04 — Services",
+    "services.tag": "Services",
     "services.title": "Ce que je peux faire pour vous",
     "services.lead":
       "Pour une application web, une plateforme sur mesure ou une formation pratique de votre équipe, je peux vous aider à faire avancer votre projet.",
@@ -344,14 +349,14 @@ const translations = {
     "services.ctaBtn": "Démarrer un projet",
 
     // Certifications
-    "cert.tag": "05 — Certifications",
+    "cert.tag": "Certifications",
     "cert.title": "Formations & Certificats",
 
     // Projects
-    "proj.tag": "06 — Projets",
+    "proj.tag": "Projets",
     "proj.title": "Galerie de projets",
     "proj.lead": "Un aperçu visuel des applications et plateformes web que j’ai réalisées. Cliquez sur une image pour l’agrandir.",
-    "gallery.tag": "07 — Galerie",
+    "gallery.tag": "Galerie",
     "gallery.title": "Quelques moments en images",
     "gallery.lead": "Quelques photos de mon travail et de mes activités.",
     "proj.p1.badge": "Marketplace",
@@ -366,6 +371,9 @@ const translations = {
     "proj.p5.desc": "Une application d'intégration pour organiser les étapes d'arrivée des employés et les processus internes associés.",
     "proj.p6.badge": "Urgence",
     "proj.p6.desc": "Une application interne conçue pour faciliter la coordination des interventions et des processus d'urgence.",
+    "proj.p7.badge": "Actualités",
+    "proj.p7.desc": "Plateforme d’actualités en ligne.",
+    "proj.open": "Visiter le projet \u2192",
     // \u00c9tudes de cas
     "case.challenge": "D\u00e9fi :",
     "case.role": "Mon r\u00f4le :",
@@ -400,7 +408,7 @@ const translations = {
     "training.open": "Découvrir le cours →",
 
     // Contact
-    "contact.tag": "08 — Contact",
+    "contact.tag": "Contact",
     "contact.title": "Travaillons ensemble",
     "contact.lead":
       "Un projet en tête, une mission freelance ou une opportunité d'enseignement ? Écrivez-moi, je réponds rapidement.",
@@ -472,7 +480,8 @@ function initI18n() {
   // Load saved language, or default to EN
   let savedLang = "en";
   try {
-    savedLang = localStorage.getItem("portfolio-lang") || "en";
+    savedLang = localStorage.getItem("portfolio-lang") ||
+      ((navigator.language || "").toLowerCase().startsWith("fr") ? "fr" : "en");
   } catch (e) {}
 
   applyLanguage(savedLang);

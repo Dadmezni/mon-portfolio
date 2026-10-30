@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     burger.addEventListener('click', () => {
       navLinks.classList.toggle('open');
       burger.classList.toggle('active');
+      burger.setAttribute('aria-expanded', String(navLinks.classList.contains('open')));
     });
 
     // Close menu when a link is clicked
@@ -178,13 +179,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const stopAutoplay = () => window.clearInterval(timer);
     const startAutoplay = () => {
       stopAutoplay();
-      if (!document.hidden) {
+      if (!document.hidden && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         timer = window.setInterval(() => setSlide(activeSlide + 1), 5000);
       }
     };
 
     gallery.addEventListener('focusin', stopAutoplay);
     gallery.addEventListener('focusout', startAutoplay);
+    gallery.addEventListener('mouseenter', stopAutoplay);
+    gallery.addEventListener('mouseleave', startAutoplay);
     document.addEventListener('visibilitychange', startAutoplay);
     track.addEventListener('touchstart', (event) => {
       touchStartX = event.changedTouches[0].clientX;
@@ -211,6 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
      -------------------------------------------- */
   const contactForm = document.getElementById('contact-form');
   const formStatus = document.querySelector('.form-status');
+  const t = (key, fallback) =>
+    window.i18n?.translations?.[document.documentElement.lang]?.[key] || fallback;
 
   if (contactForm && formStatus) {
     const submitBtn = contactForm.querySelector('.btn-submit');
@@ -237,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.ok) {
           contactForm.reset();
-          formStatus.textContent = '✅ Message sent! I will get back to you soon.';
+          formStatus.textContent = t('contact.formSuccess', '✅ Message sent! I will get back to you soon.');
           formStatus.classList.add('success');
         } else {
           const data = await response.json().catch(() => ({}));
