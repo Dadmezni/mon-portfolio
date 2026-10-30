@@ -157,6 +157,7 @@ const translations = {
     "proj.p6.desc": "An internal application built to support emergency response coordination and workflows.",
     "proj.p7.badge": "News",
     "proj.p7.desc": "Online news platform.",
+    "proj.p8.desc": "Qistas web platform.",
     "proj.open": "Visit project \u2192",
     // Case studies
     "case.challenge": "Challenge:",
@@ -373,6 +374,7 @@ const translations = {
     "proj.p6.desc": "Une application interne conçue pour faciliter la coordination des interventions et des processus d'urgence.",
     "proj.p7.badge": "Actualités",
     "proj.p7.desc": "Plateforme d’actualités en ligne.",
+    "proj.p8.desc": "Plateforme web Qistas.",
     "proj.open": "Visiter le projet \u2192",
     // \u00c9tudes de cas
     "case.challenge": "D\u00e9fi :",
