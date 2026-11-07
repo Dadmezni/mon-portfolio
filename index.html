@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Dhiaa Mezni — Full Stack Developer & IT Teacher. Laravel, PHP, ReactJS." />
+  <meta name="description" content="Dhiaa Mezni — Full Stack Laravel developer and IT trainer. Laravel 13, Livewire, Filament, React Native, Python, AI and DevOps." />
   <meta name="theme-color" content="#0b0f19" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Dhiaa Mezni — Full Stack Developer &amp; IT Teacher" />
-  <meta property="og:description" content="Laravel, PHP and ReactJS developer and IT trainer based in Jendouba, Tunisia." />
+  <meta property="og:description" content="Laravel 13, Livewire, Filament, React Native, Python, AI and DevOps developer and IT trainer based in Jendouba, Tunisia." />
   <meta property="og:image" content="https://dhiaamezni.onrender.com/assets/images/profile.png" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Dhiaa Mezni","jobTitle":"Full Stack Developer & IT Trainer","url":"https://dhiaamezni.onrender.com/","address":{"@type":"PostalAddress","addressLocality":"Jendouba","addressCountry":"TN"},"knowsAbout":["Laravel","PHP","ReactJS","MySQL"],"sameAs":["https://linkedin.com/in/dhiaa-mezni-2ab82554"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Dhiaa Mezni","jobTitle":"Full Stack Developer & IT Trainer","url":"https://dhiaamezni.onrender.com/","address":{"@type":"PostalAddress","addressLocality":"Jendouba","addressCountry":"TN"},"knowsAbout":["Laravel 13","Livewire","Filament","PostgreSQL","MongoDB","REST APIs","React Native","Expo","Python","Machine Learning","Large Language Models","RAG","Embeddings","AI Agents","Docker","CI/CD","DevOps"],"sameAs":["https://linkedin.com/in/dhiaa-mezni-2ab82554"]}</script>
   <title>Dhiaa Mezni — Full Stack Developer & IT Teacher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -74,6 +74,7 @@
               <li class="learning-group">
                 <h3>Marketing digital</h3>
                 <a href="marketing-digital-visuel.html">Cours illustré</a>
+                <a href="tp-canva.html">TP Canva</a>
               </li>
               <li class="learning-group">
                 <h3>Profil</h3>
@@ -112,8 +113,20 @@
         <h2 data-i18n-html="hero.role">Full Stack Laravel Developer <span class="accent">&</span> IT Trainer</h2>
         <p class="hero-proof" data-i18n="hero.proof">HR teams described a strategic project as “a genuine success” and recognized my contribution as exceptional.</p>
         <p class="hero-desc" data-i18n-html="hero.desc">
-          I design and build useful web applications with <strong>Laravel</strong>, <strong>PHP</strong> and <strong>ReactJS</strong>—from service platforms to internal business tools. I also help learners and teams develop practical web skills.
+          I build web and mobile applications and AI-powered solutions—from business platforms to intelligent tools. I also help learners and teams develop practical technology skills.
         </p>
+
+        <div class="hero-stack">
+          <p class="hero-stack-label" data-i18n="hero.stackLabel">Core technologies</p>
+          <ul class="hero-stack-list">
+            <li>Laravel 13 + Livewire + Filament</li>
+            <li>PostgreSQL + MongoDB + REST API</li>
+            <li>React Native + Expo</li>
+            <li>Python + Machine Learning + LLM</li>
+            <li>RAG + Embeddings + AI Agents</li>
+            <li>Docker + CI/CD + DevOps</li>
+          </ul>
+        </div>
 
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary" data-i18n="hero.ctaProjects">View my projects</a>
@@ -139,7 +152,12 @@
   <span class="k">public</span> <span class="v">$name</span> = <span class="s">"Dhiaa Mezni"</span>;
   <span class="k">public</span> <span class="v">$role</span> = <span class="s">"Laravel Developer & IT Trainer"</span>;
   <span class="k">public</span> <span class="v">$stack</span> = [
-    <span class="s">"Laravel"</span>, <span class="s">"React"</span>, <span class="s">"Node.js"</span>
+    <span class="s">"Laravel 13 + Livewire + Filament"</span>,
+    <span class="s">"PostgreSQL + MongoDB + REST API"</span>,
+    <span class="s">"React Native + Expo"</span>,
+    <span class="s">"Python + Machine Learning + LLM"</span>,
+    <span class="s">"RAG + Embeddings + AI Agents"</span>,
+    <span class="s">"Docker + CI/CD + DevOps"</span>
   ];
   <span class="k">public function</span> <span class="f">build</span>() {
     <span class="k">return</span> <span class="s">"clean & scalable apps"</span>;
@@ -207,6 +225,23 @@
               <li>PHP 8</li><li>Bootstrap</li><li>PostgreSQL</li>
             </ul>
             <a class="training-link" href="https://al-jarida.onrender.com" target="_blank" rel="noopener noreferrer" data-i18n="proj.open">Visit project →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-image lightbox-trigger"
+               data-full="assets/images/beauty.png"
+               data-caption="Beauty Center">
+            <img src="assets/images/beauty.png" alt="Beauty Center — plateforme de gestion d'un centre de beauté" loading="lazy" />
+            <span class="project-badge" data-i18n="proj.p9.badge">Beauty & Wellness</span>
+          </div>
+          <div class="project-body">
+            <h3>Beauty Center</h3>
+            <p data-i18n="proj.p9.desc">Web application for a beauty center.</p>
+            <ul class="project-stack">
+              <li>Laravel 13</li><li>Bootstrap 4</li><li>PostgreSQL</li>
+            </ul>
+            <a class="training-link" href="https://beauty-center-fc9r.onrender.com/" target="_blank" rel="noopener noreferrer" data-i18n="proj.open">Visit project →</a>
           </div>
         </article>
 
@@ -378,38 +413,51 @@
       <h2 class="section-title" data-i18n="skills.title">Technical stack</h2>
 
       <div class="skills-grid">
-
         <div class="skill-card">
           <div class="skill-icon"><svg class="ico" aria-hidden="true"><use href="#i-code"/></svg></div>
-          <h3 data-i18n="skills.core">Core stack</h3>
+          <h3 data-i18n="skills.frameworks">Frameworks & Admin</h3>
           <ul class="tag-list">
-            <li>Laravel</li><li>PHP</li><li>React.js</li>
-            <li>REST API</li><li>MySQL</li>
-          </ul>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon"><svg class="ico" aria-hidden="true"><use href="#i-layout"/></svg></div>
-          <h3 data-i18n="skills.web">Web foundations</h3>
-          <ul class="tag-list">
-            <li>JavaScript</li><li>HTML5</li><li>CSS3</li><li>Bootstrap</li>
+            <li>Laravel 13</li><li>Livewire</li><li>Filament</li>
           </ul>
         </div>
 
         <div class="skill-card">
           <div class="skill-icon"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></div>
-          <h3 data-i18n="skills.additional">Additional technologies</h3>
+          <h3 data-i18n="skills.data">Data & APIs</h3>
           <ul class="tag-list">
-            <li>Symfony</li><li>Node.js</li><li>Django</li><li>PostgreSQL</li><li>SQL</li>
+            <li>PostgreSQL</li><li>MongoDB</li><li>REST API</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon"><svg class="ico" aria-hidden="true"><use href="#i-layout"/></svg></div>
+          <h3 data-i18n="skills.mobile">Mobile</h3>
+          <ul class="tag-list">
+            <li>React Native</li><li>Expo</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon"><svg class="ico" aria-hidden="true"><use href="#i-code"/></svg></div>
+          <h3 data-i18n="skills.machineLearning">Machine Learning</h3>
+          <ul class="tag-list">
+            <li>Python</li><li>Machine Learning</li><li>LLM</li>
           </ul>
         </div>
 
         <div class="skill-card">
           <div class="skill-icon"><svg class="ico" aria-hidden="true"><use href="#i-wrench"/></svg></div>
-          <h3 data-i18n="skills.tools">Tools & Methods</h3>
+          <h3 data-i18n="skills.ai">Generative AI</h3>
           <ul class="tag-list">
-            <li>Git</li><li>Power BI</li><li>SAP</li>
-            <li>Agile</li><li>MVC</li>
+            <li>RAG</li><li>Embeddings</li><li>AI Agents</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon"><svg class="ico" aria-hidden="true"><use href="#i-wrench"/></svg></div>
+          <h3 data-i18n="skills.devops">DevOps</h3>
+          <ul class="tag-list">
+            <li>Docker</li><li>CI/CD</li><li>DevOps</li>
           </ul>
         </div>
 
@@ -424,6 +472,36 @@
       <h2 class="section-title" data-i18n="exp.title">Professional experience</h2>
 
       <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date" data-i18n="exp.smartformation.current.date">Currently</span>
+            <h3 data-i18n="exp.smartformation.current.title">IT Teacher</h3>
+            <p class="timeline-company" data-i18n="exp.smartformation.current.company">Smart Formation School · Tunisia</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date" data-i18n="exp.tabarkaTraining.date">October 2026</span>
+            <h3 data-i18n="exp.tabarkaTraining.title">Trainer — AI, Laravel & Digital Marketing</h3>
+            <p class="timeline-company" data-i18n="exp.tabarkaTraining.company">In collaboration with the Tabarka Employment Office · Ain Draham, Tunisia</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date" data-i18n="exp.enjazclick.date">Jan 2024 — Jan 2025</span>
+            <h3 data-i18n="exp.enjazclick.title">Full Stack Developer</h3>
+            <p class="timeline-company" data-i18n="exp.enjazclick.company">EnjazClick · Qatar</p>
+            <ul>
+              <li data-i18n="exp.enjazclick.li1">Implemented web applications to meet business needs.</li>
+            </ul>
+          </div>
+        </div>
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>

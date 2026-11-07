@@ -265,6 +265,39 @@ ul { list-style: none; }
 
 .hero-desc strong { color: var(--text); font-weight: 600; }
 
+.hero-stack {
+  margin: -12px 0 28px;
+}
+
+.hero-stack-label {
+  margin: 0 0 10px;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-stack-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-stack-list li {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
 .hero-cta {
   display: flex;
   gap: 14px;
@@ -823,7 +856,7 @@ ul { list-style: none; }
    ============================================ */
 @media (max-width: 900px) {
   .hero-inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
   .about-grid {
@@ -966,6 +999,7 @@ ul { list-style: none; }
   .about-stats { grid-template-columns: 1fr; }
   .btn { width: 100%; }
   .hero-cta { flex-direction: column; }
+  .hero-stack-list { grid-template-columns: 1fr; }
 }
 /* ============================================
    PROFILE AVATAR
@@ -1823,7 +1857,7 @@ summary:focus-visible {
 .projects-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 /* Skills: equal-width cards */
-.skills-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 /* Experience: title column + timeline column */
 @media (min-width: 901px) {
