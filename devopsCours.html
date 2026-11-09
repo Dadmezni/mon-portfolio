@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Cours DevOps : Laravel 13, PostgreSQL, Docker, GitHub Actions et Render.">
+<title>Formation DevOps — Laravel 13, PostgreSQL, Docker &amp; Render</title>
+<style>
+:root{color-scheme:light dark;--bg:#eef2f8;--card:#fff;--ink:#12234a;--txt:#35415f;--mut:#63708e;--ac:#165dce;--line:#d6dfef;--gold:#ffbf18;--ok:#198754;--ko:#cf3e58;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#091225;--card:#111e38;--ink:#e7edff;--txt:#c4cde2;--mut:#9ba9c7;--ac:#72a5ff;--line:#263655;--ok:#62d295;--ko:#ff8393}}
+:root[data-theme="dark"]{--bg:#091225;--card:#111e38;--ink:#e7edff;--txt:#c4cde2;--mut:#9ba9c7;--ac:#72a5ff;--line:#263655;--ok:#62d295;--ko:#ff8393}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--ac)}button{font:inherit;cursor:pointer}
+#bar{position:fixed;top:0;left:0;width:100%;height:4px;z-index:30;background:linear-gradient(90deg,var(--ac),var(--gold));transform:scaleX(0);transform-origin:left}
+.hero{position:relative;overflow:hidden;padding:44px 20px 40px;background:radial-gradient(ellipse at 85% 0,#0d4c96,transparent 42%),linear-gradient(135deg,#061126,#071c3c 62%,#09152b);color:#fff}
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid #5faeff33;border-radius:50%;width:320px;height:320px;right:-110px;top:-170px;animation:spin 18s linear infinite}
+.hero:after{width:220px;height:220px;right:-60px;top:-120px;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hi{position:relative;z-index:1;max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:26px;align-items:center}
+.brand{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#d9e8ff}
+.hero h1{margin:12px 0 8px;font-size:clamp(34px,7vw,64px);line-height:1.05;letter-spacing:-.04em}
+.hero h1 span{background:linear-gradient(90deg,#ffcb27,#ff8b16);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:0;color:#d5e0f3;font-size:clamp(16px,2.3vw,19px)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.chips span{padding:5px 11px;border:1px solid #ffffff3b;border-radius:99px;background:#ffffff0d;font-size:13px;font-weight:650}
+.cta{display:inline-block;padding:10px 18px;border-radius:10px;background:#ffc21c;color:#121a2d;font-weight:800;text-decoration:none;transition:transform .2s}
+.cta:hover{transform:translateY(-2px)}
+.term{border-radius:12px;background:#050d1c;border:1px solid #283955;box-shadow:0 18px 40px #0008;font:13px/1.7 ui-monospace,Consolas,monospace;min-height:210px;overflow:hidden}
+.th{display:flex;gap:6px;padding:8px 11px;background:#14233b}
+.th i{width:10px;height:10px;border-radius:50%;background:#ff6259}.th i:nth-child(2){background:#ffc247}.th i:nth-child(3){background:#49cb78}
+#tt{margin:0;padding:12px 14px;color:#cfe0ff;white-space:pre-wrap;min-height:170px}
+#tt:after{content:"▌";animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;max-width:1100px;margin:-26px auto 0;padding:0 16px;position:relative;z-index:2}
+.stat{padding:14px;border-radius:14px;background:var(--card);border:1px solid var(--line);text-align:center;box-shadow:0 10px 26px #142b5718}
+.stat b{display:block;font-size:30px;color:var(--ac);line-height:1.1}.stat small{color:var(--mut);font-weight:650}
+nav{position:sticky;top:4px;z-index:20;display:flex;gap:6px;align-items:center;overflow-x:auto;padding:9px 12px;margin-top:16px;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav a,nav button{flex:none;padding:5px 11px;border:1px solid var(--line);border-radius:99px;background:var(--bg);color:var(--ink);font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;transition:.2s}
+nav a:hover,nav a.on{background:var(--ac);border-color:var(--ac);color:#fff}
+@media(min-width:1000px){nav{justify-content:center}}
+main{width:min(1100px,100%);margin:auto;padding:20px 16px 48px;display:grid;gap:20px}
+.step{min-width:0;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:0 8px 26px #142b5712;scroll-margin-top:80px}
+.step h2{display:flex;align-items:center;gap:11px;margin:0 0 4px;color:var(--ink);font-size:clamp(21px,4vw,28px);line-height:1.3}
+.num{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--ac),#1745a2);color:#fff;font-size:17px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+.meta span{padding:2px 10px;border-radius:99px;background:color-mix(in srgb,var(--ac) 12%,var(--card));color:var(--ink);font-size:12px;font-weight:700}
+.goal{margin:0 0 12px;color:var(--mut);font-style:italic}
+.step h3{margin:18px 0 6px;color:var(--ink);font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:11px;margin:12px 0}
+.tile{padding:13px;border:1px solid var(--line);border-top:4px solid var(--c,var(--ac));border-radius:12px;background:color-mix(in srgb,var(--c,var(--ac)) 6%,var(--card));transition:transform .25s,box-shadow .25s}
+.tile:hover{transform:translateY(-4px);box-shadow:0 10px 20px color-mix(in srgb,var(--c,var(--ac)) 22%,transparent)}
+.tile b{display:block;color:var(--ink)}.tile p{margin:4px 0 0;font-size:14px}
+.pipe{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0;padding:14px;border-radius:14px;background:color-mix(in srgb,var(--ac) 8%,var(--card))}
+.node{flex:1 1 105px;max-width:170px;padding:10px 6px;border:2px solid var(--line);border-radius:12px;background:var(--card);text-align:center;transition:.4s}
+.node i{display:block;font-size:24px;font-style:normal}.node b{font-size:14px;color:var(--ink)}.node small{display:block;font-size:11px;color:var(--mut)}
+.node.lit{border-color:var(--ok);transform:translateY(-5px);box-shadow:0 10px 22px color-mix(in srgb,var(--ok) 28%,transparent)}
+.code{margin:10px 0;border:1px solid #283955;border-radius:11px;overflow:hidden;background:#081426}
+.ch{display:flex;align-items:center;gap:6px;padding:6px 10px;background:#14233b;color:#c5d5ef;font-size:12px}
+.ch i{width:9px;height:9px;border-radius:50%;background:#ff6259}.ch i:nth-child(2){background:#ffc247}.ch i:nth-child(3){background:#49cb78}
+.ch span{margin-left:5px;flex:1}.ch button{padding:2px 9px;border:1px solid #3a5075;border-radius:6px;background:transparent;color:#c5d5ef;font-size:12px}
+.ch button:hover{background:#243a5e}
+pre{margin:0;padding:12px 14px;overflow:auto;color:#e3edff;font:13px/1.6 ui-monospace,Consolas,monospace}
+.note,.warn,.ex{margin:12px 0;padding:10px 13px;border-radius:10px;border-left:4px solid var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card))}
+.warn{border-color:#ed9c1b;background:color-mix(in srgb,#ed9c1b 14%,var(--card))}
+.ex{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--card))}
+code:not(pre code){padding:1px 5px;border-radius:5px;background:color-mix(in srgb,var(--ac) 12%,var(--card));color:var(--ink);font:.92em ui-monospace,Consolas,monospace;overflow-wrap:anywhere}
+.tw{overflow-x:auto;margin:10px 0}table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}th{background:color-mix(in srgb,var(--ac) 12%,var(--card));color:var(--ink)}
+ul,ol{padding-inline-start:24px}li{margin:5px 0}
+.cl{list-style:none;padding:0}.cl li{display:flex;gap:9px;align-items:flex-start}.cl input{margin-top:6px;width:17px;height:17px;accent-color:var(--ok);flex:none}
+.cl li.d span{text-decoration:line-through;opacity:.6}
+details{margin:8px 0;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+summary{padding:9px 13px;cursor:pointer;color:var(--ink);font-weight:700}details>div{padding:0 13px 10px}
+.quiz{margin:14px 0;padding:14px;border:1px dashed var(--ac);border-radius:12px}
+.quiz>b{color:var(--ink)}.opts{display:grid;gap:7px;margin-top:9px}
+.opts button{padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--txt);text-align:left;transition:.2s}
+.opts button:hover:not(:disabled){border-color:var(--ac)}
+.opts button.ok{background:color-mix(in srgb,var(--ok) 22%,var(--card));border-color:var(--ok)}
+.opts button.ko{background:color-mix(in srgb,var(--ko) 20%,var(--card));border-color:var(--ko)}
+.js .step{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.js .step.in{opacity:1;transform:none}
+.js .tile{opacity:0;transform:translateY(12px)}.js .in .tile{opacity:1;transform:none;transition-delay:calc(var(--i,0)*80ms)}
+.st{counter-reset:s;list-style:none;padding:0;margin:16px 0 16px 18px}.st>li{counter-increment:s;position:relative;margin:0;padding:0 0 20px 34px;border-left:3px solid var(--line)}.st>li:last-child{border-color:transparent}.st>li:before{content:counter(s);position:absolute;left:-19px;top:0;display:grid;place-items:center;width:35px;height:35px;border-radius:50%;background:var(--ac);color:#fff;font-weight:800;box-shadow:0 0 0 5px var(--card)}.st>li.d:before{content:'✓';background:var(--ok)}.st h4{margin:4px 0;color:var(--ink);font-size:17px}.st p{margin:4px 0}.out{margin:8px 0;padding:8px 12px;border-left:4px solid var(--ok);border-radius:8px;background:color-mix(in srgb,var(--ok) 11%,var(--card));font-size:14px}.out.ko{border-color:#ed9c1b;background:color-mix(in srgb,#ed9c1b 13%,var(--card))}.dn{margin-top:4px;padding:3px 11px;border:1px solid var(--line);border-radius:99px;background:var(--bg);color:var(--ink);font-size:12px;font-weight:700}.dn:hover{border-color:var(--ok)}.pas{margin:16px 0 0;color:var(--ac);font-size:13px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}body:before{content:'';position:fixed;inset:-10%;z-index:-1;pointer-events:none;background:radial-gradient(circle at 18% 22%,color-mix(in srgb,var(--ac) 14%,transparent),transparent 38%),radial-gradient(circle at 82% 72%,color-mix(in srgb,var(--gold) 11%,transparent),transparent 38%);animation:drift 22s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(4%,3%) scale(1.12)}}
+@keyframes shine{to{background-position:200% center}}
+@keyframes pop{0%{transform:scale(.4)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes fl{50%{transform:translateY(-5px)}}
+@keyframes hop{40%{transform:translateY(-9px) scale(1.2)}}
+@keyframes glow{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--ac) 0%,transparent)}0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ac) 50%,transparent)}}
+.hero h1 span{background-image:linear-gradient(90deg,#ffcb27,#ff8b16,#ff5e8a,#ffcb27);background-size:200% auto;animation:shine 5s linear infinite}
+.chips span{animation:fl 4s ease-in-out infinite}.chips span:nth-child(2n){animation-delay:.6s}.chips span:nth-child(3n){animation-delay:1.2s}
+.cta{animation:glow 2.4s infinite}
+.num{transition:transform .4s}.step:hover .num{transform:rotate(-8deg) scale(1.1)}
+.step{transition:box-shadow .3s,border-color .3s}.step:hover{border-color:var(--ac);box-shadow:0 14px 34px #142b5722}
+.node.lit i{animation:hop .7s}
+.st>li.d:before{animation:pop .5s}
+.opts button.ok{animation:pop .45s}.opts button.ko{animation:shake .45s}
+summary{transition:background .2s}details[open]>summary{background:color-mix(in srgb,var(--ac) 10%,transparent)}
+.js .st>li,.js .code,.js .out,.js .quiz,.js .note,.js .warn,.js .ex,.js details{opacity:0;transform:translateX(-22px);transition:opacity .55s,transform .55s cubic-bezier(.2,.8,.2,1)}
+.js .st>li.in,.js .code.in,.js .out.in,.js .quiz.in,.js .note.in,.js .warn.in,.js .ex.in,.js details.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.js .st>li,.js .code,.js .out,.js .quiz,.js .note,.js .warn,.js .ex,.js details{opacity:1!important;transform:none!important;transition:none}}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+nav a,nav button{display:flex;align-items:center}nav a em{margin-left:auto;padding-left:8px}
+@media(min-width:1000px){html{scroll-padding-top:20px}body{padding-left:250px}
+nav{position:fixed;top:0;left:0;bottom:0;width:250px;margin:0;flex-direction:column;align-items:stretch;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;gap:6px;padding:20px 12px;background:var(--card);backdrop-filter:none;border-right:1px solid var(--line);border-bottom:0;z-index:25}
+nav:before{content:'Sommaire';padding:0 6px 8px;color:var(--ink);font-size:18px;font-weight:800}
+nav a,nav button{border-radius:10px;border-color:transparent;background:transparent;padding:7px 12px;font-size:14px;text-align:left}
+nav a:hover,nav a.on{background:var(--ac);color:#fff}nav button{margin-top:auto;border-color:var(--line)}}
+#gotop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;width:44px;height:44px;border:2px solid var(--ac);border-radius:50%;background:var(--gold);color:#12234a;font-size:20px;opacity:0;pointer-events:none;transform:scale(.6);transition:.3s}
+#gotop.show{opacity:1;pointer-events:auto;transform:none}
+.dig{border-color:var(--ac)}.dig ul{margin:0;padding:0 34px 12px 38px}.dig li{margin:6px 0}.dig li::marker{color:var(--ac)}
+.fg{margin:6px 14px 8px}.fg svg{display:block;width:min(520px,100%);margin:0 auto;overflow:visible}
+.fi{animation:fi .6s both}.fa{stroke-dasharray:5 4;animation:da 1s linear infinite}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}}@keyframes da{to{stroke-dashoffset:-9}}
+footer{padding:8px 16px 30px;color:var(--mut);text-align:center;font-size:14px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,:before,:after{animation:none!important}.js .step,.js .tile{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div id="bar" aria-hidden="true"></div>
+<header class="hero" id="top"><div class="hi">
+ <div>
+  <div class="brand">Smart Formation · Jendouba</div>
+  <h1>Formation <span>DevOps</span></h1>
+  <p>Construisez, conteneurisez, testez et déployez une vraie application Laravel 13, de votre poste jusqu’au cloud.</p>
+  <div class="chips"><span>🚀 Laravel 13</span><span>🐘 PostgreSQL</span><span>🐳 Docker</span><span>🐙 GitHub</span><span>🔁 Actions</span><span>☁️ Render</span></div>
+  <a class="cta" href="#s0">Commencer le cours ↓</a>
+ </div>
+ <div class="term" aria-hidden="true"><div class="th"><i></i><i></i><i></i></div><pre id="tt"></pre></div>
+</div></header>
+<div class="stats">
+ <div class="stat"><b data-n="10">0</b><small>chapitres</small></div>
+ <div class="stat"><b data-n="25">0</b><small>commandes clés</small></div>
+ <div class="stat"><b data-n="3" id="qn">0</b><small>quiz interactifs</small></div>
+ <div class="stat"><b id="pc">0%</b><small>votre progression</small></div>
+</div>
+<nav id="nav" aria-label="Sommaire">
+ <a href="#s0">Parcours</a><a href="#s1">Outils</a><a href="#s2">Laravel</a><a href="#s3">PostgreSQL</a><a href="#s4">Docker</a><a href="#s5">Git</a><a href="#s6">CI</a><a href="#s7">Render</a><a href="#s8">Projet</a><a href="#s9">Annexes</a>
+ <button id="th" type="button" aria-label="Changer de thème">🌓</button>
+</nav>
+<main>
+
+<article class="step" id="s0">
+ <h2><span class="num">∞</span>De l’idée à la production</h2>
+ <div class="meta"><span>⏱ 15 min</span><span>Niveau : débutant</span></div>
+ <p class="goal">Chaque chapitre ajoute une pièce au même projet : un catalogue de produits.</p>
+ <p>DevOps rapproche développement et exploitation : on versionne, on teste, on livre de façon reproductible, puis on surveille. Cliquez sur « Rejouer » pour voir le chemin d’un changement.</p>
+ <div class="pipe" id="pipe">
+  <div class="node"><i>💻</i><b>Code</b><small>Laravel</small></div><div class="node"><i>🐙</i><b>Push</b><small>GitHub</small></div><div class="node"><i>🧪</i><b>Tests</b><small>Actions</small></div><div class="node"><i>🐳</i><b>Image</b><small>Docker</small></div><div class="node"><i>☁️</i><b>Déploiement</b><small>Render</small></div><div class="node"><i>📈</i><b>Suivi</b><small>Logs</small></div>
+ </div>
+ <p style="text-align:center"><button class="cta" id="replay" type="button" style="border:0">▶ Rejouer le pipeline</button></p>
+ <div class="grid">
+  <div class="tile" style="--c:#3478d4;--i:0"><b>🎯 Objectif</b><p>Application déployée, reliée à PostgreSQL, livrée depuis GitHub.</p></div>
+  <div class="tile" style="--c:#20a7a5;--i:1"><b>🧰 Prérequis</b><p>PHP, HTML, terminal, VS Code, compte GitHub, Docker Desktop.</p></div>
+  <div class="tile" style="--c:#f0a51c;--i:2"><b>🧪 Méthode</b><p>Explication, commandes, vérification, défi, puis quiz.</p></div>
+ </div>
+ <div class="note"><b>Principe :</b> automatisez le répétitif, gardez une trace de chaque changement et rendez les erreurs visibles tôt.</div>
+</article>
+
+<article class="step" id="s1">
+ <h2><span class="num">1</span>Préparer le poste de travail</h2>
+ <div class="meta"><span>⏱ 20 min</span><span>PHP 8.3+</span><span>Docker Compose v2</span></div>
+ <p class="goal">Installer les outils et vérifier les versions avant d’écrire une ligne de code.</p>
+ <div class='pas'>Pas à pas</div>
+ <ol class='st'>
+  <li><h4>Installer PHP 8.3 et Composer</h4><p><b>Pourquoi :</b> Laravel 13 exige un PHP récent, et Composer télécharge ses dépendances.</p><div class='code' data-t='Terminal'><pre><code>php -v
+composer --version</code></pre></div><div class='out'><b>Résultat attendu :</b> <code>PHP 8.3.x</code> puis <code>Composer version 2.x</code>.</div></li>
+  <li><h4>Installer et démarrer Docker Desktop</h4><p><b>Pourquoi :</b> il fournit Docker Engine et Compose ; sans lui, la base locale ne démarrera pas.</p><div class='code' data-t='Terminal'><pre><code>docker run --rm hello-world</code></pre></div><div class='out'><b>Résultat attendu :</b> le message <code>Hello from Docker!</code></div><div class='out ko'><b>Si ça échoue :</b> lancez l’application Docker Desktop et attendez que l’icône indique « running ».</div></li>
+  <li><h4>Se présenter à Git</h4><p><b>Pourquoi :</b> chaque commit est signé de ce nom et de cet e-mail.</p><div class='code' data-t='Terminal'><pre><code>git config --global user.name 'Votre nom'
+git config --global user.email 'vous@exemple.com'
+git config --list</code></pre></div><div class='out'><b>Résultat attendu :</b> vos deux valeurs apparaissent dans la liste.</div></li>
+ </ol>
+ <div class="grid">
+  <div class="tile" style="--c:#3478d4;--i:0"><b>PHP + Composer</b><p>Runtime et gestionnaire de dépendances.</p></div>
+  <div class="tile" style="--c:#2495dc;--i:1"><b>Docker Desktop</b><p>Engine + Compose pour PostgreSQL local.</p></div>
+  <div class="tile" style="--c:#24292f;--i:2"><b>Git + GitHub</b><p>Historique local, partage distant.</p></div>
+  <div class="tile" style="--c:#7856db;--i:3"><b>Compte Render</b><p>Relié à GitHub pour déployer.</p></div>
+ </div>
+ <div class="code" data-t="Terminal · contrôles"><pre><code>php -v
+composer --version
+docker --version
+docker compose version
+git --version
+git config --global user.name "Votre nom"
+git config --global user.email "vous@exemple.com"</code></pre></div>
+ <ul class="cl"><li data-k="a1">Les 5 commandes de version répondent sans erreur.</li><li data-k="a2">L’identité Git est configurée.</li><li data-k="a3">Un dépôt GitHub vide (sans README) est créé.</li></ul>
+ <div class="quiz" data-q="Pourquoi créer le dépôt GitHub sans README ni licence ?|Pour que le premier push ne crée pas d’historique divergent|Pour économiser de l’espace disque|Parce que GitHub l’interdit"></div>
+</article>
+
+<article class="step" id="s2">
+ <h2><span class="num">2</span>Construire l’application Laravel</h2>
+ <div class="meta"><span>⏱ 30 min</span><span>Artisan</span><span>MVC</span></div>
+ <p class="goal">Créer le socle, comprendre où vivent routes, modèles et vues.</p>
+ <div class='pas'>Pas à pas</div>
+ <ol class='st'>
+  <li><h4>Créer le projet</h4><p><b>Pourquoi :</b> <code>create-project</code> télécharge le squelette Laravel et installe les dépendances en une commande.</p><div class='code' data-t='Terminal'><pre><code>composer create-project laravel/laravel:^13.0 devops-catalogue
+cd devops-catalogue</code></pre></div></li>
+  <li><h4>Démarrer le serveur de développement</h4><div class='code' data-t='Terminal'><pre><code>php artisan serve</code></pre></div><div class='out'><b>Résultat attendu :</b> la page d’accueil Laravel sur <code>http://127.0.0.1:8000</code>. Arrêtez avec Ctrl+C.</div></li>
+  <li><h4>Générer modèle, migration et contrôleur</h4><p><b>Pourquoi :</b> Artisan crée les fichiers au bon endroit, avec la bonne structure.</p><div class='code' data-t='Terminal'><pre><code>php artisan make:model Product -mf
+php artisan make:controller ProductController --resource</code></pre></div><div class='out'><b>Résultat attendu :</b> trois nouveaux fichiers : modèle, migration et contrôleur.</div></li>
+  <li><h4>Ajouter et tester la route /health</h4><p>Ajoutez la route dans <code>routes/web.php</code> (voir plus bas), puis testez-la.</p><div class='code' data-t='Terminal'><pre><code>curl http://127.0.0.1:8000/health</code></pre></div><div class='out'><b>Résultat attendu :</b> <code>Application prête</code></div><div class='out ko'><b>Si ça échoue :</b> <code>php artisan route:clear</code> puis relancez le serveur.</div></li>
+ </ol>
+ <div class="code" data-t="Terminal · projet"><pre><code>composer create-project laravel/laravel:^13.0 devops-catalogue
+cd devops-catalogue
+php artisan serve
+php artisan make:model Product -mf
+php artisan make:controller ProductController --resource
+php artisan route:list</code></pre></div>
+ <div class="tw"><table><thead><tr><th>Chemin</th><th>Rôle</th></tr></thead><tbody>
+  <tr><td><code>routes/web.php</code></td><td>URL de l’application.</td></tr>
+  <tr><td><code>app/Models</code></td><td>Modèles Eloquent et relations.</td></tr>
+  <tr><td><code>database/migrations</code></td><td>Évolution du schéma.</td></tr>
+  <tr><td><code>resources/views</code></td><td>Vues Blade.</td></tr>
+  <tr><td><code>tests/Feature</code></td><td>Tests de bout en bout HTTP.</td></tr>
+  <tr><td><code>.env</code></td><td>Configuration locale, jamais commitée.</td></tr></tbody></table></div>
+ <h3>Une route de santé</h3>
+ <div class="code" data-t="routes/web.php"><pre><code>Route::get('/health', fn () =&gt; response('Application prête'));
+Route::resource('products', ProductController::class);</code></pre></div>
+ <div class="ex"><b>🎯 Défi</b> Ouvrez <code>/health</code> dans le navigateur, puis listez les routes avec <code>route:list</code>.</div>
+ <h3>Laravel en profondeur : le cycle d’une requête</h3>
+ <div class='pipe' id='req'><div class='node lit'><i>🌐</i><b>Requête</b><small>GET /products</small></div><div class='node lit'><i>🧭</i><b>Route</b><small>web.php</small></div><div class='node lit'><i>🛡️</i><b>Middleware</b><small>CSRF, session</small></div><div class='node lit'><i>🎛️</i><b>Contrôleur</b><small>logique</small></div><div class='node lit'><i>🗃️</i><b>Modèle</b><small>Eloquent</small></div><div class='node lit'><i>🖼️</i><b>Vue</b><small>Blade</small></div></div>
+ <p>Nous construisons le CRUD du catalogue en suivant exactement ce chemin, de la donnée jusqu’à l’écran, puis nous le testons.</p>
+ <div class='pas'>Construire le CRUD</div>
+ <ol class='st'>
+  <li><h4>Le modèle Eloquent</h4><p><b>Pourquoi :</b> <code>$fillable</code> liste les champs que l’on peut remplir en masse ; tout le reste est refusé, ce qui protège contre l’injection de champs (<em>mass assignment</em>). Le cast garantit un prix toujours formaté.</p><div class='code' data-t='app/Models/Product.php'><pre><code>class Product extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['name', 'description', 'price'];
+
+    protected function casts(): array
+    {
+        return ['price' =&gt; 'decimal:2'];
+    }
+}</code></pre></div></li>
+  <li><h4>Factory et seeder : des données de démonstration</h4><p><b>Pourquoi :</b> une factory fabrique des données réalistes, reproductibles, sans rien saisir à la main.</p><div class='code' data-t='database/factories/ProductFactory.php'><pre><code>public function definition(): array
+{
+    return [
+        'name' =&gt; fake()-&gt;words(3, true),
+        'description' =&gt; fake()-&gt;sentence(),
+        'price' =&gt; fake()-&gt;randomFloat(2, 5, 500),
+    ];
+}</code></pre></div><div class='code' data-t='Terminal'><pre><code># dans DatabaseSeeder::run() : Product::factory()-&gt;count(20)-&gt;create();
+php artisan db:seed
+php artisan tinker
+&gt;&gt;&gt; App\Models\Product::count()</code></pre></div><div class='out'><b>Résultat attendu :</b> <code>20</code></div><div class='out ko'><b>Attention :</b> <code>migrate:fresh --seed</code> efface toutes les tables. Jamais en production.</div></li>
+  <li><h4>La validation avec un Form Request</h4><p><b>Pourquoi :</b> les règles sortent du contrôleur : elles sont réutilisables, testables, et Laravel renvoie automatiquement les erreurs à la vue.</p><div class='code' data-t='Terminal'><pre><code>php artisan make:request ProductRequest</code></pre></div><div class='code' data-t='app/Http/Requests/ProductRequest.php'><pre><code>public function authorize(): bool
+{
+    return true;
+}
+
+public function rules(): array
+{
+    return [
+        'name' =&gt; ['required', 'string', 'max:120'],
+        'description' =&gt; ['nullable', 'string', 'max:1000'],
+        'price' =&gt; ['required', 'numeric', 'min:0', 'max:99999999'],
+    ];
+}</code></pre></div></li>
+  <li><h4>Le contrôleur</h4><p><b>Pourquoi :</b> il orchestre seulement : il reçoit des données déjà validées (<code>validated()</code>), appelle le modèle, puis redirige. <code>paginate()</code> évite de charger toute la table. Importez les classes utilisées (l’éditeur propose l’import automatique).</p><div class='code' data-t='app/Http/Controllers/ProductController.php'><pre><code>public function index()
+{
+    return view('products.index', [
+        'products' =&gt; Product::latest()-&gt;paginate(10),
+    ]);
+}
+
+public function store(ProductRequest $request)
+{
+    Product::create($request-&gt;validated());
+    return back()-&gt;with('ok', 'Produit créé.');
+}
+
+public function update(ProductRequest $request, Product $product)
+{
+    $product-&gt;update($request-&gt;validated());
+    return back()-&gt;with('ok', 'Produit modifié.');
+}
+
+public function destroy(Product $product)
+{
+    $product-&gt;delete();
+    return back()-&gt;with('ok', 'Produit supprimé.');
+}</code></pre></div><p>Le <em>route model binding</em> transforme l’identifiant de l’URL en objet <code>$product</code>, avec une erreur 404 automatique s’il n’existe pas.</p></li>
+  <li><h4>La vue Blade</h4><p><b>Pourquoi :</b> <code>{{ }}</code> échappe le HTML (protection XSS) ; <code>@csrf</code> protège le formulaire ; <code>@error</code> affiche les messages de validation.</p><div class='code' data-t='resources/views/products/index.blade.php'><pre><code>@if (session('ok')) &lt;p&gt;{{ session('ok') }}&lt;/p&gt; @endif
+
+&lt;form method="POST" action="{{ route('products.store') }}"&gt;
+    @csrf
+    &lt;input name="name" value="{{ old('name') }}" placeholder="Nom"&gt;
+    @error('name') &lt;small&gt;{{ $message }}&lt;/small&gt; @enderror
+    &lt;input name="price" value="{{ old('price') }}" placeholder="Prix"&gt;
+    @error('price') &lt;small&gt;{{ $message }}&lt;/small&gt; @enderror
+    &lt;button&gt;Ajouter&lt;/button&gt;
+&lt;/form&gt;
+
+@foreach ($products as $p)
+    &lt;p&gt;{{ $p-&gt;name }} — {{ number_format($p-&gt;price, 2) }} TND&lt;/p&gt;
+@endforeach
+
+{{ $products-&gt;links() }}</code></pre></div><div class='out'><b>Résultat attendu :</b> <code>/products</code> affiche 10 produits avec pagination et le formulaire d’ajout.</div></li>
+  <li><h4>Les tests Feature</h4><p><b>Pourquoi :</b> <code>RefreshDatabase</code> remet la base propre avant chaque test. Ces tests sont ceux que la CI exécutera.</p><div class='code' data-t='tests/Feature/ProductTest.php'><pre><code>use App\Models\Product;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class ProductTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_index_is_visible(): void
+    {
+        Product::factory()-&gt;count(3)-&gt;create();
+        $this-&gt;get('/products')-&gt;assertOk();
+    }
+
+    public function test_product_can_be_created(): void
+    {
+        $this-&gt;post('/products', ['name' =&gt; 'Clavier', 'price' =&gt; 49.9]);
+        $this-&gt;assertDatabaseHas('products', ['name' =&gt; 'Clavier']);
+    }
+
+    public function test_name_is_required(): void
+    {
+        $this-&gt;post('/products', ['price' =&gt; 10])
+             -&gt;assertSessionHasErrors('name');
+    }
+}</code></pre></div><div class='code' data-t='Terminal'><pre><code>php artisan test</code></pre></div><div class='out'><b>Résultat attendu :</b> <code>Tests: 3 passed</code> (plus les tests d’exemple de Laravel).</div></li>
+  <li><h4>Préparer la production</h4><p><b>Pourquoi :</b> les caches accélèrent Laravel, mais <code>config:cache</code> fige les variables d’environnement. Il doit donc s’exécuter <b>au démarrage</b> du service, quand Render a injecté ses variables, pas pendant le build.</p><div class='code' data-t='Terminal · au démarrage du service'><pre><code>php artisan config:cache
+php artisan route:cache
+php artisan view:cache</code></pre></div><div class='out ko'><b>Piège :</b> après <code>config:cache</code>, la fonction <code>env()</code> ne doit plus être appelée hors des fichiers <code>config/</code>.</div></li>
+ </ol>
+ <div class='note'><b>Pour aller plus loin :</b> ajoutez une table <code>categories</code> et une relation <code>hasMany</code> / <code>belongsTo</code>. Chargez-la avec <code>Product::with('category')</code> pour éviter le problème N+1 (une requête SQL par ligne affichée).</div>
+ <div class="quiz" data-q="Que protège la propriété $fillable d’un modèle ?|Contre l’affectation en masse de champs non prévus|Contre les injections SQL uniquement|Contre l’oubli de migration"></div>
+ <div class="quiz" data-q="Pourquoi lancer config:cache au démarrage et pas pendant le build ?|Parce qu’il fige les variables d’environnement, injectées seulement à l’exécution|Parce que le build n’a pas accès à PHP|Parce qu’il supprime les migrations"></div>
+ <h3>Laravel avancé : aller au bout de l’application</h3>
+ <p>Le CRUD fonctionne ; voici ce qui le rend <b>professionnel</b> : modification et suppression, relations, recherche, accès protégé, API JSON et journaux lisibles en production.</p>
+ <div class='pas'>Niveau 2</div>
+ <ol class='st'>
+  <li><h4>Modifier et supprimer depuis la vue</h4><p><b>Pourquoi :</b> HTML ne sait envoyer que GET et POST ; <code>@method</code> déclare à Laravel le vrai verbe (<code>PUT</code>, <code>DELETE</code>). Remplacez la boucle <code>@foreach</code> de la vue :</p><div class='code' data-t='resources/views/products/index.blade.php'><pre><code>@foreach ($products as $p)
+  &lt;form method='POST' action='{{ route('products.update', $p) }}'&gt;
+    @csrf @method('PUT')
+    &lt;input name='name' value='{{ $p-&gt;name }}'&gt;
+    &lt;input name='price' value='{{ $p-&gt;price }}'&gt;
+    &lt;button&gt;Enregistrer&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;form method='POST' action='{{ route('products.destroy', $p) }}'
+        onsubmit='return confirm("Supprimer ?")'&gt;
+    @csrf @method('DELETE')
+    &lt;button&gt;Supprimer&lt;/button&gt;
+  &lt;/form&gt;
+@endforeach</code></pre></div><div class='out'><b>Résultat attendu :</b> modifier un prix puis recharger la page conserve la nouvelle valeur ; supprimer retire la ligne.</div></li>
+  <li><h4>Ajouter une relation : les catégories</h4><p><b>Pourquoi :</b> une clé étrangère garantit l’intégrité dans PostgreSQL lui-même, pas seulement dans le code. On passe par une <em>nouvelle</em> migration, jamais en modifiant l’ancienne.</p><div class='code' data-t='Terminal'><pre><code>php artisan make:model Category -mf
+php artisan make:migration add_category_id_to_products_table --table=products</code></pre></div><div class='code' data-t='Migrations'><pre><code>// categories : une colonne 'name' (string, unique)
+// add_category_id... :
+$table-&gt;foreignId('category_id')-&gt;nullable()
+      -&gt;constrained()-&gt;nullOnDelete();</code></pre></div><div class='code' data-t='Modèles'><pre><code>// Category
+public function products() { return $this-&gt;hasMany(Product::class); }
+// Product (ajoutez 'category_id' à $fillable)
+public function category() { return $this-&gt;belongsTo(Category::class); }
+// ProductRequest::rules()
+'category_id' =&gt; ['nullable', 'exists:categories,id'],</code></pre></div><div class='code' data-t='Terminal'><pre><code>php artisan migrate</code></pre></div></li>
+  <li><h4>Éviter le problème N+1</h4><p><b>Pourquoi :</b> afficher la catégorie de 10 produits sans précharge déclenche 1 requête pour la liste + 10 pour les catégories. <code>with()</code> les regroupe en 2 requêtes.</p><div class='code' data-t='ProductController::index'><pre><code>Product::with('category')-&gt;latest()-&gt;paginate(10);</code></pre></div><div class='out'><b>Résultat attendu :</b> dans la vue, <code>{{ $p-&gt;category?-&gt;name }}</code> ne génère plus de requête par ligne. Pour le prouver, activez <code>DB::enableQueryLog()</code> en <code>tinker</code>.</div></li>
+  <li><h4>Recherche et filtre avec un scope</h4><p><b>Pourquoi :</b> un <em>scope</em> encapsule une condition réutilisable. <code>withQueryString()</code> garde <code>?q=</code> dans les liens de pagination.</p><div class='code' data-t='Product.php + contrôleur'><pre><code>public function scopeSearch($query, ?string $q)
+{
+    return $q ? $query-&gt;where('name', 'ilike', "%{$q}%") : $query;
+}
+
+// index()
+Product::with('category')
+    -&gt;search($request-&gt;query('q'))
+    -&gt;latest()-&gt;paginate(10)-&gt;withQueryString();</code></pre></div><p><code>ilike</code> est propre à PostgreSQL : recherche insensible à la casse.</p></li>
+  <li><h4>Protéger les routes</h4><p><b>Pourquoi :</b> le <em>middleware</em> <code>auth</code> redirige les visiteurs non connectés. Pour l’inscription et la connexion, utilisez le kit de démarrage proposé par la documentation officielle de votre version de Laravel.</p><div class='code' data-t='routes/web.php'><pre><code>Route::get('/products', [ProductController::class, 'index']);
+Route::middleware('auth')-&gt;group(function () {
+    Route::resource('products', ProductController::class)-&gt;except(['index', 'show']);
+});</code></pre></div><div class='code' data-t='Test'><pre><code>public function test_guest_cannot_create(): void
+{
+    $this-&gt;post('/products', ['name' =&gt; 'X', 'price' =&gt; 1])
+         -&gt;assertRedirect('/login');
+}</code></pre></div><div class='out ko'><b>Attention :</b> mettez à jour vos tests de création avec <code>$this-&gt;actingAs(User::factory()-&gt;create())</code>.</div></li>
+  <li><h4>Exposer une API JSON</h4><p><b>Pourquoi :</b> une <em>API Resource</em> contrôle exactement les champs publiés ; vous ne divulguez jamais une colonne par accident.</p><div class='code' data-t='Terminal'><pre><code>php artisan install:api
+php artisan make:resource ProductResource</code></pre></div><div class='code' data-t='ProductResource + routes/api.php'><pre><code>public function toArray($request): array
+{
+    return ['id' =&gt; $this-&gt;id, 'name' =&gt; $this-&gt;name, 'price' =&gt; $this-&gt;price];
+}
+
+Route::get('/products', fn () =&gt;
+    ProductResource::collection(Product::paginate(10)));</code></pre></div><div class='code' data-t='Terminal'><pre><code>curl http://127.0.0.1:8000/api/products</code></pre></div><div class='out'><b>Résultat attendu :</b> un JSON avec <code>data</code>, <code>links</code> et <code>meta</code>.</div></li>
+  <li><h4>Des journaux visibles en production</h4><p><b>Pourquoi :</b> Docker et Render lisent la sortie standard. Par défaut Laravel écrit dans un fichier du conteneur, que le tableau de bord ne montre pas.</p><div class='code' data-t='Variables Render / .env'><pre><code>LOG_CHANNEL=stderr
+LOG_LEVEL=info</code></pre></div><div class='code' data-t='Dans le code'><pre><code>Log::info('Produit créé', ['id' =&gt; $product-&gt;id]);</code></pre></div><p>Laravel fournit aussi une route de santé intégrée, <code>/up</code>, idéale comme <em>Health Check Path</em> dans les réglages Render.</p><div class='out'><b>Résultat attendu :</b> chaque création de produit apparaît dans les journaux du service.</div></li>
+ </ol>
+ <div class='note'><b>Idées pour continuer :</b> <em>Policies</em> (qui peut modifier quoi), files d’attente (<code>queue</code>) pour les tâches lentes, cache, et <em>rate limiting</em> sur l’API.</div>
+ <div class="quiz" data-q="Que fait with('category') sur une liste de produits ?|Charge les catégories en une seule requête supplémentaire|Supprime la relation|Crée la clé étrangère"></div>
+ <div class="quiz" data-q="Pourquoi utiliser LOG_CHANNEL=stderr sur Render ?|Pour que les journaux apparaissent dans le tableau de bord|Pour désactiver les logs|Pour accélérer PostgreSQL"></div>
+ <div class="quiz" data-q="Quel est l’intérêt d’une API Resource ?|Contrôler précisément les champs exposés en JSON|Remplacer les migrations|Chiffrer la base"></div>
+ <div class="quiz" data-q="Quel fichier sert de modèle partageable pour la configuration ?|.env.example|.env|composer.lock"></div>
+</article>
+
+<article class="step" id="s3">
+ <h2><span class="num">3</span>PostgreSQL et migrations</h2>
+ <div class="meta"><span>⏱ 30 min</span><span>postgres:16</span><span>Healthcheck</span></div>
+ <p class="goal">Démarrer une base locale, relier Laravel, créer la table <code>products</code>.</p>
+ <div class='pas'>Pas à pas</div>
+ <ol class='st'>
+  <li><h4>Démarrer PostgreSQL avec Compose</h4><p>Créez <code>compose.yaml</code> avec le contenu ci-dessous, puis lancez-le.</p><div class='code' data-t='Terminal'><pre><code>docker compose up -d
+docker compose ps</code></pre></div><div class='out'><b>Résultat attendu :</b> le service <code>postgres</code> passe à <code>healthy</code> en quelques secondes.</div></li>
+  <li><h4>Renseigner le .env</h4><p><b>Pourquoi :</b> Laravel lit sa connexion dans <code>.env</code>. Le cache de configuration doit être vidé après modification.</p><div class='code' data-t='Terminal'><pre><code>php artisan config:clear</code></pre></div></li>
+  <li><h4>Appliquer la migration</h4><div class='code' data-t='Terminal'><pre><code>php artisan migrate
+php artisan migrate:status</code></pre></div><div class='out'><b>Résultat attendu :</b> chaque migration est marquée <code>Ran</code>.</div><div class='out ko'><b>Si « connection refused » :</b> la base n’est pas encore prête, ou <code>DB_PORT</code> / <code>DB_HOST</code> est incorrect.</div></li>
+  <li><h4>Vérifier directement dans PostgreSQL</h4><p><b>Pourquoi :</b> ne jamais supposer : on lit la base elle-même.</p><div class='code' data-t='Terminal'><pre><code>docker compose exec postgres psql -U laravel -d laravel_app -c '\dt'</code></pre></div><div class='out'><b>Résultat attendu :</b> la table <code>products</code> apparaît dans la liste.</div></li>
+ </ol>
+ <div class="code" data-t="compose.yaml"><pre><code>services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: laravel_app
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: local-dev-only
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U laravel -d laravel_app"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  pgdata:</code></pre></div>
+ <div class="code" data-t=".env · local uniquement"><pre><code>DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=laravel_app
+DB_USERNAME=laravel
+DB_PASSWORD=local-dev-only</code></pre></div>
+ <div class="code" data-t="Migration · products"><pre><code>Schema::create('products', function (Blueprint $table) {
+    $table-&gt;id();
+    $table-&gt;string('name');
+    $table-&gt;text('description')-&gt;nullable();
+    $table-&gt;decimal('price', 10, 2);
+    $table-&gt;timestamps();
+});</code></pre></div>
+ <div class="code" data-t="Terminal"><pre><code>docker compose up -d
+php artisan config:clear
+php artisan migrate
+php artisan migrate:status</code></pre></div>
+ <div class="warn"><b>Important :</b> si Laravel tourne aussi dans Compose, <code>DB_HOST</code> vaut <code>postgres</code> (nom du service). Ne réutilisez jamais ces identifiants en production.</div>
+ <div class="ex"><b>🎯 Défi</b> Modifiez une colonne via une <em>nouvelle</em> migration : on ne réécrit jamais une migration déjà appliquée.</div>
+ <div class="quiz" data-q="Quel hôte utiliser quand Laravel est dans un conteneur du même réseau Compose ?|postgres (nom du service)|127.0.0.1|localhost:5432"></div>
+</article>
+
+<article class="step" id="s4">
+ <h2><span class="num">4</span>Docker : développement puis production</h2>
+ <div class="meta"><span>⏱ 45 min</span><span>Dockerfile</span><span>Compose</span></div>
+ <p class="goal">Distinguer image et conteneur, puis préparer deux images : dev et prod.</p>
+ <div class='note'><b>Pourquoi deux images ?</b> En développement on veut un démarrage simple et le débogage ; en production on veut une image légère, sans outils de dev, qui écoute sur le port de la plateforme.</div>
+ <div class='pas'>Pas à pas</div>
+ <ol class='st'>
+  <li><h4>Créer Dockerfile et .dockerignore</h4><p>Copiez les fichiers ci-dessous à la racine du projet. Le <code>.dockerignore</code> garde <code>.env</code> et <code>vendor</code> hors de l’image.</p></li>
+  <li><h4>Générer la clé puis construire</h4><div class='code' data-t='Terminal'><pre><code>php artisan key:generate
+docker compose up --build -d</code></pre></div><div class='out'><b>Résultat attendu :</b> deux conteneurs, <code>app</code> et <code>postgres</code>, à l’état <code>Up</code>.</div></li>
+  <li><h4>Migrer depuis le conteneur</h4><div class='code' data-t='Terminal'><pre><code>docker compose exec app php artisan migrate</code></pre></div></li>
+  <li><h4>Diagnostiquer si besoin</h4><div class='code' data-t='Terminal'><pre><code>docker compose ps
+docker compose logs --tail=50 app</code></pre></div><div class='out'><b>Résultat attendu :</b> <code>http://localhost:8000</code> répond ; les journaux ne montrent aucune erreur.</div><div class='out ko'><b>Si « APP_KEY » manque :</b> relancez <code>php artisan key:generate</code>, puis <code>docker compose up -d</code>.</div></li>
+ </ol>
+ <div class="grid">
+  <div class="tile" style="--c:#2495dc;--i:0"><b>Image</b><p>Modèle versionné : app + dépendances.</p></div>
+  <div class="tile" style="--c:#168b9b;--i:1"><b>Conteneur</b><p>Instance isolée d’une image.</p></div>
+  <div class="tile" style="--c:#f0a51c;--i:2"><b>Volume</b><p>Données qui survivent au conteneur.</p></div>
+  <div class="tile" style="--c:#6b54c6;--i:3"><b>Compose</b><p>Services, ports, volumes, santé.</p></div>
+ </div>
+ <h3>Image de développement</h3>
+ <div class="code" data-t="Dockerfile · dev seulement"><pre><code>FROM php:8.3-cli
+RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends libpq-dev unzip git \
+    &amp;&amp; docker-php-ext-install pdo_pgsql \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+WORKDIR /var/www/html
+COPY . .
+RUN composer install --no-interaction --prefer-dist
+EXPOSE 8000
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]</code></pre></div>
+ <div class="code" data-t=".dockerignore"><pre><code>.git
+.env
+.env.*
+!.env.example
+vendor
+node_modules</code></pre></div>
+ <div class="code" data-t="compose.yaml · service app à ajouter"><pre><code>  app:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      APP_ENV: local
+      APP_KEY: ${APP_KEY}
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_DATABASE: laravel_app
+      DB_USERNAME: laravel
+      DB_PASSWORD: local-dev-only
+    depends_on:
+      postgres:
+        condition: service_healthy</code></pre></div>
+ <div class="code" data-t="Terminal"><pre><code>php artisan key:generate
+docker compose up --build -d
+docker compose exec app php artisan migrate
+docker compose logs -f app
+docker compose down        # garde les données
+docker compose down -v     # EFFACE les volumes</code></pre></div>
+ <h3>Image de production (Render)</h3>
+ <p>Render fournit la variable <code>PORT</code> ; Apache doit y écouter et servir <code>public/</code>. Ce Dockerfile utilise deux étages pour une image plus légère.</p>
+ <div class="code" data-t="Dockerfile.prod · exemple"><pre><code>FROM composer:2 AS vendor
+WORKDIR /app
+COPY composer.* ./
+RUN composer install --no-dev --no-scripts --prefer-dist --no-interaction
+COPY . .
+RUN composer dump-autoload --optimize --no-dev
+
+FROM php:8.3-apache
+RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends libpq-dev \
+    &amp;&amp; docker-php-ext-install pdo_pgsql opcache \
+    &amp;&amp; a2enmod rewrite \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+WORKDIR /var/www/html
+COPY --from=vendor /app .
+RUN chown -R www-data:www-data storage bootstrap/cache
+CMD ["sh","-c","sed -i \"s/80/${PORT:-10000}/\" /etc/apache2/ports.conf /etc/apache2/sites-available/000-default.conf &amp;&amp; apache2-foreground"]</code></pre></div>
+ <div class="warn"><b>Adaptez et testez</b> ce modèle localement avec <code>docker build -f Dockerfile.prod .</code> avant de déployer.</div>
+ <div class="quiz" data-q="Que fait docker compose down -v ?|Supprime aussi les volumes, donc les données|Redémarre les services|Reconstruit les images"></div>
+</article>
+
+<article class="step" id="s5">
+ <h2><span class="num">5</span>Git et GitHub</h2>
+ <div class="meta"><span>⏱ 25 min</span><span>Branches</span><span>Pull Request</span></div>
+ <p class="goal">Chaque changement devient une étape lisible, partageable et réversible.</p>
+ <div class='pas'>Pas à pas</div>
+ <ol class='st'>
+  <li><h4>Vérifier ce que Git ignore, avant le premier commit</h4><p><b>Pourquoi :</b> un secret commité reste dans l’historique même après suppression. On vérifie donc avant, pas après.</p><div class='code' data-t='Terminal'><pre><code>git init
+git check-ignore -v .env vendor</code></pre></div><div class='out'><b>Résultat attendu :</b> deux lignes montrant la règle de <code>.gitignore</code> qui ignore chaque chemin. Si rien ne s’affiche, ne commitez pas encore.</div></li>
+  <li><h4>Premier commit et premier push</h4><p>Utilisez les commandes du bloc « premier envoi » ci-dessous.</p><div class='out'><b>Résultat attendu :</b> le code est visible sur GitHub, sans <code>.env</code> ni <code>vendor/</code>.</div></li>
+  <li><h4>Travailler en branche, par petits commits</h4><p><b>Pourquoi :</b> <code>main</code> reste toujours déployable. <code>git add -p</code> permet de choisir précisément ce qui entre dans le commit. Adoptez une convention de message : <code>feat:</code> nouvelle fonction, <code>fix:</code> correction, <code>docs:</code> documentation, <code>test:</code> tests.</p><div class='code' data-t='Terminal'><pre><code>git switch -c feature/categories
+git add -p
+git commit -m 'feat: add categories relation'
+git push -u origin feature/categories</code></pre></div></li>
+  <li><h4>Ouvrir et relire la Pull Request</h4><p>Sur GitHub, cliquez <b>Compare &amp; pull request</b>. Décrivez : le <em>pourquoi</em>, ce qui change, comment tester. Relisez le diff vous-même avant de demander une revue. Fusionnez seulement quand la CI est verte.</p><div class='code' data-t='Terminal · après la fusion'><pre><code>git switch main
+git pull
+git branch -d feature/categories</code></pre></div></li>
+  <li><h4>Corriger une erreur sans casser l’historique</h4><p><b>Pourquoi :</b> sur une branche partagée, on n’efface pas : on ajoute un commit qui annule.</p><div class='code' data-t='Terminal'><pre><code>git restore fichier.php        # abandonne les changements non commités
+git revert abc1234             # annule un commit déjà partagé
+git log --oneline --graph      # relit l’historique</code></pre></div><div class='out ko'><b>Évitez :</b> <code>git push --force</code> sur <code>main</code> et <code>reset --hard</code> sur du travail partagé.</div></li>
+ </ol>
+ <div class="quiz" data-q="Quelle commande annule un commit déjà partagé sans réécrire l’historique ?|git revert|git reset --hard|git push --force"></div>
+ <div class="code" data-t="Terminal · premier envoi"><pre><code>git init
+git add .
+git commit -m "Initialise le catalogue Laravel"
+git branch -M main
+git remote add origin https://github.com/VOTRE-COMPTE/devops-catalogue.git
+git push -u origin main</code></pre></div>
+ <div class="code" data-t="Terminal · une fonctionnalité"><pre><code>git switch -c feature/product-validation
+git status
+git add app tests
+git commit -m "Add product validation"
+git push -u origin feature/product-validation</code></pre></div>
+ <ul class="cl"><li data-k="g1">Commits courts, message décrivant le résultat.</li><li data-k="g2">Relire <code>git status</code> avant chaque commit.</li><li data-k="g3">.env et clés privées sont ignorés par Git.</li><li data-k="g4">La Pull Request décrit le but et les tests.</li></ul>
+ <div class="warn"><b>Secret poussé ?</b> Le supprimer ne suffit pas : l’historique le garde. Révoquez-le d’abord, puis traitez l’historique.</div>
+ <div class="quiz" data-q="Un mot de passe a été poussé sur GitHub. Première action ?|Le révoquer ou le renouveler|Supprimer le fichier dans un nouveau commit|Rendre le dépôt privé"></div>
+</article>
+
+<article class="step" id="s6">
+ <h2><span class="num">6</span>CI avec GitHub Actions</h2>
+ <div class="meta"><span>⏱ 30 min</span><span>YAML</span><span>Service PostgreSQL</span></div>
+ <p class="goal">Exécuter les tests à chaque Pull Request, avant la fusion.</p>
+ <div class='pas'>Pas à pas</div>
+ <ol class='st'>
+  <li><h4>Créer le dossier du workflow</h4><div class='code' data-t='Terminal'><pre><code>mkdir -p .github/workflows</code></pre></div><p>GitHub ne lit les workflows que dans ce dossier exact.</p></li>
+  <li><h4>Écrire <code>tests.yml</code></h4><p>Copiez le fichier ci-dessous. Lecture : <b>on</b> = quand, <b>services</b> = base temporaire, <b>steps</b> = ce qui s’exécute, dans l’ordre.</p></li>
+  <li><h4>Pousser et lire le résultat</h4><div class='code' data-t='Terminal'><pre><code>git switch -c ci/tests
+git add .github
+git commit -m 'Add CI workflow'
+git push -u origin ci/tests</code></pre></div><div class='out'><b>Résultat attendu :</b> onglet <b>Actions</b> : un job qui passe au vert ✓.</div></li>
+  <li><h4>Rendre la CI obligatoire</h4><p>Réglages du dépôt, <b>Branches</b>, règle sur <code>main</code> : exiger que le contrôle réussisse avant fusion.</p></li>
+ </ol>
+ <div class="code" data-t=".github/workflows/tests.yml"><pre><code>name: Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: laravel_test
+          POSTGRES_USER: laravel
+          POSTGRES_PASSWORD: secret
+        ports: ["5432:5432"]
+        options: &gt;-
+          --health-cmd="pg_isready -U laravel -d laravel_test"
+          --health-interval=10s --health-timeout=5s --health-retries=5
+    env:
+      DB_CONNECTION: pgsql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+      DB_DATABASE: laravel_test
+      DB_USERNAME: laravel
+      DB_PASSWORD: secret
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pgsql, pdo_pgsql
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - run: cp .env.example .env &amp;&amp; php artisan key:generate
+      - run: php artisan migrate --force
+      - run: php artisan test</code></pre></div>
+ <ol><li>Poussez la branche et ouvrez l’onglet <b>Actions</b>.</li><li>Cassez volontairement un test, observez le rouge, corrigez.</li><li>Réglages GitHub : exigez des contrôles verts avant fusion (branch protection).</li></ol>
+ <div class="ex"><b>🎯 Défi</b> Ajoutez un test Feature qui vérifie que <code>/health</code> répond 200.</div>
+ <div class="quiz" data-q="À quoi sert le bloc services: dans le workflow ?|À démarrer une base PostgreSQL temporaire pour les tests|À déployer sur Render|À installer PHP"></div>
+</article>
+
+<article class="step" id="s7">
+ <h2><span class="num">7</span>Déployer sur Render</h2>
+ <div class="meta"><span>⏱ 40 min</span><span>Web Service Docker</span><span>HTTPS</span></div>
+ <p class="goal">Mettre en ligne, connecter la base et savoir diagnostiquer.</p>
+ <div class='pas'>Pas à pas</div>
+ <ol class='st'>
+  <li><h4>Créer la base PostgreSQL Render</h4><p>Notez l’adresse <b>interne</b> (Internal URL) : c’est celle que le service utilisera, sans passer par Internet.</p></li>
+  <li><h4>Générer une clé de production</h4><div class='code' data-t='Terminal'><pre><code>php artisan key:generate --show</code></pre></div><p>Copiez la valeur <code>base64:...</code> : elle ira dans Render, jamais dans Git.</p></li>
+  <li><h4>Créer le Web Service Docker</h4><p>Reliez le dépôt, choisissez l’environnement Docker, indiquez <code>Dockerfile.prod</code> comme chemin, puis ajoutez les variables d’environnement.</p></li>
+  <li><h4>Déployer et vérifier</h4><div class='code' data-t='Terminal'><pre><code>curl https://VOTRE-SERVICE.onrender.com/health</code></pre></div><div class='out'><b>Résultat attendu :</b> <code>Application prête</code> ; les journaux de démarrage sont sans erreur.</div></li>
+  <li><h4>Appliquer les migrations</h4><p>Utilisez la commande de pré-déploiement si votre offre la propose, sinon un shell du service :</p><div class='code' data-t='Render'><pre><code>php artisan migrate --force</code></pre></div><div class='out ko'><b>Avant :</b> sauvegardez la base et vérifiez le plan de migration.</div></li>
+ </ol>
+ <ol>
+  <li>Créez une base <b>PostgreSQL</b> sur Render et relevez ses paramètres de connexion privés.</li>
+  <li>Créez un <b>Web Service</b> relié au dépôt, environnement Docker, avec le Dockerfile de production.</li>
+  <li>Variables : <code>APP_ENV=production</code>, <code>APP_DEBUG=false</code>, <code>APP_KEY</code>, <code>DB_*</code>.</li>
+  <li>Générez une clé dédiée avec <code>php artisan key:generate --show</code> et saisissez-la comme secret.</li>
+  <li>Lancez le déploiement, lisez les journaux, puis appliquez <code>php artisan migrate --force</code>.</li>
+ </ol>
+ <div class="warn"><b>Aucun identifiant de démonstration en production.</b> HTTPS, <code>APP_DEBUG=false</code>, secrets hors du dépôt.</div>
+ <h3>Dépannage</h3>
+ <details><summary>🔴 Build en échec</summary><div>Lisez les journaux de build : extension PHP absente, mauvais chemin de Dockerfile, dépendance Composer.</div></details>
+ <details><summary>🟠 Erreur HTTP 500</summary><div>Vérifiez <code>APP_KEY</code>, les variables <code>DB_*</code> et les droits sur <code>storage/</code>. Consultez les logs applicatifs.</div></details>
+ <details><summary>🟡 Service qui ne démarre pas</summary><div>Le serveur doit écouter sur le port <code>PORT</code> fourni par Render.</div></details>
+ <details><summary>🟢 Vérifier la mise en ligne</summary><div>Testez <code>/health</code>, une lecture et une écriture en base, puis un second déploiement.</div></details>
+ <div class="note">Avant une migration risquée : sauvegardez la base et préparez un retour arrière.</div>
+ <div class="quiz" data-q="Pourquoi APP_DEBUG=false en production ?|Pour ne pas exposer d’informations internes|Pour accélérer Composer|C’est obligatoire pour PostgreSQL"></div>
+</article>
+
+<article class="step" id="s8">
+ <h2><span class="num">8</span>Projet de synthèse</h2>
+ <div class="meta"><span>⏱ 3 h</span><span>Livrable noté</span></div>
+ <p class="goal">Assembler le tout dans un catalogue de produits déployé.</p>
+ <div class='pas'>Pas à pas</div>
+ <ol class='st'>
+  <li><h4>Planifier avant de coder</h4><p>Créez une <em>issue</em> GitHub par fonctionnalité : CRUD, validation, catégories, recherche, déploiement. Une issue = une branche = une Pull Request.</p></li>
+  <li><h4>Construire par tranches verticales</h4><p><b>Pourquoi :</b> chaque tranche (base, modèle, contrôleur, vue, test) est démontrable et déployable seule, ce qui réduit les risques.</p><div class='out'><b>Ordre conseillé :</b> 1. CRUD produits → 2. validation → 3. catégories → 4. recherche → 5. protection des routes → 6. déploiement.</div></li>
+  <li><h4>Garder la CI verte à chaque fusion</h4><p>Aucune Pull Request n’est fusionnée avec un test rouge. Chaque fonction apporte au moins un test.</p></li>
+  <li><h4>Déployer, puis faire un test de fumée</h4><div class='code' data-t='Terminal'><pre><code>curl -i https://VOTRE-SERVICE.onrender.com/up
+curl -i https://VOTRE-SERVICE.onrender.com/health
+curl -s https://VOTRE-SERVICE.onrender.com/api/products</code></pre></div><div class='out'><b>Résultat attendu :</b> codes <code>200</code> et un JSON valide. Créez ensuite un produit depuis l’interface et retrouvez-le après un nouveau déploiement.</div></li>
+  <li><h4>Rédiger le README</h4><div class='code' data-t='README.md · plan'><pre><code># Catalogue DevOps
+## Présentation
+## Prérequis
+## Installation locale
+## Variables d’environnement
+## Lancer les tests
+## Déploiement (Render)
+## Architecture
+## Auteur</code></pre></div></li>
+  <li><h4>Préparer la démonstration (5 minutes)</h4><p>1 min : le problème et l’architecture. 2 min : un changement, sa Pull Request et la CI verte. 1 min : le déploiement et le test de fumée. 1 min : une panne simulée et comment vous la diagnostiquez.</p></li>
+ </ol>
+ <h3>Grille d’évaluation</h3>
+ <div class='tw'><table><thead><tr><th>Critère</th><th>Points</th></tr></thead><tbody><tr><td>Application fonctionnelle (CRUD, validation, relation)</td><td>25</td></tr><tr><td>Docker : base locale et image de production</td><td>15</td></tr><tr><td>Git : branches, commits clairs, Pull Request</td><td>15</td></tr><tr><td>CI : tests pertinents et verts</td><td>15</td></tr><tr><td>Déploiement Render, secrets et journaux</td><td>20</td></tr><tr><td>README et démonstration</td><td>10</td></tr></tbody></table></div>
+ <ul><li>CRUD complet : nom, description, prix, date de création.</li><li>Validation serveur avec messages clairs, données de démonstration non sensibles.</li><li>PostgreSQL via Compose en local, base Render en production.</li><li>GitHub : branches, Pull Request, workflow de tests.</li></ul>
+ <h3>Checklist de rendu</h3>
+ <ul class="cl">
+  <li data-k="p1">Le README explique installation, configuration et tests.</li>
+  <li data-k="p2">Un nouveau développeur lance la base avec <code>docker compose up -d</code>.</li>
+  <li data-k="p3">Migrations et tests sont verts sur GitHub Actions.</li>
+  <li data-k="p4">Les secrets sont dans Render, jamais dans le dépôt.</li>
+  <li data-k="p5">Je sais expliquer : commit → PR → CI → fusion → déploiement → vérification.</li>
+ </ul>
+ <div class="note"><b>Aller plus loin :</b> sauvegardes, supervision, alertes et procédure de restauration documentée.</div>
+ <div class="ex"><b>🎓 Livrable</b> URL Render, dépôt GitHub, capture des tests verts et courte démonstration.</div>
+ <p><a href="#top">↑ Retour en haut</a></p>
+</article>
+<article class='step' id='s9'>
+ <h2><span class='num'>📚</span>Annexes de référence</h2>
+ <div class='meta'><span>À garder sous la main</span></div>
+ <p class='goal'>Glossaire, aide-mémoire, erreurs fréquentes et checklist de sécurité.</p>
+ <h3>Glossaire</h3>
+ <div class='tw'><table><thead><tr><th>Terme</th><th>Définition</th></tr></thead><tbody>
+  <tr><td>CI / CD</td><td>Intégration continue (tests automatiques) / livraison ou déploiement continu.</td></tr>
+  <tr><td>Image / conteneur</td><td>Modèle figé / instance en cours d’exécution de ce modèle.</td></tr>
+  <tr><td>Volume</td><td>Stockage persistant attaché à un conteneur.</td></tr>
+  <tr><td>Migration</td><td>Fichier versionné qui fait évoluer le schéma de la base.</td></tr>
+  <tr><td>Eloquent</td><td>ORM de Laravel : une table = un modèle PHP.</td></tr>
+  <tr><td>Middleware</td><td>Filtre exécuté avant le contrôleur (auth, CSRF, session).</td></tr>
+  <tr><td>Pull Request</td><td>Proposition de fusion d’une branche, avec revue et contrôles.</td></tr>
+  <tr><td>Variable d’environnement</td><td>Réglage ou secret fourni à l’exécution, hors du code.</td></tr>
+  <tr><td>Health check</td><td>Route que la plateforme appelle pour savoir si l’application est vivante.</td></tr></tbody></table></div>
+ <h3>Aide-mémoire</h3>
+ <div class='tw'><table><thead><tr><th>Outil</th><th>Commande</th><th>Usage</th></tr></thead><tbody>
+  <tr><td>Artisan</td><td><code>php artisan route:list</code></td><td>Voir toutes les routes</td></tr>
+  <tr><td>Artisan</td><td><code>php artisan migrate:status</code></td><td>État des migrations</td></tr>
+  <tr><td>Artisan</td><td><code>php artisan tinker</code></td><td>Console interactive</td></tr>
+  <tr><td>Docker</td><td><code>docker compose ps</code></td><td>État des services</td></tr>
+  <tr><td>Docker</td><td><code>docker compose logs -f app</code></td><td>Suivre les journaux</td></tr>
+  <tr><td>Docker</td><td><code>docker compose exec app sh</code></td><td>Ouvrir un shell dans le conteneur</td></tr>
+  <tr><td>Git</td><td><code>git log --oneline --graph</code></td><td>Historique lisible</td></tr>
+  <tr><td>Git</td><td><code>git status</code></td><td>À lire avant chaque commit</td></tr></tbody></table></div>
+ <h3>Erreurs fréquentes</h3>
+ <div class='tw'><table><thead><tr><th>Symptôme</th><th>Cause probable</th><th>Solution</th></tr></thead><tbody>
+  <tr><td>Connection refused</td><td>Base non démarrée ou mauvais hôte</td><td><code>docker compose ps</code> ; hôte <code>postgres</code> dans Compose</td></tr>
+  <tr><td>No application encryption key</td><td><code>APP_KEY</code> absente</td><td><code>php artisan key:generate</code></td></tr>
+  <tr><td>Erreur 419</td><td>Jeton CSRF manquant</td><td>Ajouter <code>@csrf</code> au formulaire</td></tr>
+  <tr><td>Erreur 500 en production</td><td>Variable manquante ou droits sur <code>storage/</code></td><td>Lire les journaux Render</td></tr>
+  <tr><td>Port déjà utilisé</td><td>Un autre service écoute sur 5432 ou 8000</td><td>Changer le port publié</td></tr>
+  <tr><td>Test vert en local, rouge en CI</td><td>Version PHP ou base différente</td><td>Aligner le workflow</td></tr></tbody></table></div>
+ <h3>Checklist de sécurité</h3>
+ <ul class='cl'>
+  <li data-k='x1'><code>APP_DEBUG=false</code> et <code>APP_ENV=production</code> en production.</li>
+  <li data-k='x2'>Aucun secret dans le dépôt ; <code>.env</code> ignoré par Git et Docker.</li>
+  <li data-k='x3'>Mots de passe de production différents de ceux du développement.</li>
+  <li data-k='x4'>Validation côté serveur et <code>$fillable</code> définis sur chaque modèle.</li>
+  <li data-k='x5'>Routes d’écriture protégées par <code>auth</code>.</li>
+  <li data-k='x6'>Sauvegarde de la base testée avant chaque migration risquée.</li>
+ </ul>
+ <p><a href='#top'>↑ Retour en haut</a></p>
+</article>
+</main>
+<footer>Formation DevOps · Laravel 13 + PostgreSQL + Docker + Git/GitHub + Render<br>Mezni Dhiaa · Smart Formation — Jendouba</footer>
+<script>
+(function(){
+var d=document,R=d.documentElement;R.classList.add('js');
+function $(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s))}
+function S(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+// code blocks
+$('.code[data-t]').forEach(function(c){var h=d.createElement('div');h.className='ch';h.innerHTML='<i></i><i></i><i></i><span></span><button type="button">Copier</button>';h.querySelector('span').textContent=c.dataset.t;c.insertBefore(h,c.firstChild);
+ var b=h.querySelector('button');b.onclick=function(){var t=c.querySelector('pre').innerText;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='Copié ✓'},function(){b.textContent='Ctrl+C'});setTimeout(function(){b.textContent='Copier'},1500)}});
+// quiz
+$('.quiz').forEach(function(q){var p=q.dataset.q.split('|'),o=p.slice(1).map(function(t,i){return{t:t,ok:i===0}}).sort(function(){return Math.random()-.5});
+ q.innerHTML='<b>🧠 Quiz — </b>'+p[0].replace(/</g,'&lt;')+'<div class="opts"></div>';var w=q.querySelector('.opts');
+ o.forEach(function(x){var b=d.createElement('button');b.type='button';b.textContent=x.t;b.onclick=function(){$('button',w).forEach(function(y){y.disabled=true});b.classList.add(x.ok?'ok':'ko');if(!x.ok)$('button',w).forEach(function(y){if(y.textContent===p[1])y.classList.add('ok')});b.insertAdjacentHTML('afterend','');var m=d.createElement('p');m.textContent=x.ok?'✅ Bonne réponse !':'❌ La bonne réponse est : '+p[1];w.appendChild(m)};w.appendChild(b)})});
+// checklists
+var cks=$('.cl li');cks.forEach(function(li){var k='dv-'+li.dataset.k,i=d.createElement('input');i.type='checkbox';i.checked=S(k)==='1';var s=d.createElement('span');while(li.firstChild)s.appendChild(li.firstChild);li.appendChild(i);li.appendChild(s);
+ function up(){li.classList.toggle('d',i.checked)}up();i.onchange=function(){S(k,i.checked?'1':'0');up();pg()}});
+function pg(){var n=cks.filter(function(l){return l.querySelector('input').checked}).length+$('.st>li.d').length,t=cks.length+$('.st>li').length;d.getElementById('pc').textContent=Math.round(100*n/t)+'%';chap()}pg();
+// theme
+d.getElementById('th').onclick=function(){var dk=R.dataset.theme?R.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;R.dataset.theme=dk?'light':'dark'};
+// terminal typing
+var L=['$ composer create-project laravel/laravel:^13.0','✔ Application créée','$ docker compose up -d','✔ postgres  Healthy','$ php artisan migrate','✔ products ........ DONE','$ git push origin main','✔ Tests ✓  Build ✓  Déployé ☁️'],tt=d.getElementById('tt'),li=0,ci=0,buf='';
+function type(){if(li>=L.length){setTimeout(function(){buf='';li=0;ci=0;type()},3500);return}var l=L[li];if(ci<=l.length){tt.textContent=buf+l.slice(0,ci);ci++;setTimeout(type,l[0]==='$'?45:12)}else{buf+=l+'\n';li++;ci=0;setTimeout(type,l[0]==='$'?350:200)}}
+if(matchMedia('(prefers-reduced-motion:reduce)').matches){tt.textContent=L.join('\n')}else type();
+// pipeline
+var nodes=$('#pipe .node');function play(){nodes.forEach(function(n){n.classList.remove('lit')});nodes.forEach(function(n,i){setTimeout(function(){n.classList.add('lit')},i*550)})}
+d.getElementById('replay').onclick=play;
+// counters
+function count(e){var t=+e.dataset.n,s=0;(function f(){s+=Math.max(1,t/30);e.textContent=Math.min(t,Math.round(s));if(s<t)requestAnimationFrame(f)})()}
+// reveal + scrollspy
+var steps=$('.step'),links=$('nav a');
+if('IntersectionObserver' in window){
+ var rv=new IntersectionObserver(function(es,ob){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ob.unobserve(e.target);if(e.target.id==='s0')play()}})},{threshold:0,rootMargin:'0px 0px -8% 0px'});steps.forEach(function(s){rv.observe(s)});
+ var sp=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)links.forEach(function(l){l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-25% 0px -65% 0px'});steps.forEach(function(s){sp.observe(s)});
+ var co=new IntersectionObserver(function(es,ob){es.forEach(function(e){if(e.isIntersecting){count(e.target);ob.unobserve(e.target)}})});$('[data-n]').forEach(function(e){co.observe(e)});
+}else{steps.forEach(function(s){s.classList.add('in')});$('[data-n]').forEach(function(e){e.textContent=e.dataset.n})}
+function boom(el){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=el.getBoundingClientRect(),c=['#ffbf18','#165dce','#198754','#cf3e58','#7856db'];for(var i=0;i<24;i++){var s=d.createElement('i');s.style.cssText='position:fixed;z-index:50;pointer-events:none;width:7px;height:10px;border-radius:2px;left:'+(r.left+r.width/2)+'px;top:'+r.top+'px;background:'+c[i%5];d.body.appendChild(s);var a=Math.random()*6.28,v=60+Math.random()*100;s.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate('+Math.cos(a)*v+'px,'+(Math.sin(a)*v+130)+'px) rotate('+Math.random()*720+'deg)',opacity:0}],{duration:900+Math.random()*500,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=(function(n){return function(){n.remove()}})(s)}}
+var ro='IntersectionObserver' in window?new IntersectionObserver(function(es,ob){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ob.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px'}):null;
+$('.st>li,.code,.out,.quiz,.note,.warn,.ex,details').forEach(function(e){if(ro)ro.observe(e);else e.classList.add('in')});
+function chap(){var nv=$('nav a');$('.step').forEach(function(s){var a=$('.st>li,.cl li',s),n=a.length;if(!n)return;var k=a.filter(function(x){return x.classList.contains('d')}).length,l=nv.filter(function(x){return x.getAttribute('href')==='#'+s.id})[0];if(!l)return;var b=l.querySelector('em');if(!b){b=d.createElement('em');b.style.cssText='margin-left:6px;font-style:normal;font-size:11px;opacity:.85';l.appendChild(b)}b.textContent=k===n?'✓':k+'/'+n})}chap();
+var rq=d.getElementById('req');
+if(rq){var rn=$('.node',rq),cap=d.createElement('p'),rb=d.createElement('button'),CP=['Le navigateur envoie GET /products','routes/web.php trouve le contrôleur à appeler','Les middlewares vérifient session et jeton CSRF','Le contrôleur valide les données et appelle le modèle','Eloquent interroge PostgreSQL','Blade génère la page HTML renvoyée au navigateur'];
+cap.style.cssText='text-align:center;font-weight:700;color:var(--ink);min-height:1.7em;margin:6px 0';rb.type='button';rb.className='cta';rb.style.cssText='border:0;display:block;margin:0 auto 10px';rb.textContent='▶ Suivre une requête';
+rq.parentNode.insertBefore(cap,rq.nextSibling);rq.parentNode.insertBefore(rb,cap);
+var rt=[];function playReq(){rt.forEach(clearTimeout);rt=[];rn.forEach(function(n){n.classList.remove('lit')});cap.textContent='';rn.forEach(function(n,i){rt.push(setTimeout(function(){n.classList.add('lit');cap.textContent=(i+1)+'/6 — '+CP[i]},i*850))})}
+rn.forEach(function(n){n.classList.remove('lit')});rb.onclick=playReq;
+if('IntersectionObserver' in window){var ob2=new IntersectionObserver(function(es,o){if(es[0].isIntersecting){playReq();o.disconnect()}},{threshold:.5});ob2.observe(rq)}else{rn.forEach(function(n){n.classList.add('lit')})}}
+var DG={
+s1:[[['🧰','Outils'],['✅','Versions'],['🐙','Dépôt']],['Si vous jonglez entre plusieurs projets PHP, utilisez un gestionnaire de versions plutôt qu’une installation unique.','Notez les versions utilisées dans le README : « ça marche chez moi » est la première cause de bugs d’environnement.','Activez l’authentification à deux facteurs sur GitHub et Render dès maintenant.']],
+s2:[[['🌐','Requête'],['🧭','Route'],['🎛️','Contrôleur'],['🗃️','Modèle'],['🖼️','Vue']],['Gardez les contrôleurs minces : la logique métier complexe se range dans des classes de service.','<code>php artisan route:list</code> est le moyen le plus rapide de diagnostiquer une erreur 404.','Lisez la documentation de la version de Laravel installée : certaines structures évoluent d’une version à l’autre.']],
+s3:[[['🐳','Compose'],['🐘','PostgreSQL'],['📐','Migration'],['✅','Table']],['Une migration déjà appliquée en production ne se modifie jamais : créez-en une nouvelle.','Ajoutez des index sur les colonnes souvent filtrées, puis vérifiez le gain avec <code>EXPLAIN ANALYZE</code>.','Le volume Compose conserve les données ; <code>down -v</code> les efface.']],
+s4:[[['📄','Dockerfile'],['📦','Image'],['▶️','Conteneur'],['💾','Volume']],['Placez les étapes qui changent peu (dépendances) avant <code>COPY . .</code> pour profiter du cache de couches.','Épinglez les versions d’images (<code>postgres:16</code>) plutôt que <code>latest</code> pour des builds reproductibles.','Ne mettez jamais de secret dans l’image : passez-les par l’environnement au démarrage.']],
+s5:[[['🌿','Branche'],['💾','Commit'],['🔀','Pull Request'],['🏁','main']],['Un commit = un changement logique : des messages clairs rendent <code>git log</code> utile.','Protégez <code>main</code> : revue obligatoire et contrôles verts avant fusion.','Si votre offre GitHub le propose, activez la détection de secrets du dépôt.']],
+s6:[[['📤','Push'],['🧪','Actions'],['✅','Tests'],['🔒','Fusion']],['Mettez en cache les dépendances Composer dans le workflow pour accélérer la CI.','Un test qui échoue de façon aléatoire doit être corrigé, pas relancé jusqu’à ce qu’il passe.','Épinglez les actions tierces par version (voire par SHA) pour limiter les risques de chaîne d’approvisionnement.']],
+s7:[[['🗃️','Base Render'],['🔑','Secrets'],['🐳','Build'],['☁️','En ligne']],['Testez les migrations sur un environnement de préproduction avant la production.','Surveillez les journaux et exposez un point de santé (<code>/up</code>) pour détecter les pannes.','Planifiez des sauvegardes de la base et testez réellement une restauration.']],
+s8:[[['📋','Plan'],['🛠️','Code'],['🧪','CI'],['🚀','Démo']],['Livrez en petites tranches : une application simple mais déployée vaut mieux qu’une application riche jamais en ligne.','Un bon README réduit le temps d’intégration d’un nouveau développeur.','Préparez un plan B pour la démo : captures d’écran ou courte vidéo.']]};
+var PL=['var(--ac)','var(--ok)','#ed9c1b','#7856db','var(--ko)'],dn=0;
+function flow(it){var n=it.length,g=420/n,u='ah'+(dn++),o='<defs><marker id=\''+u+'\' viewBox=\'0 0 10 10\' refX=\'8\' refY=\'5\' markerWidth=\'6\' markerHeight=\'6\' orient=\'auto\'><path d=\'M0 0L10 5L0 10z\' fill=\'currentColor\'/></marker></defs>';
+it.forEach(function(x,i){var cx=g*(i+.5),c=PL[i%5];o+=`<g class='fi' style='animation-delay:${i*.25}s'><rect x='${cx-32}' y='14' width='64' height='60' rx='14' fill='${c}' fill-opacity='.15' stroke='${c}' stroke-width='2'/><text x='${cx}' y='54' text-anchor='middle' font-size='28'>${x[0]}</text><text x='${cx}' y='96' text-anchor='middle' font-size='12' font-weight='700' fill='currentColor'>${x[1]}</text></g>`;if(i<n-1)o+=`<path class='fa' d='M${cx+36} 44H${cx+g-36}' stroke='currentColor' stroke-width='2' marker-end='url(#${u})'/>`});
+return `<svg viewBox='0 0 420 108' role='img' aria-label='Schéma : ${it.map(function(x){return x[1]}).join(', ')}' style='color:var(--ink)'>${o}</svg>`}
+Object.keys(DG).forEach(function(id){var s=d.getElementById(id);if(!s)return;var h="<details class='dig'><summary>🔎 Approfondir</summary><figure class='fg'>"+flow(DG[id][0])+"</figure><ul>"+DG[id][1].map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul></details>';s.insertAdjacentHTML('beforeend',h);var e=s.querySelector('.dig:last-of-type');if(ro)ro.observe(e);else e.classList.add('in')});
+var qe=d.getElementById('qn');if(qe)qe.dataset.n=$('.quiz').length;
+var gt=d.createElement('button');gt.id='gotop';gt.type='button';gt.textContent='↑';gt.setAttribute('aria-label','Retour en haut');gt.onclick=function(){scrollTo({top:0})};d.body.appendChild(gt);addEventListener('scroll',function(){gt.classList.toggle('show',scrollY>600)},{passive:true});
+// scroll progress
+$('.st>li').forEach(function(li,i){var k='st-'+li.closest('.step').id+'-'+i,b=d.createElement('button');b.type='button';b.className='dn';function u(){var x=S(k)==='1';li.classList.toggle('d',x);b.textContent=x?'✓ Terminé':'Marquer comme fait'}u();b.onclick=function(){S(k,S(k)==='1'?'0':'1');u();pg();if(S(k)==='1')boom(b)};li.appendChild(b)});pg();
+var bar=d.getElementById('bar');function up(){var m=R.scrollHeight-innerHeight;bar.style.transform='scaleX('+(m>0?Math.min(1,scrollY/m):0)+')'}
+addEventListener('scroll',up,{passive:true});addEventListener('resize',up);up();
+})();
+</script>
+</body>
+</html>
