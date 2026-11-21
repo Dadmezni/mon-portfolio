@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CodeLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+
+:root{--bg:#e9edf5;--paper:#fdfdfb;--line:#dbe3f2;--ink:#14235c;--txt:#2b3557;--blue:#1f3fa0;--green:#2e9e57;--orange:#ee8a1f;--purple:#6a3fb5;--red:#d6335b;--yel:#ffd93b;--note:#fff3a6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}}
+:root[data-theme="dark"]{--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.7}
+header{text-align:center;padding:28px 16px 8px}
+header h1{margin:0;color:var(--ink);font-size:clamp(24px,5vw,38px);font-weight:800}
+header p{margin:4px 0 0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--bg)}
+nav a{flex:none;text-decoration:none;font-size:13px;font-weight:600;color:var(--ink);border:2px solid var(--blue);border-radius:99px;padding:2px 12px;background:var(--paper)}
+nav a:focus-visible,nav a:hover{background:var(--yel);color:#14235c}
+main{max-width:none;width:100%;margin:0;padding:8px 14px 40px;display:grid;gap:28px}
+.page{position:relative;background:var(--paper);border-radius:10px;padding:22px 22px 18px 20px;padding-right:44px;box-shadow:0 2px 0 var(--line),0 10px 24px rgba(20,35,92,.12);background-image:repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px)}
+.page:before{content:"";position:absolute;top:10px;bottom:10px;right:10px;width:16px;background:radial-gradient(circle at 50% 50%,var(--ink) 0 4px,transparent 5px) 0 0/16px 26px repeat-y}
+.brand{font-size:13px;font-weight:600;color:var(--blue)}
+.page h2{margin:2px 0 0;color:var(--ink);font-size:clamp(24px,5vw,34px);font-weight:800;line-height:1.35;display:inline;background:linear-gradient(transparent 62%,var(--yel) 62% 92%,transparent 92%)}
+.sub{margin:6px 0 14px;font-weight:600;color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.blk{background:var(--paper);border:2px dashed var(--c);border-radius:12px;padding:12px 14px}
+.blk h3{display:inline-block;margin:-26px 0 6px;padding:0 12px;background:var(--c);color:#fff;border-radius:6px;font-size:15px;font-weight:800;transform:rotate(-1deg)}
+.blk ul,.blk ol{margin:0;padding:0 18px 0 0}
+.blk li{margin:3px 0}
+.blk li::marker{color:var(--c);font-weight:800}
+.blk{margin-top:14px}
+.note,.end{margin-top:14px;padding:10px 14px;border-radius:6px;font-weight:600}
+.note{background:var(--note);color:var(--ink);transform:rotate(-.6deg);box-shadow:2px 3px 0 rgba(0,0,0,.12);width:fit-content;max-width:100%}
+.end{border:2px solid var(--blue);border-radius:12px;color:var(--ink)}
+.end b{color:var(--blue)}
+footer{text-align:center;padding:20px;font-weight:600;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:4px;z-index:9;background:linear-gradient(90deg,var(--blue),var(--yel));transform-origin:right;transform:scaleX(0)}
+.hero{position:absolute;top:14px;left:16px;font-size:clamp(42px,9vw,64px);animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+.il{list-style:none;padding:0!important}
+.il li{display:flex;gap:8px;align-items:flex-start}
+.ib{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,var(--paper));font-size:19px;transition:transform .25s}
+.il li:hover .ib{transform:scale(1.25) rotate(-8deg)}
+.flow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 2px;margin-top:6px}
+.st{flex:1 1 92px;min-width:92px;max-width:170px;text-align:center}
+.ico{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 4px;border-radius:16px;background:color-mix(in srgb,var(--c) 14%,var(--paper));border:2px solid var(--c);font-size:36px;transition:transform .25s}
+.st:hover .ico{transform:translateY(-4px) rotate(-6deg) scale(1.08)}
+.num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;font-size:12px;font-weight:800}
+.st b{display:block;font-size:13px;line-height:1.4;color:var(--ink)}
+.st small{display:block;font-size:11.5px;line-height:1.45}
+.ar{align-self:center;margin-top:-30px;color:var(--c);font-style:normal;font-size:14px;animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(-6px)}}
+.js .page{opacity:0;transform:translateY(36px) rotate(.5deg);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .page.in{opacity:1;transform:none}
+.js .page h2{background-repeat:no-repeat;background-size:0 100%;background-position:right;transition:background-size .9s .35s}
+.js .page.in h2{background-size:100% 100%}
+.js .blk{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .5s,transform .5s;transition-delay:calc(var(--k)*90ms + 250ms)}
+.js .in .blk{opacity:1;transform:none}
+.js .st{opacity:0;transform:scale(.6);transition:opacity .4s,transform .45s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i)*110ms + 500ms)}
+.js .in .st{opacity:1;transform:none}
+.js .in .note{animation:pop .8s 1s both}
+@keyframes pop{0%{transform:rotate(-6deg) scale(.7);opacity:0}60%{transform:rotate(2deg) scale(1.05)}100%{transform:rotate(-.6deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){.js .page,.js .blk,.js .st,.hero,.ar,.js .in .note{animation:none;transition:none;opacity:1;transform:none}.js .page h2{background-size:100% 100%}}
+#art svg{width:min(760px,100%);height:auto;display:block;margin:0 auto 12px;filter:drop-shadow(0 12px 24px rgba(20,35,92,.16))}
+.nd{transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.4)}}
+.flowline{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 10px;margin:8px 0 0;font-weight:600;color:var(--ink)}
+.flowline span{background:var(--paper);border:2px solid var(--blue);border-radius:99px;padding:0 12px}
+.flowline i{color:var(--orange);font-style:normal}
+nav a.on{background:var(--yel);color:#14235c;border-color:var(--orange)}
+@media (min-width:900px){
+html{scroll-padding-top:16px}
+body{padding-right:250px}
+nav{position:fixed;top:0;right:0;bottom:0;width:250px;flex-direction:column;align-items:stretch;overflow-y:auto;overflow-x:hidden;gap:6px;padding:20px 14px;background:var(--paper);border-left:2px solid var(--line);z-index:7}
+nav:before{content:attr(data-t);font-weight:800;color:var(--ink);font-size:18px;padding:0 4px 6px}
+nav a{border-radius:10px;padding:4px 12px;border-width:2px;font-size:14px;transition:transform .2s}
+nav a:hover{transform:translateX(-4px)}
+}
+@media (prefers-reduced-motion:reduce){.nd{animation:none}}
+
+nav a{display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav a b{display:inline-grid;place-items:center;flex:none;min-width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800}
+nav a.on b{background:var(--orange)}
+nav a.home{border-style:dashed;justify-content:center}
+@media (min-width:900px){
+nav a{white-space:normal;line-height:1.4;padding:7px 12px;border-color:transparent;background:transparent}
+nav a.on{border-color:var(--orange)}
+nav a.home{border-color:var(--blue);margin-bottom:6px}
+}
+#bar{background-size:200% 100%;animation:sh 3s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.dig{margin-top:14px;border:2px solid var(--purple);border-radius:12px;background:var(--paper);overflow:hidden}
+.dig summary{cursor:pointer;padding:8px 14px;font-weight:800;color:var(--purple);list-style:none;display:flex;align-items:center;gap:8px}
+.dig summary::-webkit-details-marker{display:none}
+.dig summary:after{content:"＋";margin-inline-start:auto;transition:transform .3s}
+.dig[open] summary:after{transform:rotate(45deg)}
+.dig p{margin:0;padding:4px 16px 12px;animation:dg .5s}
+@keyframes dg{from{opacity:0;transform:translateY(-8px)}}
+.js .in .blk:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 8px 18px rgba(20,35,92,.15)}
+.st .ico{animation:gl 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*.45s)}
+@keyframes gl{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}}
+.flowline span{animation:fl 3s ease-in-out infinite}
+.flowline span:nth-of-type(2){animation-delay:.5s}
+.flowline span:nth-of-type(3){animation-delay:1s}
+@keyframes fl{50%{background:var(--yel);color:#14235c;transform:translateY(-3px)}}
+#top{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);background:var(--yel);color:#14235c;font-size:20px;cursor:pointer;z-index:8;opacity:0;pointer-events:none;transform:scale(.6);transition:.3s}
+#top.show{opacity:1;pointer-events:auto;transform:none}
+@media (prefers-reduced-motion:reduce){.st .ico,.flowline span,#bar,.dig p{animation:none}}
+.dig ul{margin:0;padding:4px 34px 12px 16px;animation:dg .5s}
+.dig li{margin:4px 0}
+.dig li::marker{color:var(--purple)}
+@media (prefers-reduced-motion:reduce){.dig ul{animation:none}}
+.fg{margin:8px 16px 0}
+.fg svg{width:min(460px,100%);display:block;margin:0 auto;overflow:visible}
+.fi{animation:fi .6s both;animation-delay:var(--d)}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+.fa{stroke-dasharray:5 4;animation:da 1s linear infinite}
+@keyframes da{to{stroke-dashoffset:-9}}
+.sl{animation:sl 3s ease-in-out infinite}
+@keyframes sl{0%,10%{transform:translate(0,0)}50%{transform:translate(64px,0)}90%,100%{transform:translate(64px,64px)}}
+@media (prefers-reduced-motion:reduce){.fi,.fa,.sl{animation:none}}
+code{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Consolas,monospace;font-size:.85em;background:color-mix(in srgb,var(--blue) 12%,var(--paper));border-radius:6px;padding:1px 6px;word-break:break-word}
+
+header{position:relative}
+.lg{position:absolute;top:12px;left:12px;z-index:10;border:2px solid var(--blue);background:var(--yel);color:#14235c;border-radius:99px;padding:2px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+html[dir=ltr] .lg{left:auto;right:12px}
+.qz{margin-top:14px;border:2px solid var(--green);border-radius:12px;padding:10px 14px;background:var(--paper)}
+.qz b{color:var(--ink)}
+.qz button{font:inherit;display:block;width:100%;text-align:start;margin:6px 0;padding:4px 12px;border-radius:8px;border:2px solid var(--line);background:var(--paper);color:var(--txt);cursor:pointer}
+.qz button.g{background:#d7f5e0;border-color:var(--green);color:#14532d}.qz button.x{background:#fde1e7;border-color:var(--red);color:#7f1d1d}
+.qf{font-weight:800;color:var(--ink)}
+html[dir=ltr] .page{padding:22px 20px 18px 44px}
+html[dir=ltr] .page:before{right:auto;left:10px}
+html[dir=ltr] .hero{left:auto;right:16px}
+html[dir=ltr] .blk ul,html[dir=ltr] .blk ol{padding:0 0 0 18px}
+html[dir=ltr] #bar{transform-origin:left}
+html[dir=ltr] #top{left:auto;right:16px}
+html[dir=ltr] .js .page h2{background-position:left}
+html[dir=ltr] .dig ul{padding:4px 16px 12px 34px}
+@media (min-width:900px){html[dir=ltr] body{padding:0 0 0 250px}html[dir=ltr] nav{right:auto;left:0;border-left:0;border-right:2px solid var(--line)}html[dir=ltr] nav a:hover{transform:translateX(4px)}}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;right:14px;bottom:14px;z-index:9999;padding:8px 14px;border-radius:999px;background:#165dce;color:#fff;text-decoration:none;font:700 13px system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 24px #142b5740">← Accueil</a>
+<header><button class="lg" id="lg"></button><div id="art"><svg viewBox="0 0 760 220" role="img" aria-label="Next.js" direction="ltr"><rect x="8" y="8" width="744" height="204" rx="30" fill="#1c2a58"/><circle cx="635" cy="110" r="80" fill="#fff" fill-opacity=".07"/><text x="635" y="142" text-anchor="middle" font-size="90" fill="#ffd93b" font-family="monospace" font-weight="800">N</text><text x="62" y="95" fill="#fff" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="3">CODE · LEARN · BUILD</text><text x="60" y="170" fill="#fff" font-family="Arial,sans-serif" font-size="72" font-weight="800">Next<tspan fill="#ffd93b">.js</tspan></text><path d="M62 190h280" stroke="#ffd93b" stroke-width="5" stroke-linecap="round"/></svg></div><h1 id="h1"></h1><p class="flowline" id="fl"></p></header>
+<nav id="nav"></nav>
+<main id="main"></main>
+<footer id="ft"></footer>
+<script>
+const B='blue',G='green',O='orange',P='purple',R='red';
+let L=0;try{L=localStorage.getItem('cl10')=='fr'?1:0}catch(e){}
+const x=s=>{const p=s.split('|');return p[L]??p[0]};
+const D=[
+["مدخل إلى Next.js|Introduction à Next.js","إطار React للمواقع الكاملة|Le framework React pour des sites complets",[
+["ما هو؟|C’est quoi ?",B,["إطار مبني فوق React يضيف التوجيه والتصيير على الخادم وتحسين الأداء|Un framework basé sur React qui ajoute routage, rendu serveur et optimisations","يوحّد الواجهة والخادم في مشروع واحد|Réunit front-end et back-end dans un seul projet"]],
+["البدء|Démarrage",G,["<code>npx create-next-app@latest</code> تنشئ مشروعًا جاهزًا|<code>npx create-next-app@latest</code> crée un projet prêt à l’emploi","<code>npm run dev</code> تشغّل الخادم على <code>localhost:3000</code>|<code>npm run dev</code> lance le serveur sur <code>localhost:3000</code>"]],
+["هيكل المشروع|Structure du projet",O,["مجلد <code>app/</code> يحوي الصفحات (App Router)|Le dossier <code>app/</code> contient les pages (App Router)","<code>public/</code> للملفات الثابتة و<code>next.config.js</code> للإعدادات|<code>public/</code> pour les fichiers statiques, <code>next.config.js</code> pour la configuration"]]],
+"يتطلب Next.js معرفة أساسية بـ React وJavaScript.|Next.js demande des bases de React et de JavaScript.","Next.js = React + توجيه + تصيير خادم + تحسينات جاهزة.|Next.js = React + routage + rendu serveur + optimisations prêtes.",
+["يدعم TypeScript وESLint عند الإنشاء.|Prend en charge TypeScript et ESLint dès la création.","Turbopack يسرّع بناء التطوير.|Turbopack accélère le build de développement."],
+[['📁','app/'],['⚛️','React'],['🖥️','خادم|Serveur'],['🌐','متصفح|Navigateur']],
+["أي مجلد يحوي الصفحات في App Router؟|Quel dossier contient les pages avec l’App Router ?",["app/","components/","public/"],0]],
+["التوجيه|Le routage","المجلدات هي الروابط|Les dossiers sont les routes",[
+["الصفحات|Les pages",B,["كل مجلد داخل <code>app/</code> فيه <code>page.js</code> يصبح رابطًا|Chaque dossier de <code>app/</code> avec un <code>page.js</code> devient une route","<code>app/about/page.js</code> يعطي الرابط <code>/about</code>|<code>app/about/page.js</code> donne l’URL <code>/about</code>"]],
+["المسارات الديناميكية|Routes dynamiques",G,["<code>app/blog/[id]/page.js</code> تلتقط أي قيمة|<code>app/blog/[id]/page.js</code> capte n’importe quelle valeur","تُقرأ القيمة من <code>params</code>|La valeur se lit dans <code>params</code>"]],
+["التنقل|La navigation",O,["<code>&lt;Link href='/about'&gt;</code> تنقّل دون إعادة تحميل الصفحة|<code>&lt;Link href='/about'&gt;</code> navigue sans recharger la page","<code>layout.js</code> يغلّف الصفحات بهيكل مشترك|<code>layout.js</code> enveloppe les pages dans une structure commune"]]],
+"لا يُعاد تصيير الـ layout عند التنقل بين صفحاته.|Le layout n’est pas re-rendu lors de la navigation entre ses pages.","مجلد + page.js = رابط ؛ [id] ديناميكي ؛ Link للتنقل.|Dossier + page.js = route ; [id] dynamique ; Link pour naviguer.",
+["<code>(groupe)</code> تنظّم المجلدات دون تغيير الرابط.|<code>(groupe)</code> organise les dossiers sans changer l’URL.","<code>not-found.js</code> و<code>error.js</code> للصفحات الخاصة.|<code>not-found.js</code> et <code>error.js</code> pour les pages spéciales."],
+[['📁','folder'],['📄','page.js'],['🧩','layout.js'],['🔗','Link']],
+["أي ملف ينشئ صفحة؟|Quel fichier crée une page ?",["page.js","index.css","route.txt"],0]],
+["مكوّنات الخادم والعميل|Composants serveur et client","أين يُنفَّذ الكود؟|Où s’exécute le code ?",[
+["مكوّنات الخادم|Composants serveur",B,["افتراضيًا كل مكوّن في App Router يعمل على الخادم|Par défaut, tout composant de l’App Router s’exécute sur le serveur","يصل مباشرة إلى قاعدة البيانات ولا يُرسل JavaScript للمتصفح|Accède directement à la base de données et n’envoie pas de JavaScript au navigateur"]],
+["مكوّنات العميل|Composants client",G,["أضف <code>'use client'</code> في أول الملف|Ajoutez <code>'use client'</code> en tout début de fichier","ضرورية لـ <code>useState</code> و<code>useEffect</code> والأحداث مثل <code>onClick</code>|Nécessaires pour <code>useState</code>, <code>useEffect</code> et les événements comme <code>onClick</code>"]],
+["متى أستعمل أيًّا؟|Lequel choisir ?",O,["الخادم للبيانات والمحتوى الثابت|Serveur pour les données et le contenu statique","العميل للتفاعل فقط: أزرار ونماذج وحالة|Client uniquement pour l’interactivité : boutons, formulaires, état"]]],
+"اجعل مكوّنات العميل صغيرة وفي أطراف الشجرة.|Gardez les composants client petits, en bout d’arbre.","خادم افتراضيًا ؛ 'use client' عند الحاجة للتفاعل فقط.|Serveur par défaut ; 'use client' seulement pour l’interactivité.",
+["لا يمكن استعمال <code>useState</code> في مكوّن خادم.|On ne peut pas utiliser <code>useState</code> dans un composant serveur.","يمكن تمرير مكوّن خادم كـ <code>children</code> لمكوّن عميل.|Un composant serveur peut être passé en <code>children</code> à un composant client."],
+[['🖥️','Server'],['📦','HTML'],['🖱️','Client'],['⚡','Hydration']],
+["ماذا نضيف لجعل المكوّن مكوّن عميل؟|Que faut-il ajouter pour un composant client ?",["'use client'","'use server'","'use state'"],0]],
+["جلب البيانات|La récupération des données","مباشرة داخل المكوّن|Directement dans le composant",[
+["مكوّن async|Composant async",B,["<code>async function Page() { const res = await fetch(url); }</code>","لا حاجة لـ <code>useEffect</code> مع مكوّنات الخادم|Pas besoin de <code>useEffect</code> avec les composants serveur"]],
+["التخزين المؤقت|Le cache",G,["<code>fetch(url, { cache: 'no-store' })</code> بيانات جديدة دائمًا|<code>fetch(url, { cache: 'no-store' })</code> : toujours des données fraîches","<code>{ next: { revalidate: 60 } }</code> تحديث كل 60 ثانية|<code>{ next: { revalidate: 60 } }</code> : mise à jour toutes les 60 secondes"]],
+["قاعدة البيانات|La base de données",O,["استعلم مباشرة بـ Prisma أو SQL داخل مكوّن الخادم|Interrogez directement avec Prisma ou SQL dans un composant serveur","لا تكشف مفاتيحك السرية للمتصفح|N’exposez jamais vos clés secrètes au navigateur"]]],
+"افتراضيات التخزين المؤقت تغيّرت بين الإصدارات؛ راجع التوثيق.|Les valeurs par défaut du cache ont changé selon les versions ; consultez la documentation.","مكوّن async + fetch + ضبط cache = بيانات حديثة وسريعة.|Composant async + fetch + réglage du cache = données fraîches et rapides.",
+["<code>Promise.all</code> لتنفيذ طلبات متوازية.|<code>Promise.all</code> pour des requêtes en parallèle.","<code>revalidatePath('/blog')</code> تحدّث الصفحة عند الطلب.|<code>revalidatePath('/blog')</code> actualise la page à la demande."],
+[['🖥️','Server'],['🌐','fetch'],['🗄️','DB'],['📄','Page']],
+["أين يمكن استعمال <code>await fetch</code> مباشرة؟|Où peut-on utiliser <code>await fetch</code> directement ?",["في مكوّن خادم async|Dans un composant serveur async","في useState فقط|Seulement dans useState","لا يمكن|Impossible"],0]],
+["استراتيجيات التصيير|Les stratégies de rendu","متى تُبنى الصفحة؟|Quand la page est-elle construite ?",[
+["SSG وSSR|SSG et SSR",B,["SSG: تُبنى الصفحة وقت البناء وهي الأسرع|SSG : la page est construite au build, c’est le plus rapide","SSR: تُبنى عند كل طلب للبيانات المتغيرة|SSR : construite à chaque requête pour les données changeantes"]],
+["ISR|ISR",G,["تُحدَّث الصفحة الثابتة في الخلفية بعد مدة|La page statique est mise à jour en arrière-plan après un délai","<code>export const revalidate = 3600;</code>"]],
+["البث والتحميل|Streaming et chargement",O,["<code>loading.js</code> يعرض هيكلًا مؤقتًا أثناء التحميل|<code>loading.js</code> affiche un squelette pendant le chargement","<code>&lt;Suspense&gt;</code> تبثّ الأجزاء البطيئة لاحقًا|<code>&lt;Suspense&gt;</code> diffuse plus tard les parties lentes"]]],
+"اختر الأبسط: ثابت إن أمكن ثم ديناميكي عند الحاجة.|Choisissez le plus simple : statique si possible, dynamique si nécessaire.","SSG للثابت وSSR للمتغير وISR للوسط وStreaming للتحميل التدريجي.|SSG pour le statique, SSR pour le changeant, ISR entre les deux, Streaming pour un chargement progressif.",
+["<code>generateStaticParams</code> تبني صفحات ديناميكية مسبقًا.|<code>generateStaticParams</code> pré-construit des pages dynamiques.","استعمال <code>cookies()</code> يجعل الصفحة ديناميكية.|Utiliser <code>cookies()</code> rend la page dynamique."],
+[['🏗️','Build'],['📄','SSG'],['⚡','SSR'],['♻️','ISR']],
+["أي استراتيجية تُبنى وقت البناء؟|Quelle stratégie est construite au build ?",["SSG","SSR","CSR"],0]],
+["الواجهات وإجراءات الخادم|API et Server Actions","حفظ البيانات دون عناء|Enregistrer des données sans effort",[
+["معالجات المسارات|Route Handlers",B,["<code>app/api/users/route.js</code> تصدّر <code>GET</code> و<code>POST</code>|<code>app/api/users/route.js</code> exporte <code>GET</code> et <code>POST</code>","<code>return Response.json({ ok: true })</code>"]],
+["إجراءات الخادم|Server Actions",G,["دالة async تبدأ بـ <code>'use server'</code> تُنفَّذ على الخادم|Une fonction async avec <code>'use server'</code> s’exécute sur le serveur","<code>&lt;form action={save}&gt;</code> تربط النموذج بها مباشرة|<code>&lt;form action={save}&gt;</code> relie directement le formulaire"]],
+["الأمان|Sécurité",R,["تحقق من المدخلات وصلاحيات المستخدم داخل كل إجراء|Validez les entrées et les droits de l’utilisateur dans chaque action","إجراءات الخادم نقاط دخول عامة فعليًا|Les Server Actions sont en pratique des points d’entrée publics"]]],
+"استعمل Route Handlers لعملاء خارجيين وServer Actions لنماذجك.|Utilisez les Route Handlers pour des clients externes et les Server Actions pour vos formulaires.","route.js للـ API وServer Actions للنماذج، مع تحقق دائم.|route.js pour l’API, Server Actions pour les formulaires, avec validation systématique.",
+["<code>useFormStatus</code> يعرض حالة الإرسال.|<code>useFormStatus</code> affiche l’état d’envoi.","Zod مناسبة للتحقق من البيانات.|Zod convient bien à la validation des données."],
+[['📝','Form'],['🔐','use server'],['🗄️','DB'],['♻️','revalidate']],
+["أي ملف ينشئ نقطة API؟|Quel fichier crée un endpoint d’API ?",["route.js","page.js","layout.js"],0]],
+["التنسيق والتحسين|Style et optimisation","أسرع وأجمل|Plus rapide et plus beau",[
+["التنسيق|Le style",B,["CSS Modules: ملف <code>styles.module.css</code> بنطاق محلي|CSS Modules : <code>styles.module.css</code> à portée locale","Tailwind CSS خيار شائع ومعروض عند الإنشاء|Tailwind CSS est un choix courant, proposé à la création"]],
+["الصور والخطوط|Images et polices",G,["<code>&lt;Image src alt width height /&gt;</code> تحسّن الحجم وتؤخّر التحميل|<code>&lt;Image src alt width height /&gt;</code> optimise la taille et charge en différé","<code>next/font</code> يحمّل الخطوط دون وميض|<code>next/font</code> charge les polices sans flash"]],
+["البيانات الوصفية|Les métadonnées",O,["<code>export const metadata = { title: 'Accueil' }</code>","<code>generateMetadata</code> لعناوين ديناميكية لمحركات البحث|<code>generateMetadata</code> pour des titres dynamiques côté SEO"]]],
+"حدّد دائمًا <code>alt</code> للصور لسهولة الوصول.|Renseignez toujours <code>alt</code> pour l’accessibilité.","Image وfont وmetadata = أداء أفضل وSEO أقوى.|Image, font et metadata = meilleures performances et meilleur SEO.",
+["<code>next/dynamic</code> لتحميل المكوّنات الثقيلة عند الحاجة.|<code>next/dynamic</code> charge les composants lourds à la demande.","Lighthouse يقيس الأداء وسهولة الوصول.|Lighthouse mesure performances et accessibilité."],
+[['🖼️','Image'],['🔤','Font'],['🔍','SEO'],['⚡','Perf']],
+["أي مكوّن يحسّن الصور؟|Quel composant optimise les images ?",["next/image","img-pro","next/photo"],0]],
+["النشر والممارسات|Déploiement et bonnes pratiques","من جهازك إلى العالم|De votre poste au monde entier",[
+["البناء والنشر|Build et déploiement",B,["<code>npm run build</code> ثم <code>npm start</code> للإنتاج|<code>npm run build</code> puis <code>npm start</code> pour la production","Vercel أسهل منصة، وDocker أو Node على خادم آخر ممكنان|Vercel est la plateforme la plus simple, Docker ou Node sur un autre serveur est possible"]],
+["متغيرات البيئة|Variables d’environnement",G,["ملف <code>.env.local</code> للأسرار ولا يُرفع إلى Git|Le fichier <code>.env.local</code> contient les secrets et ne va pas dans Git","فقط <code>NEXT_PUBLIC_</code> تصل إلى المتصفح|Seules les variables <code>NEXT_PUBLIC_</code> atteignent le navigateur"]],
+["الوسيط والحماية|Middleware et protection",O,["<code>middleware.js</code> يعترض الطلبات قبل الصفحة|<code>middleware.js</code> intercepte les requêtes avant la page","مناسب لإعادة التوجيه وفحص تسجيل الدخول|Utile pour les redirections et la vérification de connexion"]]],
+"اختبر <code>npm run build</code> محليًا قبل النشر.|Testez <code>npm run build</code> en local avant de déployer.","build + متغيرات بيئة آمنة + middleware = نشر موثوق.|build + variables d’environnement sûres + middleware = déploiement fiable.",
+["Auth.js مكتبة شائعة للمصادقة.|Auth.js est une bibliothèque courante pour l’authentification.","راقب الأداء والأخطاء بعد النشر.|Surveillez performances et erreurs après le déploiement."],
+[['🔨','build'],['🔐','env'],['🛡️','middleware'],['🚀','Deploy']],
+["أي بادئة تكشف متغيرًا للمتصفح؟|Quel préfixe expose une variable au navigateur ?",["NEXT_PUBLIC_","SECRET_","API_"],0]]
+];
+const HE=['▲','📁','🖥️','🌐','⚡','🔌','🎨','🚀'],CL=['--blue','--green','--orange','--purple','--red'];
+const IC=[[/erreur|خطأ|danger|خطر/i,'⚠️'],[/sécurité|الأمان|middleware|الوسيط|protection/i,'🛡️'],[/\bapi\b|route handlers|معالجات|server actions|إجراءات/i,'🔌'],[/page|الصفحات|routage|التوجيه|navigation|التنقل|dynamique|الديناميكية/i,'📁'],[/serveur|خادم|client|عميل/i,'🖥️'],[/données|cache|التخزين|base de données|قاعدة|async/i,'🌐'],[/ssg|ssr|isr|streaming|البث/i,'⚡'],[/style|التنسيق|image|الصور|métadonnées|البيانات الوصفية/i,'🎨'],[/build|déploiement|النشر|variables d’env|متغيرات/i,'🚀'],[/démarrage|البدء|structure|هيكل|c’est quoi|ما هو/i,'🧭'],[/choisir|متى|exemple|مثال/i,'💡']];
+const ic=t=>{for(const[r,e]of IC)if(r.test(t))return e;return null};
+const $=i=>document.getElementById(i),nav=$('nav'),main=$('main');
+document.documentElement.classList.add('js');
+const TX=(a,y,t,z=12)=>`<text x="${a}" y="${y}" text-anchor="middle" font-size="${z}" font-weight="600" fill="var(--ink)">${t}</text>`;
+function flow(it){const n=it.length,g=420/n;let o='';
+ it.forEach(([e,l],i)=>{const c=`var(${CL[i%5]})`,cx=L?g*(i+.5):420-g*(i+.5),d=L?1:-1;
+  o+=`<g class="fi" style="--d:${i*.25}s"><rect x="${cx-30}" y="18" width="60" height="60" rx="14" fill="${c}" fill-opacity=".15" stroke="${c}" stroke-width="2"/>${TX(cx,58,e,28)}${TX(cx,98,x(l),11)}</g>`;
+  if(i<n-1)o+=`<path class="fa" d="M${cx+d*36} 48H${cx+d*(g-36)}" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah)"/>`});
+ return `<svg viewBox="0 0 420 115" direction="ltr"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>${o}</svg>`}
+function qa(b,ok){b.classList.add(ok?'g':'x');b.parentNode.querySelector('.qf').textContent=ok?(L?'✔ Bravo !':'✔ أحسنت!'):(L?'✖ Réessayez':'✖ حاول مرة أخرى')}
+let io,so;
+function render(){
+ const H=document.documentElement;H.lang=L?'fr':'ar';H.dir=L?'ltr':'rtl';
+ document.title=L?'CodeLab – Formation Next.js':'CodeLab – دورة Next.js';
+ $('h1').textContent=L?'Apprendre Next.js pas à pas':'تعلم Next.js خطوة بخطوة';
+ $('lg').textContent=L?'ع':'FR';$('lg').setAttribute('aria-label',L?'العربية':'Français');
+ $('fl').innerHTML=['📁 app/','⚛️ React','🖥️ Server','🚀 Vercel'].map(s=>`<span style="direction:ltr">${s}</span>`).join(`<i>${L?'▶':'◀'}</i>`);
+ $('ft').textContent=L?'CodeLab — Apprenez, pratiquez, partagez':'CodeLab — تعلّم، تدرّب، وشارك';
+ nav.dataset.t=L?'Sommaire':'المواضيع';nav.innerHTML='';main.innerHTML='';
+ D.forEach((d,n)=>{const[t,s,bl,note,end,dg,fl,q]=d,id='p'+(n+1);
+  nav.insertAdjacentHTML('beforeend',`<a href="#${id}" title="${x(t)}"><b>${n+1}</b><span>${x(t)}</span></a>`);
+  const blocks=bl.map(([h,c,it,ol],k)=>{let body;
+   if(ol)body=`<div class="flow">${it.map((z,j)=>{const[a,...r]=x(z).split(/[:：]/);const d2=r.join(':').trim();return `<div class="st" style="--i:${j}"><span class="ico">${ic(z)||'⭐'}</span><span class="num">${j+1}</span><b>${d2?a:x(z)}</b>${d2?`<small>${d2}</small>`:''}</div>`}).join(`<i class="ar">${L?'▶':'◀'}</i>`)}</div>`;
+   else body=`<ul class="il">${it.map(z=>`<li><span class="ib">${ic(z)||'✦'}</span><span>${x(z)}</span></li>`).join('')}</ul>`;
+   return `<section class="blk" style="--c:var(--${c});--k:${k}"><h3>${ic(h)||''} ${x(h)}</h3>${body}</section>`}).join('');
+  const quiz=`<div class="qz"><b>🧠 ${x(q[0])}</b>${q[1].map((o,i)=>`<button onclick="qa(this,${i==q[2]})">${x(o)}</button>`).join('')}<div class="qf"></div></div>`;
+  main.insertAdjacentHTML('beforeend',`<article class="page" id="${id}"><span class="hero" aria-hidden="true">${HE[n]}</span><h2>${x(t)}</h2><p class="sub">${x(s)}</p><div class="grid">${blocks}</div><div class="note">💡 ${x(note)}</div><div class="end"><b>${L?'À retenir : ':'الخلاصة: '}</b>${x(end)}</div>${quiz}<details class="dig"><summary>🔎 ${L?'Aller plus loin':'تعمّق أكثر'}</summary><figure class="fg">${flow(fl)}</figure><ul>${dg.map(z=>`<li>${x(z)}</li>`).join('')}</ul></details></article>`)});
+ io&&io.disconnect();so&&so.disconnect();
+ const pages=document.querySelectorAll('.page');
+ if('IntersectionObserver' in window){io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});pages.forEach(p=>io.observe(p))}else pages.forEach(p=>p.classList.add('in'));
+ const links=[...nav.querySelectorAll('a')];
+ so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('on',on);if(on)a.scrollIntoView({block:'nearest',inline:'nearest'})})}),{rootMargin:'-30% 0px -60% 0px'});pages.forEach(p=>so.observe(p));
+}
+$('lg').onclick=()=>{L=1-L;try{localStorage.setItem('cl10',L?'fr':'ar')}catch(e){}render()};
+const tb=document.createElement('button');tb.id='top';tb.textContent='↑';tb.setAttribute('aria-label','Top');tb.onclick=()=>scrollTo({top:0});document.body.append(tb);addEventListener('scroll',()=>tb.classList.toggle('show',scrollY>600),{passive:true});
+const bar=document.createElement('div');bar.id='bar';document.body.prepend(bar);
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight||1)})`},{passive:true});
+render();
+</script>
+</body>
+</html>

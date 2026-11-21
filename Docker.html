@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CodeLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+
+:root{--bg:#e9edf5;--paper:#fdfdfb;--line:#dbe3f2;--ink:#14235c;--txt:#2b3557;--blue:#1f3fa0;--green:#2e9e57;--orange:#ee8a1f;--purple:#6a3fb5;--red:#d6335b;--yel:#ffd93b;--note:#fff3a6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}}
+:root[data-theme="dark"]{--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.7}
+header{text-align:center;padding:28px 16px 8px}
+header h1{margin:0;color:var(--ink);font-size:clamp(24px,5vw,38px);font-weight:800}
+header p{margin:4px 0 0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--bg)}
+nav a{flex:none;text-decoration:none;font-size:13px;font-weight:600;color:var(--ink);border:2px solid var(--blue);border-radius:99px;padding:2px 12px;background:var(--paper)}
+nav a:focus-visible,nav a:hover{background:var(--yel);color:#14235c}
+main{max-width:none;width:100%;margin:0;padding:8px 14px 40px;display:grid;gap:28px}
+.page{position:relative;background:var(--paper);border-radius:10px;padding:22px 22px 18px 20px;padding-right:44px;box-shadow:0 2px 0 var(--line),0 10px 24px rgba(20,35,92,.12);background-image:repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px)}
+.page:before{content:"";position:absolute;top:10px;bottom:10px;right:10px;width:16px;background:radial-gradient(circle at 50% 50%,var(--ink) 0 4px,transparent 5px) 0 0/16px 26px repeat-y}
+.brand{font-size:13px;font-weight:600;color:var(--blue)}
+.page h2{margin:2px 0 0;color:var(--ink);font-size:clamp(24px,5vw,34px);font-weight:800;line-height:1.35;display:inline;background:linear-gradient(transparent 62%,var(--yel) 62% 92%,transparent 92%)}
+.sub{margin:6px 0 14px;font-weight:600;color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.blk{background:var(--paper);border:2px dashed var(--c);border-radius:12px;padding:12px 14px}
+.blk h3{display:inline-block;margin:-26px 0 6px;padding:0 12px;background:var(--c);color:#fff;border-radius:6px;font-size:15px;font-weight:800;transform:rotate(-1deg)}
+.blk ul,.blk ol{margin:0;padding:0 18px 0 0}
+.blk li{margin:3px 0}
+.blk li::marker{color:var(--c);font-weight:800}
+.blk{margin-top:14px}
+.note,.end{margin-top:14px;padding:10px 14px;border-radius:6px;font-weight:600}
+.note{background:var(--note);color:var(--ink);transform:rotate(-.6deg);box-shadow:2px 3px 0 rgba(0,0,0,.12);width:fit-content;max-width:100%}
+.end{border:2px solid var(--blue);border-radius:12px;color:var(--ink)}
+.end b{color:var(--blue)}
+footer{text-align:center;padding:20px;font-weight:600;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:4px;z-index:9;background:linear-gradient(90deg,var(--blue),var(--yel));transform-origin:right;transform:scaleX(0)}
+.hero{position:absolute;top:14px;left:16px;font-size:clamp(42px,9vw,64px);animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+.il{list-style:none;padding:0!important}
+.il li{display:flex;gap:8px;align-items:flex-start}
+.ib{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,var(--paper));font-size:19px;transition:transform .25s}
+.il li:hover .ib{transform:scale(1.25) rotate(-8deg)}
+.flow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 2px;margin-top:6px}
+.st{flex:1 1 92px;min-width:92px;max-width:170px;text-align:center}
+.ico{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 4px;border-radius:16px;background:color-mix(in srgb,var(--c) 14%,var(--paper));border:2px solid var(--c);font-size:36px;transition:transform .25s}
+.st:hover .ico{transform:translateY(-4px) rotate(-6deg) scale(1.08)}
+.num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;font-size:12px;font-weight:800}
+.st b{display:block;font-size:13px;line-height:1.4;color:var(--ink)}
+.st small{display:block;font-size:11.5px;line-height:1.45}
+.ar{align-self:center;margin-top:-30px;color:var(--c);font-style:normal;font-size:14px;animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(-6px)}}
+.js .page{opacity:0;transform:translateY(36px) rotate(.5deg);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .page.in{opacity:1;transform:none}
+.js .page h2{background-repeat:no-repeat;background-size:0 100%;background-position:right;transition:background-size .9s .35s}
+.js .page.in h2{background-size:100% 100%}
+.js .blk{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .5s,transform .5s;transition-delay:calc(var(--k)*90ms + 250ms)}
+.js .in .blk{opacity:1;transform:none}
+.js .st{opacity:0;transform:scale(.6);transition:opacity .4s,transform .45s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i)*110ms + 500ms)}
+.js .in .st{opacity:1;transform:none}
+.js .in .note{animation:pop .8s 1s both}
+@keyframes pop{0%{transform:rotate(-6deg) scale(.7);opacity:0}60%{transform:rotate(2deg) scale(1.05)}100%{transform:rotate(-.6deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){.js .page,.js .blk,.js .st,.hero,.ar,.js .in .note{animation:none;transition:none;opacity:1;transform:none}.js .page h2{background-size:100% 100%}}
+#art svg{width:min(760px,100%);height:auto;display:block;margin:0 auto 12px;filter:drop-shadow(0 12px 24px rgba(20,35,92,.16))}
+.nd{transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.4)}}
+.flowline{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 10px;margin:8px 0 0;font-weight:600;color:var(--ink)}
+.flowline span{background:var(--paper);border:2px solid var(--blue);border-radius:99px;padding:0 12px}
+.flowline i{color:var(--orange);font-style:normal}
+nav a.on{background:var(--yel);color:#14235c;border-color:var(--orange)}
+@media (min-width:900px){
+html{scroll-padding-top:16px}
+body{padding-right:250px}
+nav{position:fixed;top:0;right:0;bottom:0;width:250px;flex-direction:column;align-items:stretch;overflow-y:auto;overflow-x:hidden;gap:6px;padding:20px 14px;background:var(--paper);border-left:2px solid var(--line);z-index:7}
+nav:before{content:attr(data-t);font-weight:800;color:var(--ink);font-size:18px;padding:0 4px 6px}
+nav a{border-radius:10px;padding:4px 12px;border-width:2px;font-size:14px;transition:transform .2s}
+nav a:hover{transform:translateX(-4px)}
+}
+@media (prefers-reduced-motion:reduce){.nd{animation:none}}
+
+nav a{display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav a b{display:inline-grid;place-items:center;flex:none;min-width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800}
+nav a.on b{background:var(--orange)}
+nav a.home{border-style:dashed;justify-content:center}
+@media (min-width:900px){
+nav a{white-space:normal;line-height:1.4;padding:7px 12px;border-color:transparent;background:transparent}
+nav a.on{border-color:var(--orange)}
+nav a.home{border-color:var(--blue);margin-bottom:6px}
+}
+#bar{background-size:200% 100%;animation:sh 3s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.dig{margin-top:14px;border:2px solid var(--purple);border-radius:12px;background:var(--paper);overflow:hidden}
+.dig summary{cursor:pointer;padding:8px 14px;font-weight:800;color:var(--purple);list-style:none;display:flex;align-items:center;gap:8px}
+.dig summary::-webkit-details-marker{display:none}
+.dig summary:after{content:"＋";margin-inline-start:auto;transition:transform .3s}
+.dig[open] summary:after{transform:rotate(45deg)}
+.dig p{margin:0;padding:4px 16px 12px;animation:dg .5s}
+@keyframes dg{from{opacity:0;transform:translateY(-8px)}}
+.js .in .blk:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 8px 18px rgba(20,35,92,.15)}
+.st .ico{animation:gl 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*.45s)}
+@keyframes gl{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}}
+.flowline span{animation:fl 3s ease-in-out infinite}
+.flowline span:nth-of-type(2){animation-delay:.5s}
+.flowline span:nth-of-type(3){animation-delay:1s}
+@keyframes fl{50%{background:var(--yel);color:#14235c;transform:translateY(-3px)}}
+#top{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);background:var(--yel);color:#14235c;font-size:20px;cursor:pointer;z-index:8;opacity:0;pointer-events:none;transform:scale(.6);transition:.3s}
+#top.show{opacity:1;pointer-events:auto;transform:none}
+@media (prefers-reduced-motion:reduce){.st .ico,.flowline span,#bar,.dig p{animation:none}}
+.dig ul{margin:0;padding:4px 34px 12px 16px;animation:dg .5s}
+.dig li{margin:4px 0}
+.dig li::marker{color:var(--purple)}
+@media (prefers-reduced-motion:reduce){.dig ul{animation:none}}
+.fg{margin:8px 16px 0}
+.fg svg{width:min(460px,100%);display:block;margin:0 auto;overflow:visible}
+.fi{animation:fi .6s both;animation-delay:var(--d)}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+.fa{stroke-dasharray:5 4;animation:da 1s linear infinite}
+@keyframes da{to{stroke-dashoffset:-9}}
+.sl{animation:sl 3s ease-in-out infinite}
+@keyframes sl{0%,10%{transform:translate(0,0)}50%{transform:translate(64px,0)}90%,100%{transform:translate(64px,64px)}}
+@media (prefers-reduced-motion:reduce){.fi,.fa,.sl{animation:none}}
+code{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Consolas,monospace;font-size:.85em;background:color-mix(in srgb,var(--blue) 12%,var(--paper));border-radius:6px;padding:1px 6px;word-break:break-word}
+
+header{position:relative}
+.lg{position:absolute;top:12px;left:12px;z-index:10;border:2px solid var(--blue);background:var(--yel);color:#14235c;border-radius:99px;padding:2px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+html[dir=ltr] .lg{left:auto;right:12px}
+.qz{margin-top:14px;border:2px solid var(--green);border-radius:12px;padding:10px 14px;background:var(--paper)}
+.qz b{color:var(--ink)}
+.qz button{font:inherit;display:block;width:100%;text-align:start;margin:6px 0;padding:4px 12px;border-radius:8px;border:2px solid var(--line);background:var(--paper);color:var(--txt);cursor:pointer}
+.qz button.g{background:#d7f5e0;border-color:var(--green);color:#14532d}.qz button.x{background:#fde1e7;border-color:var(--red);color:#7f1d1d}
+.qf{font-weight:800;color:var(--ink)}
+html[dir=ltr] .page{padding:22px 20px 18px 44px}
+html[dir=ltr] .page:before{right:auto;left:10px}
+html[dir=ltr] .hero{left:auto;right:16px}
+html[dir=ltr] .blk ul,html[dir=ltr] .blk ol{padding:0 0 0 18px}
+html[dir=ltr] #bar{transform-origin:left}
+html[dir=ltr] #top{left:auto;right:16px}
+html[dir=ltr] .js .page h2{background-position:left}
+html[dir=ltr] .dig ul{padding:4px 16px 12px 34px}
+@media (min-width:900px){html[dir=ltr] body{padding:0 0 0 250px}html[dir=ltr] nav{right:auto;left:0;border-left:0;border-right:2px solid var(--line)}html[dir=ltr] nav a:hover{transform:translateX(4px)}}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;right:14px;bottom:14px;z-index:9999;padding:8px 14px;border-radius:999px;background:#165dce;color:#fff;text-decoration:none;font:700 13px system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 24px #142b5740">← Accueil</a>
+<header><button class="lg" id="lg"></button><div id="art"><svg viewBox="0 0 760 220" role="img" aria-label="Docker" direction="ltr"><rect x="8" y="8" width="744" height="204" rx="30" fill="#1c2a58"/><circle cx="635" cy="110" r="80" fill="#fff" fill-opacity=".07"/><text x="635" y="142" text-anchor="middle" font-size="90" fill="#ffd93b" font-family="monospace" font-weight="800">🐳</text><text x="62" y="95" fill="#fff" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="3">CODE · LEARN · BUILD</text><text x="60" y="170" fill="#fff" font-family="Arial,sans-serif" font-size="72" font-weight="800">Dock<tspan fill="#ffd93b">er</tspan></text><path d="M62 190h280" stroke="#ffd93b" stroke-width="5" stroke-linecap="round"/></svg></div><h1 id="h1"></h1><p class="flowline" id="fl"></p></header>
+<nav id="nav"></nav>
+<main id="main"></main>
+<footer id="ft"></footer>
+<script>
+const B='blue',G='green',O='orange',P='purple',R='red';
+let L=0;try{L=localStorage.getItem('cl8')=='fr'?1:0}catch(e){}
+const x=s=>{const p=s.split('|');return p[L]??p[0]};
+const D=[
+["مدخل إلى Docker|Introduction à Docker","شغّل تطبيقك في أي مكان بنفس الطريقة|Exécutez votre appli partout de la même façon",[
+["ما هو Docker؟|C’est quoi Docker ?",B,["أداة تعبّئ التطبيق وكل ما يحتاجه داخل حاوية (container) معزولة|Un outil qui emballe l’application et ses dépendances dans un conteneur isolé","تنتهي مشكلة «يعمل على جهازي فقط»|Fini le « ça marche sur ma machine »"]],
+["صورة وحاوية|Image et conteneur",G,["الصورة (image) قالب للقراءة فقط والحاوية نسخة قيد التشغيل منها|L’image est un modèle en lecture seule, le conteneur en est une instance en cours d’exécution","الصور تُحفظ في سجلات مثل Docker Hub|Les images sont stockées dans des registres comme Docker Hub"]],
+["حاوية أم آلة افتراضية؟|Conteneur ou machine virtuelle ?",O,["الحاويات تشارك نواة النظام فهي أخف وأسرع|Les conteneurs partagent le noyau de l’hôte : plus légers et plus rapides","الآلة الافتراضية تحمل نظام تشغيل كاملًا|Une machine virtuelle embarque un système complet"]]],
+"الحاوية عملية معزولة وليست آلة افتراضية كاملة.|Un conteneur est un processus isolé, pas une machine virtuelle complète.","Docker = صورة + حاوية + سجل لتوزيع التطبيقات بثبات.|Docker = image + conteneur + registre pour distribuer des applications de façon fiable.",
+["<code>docker --version</code> تتحقق من التثبيت.|<code>docker --version</code> vérifie l’installation.","Docker Desktop يناسب ويندوز وماك.|Docker Desktop convient à Windows et Mac."],
+[['📄','Dockerfile'],['🖼️','Image'],['📦','حاوية|Conteneur'],['☁️','Registry']],
+["ما الصورة في Docker؟|Qu’est-ce qu’une image Docker ?",["قالب للقراءة فقط|Un modèle en lecture seule","حاوية قيد التشغيل|Un conteneur en cours d’exécution","ملف نصي فقط|Un simple fichier texte"],0]],
+["الأوامر الأساسية|Les commandes de base","شغّل وأوقف وراقب|Lancer, arrêter, surveiller",[
+["التشغيل|Lancer",B,["<code>docker run -d -p 8080:80 nginx</code>","<code>-d</code> في الخلفية و<code>-p</code> يربط منفذ الجهاز بمنفذ الحاوية|<code>-d</code> en arrière-plan, <code>-p</code> relie un port de l’hôte à celui du conteneur"]],
+["المراقبة|Surveiller",G,["<code>docker ps</code> تعرض الحاويات العاملة و<code>docker ps -a</code> كلها|<code>docker ps</code> liste les conteneurs actifs, <code>docker ps -a</code> tous","<code>docker logs nom</code> تعرض السجلات|<code>docker logs nom</code> affiche les journaux"]],
+["الإيقاف والحذف|Arrêter et supprimer",O,["<code>docker stop</code> و<code>docker rm</code> للحاويات و<code>docker rmi</code> للصور|<code>docker stop</code> et <code>docker rm</code> pour les conteneurs, <code>docker rmi</code> pour les images","<code>docker exec -it nom sh</code> تفتح طرفية داخل الحاوية|<code>docker exec -it nom sh</code> ouvre un terminal dans le conteneur"]]],
+"سمِّ حاوياتك بـ <code>--name</code> لتسهيل التعامل معها.|Nommez vos conteneurs avec <code>--name</code> pour les retrouver facilement.","run وps وlogs وexec وstop وrm هي أوامر الاستعمال اليومي.|run, ps, logs, exec, stop et rm sont les commandes du quotidien.",
+["<code>docker pull</code> تنزّل صورة دون تشغيلها.|<code>docker pull</code> télécharge une image sans la lancer.","<code>--rm</code> تحذف الحاوية بعد انتهائها.|<code>--rm</code> supprime le conteneur à la fin."],
+[['⬇️','pull'],['▶️','run'],['👀','ps / logs'],['⏹️','stop']],
+["ماذا يفعل الخيار <code>-p 8080:80</code>؟|Que fait l’option <code>-p 8080:80</code> ?",["يربط المنفذ 8080 للجهاز بالمنفذ 80 للحاوية|Relie le port 8080 de l’hôte au port 80 du conteneur","يشغّل 80 حاوية|Lance 80 conteneurs","يحذف المنفذ|Supprime le port"],0]],
+["ملف Dockerfile|Le Dockerfile","وصفة بناء الصورة|La recette de construction de l’image",[
+["التعليمات|Les instructions",B,["<code>FROM node:20</code> الصورة الأساسية|<code>FROM node:20</code> : l’image de base","<code>WORKDIR</code> و<code>COPY</code> و<code>RUN</code> و<code>CMD</code>"]],
+["البناء|La construction",G,["<code>docker build -t monapp:1.0 .</code> تبني الصورة|<code>docker build -t monapp:1.0 .</code> construit l’image","<code>docker run monapp:1.0</code> تشغّلها|<code>docker run monapp:1.0</code> la lance"]],
+["الطبقات والذاكرة المؤقتة|Couches et cache",O,["كل تعليمة تنشئ طبقة (layer)|Chaque instruction crée une couche (layer)","ضع ما يتغير قليلًا أولًا (التبعيات) والكود أخيرًا|Placez ce qui change peu d’abord (dépendances), le code ensuite"]]],
+"<code>RUN</code> أثناء البناء و<code>CMD</code> عند التشغيل.|<code>RUN</code> s’exécute au build, <code>CMD</code> au démarrage.","Dockerfile = FROM ثم COPY ثم RUN ثم CMD.|Dockerfile = FROM, COPY, RUN puis CMD.",
+["<code>EXPOSE 3000</code> توثّق المنفذ المستعمل.|<code>EXPOSE 3000</code> documente le port utilisé.","<code>ENV</code> تضبط متغيرات البيئة.|<code>ENV</code> définit des variables d’environnement."],
+[['📄','Dockerfile'],['🔨','build'],['🖼️','Image'],['▶️','run']],
+["أي تعليمة تحدد الصورة الأساسية؟|Quelle instruction définit l’image de base ?",["FROM","RUN","CMD"],0]],
+["المجلدات والبيانات|Volumes et données","لا تفقد بياناتك|Ne perdez pas vos données",[
+["المشكلة|Le problème",B,["بيانات الحاوية تضيع عند حذفها|Les données d’un conteneur disparaissent avec lui","الحل: المجلدات (volumes)|La solution : les volumes"]],
+["المجلد|Le volume",G,["<code>docker volume create donnees</code>","<code>docker run -v donnees:/var/lib/postgresql/data postgres</code>"]],
+["الربط المباشر|Bind mount",O,["<code>-v $(pwd):/app</code> يربط مجلدًا من جهازك بالحاوية|<code>-v $(pwd):/app</code> relie un dossier de votre machine au conteneur","مفيد أثناء التطوير: تعديل الكود يظهر فورًا|Pratique en développement : les modifications du code sont visibles immédiatement"]]],
+"في الإنتاج فضّل المجلدات التي يديرها Docker.|En production, préférez les volumes gérés par Docker.","Volume = بيانات دائمة خارج دورة حياة الحاوية.|Volume = données persistantes hors du cycle de vie du conteneur.",
+["<code>docker volume ls</code> تعرض المجلدات.|<code>docker volume ls</code> liste les volumes.","<code>docker volume rm</code> تحذف مجلدًا غير مستعمل.|<code>docker volume rm</code> supprime un volume inutilisé."],
+[['📦','حاوية|Conteneur'],['🔗','-v'],['💾','Volume'],['🖥️','المضيف|Hôte']],
+["ماذا يحدث لبيانات حاوية بلا volume عند حذفها؟|Que deviennent les données d’un conteneur sans volume quand on le supprime ?",["تُحفظ|Elles sont conservées","تضيع|Elles sont perdues","تُنسخ للسحابة|Copiées dans le cloud"],1]],
+["الشبكات|Les réseaux Docker","اجعل الحاويات تتحدث|Faire communiquer les conteneurs",[
+["أنواع الشبكات|Types de réseaux",B,["<code>bridge</code> الافتراضية و<code>host</code> و<code>none</code>|<code>bridge</code> par défaut, <code>host</code> et <code>none</code>","في شبكة bridge مخصصة تتعرف الحاويات على بعضها بالاسم|Sur un réseau bridge personnalisé, les conteneurs se trouvent par leur nom"]],
+["إنشاء شبكة|Créer un réseau",G,["<code>docker network create monreseau</code>","<code>docker run --network monreseau --name db postgres</code>"]],
+["المنافذ|Les ports",O,["<code>-p</code> ينشر المنفذ للخارج عند الحاجة فقط|<code>-p</code> publie un port vers l’extérieur seulement si nécessaire","داخل نفس الشبكة لا حاجة لنشر المنافذ|Dans un même réseau, inutile de publier les ports"]]],
+"قاعدة البيانات لا تحتاج إلى منفذ منشور للعالم.|Une base de données n’a pas besoin d’un port publié au monde.","شبكة مخصصة + أسماء الحاويات = اتصال بسيط وآمن.|Réseau dédié + noms de conteneurs = communication simple et sûre.",
+["مثال: التطبيق يتصل بـ <code>db:5432</code> مباشرة.|Exemple : l’appli se connecte à <code>db:5432</code> directement.","<code>docker network ls</code> تعرض الشبكات.|<code>docker network ls</code> liste les réseaux."],
+[['🌐','Internet'],['🚪','-p'],['🕸️','شبكة|Réseau'],['📦','حاويات|Conteneurs']],
+["كيف يجد التطبيق قاعدة البيانات في شبكة مخصصة؟|Comment l’appli trouve-t-elle la base sur un réseau dédié ?",["بعنوان IP ثابت دائمًا|Toujours par IP fixe","باسم الحاوية|Par le nom du conteneur","لا يمكنها|Impossible"],1]],
+["Docker Compose|Docker Compose","تطبيق متعدد الخدمات بأمر واحد|Une appli multi-services en une commande",[
+["الفكرة|L’idée",B,["ملف <code>compose.yaml</code> يصف الخدمات والشبكات والمجلدات|Un fichier <code>compose.yaml</code> décrit services, réseaux et volumes","<code>docker compose up -d</code> تشغّل كل شيء|<code>docker compose up -d</code> démarre tout"]],
+["مثال|Exemple",G,["<code>services:</code> ثم <code>web:</code> و<code>db:</code>|<code>services:</code> puis <code>web:</code> et <code>db:</code>","لكل خدمة <code>image</code> أو <code>build</code> و<code>ports</code> و<code>volumes</code>|Chaque service a <code>image</code> ou <code>build</code>, <code>ports</code> et <code>volumes</code>"]],
+["أوامر مفيدة|Commandes utiles",O,["<code>docker compose logs -f</code> لمتابعة السجلات|<code>docker compose logs -f</code> pour suivre les journaux","<code>docker compose down</code> توقف الحاويات وتحذفها|<code>docker compose down</code> arrête et supprime les conteneurs"]]],
+"<code>depends_on</code> تحدد ترتيب التشغيل لا جاهزية الخدمة.|<code>depends_on</code> règle l’ordre de démarrage, pas la disponibilité du service.","Compose = ملف YAML واحد لبيئة كاملة قابلة للتكرار.|Compose = un seul fichier YAML pour un environnement complet et reproductible.",
+["استعمل ملف <code>.env</code> للمتغيرات الحساسة.|Utilisez un fichier <code>.env</code> pour les variables sensibles.","<code>docker compose up --build</code> تعيد بناء الصور.|<code>docker compose up --build</code> reconstruit les images."],
+[['📝','compose.yaml'],['🚀','up'],['🧩','خدمات|Services'],['🛑','down']],
+["أي أمر يشغّل كل الخدمات؟|Quelle commande démarre tous les services ?",["docker compose up","docker compose rm","docker build"],0]],
+["التحسين وأفضل الممارسات|Optimisation et bonnes pratiques","صور أصغر وبناء أسرع|Des images plus petites, un build plus rapide",[
+["صور خفيفة|Images légères",B,["استعمل صورًا أساسية صغيرة مثل <code>alpine</code> أو <code>slim</code>|Choisissez des images de base légères comme <code>alpine</code> ou <code>slim</code>","كل ملف زائد يبطّئ البناء والتوزيع|Chaque fichier en trop ralentit build et distribution"]],
+["ملف dockerignore|Le fichier .dockerignore",G,["استثنِ <code>node_modules</code> و<code>.git</code> و<code>.env</code>|Excluez <code>node_modules</code>, <code>.git</code> et <code>.env</code>","يشبه <code>.gitignore</code> لكن لسياق البناء|Fonctionne comme <code>.gitignore</code>, pour le contexte de build"]],
+["البناء متعدد المراحل|Build multi-étapes",O,["مرحلة للبناء وأخرى صغيرة للتشغيل|Une étape pour construire, une petite pour exécuter","<code>COPY --from=build /app/dist /app</code>"]]],
+"ادمج أوامر <code>RUN</code> المتقاربة لتقليل الطبقات.|Regroupez les <code>RUN</code> proches pour réduire les couches.","صورة صغيرة + dockerignore + multi-stage = بناء سريع وتوزيع خفيف.|Image légère + dockerignore + multi-stage = build rapide et distribution légère.",
+["ثبّت إصدارات الصور (<code>node:20.11</code>) بدل <code>latest</code>.|Fixez les versions d’images (<code>node:20.11</code>) plutôt que <code>latest</code>.","<code>docker system prune</code> تنظّف الموارد غير المستعملة.|<code>docker system prune</code> nettoie les ressources inutilisées."],
+[['🏗️','Build'],['✂️','Alpine'],['📦','Multi-stage'],['🪶','صورة نهائية|Image finale']],
+["ما فائدة <code>.dockerignore</code>؟|À quoi sert <code>.dockerignore</code> ?",["استبعاد ملفات من سياق البناء|Exclure des fichiers du contexte de build","حذف الحاويات|Supprimer des conteneurs","تسريع الشبكة|Accélérer le réseau"],0]],
+["الأمان والسجلات|Sécurité et registres","انشر صورك بأمان|Publier ses images en sécurité",[
+["الأمان|Sécurité",B,["لا تشغّل التطبيق كمستخدم root: <code>USER app</code>|N’exécutez pas l’appli en root : <code>USER app</code>","لا تضع كلمات السر داخل الصورة أو Dockerfile|Ne mettez pas de secrets dans l’image ni le Dockerfile"]],
+["السجل|Le registre",G,["<code>docker login</code> ثم <code>docker tag monapp user/monapp:1.0</code>|<code>docker login</code> puis <code>docker tag monapp user/monapp:1.0</code>","<code>docker push user/monapp:1.0</code> ترفع الصورة|<code>docker push user/monapp:1.0</code> publie l’image"]],
+["أخطاء شائعة|Erreurs courantes",R,["الاعتماد على الوسم <code>latest</code> في الإنتاج|S’appuyer sur le tag <code>latest</code> en production","نسيان تحديث الصور الأساسية|Oublier de mettre à jour les images de base"]]],
+"افحص الصور بأدوات مثل <code>docker scout</code> أو Trivy.|Analysez vos images avec <code>docker scout</code> ou Trivy.","مستخدم محدود + أسرار خارج الصورة + وسوم دقيقة = حاويات أكثر أمانًا.|Utilisateur limité + secrets hors image + tags précis = conteneurs plus sûrs.",
+["استعمل أسرار Compose أو متغيرات البيئة وقت التشغيل.|Utilisez les secrets de Compose ou des variables d’environnement au runtime.","<code>--read-only</code> تجعل نظام ملفات الحاوية للقراءة فقط.|<code>--read-only</code> rend le système de fichiers du conteneur en lecture seule."],
+[['👤','USER'],['🔐','Secrets'],['🔍','Scan'],['☁️','push']],
+["أين تضع كلمة سر قاعدة البيانات؟|Où mettre le mot de passe de la base ?",["داخل Dockerfile|Dans le Dockerfile","متغير بيئة أو سر وقت التشغيل|Variable d’environnement ou secret au runtime","داخل الصورة العامة|Dans l’image publique"],1]]
+];
+const HE=['🐳','▶️','📄','💾','🕸️','🧩','🪶','🛡️'],CL=['--blue','--green','--orange','--purple','--red'];
+const IC=[[/erreur|خطأ|danger|خطر|أخطاء/i,'⚠️'],[/dockerfile|instruction|تعليمات|construction|البناء|build/i,'🔨'],[/volume|مجلد|bind|الربط|problème|المشكلة|données/i,'💾'],[/réseau|شبكة|port|منفذ/i,'🕸️'],[/compose|yaml|service|خدمات/i,'🧩'],[/léger|خفيفة|dockerignore|multi|مراحل|couche|طبقات|optimisation/i,'🪶'],[/sécurité|أمان|secret|registre|سجل|user/i,'🛡️'],[/lancer|التشغيل|surveiller|المراقبة|arrêter|الإيقاف|commande|أوامر/i,'▶️'],[/image|صورة|conteneur|حاوية|docker/i,'🐳'],[/exemple|مثال|idée|الفكرة/i,'💡']];
+const ic=t=>{for(const[r,e]of IC)if(r.test(t))return e;return null};
+const $=i=>document.getElementById(i),nav=$('nav'),main=$('main');
+document.documentElement.classList.add('js');
+const TX=(a,y,t,z=12)=>`<text x="${a}" y="${y}" text-anchor="middle" font-size="${z}" font-weight="600" fill="var(--ink)">${t}</text>`;
+function flow(it){const n=it.length,g=420/n;let o='';
+ it.forEach(([e,l],i)=>{const c=`var(${CL[i%5]})`,cx=L?g*(i+.5):420-g*(i+.5),d=L?1:-1;
+  o+=`<g class="fi" style="--d:${i*.25}s"><rect x="${cx-30}" y="18" width="60" height="60" rx="14" fill="${c}" fill-opacity=".15" stroke="${c}" stroke-width="2"/>${TX(cx,58,e,28)}${TX(cx,98,x(l),11)}</g>`;
+  if(i<n-1)o+=`<path class="fa" d="M${cx+d*36} 48H${cx+d*(g-36)}" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah)"/>`});
+ return `<svg viewBox="0 0 420 115" direction="ltr"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>${o}</svg>`}
+function qa(b,ok){b.classList.add(ok?'g':'x');b.parentNode.querySelector('.qf').textContent=ok?(L?'✔ Bravo !':'✔ أحسنت!'):(L?'✖ Réessayez':'✖ حاول مرة أخرى')}
+let io,so;
+function render(){
+ const H=document.documentElement;H.lang=L?'fr':'ar';H.dir=L?'ltr':'rtl';
+ document.title=L?'CodeLab – Formation Docker':'CodeLab – دورة Docker';
+ $('h1').textContent=L?'Apprendre Docker pas à pas':'تعلم Docker خطوة بخطوة';
+ $('lg').textContent=L?'ع':'FR';$('lg').setAttribute('aria-label',L?'العربية':'Français');
+ $('fl').innerHTML=['📝 Dockerfile','🖼️ Image','📦 Container','☁️ Registry'].map(s=>`<span style="direction:ltr">${s}</span>`).join(`<i>${L?'▶':'◀'}</i>`);
+ $('ft').textContent=L?'CodeLab — Apprenez, pratiquez, partagez':'CodeLab — تعلّم، تدرّب، وشارك';
+ nav.dataset.t=L?'Sommaire':'المواضيع';nav.innerHTML='';main.innerHTML='';
+ D.forEach((d,n)=>{const[t,s,bl,note,end,dg,fl,q]=d,id='p'+(n+1);
+  nav.insertAdjacentHTML('beforeend',`<a href="#${id}" title="${x(t)}"><b>${n+1}</b><span>${x(t)}</span></a>`);
+  const blocks=bl.map(([h,c,it,ol],k)=>{let body;
+   if(ol)body=`<div class="flow">${it.map((z,j)=>{const[a,...r]=x(z).split(/[:：]/);const d2=r.join(':').trim();return `<div class="st" style="--i:${j}"><span class="ico">${ic(z)||'⭐'}</span><span class="num">${j+1}</span><b>${d2?a:x(z)}</b>${d2?`<small>${d2}</small>`:''}</div>`}).join(`<i class="ar">${L?'▶':'◀'}</i>`)}</div>`;
+   else body=`<ul class="il">${it.map(z=>`<li><span class="ib">${ic(z)||'✦'}</span><span>${x(z)}</span></li>`).join('')}</ul>`;
+   return `<section class="blk" style="--c:var(--${c});--k:${k}"><h3>${ic(h)||''} ${x(h)}</h3>${body}</section>`}).join('');
+  const quiz=`<div class="qz"><b>🧠 ${x(q[0])}</b>${q[1].map((o,i)=>`<button onclick="qa(this,${i==q[2]})">${x(o)}</button>`).join('')}<div class="qf"></div></div>`;
+  main.insertAdjacentHTML('beforeend',`<article class="page" id="${id}"><span class="hero" aria-hidden="true">${HE[n]}</span><h2>${x(t)}</h2><p class="sub">${x(s)}</p><div class="grid">${blocks}</div><div class="note">💡 ${x(note)}</div><div class="end"><b>${L?'À retenir : ':'الخلاصة: '}</b>${x(end)}</div>${quiz}<details class="dig"><summary>🔎 ${L?'Aller plus loin':'تعمّق أكثر'}</summary><figure class="fg">${flow(fl)}</figure><ul>${dg.map(z=>`<li>${x(z)}</li>`).join('')}</ul></details></article>`)});
+ io&&io.disconnect();so&&so.disconnect();
+ const pages=document.querySelectorAll('.page');
+ if('IntersectionObserver' in window){io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});pages.forEach(p=>io.observe(p))}else pages.forEach(p=>p.classList.add('in'));
+ const links=[...nav.querySelectorAll('a')];
+ so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('on',on);if(on)a.scrollIntoView({block:'nearest',inline:'nearest'})})}),{rootMargin:'-30% 0px -60% 0px'});pages.forEach(p=>so.observe(p));
+}
+$('lg').onclick=()=>{L=1-L;try{localStorage.setItem('cl8',L?'fr':'ar')}catch(e){}render()};
+const tb=document.createElement('button');tb.id='top';tb.textContent='↑';tb.setAttribute('aria-label','Top');tb.onclick=()=>scrollTo({top:0});document.body.append(tb);addEventListener('scroll',()=>tb.classList.toggle('show',scrollY>600),{passive:true});
+const bar=document.createElement('div');bar.id='bar';document.body.prepend(bar);
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight||1)})`},{passive:true});
+render();
+</script>
+</body>
+</html>

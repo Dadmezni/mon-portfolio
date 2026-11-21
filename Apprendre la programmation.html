@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apprendre la programmation — Les bases</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+
+:root{--bg:#e9edf5;--paper:#fdfdfb;--line:#dbe3f2;--ink:#14235c;--txt:#2b3557;--blue:#1f3fa0;--green:#2e9e57;--orange:#ee8a1f;--purple:#6a3fb5;--red:#d6335b;--yel:#ffd93b;--note:#fff3a6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}}
+:root[data-theme="dark"]{--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.7}
+header{text-align:center;padding:28px 16px 8px}
+header h1{margin:0;color:var(--ink);font-size:clamp(24px,5vw,38px);font-weight:800}
+header p{margin:4px 0 0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--bg)}
+nav a{flex:none;text-decoration:none;font-size:13px;font-weight:600;color:var(--ink);border:2px solid var(--blue);border-radius:99px;padding:2px 12px;background:var(--paper)}
+nav a:focus-visible,nav a:hover{background:var(--yel);color:#14235c}
+main{max-width:none;width:100%;margin:0;padding:8px 14px 40px;display:grid;gap:28px}
+.page{position:relative;background:var(--paper);border-radius:10px;padding:22px 22px 18px 20px;padding-right:44px;box-shadow:0 2px 0 var(--line),0 10px 24px rgba(20,35,92,.12);background-image:repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px)}
+.page:before{content:"";position:absolute;top:10px;bottom:10px;right:10px;width:16px;background:radial-gradient(circle at 50% 50%,var(--ink) 0 4px,transparent 5px) 0 0/16px 26px repeat-y}
+.brand{font-size:13px;font-weight:600;color:var(--blue)}
+.page h2{margin:2px 0 0;color:var(--ink);font-size:clamp(24px,5vw,34px);font-weight:800;line-height:1.35;display:inline;background:linear-gradient(transparent 62%,var(--yel) 62% 92%,transparent 92%)}
+.sub{margin:6px 0 14px;font-weight:600;color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.blk{background:var(--paper);border:2px dashed var(--c);border-radius:12px;padding:12px 14px}
+.blk h3{display:inline-block;margin:-26px 0 6px;padding:0 12px;background:var(--c);color:#fff;border-radius:6px;font-size:15px;font-weight:800;transform:rotate(-1deg)}
+.blk ul,.blk ol{margin:0;padding:0 18px 0 0}
+.blk li{margin:3px 0}
+.blk li::marker{color:var(--c);font-weight:800}
+.blk{margin-top:14px}
+.note,.end{margin-top:14px;padding:10px 14px;border-radius:6px;font-weight:600}
+.note{background:var(--note);color:var(--ink);transform:rotate(-.6deg);box-shadow:2px 3px 0 rgba(0,0,0,.12);width:fit-content;max-width:100%}
+.end{border:2px solid var(--blue);border-radius:12px;color:var(--ink)}
+.end b{color:var(--blue)}
+footer{text-align:center;padding:20px;font-weight:600;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:4px;z-index:9;background:linear-gradient(90deg,var(--blue),var(--yel));transform-origin:right;transform:scaleX(0)}
+.hero{position:absolute;top:14px;left:16px;font-size:clamp(42px,9vw,64px);animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+.il{list-style:none;padding:0!important}
+.il li{display:flex;gap:8px;align-items:flex-start}
+.ib{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,var(--paper));font-size:19px;transition:transform .25s}
+.il li:hover .ib{transform:scale(1.25) rotate(-8deg)}
+.flow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 2px;margin-top:6px}
+.st{flex:1 1 92px;min-width:92px;max-width:170px;text-align:center}
+.ico{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 4px;border-radius:16px;background:color-mix(in srgb,var(--c) 14%,var(--paper));border:2px solid var(--c);font-size:36px;transition:transform .25s}
+.st:hover .ico{transform:translateY(-4px) rotate(-6deg) scale(1.08)}
+.num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;font-size:12px;font-weight:800}
+.st b{display:block;font-size:13px;line-height:1.4;color:var(--ink)}
+.st small{display:block;font-size:11.5px;line-height:1.45}
+.ar{align-self:center;margin-top:-30px;color:var(--c);font-style:normal;font-size:14px;animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(-6px)}}
+.js .page{opacity:0;transform:translateY(36px) rotate(.5deg);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .page.in{opacity:1;transform:none}
+.js .page h2{background-repeat:no-repeat;background-size:0 100%;background-position:right;transition:background-size .9s .35s}
+.js .page.in h2{background-size:100% 100%}
+.js .blk{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .5s,transform .5s;transition-delay:calc(var(--k)*90ms + 250ms)}
+.js .in .blk{opacity:1;transform:none}
+.js .st{opacity:0;transform:scale(.6);transition:opacity .4s,transform .45s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i)*110ms + 500ms)}
+.js .in .st{opacity:1;transform:none}
+.js .in .note{animation:pop .8s 1s both}
+@keyframes pop{0%{transform:rotate(-6deg) scale(.7);opacity:0}60%{transform:rotate(2deg) scale(1.05)}100%{transform:rotate(-.6deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){.js .page,.js .blk,.js .st,.hero,.ar,.js .in .note{animation:none;transition:none;opacity:1;transform:none}.js .page h2{background-size:100% 100%}}
+#art svg{width:min(760px,100%);height:auto;display:block;margin:0 auto 12px;filter:drop-shadow(0 12px 24px rgba(20,35,92,.16))}
+.nd{transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.4)}}
+.flowline{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 10px;margin:8px 0 0;font-weight:600;color:var(--ink)}
+.flowline span{background:var(--paper);border:2px solid var(--blue);border-radius:99px;padding:0 12px}
+.flowline i{color:var(--orange);font-style:normal}
+nav a.on{background:var(--yel);color:#14235c;border-color:var(--orange)}
+@media (min-width:900px){
+html{scroll-padding-top:16px}
+body{padding-right:250px}
+nav{position:fixed;top:0;right:0;bottom:0;width:250px;flex-direction:column;align-items:stretch;overflow-y:auto;overflow-x:hidden;gap:6px;padding:20px 14px;background:var(--paper);border-left:2px solid var(--line);z-index:7}
+nav:before{content:attr(data-t);font-weight:800;color:var(--ink);font-size:18px;padding:0 4px 6px}
+nav a{border-radius:10px;padding:4px 12px;border-width:2px;font-size:14px;transition:transform .2s}
+nav a:hover{transform:translateX(-4px)}
+}
+@media (prefers-reduced-motion:reduce){.nd{animation:none}}
+
+nav a{display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav a b{display:inline-grid;place-items:center;flex:none;min-width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800}
+nav a.on b{background:var(--orange)}
+nav a.home{border-style:dashed;justify-content:center}
+@media (min-width:900px){
+nav a{white-space:normal;line-height:1.4;padding:7px 12px;border-color:transparent;background:transparent}
+nav a.on{border-color:var(--orange)}
+nav a.home{border-color:var(--blue);margin-bottom:6px}
+}
+#bar{background-size:200% 100%;animation:sh 3s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.dig{margin-top:14px;border:2px solid var(--purple);border-radius:12px;background:var(--paper);overflow:hidden}
+.dig summary{cursor:pointer;padding:8px 14px;font-weight:800;color:var(--purple);list-style:none;display:flex;align-items:center;gap:8px}
+.dig summary::-webkit-details-marker{display:none}
+.dig summary:after{content:"＋";margin-inline-start:auto;transition:transform .3s}
+.dig[open] summary:after{transform:rotate(45deg)}
+.dig p{margin:0;padding:4px 16px 12px;animation:dg .5s}
+@keyframes dg{from{opacity:0;transform:translateY(-8px)}}
+.js .in .blk:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 8px 18px rgba(20,35,92,.15)}
+.st .ico{animation:gl 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*.45s)}
+@keyframes gl{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}}
+.flowline span{animation:fl 3s ease-in-out infinite}
+.flowline span:nth-of-type(2){animation-delay:.5s}
+.flowline span:nth-of-type(3){animation-delay:1s}
+@keyframes fl{50%{background:var(--yel);color:#14235c;transform:translateY(-3px)}}
+#top{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);background:var(--yel);color:#14235c;font-size:20px;cursor:pointer;z-index:8;opacity:0;pointer-events:none;transform:scale(.6);transition:.3s}
+#top.show{opacity:1;pointer-events:auto;transform:none}
+@media (prefers-reduced-motion:reduce){.st .ico,.flowline span,#bar,.dig p{animation:none}}
+.dig ul{margin:0;padding:4px 34px 12px 16px;animation:dg .5s}
+.dig li{margin:4px 0}
+.dig li::marker{color:var(--purple)}
+@media (prefers-reduced-motion:reduce){.dig ul{animation:none}}
+.fg{margin:8px 16px 0}
+.fg svg{width:min(460px,100%);display:block;margin:0 auto;overflow:visible}
+.fi{animation:fi .6s both;animation-delay:var(--d)}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+.fa{stroke-dasharray:5 4;animation:da 1s linear infinite}
+@keyframes da{to{stroke-dashoffset:-9}}
+.sl{animation:sl 3s ease-in-out infinite}
+@keyframes sl{0%,10%{transform:translate(0,0)}50%{transform:translate(64px,0)}90%,100%{transform:translate(64px,64px)}}
+@media (prefers-reduced-motion:reduce){.fi,.fa,.sl{animation:none}}
+code{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Consolas,monospace;font-size:.85em;background:color-mix(in srgb,var(--blue) 12%,var(--paper));border-radius:6px;padding:1px 6px;word-break:break-word}
+
+header{position:relative}
+.lg{position:absolute;top:12px;left:12px;z-index:10;border:2px solid var(--blue);background:var(--yel);color:#14235c;border-radius:99px;padding:2px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+html[dir=ltr] .lg{left:auto;right:12px}
+.qz{margin-top:14px;border:2px solid var(--green);border-radius:12px;padding:10px 14px;background:var(--paper)}
+.qz b{color:var(--ink)}
+.qz button{font:inherit;display:block;width:100%;text-align:start;margin:6px 0;padding:4px 12px;border-radius:8px;border:2px solid var(--line);background:var(--paper);color:var(--txt);cursor:pointer}
+.qz button.g{background:#d7f5e0;border-color:var(--green);color:#14532d}.qz button.x{background:#fde1e7;border-color:var(--red);color:#7f1d1d}
+.qf{font-weight:800;color:var(--ink)}
+html[dir=ltr] .page{padding:22px 20px 18px 44px}
+html[dir=ltr] .page:before{right:auto;left:10px}
+html[dir=ltr] .hero{left:auto;right:16px}
+html[dir=ltr] .blk ul,html[dir=ltr] .blk ol{padding:0 0 0 18px}
+html[dir=ltr] #bar{transform-origin:left}
+html[dir=ltr] #top{left:auto;right:16px}
+html[dir=ltr] .js .page h2{background-position:left}
+html[dir=ltr] .dig ul{padding:4px 16px 12px 34px}
+@media (min-width:900px){html[dir=ltr] body{padding:0 0 0 250px}html[dir=ltr] nav{right:auto;left:0;border-left:0;border-right:2px solid var(--line)}html[dir=ltr] nav a:hover{transform:translateX(4px)}}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;right:14px;bottom:14px;z-index:9999;padding:8px 14px;border-radius:999px;background:#165dce;color:#fff;text-decoration:none;font:700 13px system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 24px #142b5740">← Accueil</a>
+<header><button class="lg" id="lg"></button><div id="art"><svg viewBox="0 0 760 220" role="img" aria-label="Python" direction="ltr"><rect x="8" y="8" width="744" height="204" rx="30" fill="#1c2a58"/><circle cx="635" cy="110" r="80" fill="#fff" fill-opacity=".07"/><text x="635" y="142" text-anchor="middle" font-size="90" fill="#ffd93b" font-family="monospace" font-weight="800">{ }</text><text x="62" y="95" fill="#fff" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="3">CODE · LEARN · BUILD</text><text x="60" y="170" fill="#fff" font-family="Arial,sans-serif" font-size="72" font-weight="800">Python <tspan fill="#ffd93b">3</tspan></text><path d="M62 190h280" stroke="#ffd93b" stroke-width="5" stroke-linecap="round"/></svg></div><h1 id="h1"></h1><p class="flowline" id="fl"></p></header>
+<nav id="nav"></nav>
+<main id="main"></main>
+<footer id="ft"></footer>
+<script>
+const B='blue',G='green',O='orange',P='purple',R='red';
+let L=0;try{L=localStorage.getItem('cl4')=='fr'?1:0}catch(e){}
+const x=s=>{const p=s.split('|');return p[L]??p[0]};
+const D=[
+["المتغيرات|Les variables","صناديق تحفظ المعلومات|Des boîtes pour garder l’information",[
+["ما هو المتغير؟|C’est quoi ?",B,["صندوق له اسم يحفظ قيمة في ذاكرة الحاسوب|Une boîte nommée qui garde une valeur en mémoire","<code>age = 12</code> العلامة = تضع القيمة في الصندوق|<code>age = 12</code> : le signe = range la valeur dans la boîte"]],
+["أنواع البيانات|Les types",G,["<code>int</code> أعداد صحيحة و<code>float</code> أعداد عشرية|<code>int</code> entiers et <code>float</code> décimaux","<code>str</code> نصوص و<code>bool</code> صح أو خطأ|<code>str</code> texte et <code>bool</code> vrai ou faux"]],
+["أخطاء شائعة|Erreurs courantes",R,["الاسم لا يبدأ برقم: <code>2age</code> خطأ|Un nom ne commence jamais par un chiffre : <code>2age</code> est faux","اختر أسماء واضحة مثل <code>prix_total</code>|Choisissez des noms clairs comme <code>prix_total</code>"]]],
+"يمكن تغيير قيمة المتغير في أي وقت.|Une variable peut changer de valeur à tout moment.","المتغير = اسم + قيمة قابلة للتعديل.|Variable = nom + valeur modifiable.",
+["في بايثون لا تحتاج إلى تحديد النوع، فهو يُستنتج من القيمة.|En Python, pas besoin de déclarer le type : il est déduit de la valeur.","<code>type(x)</code> تعرض نوع المتغير.|<code>type(x)</code> affiche le type d’une variable."],
+[['🏷️','الاسم|Nom'],['🟰','='],['💎','القيمة|Valeur'],['🧠','الذاكرة|Mémoire']],
+["بعد <code>x = 5</code> ثم <code>x = 8</code> كم قيمة x؟|Après <code>x = 5</code> puis <code>x = 8</code>, que vaut x ?",["5","8","13"],1]],
+["الشروط|Les conditions","البرنامج يتخذ القرار|Le programme prend des décisions",[
+["if و else|if et else",B,["<code>if</code> تنفّذ الكود إذا تحقق الشرط و<code>else</code> في غير ذلك|<code>if</code> exécute si la condition est vraie, <code>else</code> sinon","<code>elif</code> لإضافة حالات أخرى|<code>elif</code> ajoute d’autres cas"]],
+["المقارنات|Les comparaisons",G,["<code>==</code> <code>!=</code> <code>&lt;</code> <code>&gt;=</code>","<code>and</code> و<code>or</code> تجمعان عدة شروط|<code>and</code> et <code>or</code> combinent plusieurs conditions"]],
+["أخطاء شائعة|Erreurs courantes",R,["الخلط بين <code>=</code> (إسناد) و<code>==</code> (مقارنة)|Confondre <code>=</code> (ranger) et <code>==</code> (comparer)","المسافة البادئة (4 مسافات) جزء من اللغة|L’indentation (4 espaces) fait partie du langage"]]],
+"الشرط يعطي دائمًا صحيحًا أو خطأ.|Une condition vaut toujours vrai ou faux.","if / elif / else توجّه مسار البرنامج.|if / elif / else orientent le programme.",
+["مثال: <code>if age &gt;= 18:</code> ثم سطر مزاح <code>print('adulte')</code>|Exemple : <code>if age &gt;= 18:</code> puis une ligne indentée <code>print('adulte')</code>","الشروط المتداخلة ممكنة لكن دون مبالغة.|Les conditions imbriquées sont possibles, mais sans excès."],
+[['❓','سؤال|Question'],['✅','صحيح؟|Vrai ?'],['➡️','المسار أ|Chemin A'],['↪️','المسار ب|Chemin B']],
+["إذا كان age = 18 فما قيمة <code>age &gt;= 18</code>؟|Si age = 18, que vaut <code>age &gt;= 18</code> ?",["صحيح|Vrai","خطأ|Faux","خطأ برمجي|Erreur"],0]],
+["الحلقات|Les boucles","كرّر دون تعب|Répéter sans se fatiguer",[
+["الحلقة for|La boucle for",B,["<code>for i in range(5):</code> تكرر 5 مرات|<code>for i in range(5):</code> répète 5 fois","<code>range(5)</code> تنتج 0 و1 و2 و3 و4|<code>range(5)</code> produit 0, 1, 2, 3, 4"]],
+["خطوات الحلقة|Étapes d’une boucle",O,["البداية: تجهيز العداد|Début : préparer le compteur","الاختبار: هل الشرط صحيح؟|Test : la condition est-elle vraie ?","التنفيذ: تشغيل الكتلة|Corps : exécuter le bloc","التحديث: تغيير العداد|Mise à jour : changer le compteur"],1],
+["الحلقة اللانهائية|La boucle infinie",R,["while لا يصبح شرطها خاطئًا أبدًا|Un while dont la condition ne devient jamais fausse","تأكد أن المتغير يتغير داخل الحلقة|Vérifiez que la variable change dans la boucle"]]],
+"<code>range(5)</code> لا تتضمن الرقم 5.|<code>range(5)</code> n’inclut jamais 5.","for لعدد معروف و while ما دام الشرط صحيحًا.|for pour un nombre connu, while tant que la condition est vraie.",
+["<code>for x in liste:</code> تمر على العناصر مباشرة.|<code>for x in liste:</code> parcourt directement les éléments.","جدول الضرب: <code>for i in range(1, 11): print(7 * i)</code>|Table de multiplication : <code>for i in range(1, 11): print(7 * i)</code>"],
+[['🏁','البداية|Début'],['❓','الاختبار|Test'],['⚙️','الكتلة|Bloc'],['🔄','تكرار|Retour']],
+["كم مرة تدور <code>for i in range(3)</code>؟|Combien de tours fait <code>for i in range(3)</code> ?",["2","3","4"],1]],
+["الدوال|Les fonctions","آلات قابلة لإعادة الاستخدام|Des machines réutilisables",[
+["التعريف|Définition",B,["<code>def</code> تعرّف الدالة والمعاملات هي مدخلاتها|<code>def</code> définit la fonction, les paramètres sont ses entrées","<code>return</code> يعيد النتيجة لمن استدعاها|<code>return</code> renvoie le résultat à l’appelant"]],
+["مثال|Exemple",G,["<code>def doubler(n): return n * 2</code>","<code>doubler(7)</code> تعيد 14|<code>doubler(7)</code> renvoie 14"]],
+["فوائد|Avantages",O,["نكتب الكود مرة ونستعمله في كل مكان|On écrit une fois, on réutilise partout","دالة واحدة لمهمة واحدة باسم فعل|Une fonction, une tâche, un nom-verbe"]],
+["خطأ شائع|Erreur courante",R,["نسيان <code>return</code> والاكتفاء بـ <code>print</code>|Oublier <code>return</code> et se contenter de <code>print</code>","لا يمكن إعادة استخدام ما طُبع|Ce qui est affiché ne peut pas être réutilisé"]]],
+"الدالة بلا return تعيد None.|Sans return, une fonction renvoie None.","def + معاملات + return = آلة قابلة للتكرار.|def + paramètres + return = une machine réutilisable.",
+["قيمة افتراضية: <code>def saluer(nom='ami')</code>|Valeur par défaut : <code>def saluer(nom='ami')</code>","مثال واقعي: <code>def ttc(prix): return prix * 1.19</code>|Cas réel : <code>def ttc(prix): return prix * 1.19</code>"],
+[['📥','مدخل|Entrée'],['⚙️','دالة|Fonction'],['🧮','معالجة|Calcul'],['📤','نتيجة|Sortie']],
+["ماذا تعيد <code>doubler(5)</code>؟|Que renvoie <code>doubler(5)</code> ?",["5","10","25"],1]],
+["القوائم|Les listes","عدة قيم مرتبة|Plusieurs valeurs ordonnées",[
+["الأساسيات|Les bases",B,["<code>fruits = ['pomme', 'kiwi']</code>","الفهرس يبدأ من 0 والأخير <code>-1</code>|L’indice commence à 0, le dernier est <code>-1</code>"]],
+["العمليات|Les opérations",G,["<code>append</code> للإضافة و<code>remove</code> للحذف|<code>append</code> ajoute, <code>remove</code> supprime","<code>len</code> للطول و<code>sorted</code> للترتيب|<code>len</code> donne la taille, <code>sorted</code> trie"]],
+["خطأ الفهرس|IndexError",R,["قراءة فهرس غير موجود تسبب خطأ|Lire un indice inexistant provoque une erreur","آخر فهرس هو <code>len(liste) - 1</code>|Le dernier indice est <code>len(liste) - 1</code>"]]],
+"العدّ يبدأ من الصفر لا من الواحد.|On compte à partir de zéro, pas de un.","القائمة = عناصر مرتبة بفهارس.|Liste = éléments ordonnés par indices.",
+["المتوسط: <code>sum(notes) / len(notes)</code>|Moyenne : <code>sum(notes) / len(notes)</code>","الشرائح: <code>liste[0:2]</code> تأخذ أول عنصرين|Tranches : <code>liste[0:2]</code> prend les deux premiers éléments"],
+[['0️⃣','فهرس 0|indice 0'],['1️⃣','فهرس 1|indice 1'],['2️⃣','فهرس 2|indice 2'],['➕','append']],
+["في <code>['a','b','c']</code> كم قيمة <code>liste[1]</code>؟|Dans <code>['a','b','c']</code>, que vaut <code>liste[1]</code> ?",["'a'","'b'","'c'"],1]],
+["القواميس|Les dictionnaires","ابحث بالاسم لا بالموضع|Chercher par nom, pas par position",[
+["التعريف|Définition",B,["أزواج مفتاح ← قيمة|Des paires clé → valeur","<code>eleve = {'nom': 'Sara', 'age': 12}</code>"]],
+["الاستعمال|Utilisation",G,["<code>eleve['nom']</code> تقرأ و<code>eleve['ville'] = 'Tunis'</code> تضيف|<code>eleve['nom']</code> lit, <code>eleve['ville'] = 'Tunis'</code> ajoute","<code>items()</code> للمرور على المفاتيح والقيم|<code>items()</code> parcourt clés et valeurs"]],
+["خطأ المفتاح|KeyError",R,["قراءة مفتاح غير موجود تسبب خطأ|Lire une clé absente provoque une erreur","استعمل <code>get</code> لتجنب الخطأ|Utilisez <code>get</code> pour l’éviter"]]],
+"يجب أن يكون المفتاح فريدًا.|Une clé doit être unique.","القاموس = مفتاح ← قيمة.|Dictionnaire = clé → valeur.",
+["قائمة من القواميس تمثل فصلًا كاملًا من التلاميذ.|Une liste de dictionnaires représente toute une classe.","صيغة JSON في الويب تشبه القواميس تمامًا.|Le JSON du web ressemble beaucoup aux dictionnaires."],
+[['🔑','مفتاح|Clé'],['➡️','→'],['💎','قيمة|Valeur'],['📒','قاموس|Dictionnaire']],
+["كيف تقرأ العمر من eleve؟|Comment lire l’âge dans eleve ?",["eleve[1]","eleve['age']","eleve.age()"],1]],
+["العودية|La récursivité","دالة تستدعي نفسها|Une fonction qui s’appelle elle-même",[
+["الفكرة|L’idée",B,["نحل المشكلة بتصغيرها إلى مشكلة أبسط|On résout un problème en le réduisant à un plus petit","مثل الدمى الروسية: نفتح واحدة تلو الأخرى|Comme les poupées russes : on ouvre l’une après l’autre"]],
+["مثال|Exemple",G,["<code>def fact(n): return 1 if n &lt;= 1 else n * fact(n - 1)</code>","<code>fact(4)</code> = 4 × 3 × 2 × 1 = 24"]],
+["الخطر|Le danger",R,["بلا حالة توقف يحدث <code>RecursionError</code>|Sans cas d’arrêt : <code>RecursionError</code>","اكتب حالة التوقف أولًا|Écrivez d’abord le cas d’arrêt"]]],
+"كل استدعاء يعمل على مشكلة أصغر.|Chaque appel traite un problème plus petit.","حالة توقف + استدعاء أبسط = عودية آمنة.|Cas d’arrêt + appel plus simple = récursivité sûre.",
+["تُستعمل في المجلدات والأشجار.|Utile pour les dossiers et les arbres.","يمكن غالبًا استبدالها بحلقة.|Souvent remplaçable par une boucle."],
+[['4️⃣','fact(4)'],['3️⃣','fact(3)'],['2️⃣','fact(2)'],['1️⃣','fact(1)']],
+["ما فائدة حالة التوقف؟|À quoi sert le cas d’arrêt ?",["تسريع الكود|Accélérer le code","إنهاء الاستدعاءات|Terminer les appels","تعريف متغير|Déclarer une variable"],1]],
+["الأصناف (POO)|Les classes (POO)","البرمجة الكائنية|La programmation orientée objet",[
+["المفهوم|Le concept",B,["الصنف مخطط والكائن نسخة منه|La classe est un plan, l’objet en est une instance","الخصائص بيانات والدوال الداخلية أفعال|Les attributs sont les données, les méthodes sont les actions"]],
+["مثال|Exemple",G,["<code>class Animal:</code> ثم <code>def __init__(self, nom):</code>|<code>class Animal:</code> puis <code>def __init__(self, nom):</code>","<code>mimi = Animal('Mimi')</code>"]],
+["خطأ شائع|Erreur courante",R,["نسيان <code>self</code> في الدوال|Oublier <code>self</code> dans les méthodes","<code>self</code> تشير إلى الكائن الحالي|<code>self</code> désigne l’objet courant"]]],
+"لكل كائن بياناته الخاصة.|Chaque objet a ses propres données.","صنف = مخطط ؛ كائن = نسخة.|Classe = plan ; objet = instance.",
+["مثال واقعي: صنف <code>Compte</code> له solde ودالتان deposer وretirer|Cas réel : classe <code>Compte</code> avec solde et méthodes deposer / retirer","الوراثة تسمح بإعادة استخدام صنف في آخر.|L’héritage permet de réutiliser une classe dans une autre."],
+[['📐','صنف|Classe'],['🏗️','__init__'],['🐱','كائن|Objet'],['🎬','دالة|Méthode']],
+["الصنف هو…|Une classe est…",["مخطط لإنشاء كائنات|Un plan pour créer des objets","حلقة|Une boucle","نص|Un texte"],0]]
+];
+const HE=['🧱','🔀','🔁','⚙️','📋','🔑','🪆','🧩'],CL=['--blue','--green','--orange','--purple','--red'];
+const IC=[[/for|while|boucle|حلق|تكرار|عداد|compteur/i,'🔁'],[/def|fonction|دال/i,'⚙️'],[/list|قائم|فهرس|indice|index/i,'📋'],[/dict|قاموس|clé|مفتاح/i,'🔑'],[/class|classe|صنف|objet|كائن/i,'🧩'],[/error|erreur|خطأ|danger|خطر/i,'⚠️'],[/\bif\b|condition|شرط/,'🔀'],[/return|renvoie|تعيد|نتيجة/i,'📤'],[/type|نوع|int/i,'🏷️'],[/test|اختبار|هل/i,'❓'],[/اسم|nom/i,'🏷️'],[/مثال|exemple|cas réel/i,'💡']];
+const ic=t=>{for(const[r,e]of IC)if(r.test(t))return e;return null};
+const $=i=>document.getElementById(i),nav=$('nav'),main=$('main');
+document.documentElement.classList.add('js');
+const TX=(a,y,t,z=12)=>`<text x="${a}" y="${y}" text-anchor="middle" font-size="${z}" font-weight="600" fill="var(--ink)">${t}</text>`;
+function flow(it){const n=it.length,g=420/n;let o='';
+ it.forEach(([e,l],i)=>{const c=`var(${CL[i%5]})`,cx=L?g*(i+.5):420-g*(i+.5),d=L?1:-1;
+  o+=`<g class="fi" style="--d:${i*.25}s"><rect x="${cx-30}" y="18" width="60" height="60" rx="14" fill="${c}" fill-opacity=".15" stroke="${c}" stroke-width="2"/>${TX(cx,58,e,28)}${TX(cx,98,x(l),11)}</g>`;
+  if(i<n-1)o+=`<path class="fa" d="M${cx+d*36} 48H${cx+d*(g-36)}" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah)"/>`});
+ return `<svg viewBox="0 0 420 115" direction="ltr"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>${o}</svg>`}
+function qa(b,ok){b.classList.add(ok?'g':'x');b.parentNode.querySelector('.qf').textContent=ok?(L?'✔ Bravo !':'✔ أحسنت!'):(L?'✖ Réessayez':'✖ حاول مرة أخرى')}
+let io,so;
+function render(){
+ const H=document.documentElement;H.lang=L?'fr':'ar';H.dir=L?'ltr':'rtl';
+ document.title=L?'CodeLab – Apprendre la programmation':'CodeLab – تعلم البرمجة';
+ $('h1').textContent=L?'Apprendre la programmation pas à pas':'تعلم البرمجة خطوة بخطوة';
+ $('lg').textContent=L?'ع':'FR';$('lg').setAttribute('aria-label',L?'العربية':'Français');
+ $('fl').innerHTML=['🧱 x = 5','🔀 if','🔁 for','⚙️ def','📋 list'].map(s=>`<span style="direction:ltr">${s}</span>`).join(`<i>${L?'▶':'◀'}</i>`);
+ $('ft').textContent=L?'CodeLab — Apprenez, pratiquez, partagez':'CodeLab — تعلّم، تدرّب، وشارك';
+ nav.dataset.t=L?'Sommaire':'المواضيع';nav.innerHTML='';main.innerHTML='';
+ D.forEach((d,n)=>{const[t,s,bl,note,end,dg,fl,q]=d,id='p'+(n+1);
+  nav.insertAdjacentHTML('beforeend',`<a href="#${id}" title="${x(t)}"><b>${n+1}</b><span>${x(t)}</span></a>`);
+  const blocks=bl.map(([h,c,it,ol],k)=>{let body;
+   if(ol)body=`<div class="flow">${it.map((z,j)=>{const[a,...r]=x(z).split(/[:：]/);const d2=r.join(':').trim();return `<div class="st" style="--i:${j}"><span class="ico">${ic(z)||'⭐'}</span><span class="num">${j+1}</span><b>${d2?a:x(z)}</b>${d2?`<small>${d2}</small>`:''}</div>`}).join(`<i class="ar">${L?'▶':'◀'}</i>`)}</div>`;
+   else body=`<ul class="il">${it.map(z=>`<li><span class="ib">${ic(z)||'✦'}</span><span>${x(z)}</span></li>`).join('')}</ul>`;
+   return `<section class="blk" style="--c:var(--${c});--k:${k}"><h3>${ic(h)||''} ${x(h)}</h3>${body}</section>`}).join('');
+  const quiz=`<div class="qz"><b>🧠 ${x(q[0])}</b>${q[1].map((o,i)=>`<button onclick="qa(this,${i==q[2]})">${x(o)}</button>`).join('')}<div class="qf"></div></div>`;
+  main.insertAdjacentHTML('beforeend',`<article class="page" id="${id}"><span class="hero" aria-hidden="true">${HE[n]}</span><h2>${x(t)}</h2><p class="sub">${x(s)}</p><div class="grid">${blocks}</div><div class="note">💡 ${x(note)}</div><div class="end"><b>${L?'À retenir : ':'الخلاصة: '}</b>${x(end)}</div>${quiz}<details class="dig"><summary>🔎 ${L?'Aller plus loin':'تعمّق أكثر'}</summary><figure class="fg">${flow(fl)}</figure><ul>${dg.map(z=>`<li>${x(z)}</li>`).join('')}</ul></details></article>`)});
+ io&&io.disconnect();so&&so.disconnect();
+ const pages=document.querySelectorAll('.page');
+ if('IntersectionObserver' in window){io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});pages.forEach(p=>io.observe(p))}else pages.forEach(p=>p.classList.add('in'));
+ const links=[...nav.querySelectorAll('a')];
+ so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('on',on);if(on)a.scrollIntoView({block:'nearest',inline:'nearest'})})}),{rootMargin:'-30% 0px -60% 0px'});pages.forEach(p=>so.observe(p));
+}
+$('lg').onclick=()=>{L=1-L;try{localStorage.setItem('cl4',L?'fr':'ar')}catch(e){}render()};
+const tb=document.createElement('button');tb.id='top';tb.textContent='↑';tb.setAttribute('aria-label','Top');tb.onclick=()=>scrollTo({top:0});document.body.append(tb);addEventListener('scroll',()=>tb.classList.toggle('show',scrollY>600),{passive:true});
+const bar=document.createElement('div');bar.id='bar';document.body.prepend(bar);
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight||1)})`},{passive:true});
+render();
+</script>
+</body>
+</html>

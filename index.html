@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -36,64 +36,50 @@
   <header class="navbar">
     <div class="container nav-inner">
       <a href="#hero" class="logo">Dhiaa<span>.</span> Mezni</a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-          <li><a href="#about" data-i18n="nav.about">About</a></li>
-          <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
-          <li><a href="#recommendations" data-i18n="nav.recommendations">Recommendations</a></li>
-          <li><a href="#certifications" data-i18n="nav.certifications">Certifications</a></li>
-          <!--<li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li> -->
-          <li class="nav-dropdown">
-            <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="learning-menu">
-              Formations <span class="dropdown-chevron" aria-hidden="true">▾</span>
+
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <ul class="menu">
+          <li class="menu-item">
+            <a class="menu-link" href="#projects" data-i18n="nav.projects">Projects</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link" href="#services" data-i18n="nav.services">Services</a>
+          </li>
+
+          <!-- Profil -->
+          <li class="menu-item has-sub">
+            <button class="menu-link menu-toggle" type="button" aria-expanded="false" aria-controls="sub-profile">
+              <span data-i18n="nav.profile">Profile</span>
+              <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </button>
-            <ul class="dropdown-menu" id="learning-menu">
-              <li class="learning-group">
-                <h3>Intelligence artificielle</h3>
-                <a href="ia.html">Comprendre l'IA</a>
-                <a href="iaCours.html" lang="ar" hreflang="ar">Cours d'IA en arabe</a>
-                <a href="rag.html">Machine Learning et RAG</a>
-                <a href="ragHistoire.html">Histoire de l'IA et du RAG</a>
-                <a href="embedding.html">Embeddings</a>
-                <a href="prompts.html">Technologies et prompts</a>
-              </li>
-              <li class="learning-group">
-                <h3>Développement web</h3>
-                <a href="laravelCours.html">Cours Laravel</a>
-                <a href="devopsCours.html">Formation DevOps</a>
-                <a href="bootstrap-cours.html">Cours Bootstrap 5</a>
-                <a href="guide-portfolio.html">Guide du portfolio</a>
-              </li>
-              <li class="learning-group">
-                <h3>Ateliers et évaluations</h3>
-                <a href="round3-vscode.html">Atelier pratique</a>
-                <a href="explication-code-round3.html">Explication du code</a>
-                <a href="quiz-ia-php.html">Quiz récapitulatif IA + PHP</a>
-                <a href="qcm.html">QCM PHP et IA</a>
-              </li>
-              <li class="learning-group">
-                <h3>Marketing digital</h3>
-                <a href="marketing-digital-visuel.html">Cours illustré</a>
-                <a href="tp-canva.html">TP Canva</a>
-              </li>
-              <li class="learning-group">
-                <h3>Profil</h3>
-                <a href="resume.html" data-i18n="nav.resume">Resume / CV</a>
-              </li>
+            <ul class="submenu" id="sub-profile">
+              <li><a href="#about" data-i18n="nav.about">About</a></li>
+              <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+              <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+              <li><a href="#recommendations" data-i18n="nav.recommendations">Recommendations</a></li>
+              <li><a href="#certifications" data-i18n="nav.certifications">Certifications</a></li>
+              <li class="submenu-sep"><a href="resume.html" data-i18n="nav.resume">Resume / CV</a></li>
             </ul>
           </li>
-          <li><a href="#contact" class="btn-nav" data-i18n="nav.contact">Contact</a></li>
+          <!-- Formations : page dédiée -->
+          <li class="menu-item">
+            <a class="menu-link" href="formations.html" data-i18n="nav.formations">Formations</a>
+          </li>
+
+          <li class="menu-item menu-cta">
+            <a class="btn-nav" href="#contact" data-i18n="nav.contact">Contact</a>
+          </li>
         </ul>
       </nav>
 
-      <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
-        <span class="lang-current">FR</span>
-      </button>
-
-      <button class="burger" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+          <span class="lang-current">FR</span>
+        </button>
+        <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -686,6 +672,9 @@
           <a class="training-link" href="bootstrap-cours.html" data-i18n="training.open">Explore the course →</a>
         </article>
       </div>
+      <div class="training-all">
+        <a class="btn btn-outline" href="formations.html">Voir toutes les formations →</a>
+      </div>
     </div>
   </section>
 
@@ -741,7 +730,6 @@
             <span class="cert-badge">Certificate of Completion</span>
           </div>
         </article>
-
 
         <article class="cert-card">
           <a class="cert-image lightbox-trigger" href="assets/images/6.png" data-full="assets/images/6.png" data-caption="PHP 5 and Symfony 2 Training - February to March 2017">
@@ -800,24 +788,27 @@
       <div class="gallery-carousel" aria-label="Image gallery">
         <div class="gallery-viewport">
           <div class="gallery-track">
-        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/1.png" data-full="assets/images/gallery/1.png" data-caption="Gallery photo 1">
-          <img src="assets/images/gallery/1.png" alt="Gallery photo 1" loading="lazy" />
-        </a>
-        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/2.jpg" data-full="assets/images/gallery/2.jpg" data-caption="Gallery photo 2">
-          <img src="assets/images/gallery/2.jpg" alt="Gallery photo 2" loading="lazy" />
-        </a>
-        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/3.png" data-full="assets/images/gallery/3.png" data-caption="Gallery photo 3">
-          <img src="assets/images/gallery/3.png" alt="Gallery photo 3" loading="lazy" />
-        </a>
-        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/4.jpg" data-full="assets/images/gallery/4.jpg" data-caption="Gallery photo 4">
-          <img src="assets/images/gallery/4.jpg" alt="Gallery photo 4" loading="lazy" />
-        </a>
-        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/5.jpg" data-full="assets/images/gallery/5.jpg" data-caption="Gallery photo 5">
-          <img src="assets/images/gallery/5.jpg" alt="Gallery photo 5" loading="lazy" />
-        </a>
-        <a class="gallery-item lightbox-trigger" href="assets/images/gallery/6.jpg" data-full="assets/images/gallery/6.jpg" data-caption="Gallery photo 6">
-          <img src="assets/images/gallery/6.jpg" alt="Gallery photo 6" loading="lazy" />
-        </a>
+            <a class="gallery-item lightbox-trigger" href="assets/images/gallery/1.png" data-full="assets/images/gallery/1.png" data-caption="Gallery photo 1">
+              <img src="assets/images/gallery/1.png" alt="Gallery photo 1" loading="lazy" />
+            </a>
+            <a class="gallery-item lightbox-trigger" href="assets/images/gallery/2.jpg" data-full="assets/images/gallery/2.jpg" data-caption="Gallery photo 2">
+              <img src="assets/images/gallery/2.jpg" alt="Gallery photo 2" loading="lazy" />
+            </a>
+            <a class="gallery-item lightbox-trigger" href="assets/images/gallery/3.png" data-full="assets/images/gallery/3.png" data-caption="Gallery photo 3">
+              <img src="assets/images/gallery/3.png" alt="Gallery photo 3" loading="lazy" />
+            </a>
+            <a class="gallery-item lightbox-trigger" href="assets/images/gallery/4.jpg" data-full="assets/images/gallery/4.jpg" data-caption="Gallery photo 4">
+              <img src="assets/images/gallery/4.jpg" alt="Gallery photo 4" loading="lazy" />
+            </a>
+            <a class="gallery-item lightbox-trigger" href="assets/images/gallery/5.jpg" data-full="assets/images/gallery/5.jpg" data-caption="Gallery photo 5">
+              <img src="assets/images/gallery/5.jpg" alt="Gallery photo 5" loading="lazy" />
+            </a>
+            <a class="gallery-item lightbox-trigger" href="assets/images/gallery/6.jpg" data-full="assets/images/gallery/6.jpg" data-caption="Gallery photo 6">
+              <img src="assets/images/gallery/6.jpg" alt="Gallery photo 6" loading="lazy" />
+            </a>
+            <a class="gallery-item lightbox-trigger" href="assets/images/gallery/3c21e192-4ceb-4df0-a580-dd76f52fd1f5.jpg" data-full="assets/images/gallery/3c21e192-4ceb-4df0-a580-dd76f52fd1f5.jpg" data-caption="Gallery photo 7">
+              <img src="assets/images/gallery/3c21e192-4ceb-4df0-a580-dd76f52fd1f5.jpg" alt="Gallery photo 7" loading="lazy" />
+            </a>
           </div>
         </div>
         <div class="gallery-controls">
@@ -937,6 +928,7 @@
       <p class="footer-loc" data-i18n="footer.loc">Jendouba, Tunisia 🇹🇳</p>
     </div>
   </footer>
+
   <!-- ===== LIGHTBOX ===== -->
   <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
     <button class="lightbox-close" aria-label="Close">&times;</button>
@@ -948,7 +940,9 @@
       <figcaption class="lightbox-caption" id="lightbox-caption"></figcaption>
     </figure>
   </div>
+
   <script src="js/i18n.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/menu.js?v=3"></script>
 </body>
 </html>

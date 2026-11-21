@@ -348,5 +348,5 @@ document.getElementById('art').innerHTML=`<svg viewBox="0 0 350 150" role="img" 
 const links=[...nav.querySelectorAll('a')];const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('on',on);if(on)a.scrollIntoView({block:'nearest',inline:'nearest'})})}),{rootMargin:'-30% 0px -60% 0px'});pages.forEach(x=>so.observe(x));})();
 </script>
 
-</body>
+ </body>
 </html>

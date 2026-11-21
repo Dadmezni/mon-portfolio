@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Python — Les bases du développement</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--tx:#161c2d;--mu:#667085;--pr:#4f46e5;--pr2:#eef2ff;--bd:#e4e7ee;--ok:#16a34a;--ko:#dc2626;--code:#0f1424;--ct:#e6eaff;--dm:#fff7e0;--hl:#fde68a;--l0:#16a34a;--l1:#2563eb;--l2:#9333ea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e111b;--card:#171b29;--tx:#eef0f8;--mu:#9aa3b8;--pr:#8b85ff;--pr2:#232748;--bd:#272c40;--code:#090c16;--dm:#2a2616;--hl:#5b4a12}}
+:root[data-theme="dark"]{--bg:#0e111b;--card:#171b29;--tx:#eef0f8;--mu:#9aa3b8;--pr:#8b85ff;--pr2:#232748;--bd:#272c40;--code:#090c16;--dm:#2a2616;--hl:#5b4a12}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:30}
+svg.i{width:1.2em;height:1.2em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:12px;padding:10px 18px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.15rem}.logo span{background:var(--pr);color:#fff;border-radius:9px;padding:5px 7px;display:flex}
+.sp{flex:1}.pg{width:150px;height:10px;background:var(--bd);border-radius:9px;overflow:hidden}.pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pr),var(--ok));transition:width .7s}
+.lay{display:grid;grid-template-columns:270px 1fr;gap:22px;max-width:1100px;margin:0 auto;padding:22px 18px 70px}
+nav{align-self:start;position:sticky;top:calc(70px + env(safe-area-inset-top,0px))}
+.lv{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin:14px 0 4px;color:var(--c)}
+.it{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;color:var(--tx);padding:8px 10px;border-radius:10px;cursor:pointer;font:inherit;font-size:.93rem}
+.it:hover,.it.on{background:var(--pr2)}.it.on{font-weight:700;box-shadow:inset 3px 0 var(--pr)}
+.dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--bd);display:grid;place-items:center;font-size:.7rem;flex:none;color:var(--mu)}.dot.d{background:var(--ok);border-color:var(--ok);color:#fff}
+.mb{display:none;width:100%;margin-bottom:10px;justify-content:center;gap:8px}
+main{min-width:0;animation:in .4s both}@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.bdg{background:var(--c);color:#fff;border-radius:99px;padding:2px 10px;font-size:.75rem;font-weight:700}
+h1{font-size:1.8rem;line-height:1.2;margin:8px 0 12px;display:flex;align-items:center;gap:14px}
+.tile{width:54px;height:54px;border-radius:15px;background:linear-gradient(135deg,var(--c),var(--pr));color:#fff;display:grid;place-items:center;flex:none;animation:fl 3s ease-in-out infinite}.tile svg{width:28px;height:28px}
+@keyframes fl{50%{transform:translateY(-5px) rotate(-4deg)}}
+.steps{display:flex;gap:4px;margin:12px 0 18px;overflow-x:auto}
+.sb{flex:1;min-width:84px;border:0;border-bottom:4px solid var(--bd);background:none;color:var(--mu);padding:6px 2px;font:inherit;font-size:.78rem;cursor:pointer}
+.sb.on{border-color:var(--c);color:var(--tx);font-weight:700}.sb.p{border-color:var(--ok)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;margin:12px 0;animation:in .4s both}
+.obj{background:var(--pr2);border-radius:12px;padding:10px 16px;margin-top:12px}.obj li{margin:2px 0}
+mark{background:var(--hl);color:inherit;padding:0 4px;border-radius:4px;font-weight:600}
+code{background:var(--pr2);padding:1px 6px;border-radius:5px}
+.fl{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:6px 0 14px}
+.fl b{background:var(--pr2);border:2px solid var(--bd);border-radius:12px;padding:8px 14px;animation:hi 3.6s infinite;animation-delay:calc(var(--k)*.9s)}
+.fl u{text-decoration:none;color:var(--mu)}
+@keyframes hi{0%,24%,100%{border-color:var(--bd);transform:none}6%,18%{border-color:var(--c);background:var(--hl);transform:scale(1.08)}}
+.nt{display:flex;gap:12px;margin:10px 0;animation:pop .45s}.nt>span{font-size:.85rem;background:var(--c);color:#fff;border-radius:50%;width:26px;height:26px;display:grid;place-items:center;flex:none;margin-top:2px}
+.win{background:var(--code);border-radius:14px;overflow:hidden;margin:10px 0;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.wh{display:flex;align-items:center;gap:6px;padding:8px 12px;background:rgba(255,255,255,.06);color:#9aa3c7;font-size:.8rem}
+.wh b{width:10px;height:10px;border-radius:50%;background:#ff5f57}.wh b+b{background:#febc2e}.wh b+b+b{background:#28c840}.wh em{font-style:normal;margin-left:8px}
+pre{margin:0;padding:14px;color:var(--ct);overflow-x:auto;font:.9rem/1.6 ui-monospace,Menlo,Consolas,monospace}pre i{font-style:normal}.c{color:#7a85ad}.s{color:#9be28f}.k{color:#ff92c2}.n{color:#ffcf7a}
+.demo{background:var(--dm);border:1px solid var(--bd);border-radius:14px;padding:16px}.demo>b{display:block;margin-bottom:10px}
+input,select{font:inherit;padding:8px 11px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);max-width:100%}
+.bt{background:var(--pr);color:#fff;border:0;border-radius:10px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer}.bt:active{transform:scale(.96)}.bt.g{background:none;color:var(--tx);border:1px solid var(--bd)}
+.out{margin-top:12px;min-height:2.4rem;font-size:1.2rem;word-break:break-word}
+.box{display:inline-block;border:3px dashed var(--pr);border-radius:12px;padding:10px 18px;margin:4px;text-align:center}
+.pop{animation:pop .45s}@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+.chip{display:inline-block;background:var(--pr);color:#fff;border-radius:99px;padding:3px 12px;margin:3px;font-size:1rem;animation:pop .4s}
+.tag{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c)}
+.err{border-left:4px solid var(--ko);padding:8px 14px;background:var(--card);border-radius:0 10px 10px 0;margin:10px 0}
+.ok2{border-left:4px solid var(--ok);padding:8px 14px;background:var(--card);border-radius:0 10px 10px 0;margin:10px 0}
+button.o{display:block;width:100%;text-align:left;margin:8px 0;padding:11px 14px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;cursor:pointer}
+.good{background:#dcfce7!important;border-color:var(--ok)!important;color:#14532d!important}.bad{background:#fee2e2!important;border-color:var(--ko)!important;color:#7f1d1d!important;animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.pn{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+.cert{border:3px double var(--pr);border-radius:18px;padding:30px 18px;text-align:center;background:var(--card)}
+@media (max-width:860px){.lay{grid-template-columns:1fr}.mb{display:flex}nav{display:none;position:static}nav.open{display:block}h1{font-size:1.45rem}.pg{width:90px}}
+@media print{header,nav,.pn,.noprint{display:none!important}.lay{display:block}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<a href="index.html" style="position:fixed;right:14px;bottom:14px;z-index:9999;padding:8px 14px;border-radius:999px;background:#165dce;color:#fff;text-decoration:none;font:700 13px system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 24px #142b5740">← Accueil</a>
+<header><div class="logo"><span id="lg"></span>CodeLab</div><div class="sp"></div><span id="pt" style="font-size:.85rem;color:var(--mu)"></span><div class="pg"><i id="pb"></i></div></header>
+<div class="lay"><div><button class="bt g mb" id="mb"></button><nav id="nv"></nav></div><main id="mn"></main></div>
+<script>
+var P={box:'M21 8l-9-5-9 5v8l9 5 9-5z M3 8l9 5 9-5 M12 13v8',br:'M6 3v12 M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M18 9a9 9 0 0 1-9 9',rp:'M17 2l4 4-4 4 M3 11v-1a4 4 0 0 1 4-4h14 M7 22l-4-4 4-4 M21 13v1a4 4 0 0 1-4 4H3',fn:'M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1 M16 21h1a2 2 0 0 0 2-2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1',ls:'M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01',ly:'M12 2l10 5-10 5L2 7z M2 17l10 5 10-5 M2 12l10 5 10-5',gr:'M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z',ky:'M21 2l-2 2 M11.4 11.6a5.5 5.5 0 1 1-7.8 7.8 5.5 5.5 0 0 1 7.8-7.8z M11.4 11.6L15.5 7.5l3 3L22 7l-3-3',ck:'M20 6L9 17l-5-5',cd:'M16 18l6-6-6-6 M8 6l-6 6 6 6',mn:'M3 12h18 M3 6h18 M3 18h18',aw:'M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12z M8.2 13.9L7 23l5-3 5 3-1.2-9.1',ar:'M5 12h14 M12 5l7 7-7 7',al:'M19 12H5 M12 19l-7-7 7-7',pr:'M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z'};
+function I(n){return '<svg class="i" viewBox="0 0 24 24"><path d="'+P[n]+'"/></svg>'}
+var LV=[['Débutant','var(--l0)'],['Intermédiaire','var(--l1)'],['Avancé','var(--l2)']],S=['Intro','Notions','Exemple','Cas pratique','Exercice','Quiz','Synthèse'];
+var L=[
+{v:0,ic:'box',t:'Les variables',in:'Chaque application retient des informations : votre prénom, votre score, le prix d’un panier. Sans variables, un programme serait amnésique.',ob:['Créer et modifier une variable','Choisir de bons noms'],f:['Nom','=','Valeur','Mémoire'],
+n:['Une variable est une <mark>boîte étiquetée</mark> en mémoire : le nom est l’étiquette.','Le signe <mark>=</mark> n’est pas une égalité mathématique : il range la valeur de droite dans la boîte de gauche.','Types courants : <mark>int</mark> (12), <mark>float</mark> (3.5), <mark>str</mark> ("Sara"), <mark>bool</mark> (True).'],
+c:'prenom = "Sara"\nage = 12\nage = age + 1   # la boîte change\nprint(prenom, age)',d:'<b>Rangez une valeur dans la boîte</b><input id="a" value="Bonjour"> <button class="bt" onclick="vr()">Ranger</button><div class="out"><span class="box" id="bx">ma_variable = ?</span></div>',
+cs:'<b>Boutique en ligne.</b> Le panier est une variable <code>total</code>. Chaque article ajouté fait <code>total = total + prix</code>. Sans variable, impossible d’afficher le montant à payer.',
+ex:{q:'Après <code>age = 12</code> puis <code>age = age + 1</code>, que vaut age ?',a:'13',h:'On ajoute 1 à l’ancienne valeur.'},
+er:'Écrire <code>2age = 5</code> : un nom ne commence jamais par un chiffre. Préférez des noms clairs (<code>prix_total</code>).',
+q:{q:'Après x = 5 puis x = 8, que vaut x ?',o:['5','8','13'],a:1,e:'La nouvelle valeur remplace l’ancienne.'},sy:'Variable = nom + valeur modifiable. Quatre types de base : int, float, str, bool.',nx:'Étape suivante : faire des choix avec les conditions.'},
+{v:0,ic:'br',t:'Les conditions',in:'Un distributeur refuse une carte expirée, un jeu change de niveau à 100 points : les programmes décident en permanence.',ob:['Écrire if / elif / else','Utiliser les comparaisons'],f:['Question','Vrai ?','Chemin A','Chemin B'],
+n:['<mark>if</mark> exécute un bloc seulement si la condition est vraie, <mark>else</mark> gère le reste.','Comparaisons : <mark>==</mark>, <mark>!=</mark>, <mark>&lt;</mark>, <mark>&gt;=</mark>. Combinez avec <mark>and</mark> / <mark>or</mark>.','L’<mark>indentation</mark> (4 espaces) délimite le bloc : elle fait partie du langage.'],
+c:'if age >= 18:\n    print("Adulte")\nelse:\n    print("Mineur")',d:'<b>Déplacez le curseur de l’âge</b><input type="range" id="a" min="0" max="40" value="12" oninput="cn()"> <b id="a2">12</b> ans<div class="out" id="o"></div>',
+cs:'<b>Cinéma.</b> Le tarif dépend de l’âge : <code>if age &lt; 12</code> tarif enfant, <code>elif age &gt;= 60</code> tarif senior, <code>else</code> plein tarif.',
+ex:{q:'Avec <code>note = 9</code> et <code>if note &gt;= 10: print("admis") else: print("refusé")</code>, que s’affiche-t-il ?',a:'refus[eé]',h:'9 est-il supérieur ou égal à 10 ?'},
+er:'Confondre <code>=</code> (ranger) et <code>==</code> (comparer) dans une condition.',
+q:{q:'Si age = 18, que vaut age >= 18 ?',o:['Vraie','Fausse','Erreur'],a:0,e:'>= signifie « supérieur ou égal ».'},sy:'if / elif / else orientent le programme ; == compare, = range.',nx:'Étape suivante : répéter sans se fatiguer avec les boucles.'},
+{v:0,ic:'rp',t:'Les boucles',in:'Envoyer 1 000 mails ou dessiner 50 ennemis : personne n’écrit 1 000 lignes. On répète.',ob:['Utiliser for et while','Comprendre range()'],f:['Début','Bloc','Encore ?','Fin'],
+n:['<mark>for</mark> répète un nombre connu de fois ; <mark>while</mark> répète tant qu’une condition est vraie.','<mark>range(5)</mark> produit 0, 1, 2, 3, 4 : le bloc s’exécute 5 fois.','<mark>break</mark> sort de la boucle, <mark>continue</mark> passe au tour suivant.'],
+c:'for i in range(5):\n    print("Tour", i)',d:'<b>Nombre de répétitions</b><select id="a"><option>3</option><option selected>5</option><option>8</option></select> <button class="bt" onclick="lp()">Lancer</button><div class="out" id="o"></div>',
+cs:'<b>Table de multiplication.</b> <code>for i in range(1, 11): print(7 * i)</code> affiche toute la table de 7 en 2 lignes.',
+ex:{q:'Combien de fois « Salut » s’affiche avec <code>for i in range(4)</code> ?',a:'4',h:'range(4) donne 0, 1, 2, 3.'},
+er:'La boucle infinie : un <code>while</code> dont la condition ne devient jamais fausse.',
+q:{q:'Combien de tours fait for i in range(3) ?',o:['2','3','4'],a:1,e:'i vaut 0, 1 puis 2 : 3 tours.'},sy:'for = nombre connu, while = tant que ; range(n) compte de 0 à n-1.',nx:'Niveau suivant : organiser son code avec les fonctions.'},
+{v:1,ic:'fn',t:'Les fonctions',in:'Les fonctions évitent de copier-coller du code : on écrit une fois, on réutilise partout.',ob:['Définir et appeler une fonction','Utiliser paramètres et return'],f:['Entrée','Fonction','Traitement','Sortie'],
+n:['<mark>def</mark> définit la fonction ; les <mark>paramètres</mark> sont ses entrées.','<mark>return</mark> renvoie le résultat à l’appelant ; sans return, la fonction renvoie None.','Une bonne fonction fait <mark>une seule chose</mark> et porte un nom-verbe.'],
+c:'def doubler(n):\n    return n * 2\n\nprint(doubler(7))   # 14',d:'<b>Passez un nombre dans la machine</b><input type="number" id="a" value="7" style="width:90px"> <button class="bt" onclick="fu()">Exécuter</button><div class="out" id="o">entrée → doubler() → ?</div>',
+cs:'<b>Calcul de TVA.</b> <code>def ttc(prix): return prix * 1.19</code> est appelée pour chaque produit : une règle, mille usages.',
+ex:{q:'<code>def carre(n): return n * n</code> : que renvoie <code>carre(6)</code> ?',a:'36',h:'6 × 6.'},
+er:'Oublier <code>return</code> et afficher avec print : le résultat ne peut plus être réutilisé.',
+q:{q:'Que renvoie doubler(5) ?',o:['5','10','25'],a:1,e:'5 × 2 = 10.'},sy:'def + paramètres + return : une fonction est une machine réutilisable.',nx:'Ensuite : stocker plusieurs valeurs avec les listes.'},
+{v:1,ic:'ls',t:'Les listes',in:'Les notes d’une classe, les produits d’un panier : les données vont rarement seules.',ob:['Créer et parcourir une liste','Utiliser les indices'],f:['indice 0','indice 1','indice 2','…'],
+n:['Une liste contient plusieurs éléments <mark>ordonnés</mark> entre crochets.','Les <mark>indices</mark> commencent à 0 ; <mark>-1</mark> désigne le dernier élément.','<mark>append</mark>, <mark>remove</mark>, <mark>len</mark> et <mark>sorted</mark> couvrent 90 % des usages.'],
+c:'fruits = ["pomme", "kiwi"]\nfruits.append("mangue")\nprint(fruits[0])   # pomme\nprint(len(fruits)) # 3',d:'<b>Ajoutez des éléments</b><button class="bt g" onclick="li(\'pomme\')">pomme</button> <button class="bt g" onclick="li(\'kiwi\')">kiwi</button> <button class="bt g" onclick="li(\'mangue\')">mangue</button> <button class="bt g" onclick="li()">Vider</button><div class="out" id="o">[ ]</div>',
+cs:'<b>Moyenne de classe.</b> <code>sum(notes) / len(notes)</code> calcule la moyenne, quelle que soit la taille de la liste.',
+ex:{q:'Avec <code>notes = [12, 15, 9]</code>, que vaut <code>notes[2]</code> ?',a:'9',h:'On compte à partir de 0.'},
+er:'<code>IndexError</code> : accéder à un indice qui n’existe pas (le dernier est len-1).',
+q:{q:'Dans ["a","b","c"], que vaut liste[1] ?',o:['"a"','"b"','"c"'],a:1,e:'On compte à partir de 0.'},sy:'Liste = éléments ordonnés ; indices dès 0 ; append ajoute.',nx:'Ensuite : retrouver une donnée par son nom avec les dictionnaires.'},
+{v:1,ic:'ky',t:'Les dictionnaires',in:'Un carnet d’adresses retrouve un numéro par un nom, pas par une position. Le dictionnaire fait pareil.',ob:['Créer un dictionnaire','Lire, ajouter, parcourir'],f:['Clé','→','Valeur','Accès'],
+n:['Un dictionnaire associe des <mark>clés</mark> à des <mark>valeurs</mark> : <code>{"nom": "Sara"}</code>.','<mark>d["clé"]</mark> lit, <mark>d["clé"] = x</mark> ajoute ou modifie.','<mark>d.items()</mark> permet de parcourir clés et valeurs ensemble.'],
+c:'eleve = {"nom": "Sara", "age": 12, "ville": "Tunis"}\nprint(eleve["ville"])   # Tunis',d:'<b>Choisissez une clé</b><select id="a" onchange="di()"><option>nom</option><option>age</option><option>ville</option></select><div class="out" id="o"></div>',
+cs:'<b>Fiche élève.</b> Un dictionnaire par élève regroupe nom, âge et moyenne ; une liste de dictionnaires forme la classe.',
+ex:{q:'Avec <code>prix = {"pain": 1, "lait": 2}</code>, que vaut <code>prix["lait"]</code> ?',a:'2',h:'Cherchez la clé "lait".'},
+er:'<code>KeyError</code> : lire une clé absente. Utilisez <code>d.get("clé")</code> pour éviter l’erreur.',
+q:{q:'Comment lire l’âge dans eleve ?',o:['eleve[1]','eleve["age"]','eleve.age()'],a:1,e:'On utilise la clé entre crochets.'},sy:'Dictionnaire = paires clé/valeur ; accès par la clé.',nx:'Niveau avancé : la récursivité.'},
+{v:2,ic:'ly',t:'La récursivité',in:'Des poupées russes : pour trouver la plus petite, on ouvre la même poupée encore et encore.',ob:['Identifier cas d’arrêt et cas récursif','Dérouler un appel'],f:['fact(4)','fact(3)','fact(2)','fact(1)'],
+n:['Une fonction <mark>récursive</mark> s’appelle elle-même sur un problème plus petit.','Le <mark>cas d’arrêt</mark> termine la chaîne d’appels ; sans lui : erreur de pile.','Souvent remplaçable par une boucle, mais plus élégante pour les arbres et les fichiers.'],
+c:'def fact(n):\n    if n <= 1:      # cas d’arrêt\n        return 1\n    return n * fact(n - 1)',d:'<b>Factorielle de</b><select id="a"><option>3</option><option selected>5</option><option>6</option></select> <button class="bt" onclick="rc()">Dérouler</button><div class="out" id="o"></div>',
+cs:'<b>Explorateur de fichiers.</b> Pour lister un dossier, on lit ses fichiers puis on s’appelle sur chaque sous-dossier.',
+ex:{q:'Combien vaut <code>fact(4)</code> ?',a:'24',h:'4 × 3 × 2 × 1.'},
+er:'Oublier le cas d’arrêt : <code>RecursionError</code> garantie.',
+q:{q:'À quoi sert le cas d’arrêt ?',o:['Accélérer le code','Terminer les appels','Déclarer une variable'],a:1,e:'Il stoppe la chaîne d’appels.'},sy:'Cas d’arrêt + cas récursif plus petit = récursivité sûre.',nx:'Dernier module : la programmation orientée objet.'},
+{v:2,ic:'gr',t:'Les classes (POO)',in:'Un jeu vidéo contient des centaines de personnages bâtis sur le même modèle : c’est la POO.',ob:['Définir une classe','Créer des objets'],f:['Classe','__init__','Objet','Méthode'],
+n:['Une <mark>classe</mark> est un plan ; un <mark>objet</mark> est une instance créée avec ce plan.','Les <mark>attributs</mark> stockent les données, les <mark>méthodes</mark> sont les actions.','<mark>self</mark> désigne l’objet en cours ; <mark>__init__</mark> l’initialise.'],
+c:'class Animal:\n    def __init__(self, nom):\n        self.nom = nom\n    def parler(self):\n        print(self.nom, "salue !")\n\nmimi = Animal("Mimi")',d:'<b>Créez des objets avec le même plan</b><input id="a" value="Mimi" style="width:120px"> <button class="bt" onclick="ob()">Animal(nom)</button><div class="out" id="o"></div>',
+cs:'<b>Compte bancaire.</b> Classe <code>Compte</code> avec attribut <code>solde</code> et méthodes <code>deposer</code> / <code>retirer</code> : chaque client a son objet.',
+ex:{q:'Avec <code>a = Animal("Rex")</code> et <code>b = Animal("Mimi")</code>, combien d’objets distincts existe-t-il ?',a:'2|deux',h:'Un appel à Animal() = un objet.'},
+er:'Oublier <code>self</code> dans les méthodes : Python ne saura pas quel objet utiliser.',
+q:{q:'Une classe est…',o:['Un plan pour créer des objets','Une boucle','Un texte'],a:0,e:'Chaque objet en est une instance.'},sy:'Classe = plan ; objet = instance ; attributs + méthodes.',nx:'Bravo, la formation est terminée : récupérez votre certificat !'}
+];
+var done={},cur=0,st=0,rv=1;try{done=JSON.parse(localStorage.getItem('cl3')||'{}')}catch(e){}
+function $(i){return document.getElementById(i)}
+function sv(){try{localStorage.setItem('cl3',JSON.stringify(done))}catch(e){}}
+function cnt(){var n=0;for(var k in done)if(done[k])n++;return n}
+function hl(s){s=s.replace(/&/g,'&amp;').replace(/</g,'&lt;');return s.replace(/(#.*$)|("[^"]*")|\b(def|return|if|else|for|in|range|class|print|self|len)\b|\b(\d+)\b/gm,function(m,c,s2,k){return c?'<i class=c>'+c+'</i>':s2?'<i class=s>'+s2+'</i>':k?'<i class=k>'+k+'</i>':'<i class=n>'+m+'</i>'})}
+function nav(){var h='',v=-1;L.forEach(function(s,i){if(s.v!=v){v=s.v;h+='<div class="lv" style="--c:'+LV[v][1]+'">'+LV[v][0]+'</div>'}
+h+='<button class="it'+(cur==i?' on':'')+'" onclick="go('+i+')"><span class="dot'+(done[i]?' d':'')+'">'+(done[i]?I('ck'):i+1)+'</span>'+s.t+'</button>'});
+h+='<div class="lv" style="--c:var(--pr)">Diplôme</div><button class="it'+(cur==L.length?' on':'')+'" onclick="go('+L.length+')"><span class="dot">'+I('aw')+'</span>Certificat</button>';
+$('nv').innerHTML=h;var n=cnt();$('pt').textContent=n+'/'+L.length;$('pb').style.width=n/L.length*100+'%'}
+function go(i,s){if(i==L.length&&cnt()<L.length){alert('Validez les 8 quiz pour débloquer le certificat.');return}cur=i;st=s||0;rv=1;$('nv').classList.remove('open');ren();window.scrollTo({top:0,behavior:'smooth'})}
+function sg(d){if(st+d>=S.length)return go(cur+1);if(st+d<0)return cur?go(cur-1,S.length-1):0;st+=d;rv=1;ren();window.scrollTo({top:0,behavior:'smooth'})}
+function ren(){var m=$('mn'),h,s=L[cur];m.style.animation='none';void m.offsetWidth;m.style.animation='';
+if(cur==L.length){h='<div class="cert"><div style="color:var(--pr);font-size:2.4rem">'+I('aw')+'</div><h2>Certificat de réussite</h2><p>Décerné à</p><input id="nm" placeholder="Votre nom" style="font-size:1.3rem;text-align:center;width:min(320px,100%)" oninput="$(\'nn\').textContent=this.value"><h2 id="nn"></h2><p>pour avoir terminé la formation <b>Python interactive</b> (8 modules, 3 niveaux)<br>'+new Date().toLocaleDateString('fr-FR')+'</p><button class="bt noprint" onclick="window.print()">'+I('pr')+' Imprimer</button></div>'}
+else{var b='',lv=LV[s.v];
+if(st==0)b='<div class="card"><span class="tag">Introduction</span><p style="font-size:1.1rem">'+s.in+'</p><div class="obj"><b>Objectifs pédagogiques</b><ul>'+s.ob.map(function(o){return '<li>'+o+'</li>'}).join('')+'</ul></div></div>';
+if(st==1){b='<div class="card"><span class="tag">Schéma animé</span><div class="fl">'+s.f.map(function(x,i){return (i?'<u>'+I('ar')+'</u>':'')+'<b style="--k:'+i+'">'+x+'</b>'}).join('')+'</div><span class="tag">Notions fondamentales</span>'+s.n.slice(0,rv).map(function(x,i){return '<div class="nt"><span>'+(i+1)+'</span><div>'+x+'</div></div>'}).join('')+(rv<s.n.length?'<button class="bt g" onclick="rv++;ren()">Afficher la suite</button>':'')+'</div>'}
+if(st==2)b='<div class="card"><span class="tag">Exemple concret</span><div class="win"><div class="wh"><b></b><b></b><b></b><em>main.py</em></div><pre>'+hl(s.c)+'</pre></div><div class="demo">'+s.d+'</div></div>';
+if(st==3)b='<div class="card"><span class="tag">Étude de cas</span><p>'+s.cs+'</p><div class="err"><b>Erreur à éviter.</b> '+s.er+'</div></div>';
+if(st==4)b='<div class="card"><span class="tag">Exercice d’application</span><p>'+s.ex.q+'</p><input id="ex" placeholder="Votre réponse"> <button class="bt" onclick="ck()">Vérifier</button><div class="out" id="exr"></div></div>';
+if(st==5)b='<div class="card"><span class="tag">Quiz</span><p><b>'+s.q.q+'</b></p>'+s.q.o.map(function(o,i){return '<button class="o" onclick="qz(this,'+(i==s.q.a)+')">'+o+'</button>'}).join('')+'<div id="fb" style="font-weight:600">'+(done[cur]?'Module validé.':'')+'</div></div>';
+if(st==6)b='<div class="card"><span class="tag">Synthèse</span><div class="ok2">'+s.sy+'</div><p><b>Mini-défi :</b> modifiez l’exemple du module et prédisez le résultat avant de l’exécuter.</p><p style="color:var(--mu)">'+s.nx+'</p></div>';
+h='<div style="--c:'+lv[1]+'"><span class="bdg">'+lv[0]+'</span> <span style="color:var(--mu);font-size:.85rem">Module '+(cur+1)+' sur '+L.length+'</span><h1><span class="tile">'+I(s.ic)+'</span>'+s.t+'</h1><div class="steps">'+S.map(function(x,i){return '<button class="sb'+(i==st?' on':i<st?' p':'')+'" onclick="go('+cur+','+i+')">'+x+'</button>'}).join('')+'</div>'+b+'<div class="pn"><button class="bt g" onclick="sg(-1)">'+I('al')+' Précédent</button><button class="bt" onclick="sg(1)">'+(st==6?(cur==L.length-1?'Certificat':'Module suivant'):'Suivant')+' '+I('ar')+'</button></div></div>'}
+m.innerHTML=h;nav();if(cur<L.length&&st==2&&s)dm()}
+function ck(){var e=L[cur].ex,v=$('ex').value.trim().toLowerCase();$('exr').innerHTML=new RegExp('^('+e.a+')$').test(v)?'<b style="color:var(--ok)">Correct, bien joué !</b>':'<b style="color:var(--ko)">Pas encore.</b> Indice : '+e.h}
+function qz(b,ok){b.classList.add(ok?'good':'bad');var q=L[cur].q;$('fb').innerHTML=ok?'Bravo ! '+q.e:'Pas tout à fait, réessayez.';if(ok&&!done[cur]){done[cur]=1;sv();nav()}}
+function dm(){if(cur==1)cn();if(cur==5)di()}
+function vr(){var e=$('bx');e.textContent='ma_variable = "'+$('a').value+'"';e.classList.remove('pop');void e.offsetWidth;e.classList.add('pop')}
+function cn(){var a=+$('a').value;$('a2').textContent=a;$('o').innerHTML=a>=18?'Condition vraie → <b>Adulte</b>':'Condition fausse → <b>Mineur</b>'}
+function lp(){var n=+$('a').value,o=$('o');o.innerHTML='';for(var i=0;i<n;i++)(function(i){setTimeout(function(){o.innerHTML+='<span class="chip">Tour '+i+'</span>'},i*320)})(i)}
+function fu(){var n=+$('a').value;$('o').innerHTML=n+' → doubler() → <b class="pop" style="display:inline-block">'+n*2+'</b>'}
+var fr=[];function li(f){if(!f)fr=[];else fr.push(f);$('o').innerHTML='[ '+fr.map(function(x,i){return '<span class="chip">'+x+' <small>indice '+i+'</small></span>'}).join('')+' ]'}
+function di(){var d={nom:'Sara',age:12,ville:'Tunis'},k=$('a').value;$('o').innerHTML='eleve["'+k+'"] → <b class="pop" style="display:inline-block">'+d[k]+'</b>'}
+function rc(){var n=+$('a').value,o=$('o'),p=[],i,r=1;o.innerHTML='';for(i=n;i>=1;i--)p.push('fact('+i+') = '+(i>1?i+' × fact('+(i-1)+')':'1'));
+p.forEach(function(s,i){setTimeout(function(){o.innerHTML+='<span class="chip" style="margin-left:'+i*14+'px">'+s+'</span><br>'},i*420)});
+for(i=2;i<=n;i++)r*=i;setTimeout(function(){o.innerHTML+='<b class="pop" style="display:inline-block">Résultat : '+r+'</b>'},p.length*420)}
+function ob(){var n=$('a').value.replace(/</g,'&lt;');$('o').innerHTML+='<span class="box pop">'+n+'<br><small>'+n+'.parler() → '+n+' salue !</small></span>'}
+$('lg').innerHTML=I('cd');$('mb').innerHTML=I('mn')+' Plan de la formation';$('mb').onclick=function(){$('nv').classList.toggle('open')};
+for(var z=0;z<L.length;z++)if(!done[z]){cur=z;break}
+ren();
+</script></body></html>

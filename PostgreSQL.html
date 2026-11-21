@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CodeLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+
+:root{--bg:#e9edf5;--paper:#fdfdfb;--line:#dbe3f2;--ink:#14235c;--txt:#2b3557;--blue:#1f3fa0;--green:#2e9e57;--orange:#ee8a1f;--purple:#6a3fb5;--red:#d6335b;--yel:#ffd93b;--note:#fff3a6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}}
+:root[data-theme="dark"]{--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.7}
+header{text-align:center;padding:28px 16px 8px}
+header h1{margin:0;color:var(--ink);font-size:clamp(24px,5vw,38px);font-weight:800}
+header p{margin:4px 0 0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--bg)}
+nav a{flex:none;text-decoration:none;font-size:13px;font-weight:600;color:var(--ink);border:2px solid var(--blue);border-radius:99px;padding:2px 12px;background:var(--paper)}
+nav a:focus-visible,nav a:hover{background:var(--yel);color:#14235c}
+main{max-width:none;width:100%;margin:0;padding:8px 14px 40px;display:grid;gap:28px}
+.page{position:relative;background:var(--paper);border-radius:10px;padding:22px 22px 18px 20px;padding-right:44px;box-shadow:0 2px 0 var(--line),0 10px 24px rgba(20,35,92,.12);background-image:repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px)}
+.page:before{content:"";position:absolute;top:10px;bottom:10px;right:10px;width:16px;background:radial-gradient(circle at 50% 50%,var(--ink) 0 4px,transparent 5px) 0 0/16px 26px repeat-y}
+.brand{font-size:13px;font-weight:600;color:var(--blue)}
+.page h2{margin:2px 0 0;color:var(--ink);font-size:clamp(24px,5vw,34px);font-weight:800;line-height:1.35;display:inline;background:linear-gradient(transparent 62%,var(--yel) 62% 92%,transparent 92%)}
+.sub{margin:6px 0 14px;font-weight:600;color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.blk{background:var(--paper);border:2px dashed var(--c);border-radius:12px;padding:12px 14px}
+.blk h3{display:inline-block;margin:-26px 0 6px;padding:0 12px;background:var(--c);color:#fff;border-radius:6px;font-size:15px;font-weight:800;transform:rotate(-1deg)}
+.blk ul,.blk ol{margin:0;padding:0 18px 0 0}
+.blk li{margin:3px 0}
+.blk li::marker{color:var(--c);font-weight:800}
+.blk{margin-top:14px}
+.note,.end{margin-top:14px;padding:10px 14px;border-radius:6px;font-weight:600}
+.note{background:var(--note);color:var(--ink);transform:rotate(-.6deg);box-shadow:2px 3px 0 rgba(0,0,0,.12);width:fit-content;max-width:100%}
+.end{border:2px solid var(--blue);border-radius:12px;color:var(--ink)}
+.end b{color:var(--blue)}
+footer{text-align:center;padding:20px;font-weight:600;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:4px;z-index:9;background:linear-gradient(90deg,var(--blue),var(--yel));transform-origin:right;transform:scaleX(0)}
+.hero{position:absolute;top:14px;left:16px;font-size:clamp(42px,9vw,64px);animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+.il{list-style:none;padding:0!important}
+.il li{display:flex;gap:8px;align-items:flex-start}
+.ib{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,var(--paper));font-size:19px;transition:transform .25s}
+.il li:hover .ib{transform:scale(1.25) rotate(-8deg)}
+.flow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 2px;margin-top:6px}
+.st{flex:1 1 92px;min-width:92px;max-width:170px;text-align:center}
+.ico{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 4px;border-radius:16px;background:color-mix(in srgb,var(--c) 14%,var(--paper));border:2px solid var(--c);font-size:36px;transition:transform .25s}
+.st:hover .ico{transform:translateY(-4px) rotate(-6deg) scale(1.08)}
+.num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;font-size:12px;font-weight:800}
+.st b{display:block;font-size:13px;line-height:1.4;color:var(--ink)}
+.st small{display:block;font-size:11.5px;line-height:1.45}
+.ar{align-self:center;margin-top:-30px;color:var(--c);font-style:normal;font-size:14px;animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(-6px)}}
+.js .page{opacity:0;transform:translateY(36px) rotate(.5deg);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .page.in{opacity:1;transform:none}
+.js .page h2{background-repeat:no-repeat;background-size:0 100%;background-position:right;transition:background-size .9s .35s}
+.js .page.in h2{background-size:100% 100%}
+.js .blk{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .5s,transform .5s;transition-delay:calc(var(--k)*90ms + 250ms)}
+.js .in .blk{opacity:1;transform:none}
+.js .st{opacity:0;transform:scale(.6);transition:opacity .4s,transform .45s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i)*110ms + 500ms)}
+.js .in .st{opacity:1;transform:none}
+.js .in .note{animation:pop .8s 1s both}
+@keyframes pop{0%{transform:rotate(-6deg) scale(.7);opacity:0}60%{transform:rotate(2deg) scale(1.05)}100%{transform:rotate(-.6deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){.js .page,.js .blk,.js .st,.hero,.ar,.js .in .note{animation:none;transition:none;opacity:1;transform:none}.js .page h2{background-size:100% 100%}}
+#art svg{width:min(760px,100%);height:auto;display:block;margin:0 auto 12px;filter:drop-shadow(0 12px 24px rgba(20,35,92,.16))}
+.nd{transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.4)}}
+.flowline{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 10px;margin:8px 0 0;font-weight:600;color:var(--ink)}
+.flowline span{background:var(--paper);border:2px solid var(--blue);border-radius:99px;padding:0 12px}
+.flowline i{color:var(--orange);font-style:normal}
+nav a.on{background:var(--yel);color:#14235c;border-color:var(--orange)}
+@media (min-width:900px){
+html{scroll-padding-top:16px}
+body{padding-right:250px}
+nav{position:fixed;top:0;right:0;bottom:0;width:250px;flex-direction:column;align-items:stretch;overflow-y:auto;overflow-x:hidden;gap:6px;padding:20px 14px;background:var(--paper);border-left:2px solid var(--line);z-index:7}
+nav:before{content:attr(data-t);font-weight:800;color:var(--ink);font-size:18px;padding:0 4px 6px}
+nav a{border-radius:10px;padding:4px 12px;border-width:2px;font-size:14px;transition:transform .2s}
+nav a:hover{transform:translateX(-4px)}
+}
+@media (prefers-reduced-motion:reduce){.nd{animation:none}}
+
+nav a{display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav a b{display:inline-grid;place-items:center;flex:none;min-width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800}
+nav a.on b{background:var(--orange)}
+nav a.home{border-style:dashed;justify-content:center}
+@media (min-width:900px){
+nav a{white-space:normal;line-height:1.4;padding:7px 12px;border-color:transparent;background:transparent}
+nav a.on{border-color:var(--orange)}
+nav a.home{border-color:var(--blue);margin-bottom:6px}
+}
+#bar{background-size:200% 100%;animation:sh 3s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.dig{margin-top:14px;border:2px solid var(--purple);border-radius:12px;background:var(--paper);overflow:hidden}
+.dig summary{cursor:pointer;padding:8px 14px;font-weight:800;color:var(--purple);list-style:none;display:flex;align-items:center;gap:8px}
+.dig summary::-webkit-details-marker{display:none}
+.dig summary:after{content:"＋";margin-inline-start:auto;transition:transform .3s}
+.dig[open] summary:after{transform:rotate(45deg)}
+.dig p{margin:0;padding:4px 16px 12px;animation:dg .5s}
+@keyframes dg{from{opacity:0;transform:translateY(-8px)}}
+.js .in .blk:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 8px 18px rgba(20,35,92,.15)}
+.st .ico{animation:gl 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*.45s)}
+@keyframes gl{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}}
+.flowline span{animation:fl 3s ease-in-out infinite}
+.flowline span:nth-of-type(2){animation-delay:.5s}
+.flowline span:nth-of-type(3){animation-delay:1s}
+@keyframes fl{50%{background:var(--yel);color:#14235c;transform:translateY(-3px)}}
+#top{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);background:var(--yel);color:#14235c;font-size:20px;cursor:pointer;z-index:8;opacity:0;pointer-events:none;transform:scale(.6);transition:.3s}
+#top.show{opacity:1;pointer-events:auto;transform:none}
+@media (prefers-reduced-motion:reduce){.st .ico,.flowline span,#bar,.dig p{animation:none}}
+.dig ul{margin:0;padding:4px 34px 12px 16px;animation:dg .5s}
+.dig li{margin:4px 0}
+.dig li::marker{color:var(--purple)}
+@media (prefers-reduced-motion:reduce){.dig ul{animation:none}}
+.fg{margin:8px 16px 0}
+.fg svg{width:min(460px,100%);display:block;margin:0 auto;overflow:visible}
+.fi{animation:fi .6s both;animation-delay:var(--d)}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+.fa{stroke-dasharray:5 4;animation:da 1s linear infinite}
+@keyframes da{to{stroke-dashoffset:-9}}
+.sl{animation:sl 3s ease-in-out infinite}
+@keyframes sl{0%,10%{transform:translate(0,0)}50%{transform:translate(64px,0)}90%,100%{transform:translate(64px,64px)}}
+@media (prefers-reduced-motion:reduce){.fi,.fa,.sl{animation:none}}
+code{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Consolas,monospace;font-size:.85em;background:color-mix(in srgb,var(--blue) 12%,var(--paper));border-radius:6px;padding:1px 6px;word-break:break-word}
+
+header{position:relative}
+.lg{position:absolute;top:12px;left:12px;z-index:10;border:2px solid var(--blue);background:var(--yel);color:#14235c;border-radius:99px;padding:2px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+html[dir=ltr] .lg{left:auto;right:12px}
+.qz{margin-top:14px;border:2px solid var(--green);border-radius:12px;padding:10px 14px;background:var(--paper)}
+.qz b{color:var(--ink)}
+.qz button{font:inherit;display:block;width:100%;text-align:start;margin:6px 0;padding:4px 12px;border-radius:8px;border:2px solid var(--line);background:var(--paper);color:var(--txt);cursor:pointer}
+.qz button.g{background:#d7f5e0;border-color:var(--green);color:#14532d}.qz button.x{background:#fde1e7;border-color:var(--red);color:#7f1d1d}
+.qf{font-weight:800;color:var(--ink)}
+html[dir=ltr] .page{padding:22px 20px 18px 44px}
+html[dir=ltr] .page:before{right:auto;left:10px}
+html[dir=ltr] .hero{left:auto;right:16px}
+html[dir=ltr] .blk ul,html[dir=ltr] .blk ol{padding:0 0 0 18px}
+html[dir=ltr] #bar{transform-origin:left}
+html[dir=ltr] #top{left:auto;right:16px}
+html[dir=ltr] .js .page h2{background-position:left}
+html[dir=ltr] .dig ul{padding:4px 16px 12px 34px}
+@media (min-width:900px){html[dir=ltr] body{padding:0 0 0 250px}html[dir=ltr] nav{right:auto;left:0;border-left:0;border-right:2px solid var(--line)}html[dir=ltr] nav a:hover{transform:translateX(4px)}}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;right:14px;bottom:14px;z-index:9999;padding:8px 14px;border-radius:999px;background:#165dce;color:#fff;text-decoration:none;font:700 13px system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 24px #142b5740">← Accueil</a>
+<header><button class="lg" id="lg"></button><div id="art"><svg viewBox="0 0 760 220" role="img" aria-label="PostgreSQL" direction="ltr"><rect x="8" y="8" width="744" height="204" rx="30" fill="#1c2a58"/><circle cx="635" cy="110" r="80" fill="#fff" fill-opacity=".07"/><text x="635" y="142" text-anchor="middle" font-size="64" fill="#ffd93b" font-family="monospace" font-weight="800">SQL</text><text x="62" y="95" fill="#fff" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="3">CODE · LEARN · BUILD</text><text x="60" y="170" fill="#fff" font-family="Arial,sans-serif" font-size="72" font-weight="800">PostgreSQL</text><path d="M62 190h280" stroke="#ffd93b" stroke-width="5" stroke-linecap="round"/></svg></div><h1 id="h1"></h1><p class="flowline" id="fl"></p></header>
+<nav id="nav"></nav>
+<main id="main"></main>
+<footer id="ft"></footer>
+<script>
+const B='blue',G='green',O='orange',P='purple',R='red';
+let L=0;try{L=localStorage.getItem('cl6')=='fr'?1:0}catch(e){}
+const x=s=>{const p=s.split('|');return p[L]??p[0]};
+const D=[
+["مدخل إلى PostgreSQL|Introduction à PostgreSQL","قاعدة بيانات علائقية قوية ومفتوحة المصدر|Une base relationnelle puissante et open source",[
+["التعريف|Définition",B,["نظام إدارة قواعد بيانات علائقية مفتوح المصدر يعتمد لغة SQL|SGBD relationnel open source qui utilise le langage SQL","يعمل بنمط عميل/خادم: التطبيق يرسل استعلامًا والخادم يرد|Architecture client/serveur : l’application envoie une requête, le serveur répond"]],
+["الأدوات|Les outils",G,["<code>psql</code> واجهة سطر الأوامر وpgAdmin واجهة رسومية|<code>psql</code> en ligne de commande et pgAdmin en interface graphique","<code>CREATE DATABASE ecole;</code> ثم <code>\\c ecole</code> للاتصال|<code>CREATE DATABASE ecole;</code> puis <code>\\c ecole</code> pour se connecter"]],
+["لماذا PostgreSQL؟|Pourquoi PostgreSQL ?",O,["موثوقية عالية ومعاملات ACID كاملة|Très fiable, transactions ACID complètes","يدعم JSONB والفهارس المتقدمة والامتدادات|Gère JSONB, index avancés et extensions"]]],
+"كل أمر SQL ينتهي بفاصلة منقوطة <code>;</code>|Chaque commande SQL se termine par un point-virgule <code>;</code>","PostgreSQL = قاعدة علائقية موثوقة تُستعمل بلغة SQL.|PostgreSQL = base relationnelle fiable pilotée en SQL.",
+["<code>\\l</code> تعرض القواعد و<code>\\dt</code> تعرض الجداول|<code>\\l</code> liste les bases et <code>\\dt</code> liste les tables","<code>\\q</code> للخروج من psql|<code>\\q</code> pour quitter psql"],
+[['💻','تطبيق|Appli'],['📨','SQL'],['🐘','PostgreSQL'],['💾','بيانات|Données']],
+["بأي لغة نتحدث مع PostgreSQL؟|Quel langage utilise-t-on avec PostgreSQL ?",["SQL","HTML","CSS"],0]],
+["الجداول والأنواع|Tables et types","تصميم هيكل البيانات|Concevoir la structure des données",[
+["إنشاء جدول|Créer une table",B,["<code>CREATE TABLE eleves (id SERIAL PRIMARY KEY, nom TEXT);</code>","المفتاح الأساسي <code>PRIMARY KEY</code> يميز كل صف|La clé primaire <code>PRIMARY KEY</code> identifie chaque ligne"]],
+["الأنواع|Les types",G,["<code>integer</code> و<code>numeric</code> و<code>text</code> و<code>boolean</code>","<code>date</code> و<code>timestamp</code> للتواريخ|<code>date</code> et <code>timestamp</code> pour les dates"]],
+["القيود|Les contraintes",O,["<code>NOT NULL</code> و<code>UNIQUE</code> و<code>DEFAULT</code>","<code>CHECK (age &gt; 0)</code> يمنع القيم غير المنطقية|<code>CHECK (age &gt; 0)</code> refuse les valeurs absurdes"]]],
+"اختر النوع الأنسب لبياناتك.|Choisissez le type le plus adapté à vos données.","الجدول = أعمدة بأنواع + قيود + مفتاح أساسي.|Table = colonnes typées + contraintes + clé primaire.",
+["<code>JSONB</code> يخزّن بيانات مرنة ويمكن فهرستها.|<code>JSONB</code> stocke des données souples et peut être indexé.","<code>GENERATED ALWAYS AS IDENTITY</code> بديل حديث لـ SERIAL.|<code>GENERATED ALWAYS AS IDENTITY</code> remplace SERIAL de façon moderne."],
+[['📋','جدول|Table'],['🏷️','نوع|Type'],['🔒','قيد|Contrainte'],['🔑','PK']],
+["أي قيد يمنع القيمة الفارغة؟|Quelle contrainte interdit une valeur vide ?",["UNIQUE","NOT NULL","DEFAULT"],1]],
+["العمليات الأساسية CRUD|Les opérations CRUD","إنشاء وقراءة وتعديل وحذف|Créer, lire, modifier, supprimer",[
+["الإدراج والقراءة|Insérer et lire",B,["<code>INSERT INTO eleves (nom) VALUES ('Sara');</code>","<code>SELECT * FROM eleves;</code> تقرأ كل الصفوف|<code>SELECT * FROM eleves;</code> lit toutes les lignes"]],
+["التعديل والحذف|Modifier et supprimer",G,["<code>UPDATE eleves SET nom = 'Lina' WHERE id = 1;</code>","<code>DELETE FROM eleves WHERE id = 1;</code>"]],
+["خطر|Danger",R,["نسيان <code>WHERE</code> يعدّل أو يحذف كل الصفوف|Oublier <code>WHERE</code> modifie ou supprime toutes les lignes","جرّب بـ <code>SELECT</code> أولًا ثم نفّذ|Testez d’abord avec un <code>SELECT</code>"]]],
+"<code>RETURNING *</code> تعيد الصف بعد الإدراج أو التعديل.|<code>RETURNING *</code> renvoie la ligne après insertion ou modification.","INSERT وSELECT وUPDATE وDELETE تغطي أغلب الاحتياجات.|INSERT, SELECT, UPDATE et DELETE couvrent l’essentiel.",
+["<code>ON CONFLICT DO NOTHING</code> يتجاهل الصفوف المكررة.|<code>ON CONFLICT DO NOTHING</code> ignore les doublons.","<code>TRUNCATE</code> تفرغ الجدول بسرعة.|<code>TRUNCATE</code> vide une table rapidement."],
+[['➕','INSERT'],['👀','SELECT'],['✏️','UPDATE'],['🗑️','DELETE']],
+["ماذا يحدث إذا نسيت WHERE في DELETE؟|Que se passe-t-il si on oublie WHERE dans un DELETE ?",["لا شيء|Rien","تُحذف كل الصفوف|Toutes les lignes sont supprimées","خطأ دائمًا|Erreur systématique"],1]],
+["التصفية والتجميع|Filtrer et agréger","استخرج المعلومة المفيدة|Extraire l’information utile",[
+["التصفية والترتيب|Filtrer et trier",B,["<code>WHERE age &gt;= 18 ORDER BY nom LIMIT 10</code>","<code>LIKE</code> و<code>ILIKE</code> للبحث في النصوص (ILIKE تتجاهل حالة الأحرف)|<code>LIKE</code> et <code>ILIKE</code> cherchent dans le texte (ILIKE ignore la casse)"]],
+["التجميع|Les agrégats",G,["<code>COUNT</code> و<code>SUM</code> و<code>AVG</code> و<code>MAX</code>","<code>GROUP BY classe</code> تجمع حسب العمود|<code>GROUP BY classe</code> regroupe par colonne"]],
+["WHERE أم HAVING؟|WHERE ou HAVING ?",O,["<code>WHERE</code> تصفّي الصفوف قبل التجميع|<code>WHERE</code> filtre les lignes avant le regroupement","<code>HAVING</code> تصفّي المجموعات بعد التجميع|<code>HAVING</code> filtre les groupes après le regroupement"]]],
+"<code>NULL</code> يُختبر بـ <code>IS NULL</code> لا بـ =.|<code>NULL</code> se teste avec <code>IS NULL</code>, pas avec =.","WHERE تصفّي وGROUP BY تجمع وHAVING تصفّي المجموعات.|WHERE filtre, GROUP BY regroupe, HAVING filtre les groupes.",
+["<code>SELECT classe, AVG(note) FROM notes GROUP BY classe;</code>","<code>DISTINCT</code> تحذف التكرار من النتيجة.|<code>DISTINCT</code> retire les doublons du résultat."],
+[['🔍','WHERE'],['🧮','GROUP BY'],['✅','HAVING'],['📑','ORDER BY']],
+["أي كلمة تصفّي المجموعات بعد GROUP BY؟|Quel mot filtre les groupes après GROUP BY ?",["WHERE","HAVING","LIMIT"],1]],
+["العلاقات والجوينات|Relations et jointures","اربط الجداول ببعضها|Relier les tables entre elles",[
+["المفتاح الأجنبي|Clé étrangère",B,["<code>classe_id INTEGER REFERENCES classes(id)</code>","يضمن أن القيمة موجودة في الجدول الآخر|Garantit que la valeur existe dans l’autre table"]],
+["الجوينات|Les jointures",G,["<code>INNER JOIN</code> الصفوف المتطابقة فقط|<code>INNER JOIN</code> : uniquement les lignes qui correspondent","<code>LEFT JOIN</code> كل صفوف اليسار حتى بدون تطابق|<code>LEFT JOIN</code> : toutes les lignes de gauche, même sans correspondance"]],
+["أنواع العلاقات|Types de relations",O,["واحد لعدة: صف في classes لعدة صفوف في eleves|Un à plusieurs : une classe pour plusieurs élèves","عدة لعدة تحتاج جدولًا وسيطًا|Plusieurs à plusieurs : nécessite une table de liaison"]]],
+"استعمل أسماء مستعارة <code>e</code> و<code>c</code> لتقصير الاستعلام.|Utilisez des alias <code>e</code> et <code>c</code> pour raccourcir la requête.","مفتاح أجنبي + JOIN = بيانات مترابطة بلا تكرار.|Clé étrangère + JOIN = données reliées sans duplication.",
+["<code>SELECT e.nom, c.nom FROM eleves e JOIN classes c ON c.id = e.classe_id;</code>","<code>ON DELETE CASCADE</code> تحذف الصفوف المرتبطة تلقائيًا.|<code>ON DELETE CASCADE</code> supprime automatiquement les lignes liées."],
+[['👩‍🎓','eleves'],['🔗','FK'],['🏫','classes'],['🧩','JOIN']],
+["أي جوين يحتفظ بكل صفوف اليسار؟|Quelle jointure garde toutes les lignes de gauche ?",["INNER JOIN","LEFT JOIN","CROSS JOIN"],1]],
+["الفهارس والأداء|Index et performances","اجعل الاستعلامات أسرع|Accélérer les requêtes",[
+["الفهرس|L’index",B,["<code>CREATE INDEX idx_nom ON eleves (nom);</code>","يشبه فهرس الكتاب: يجد الصف دون مسح الجدول كله|Comme l’index d’un livre : trouve la ligne sans parcourir toute la table"]],
+["التحليل|Analyser",G,["<code>EXPLAIN ANALYZE</code> تعرض خطة التنفيذ والزمن الفعلي|<code>EXPLAIN ANALYZE</code> montre le plan d’exécution et le temps réel","<code>Seq Scan</code> مسح كامل و<code>Index Scan</code> بحث بالفهرس|<code>Seq Scan</code> = parcours complet, <code>Index Scan</code> = recherche par index"]],
+["تنبيه|Attention",R,["كل فهرس يبطّئ الإدراج والتعديل|Chaque index ralentit les insertions et mises à jour","لا تفهرس كل الأعمدة|N’indexez pas toutes les colonnes"]]],
+"المفتاح الأساسي وUNIQUE يُفهرسان تلقائيًا.|Clé primaire et UNIQUE sont indexées automatiquement.","افهرس الأعمدة الكثيرة الاستعمال في WHERE وJOIN.|Indexez les colonnes très utilisées dans WHERE et JOIN.",
+["أنواع الفهارس: B-tree (الافتراضي) وGIN لـ JSONB.|Types d’index : B-tree (par défaut) et GIN pour JSONB.","<code>VACUUM</code> و<code>ANALYZE</code> تحافظان على أداء القاعدة.|<code>VACUUM</code> et <code>ANALYZE</code> maintiennent les performances."],
+[['🐢','Seq Scan'],['📖','INDEX'],['⚡','Index Scan'],['📊','EXPLAIN']],
+["ما أثر الفهارس الزائدة؟|Quel est l’effet d’index en trop ?",["تبطّئ الكتابة|Ralentissent l’écriture","تحذف البيانات|Suppriment des données","لا أثر|Aucun effet"],0]],
+["المعاملات|Les transactions","إما كل شيء أو لا شيء|Tout ou rien",[
+["الفكرة|L’idée",B,["مجموعة أوامر تُنفَّذ كوحدة واحدة|Un groupe de commandes exécuté comme un seul bloc","<code>BEGIN;</code> ثم الأوامر ثم <code>COMMIT;</code> أو <code>ROLLBACK;</code>|<code>BEGIN;</code> puis les commandes puis <code>COMMIT;</code> ou <code>ROLLBACK;</code>"]],
+["خصائص ACID|Propriétés ACID",G,["ذرية وتناسق وعزل وديمومة|Atomicité, Cohérence, Isolation, Durabilité","مثال: التحويل المالي يخصم من حساب ويضيف لآخر معًا|Exemple : un virement débite un compte et en crédite un autre ensemble"]],
+["خطأ شائع|Erreur courante",R,["نسيان <code>COMMIT</code> يترك المعاملة معلّقة|Oublier <code>COMMIT</code> laisse la transaction en suspens","المعاملات الطويلة تقفل الصفوف|Les transactions longues verrouillent les lignes"]]],
+"عند حدوث خطأ تفشل المعاملة ويجب تنفيذ ROLLBACK.|En cas d’erreur, la transaction échoue et il faut faire ROLLBACK.","BEGIN + COMMIT/ROLLBACK = عمليات آمنة ومتسقة.|BEGIN + COMMIT/ROLLBACK = opérations sûres et cohérentes.",
+["<code>SAVEPOINT</code> تسمح بالتراجع الجزئي.|<code>SAVEPOINT</code> permet un retour en arrière partiel.","مستويات العزل: READ COMMITTED (الافتراضي) وSERIALIZABLE.|Niveaux d’isolation : READ COMMITTED (défaut) et SERIALIZABLE."],
+[['▶️','BEGIN'],['⚙️','أوامر|Requêtes'],['✅','COMMIT'],['↩️','ROLLBACK']],
+["أي أمر يلغي المعاملة؟|Quelle commande annule la transaction ?",["COMMIT","ROLLBACK","BEGIN"],1]],
+["الأدوار والنسخ الاحتياطي|Rôles et sauvegarde","حماية القاعدة وبياناتها|Protéger la base et ses données",[
+["الأدوار|Les rôles",B,["<code>CREATE ROLE app LOGIN PASSWORD '...';</code>","<code>GRANT SELECT ON eleves TO app;</code> تمنح صلاحية محددة|<code>GRANT SELECT ON eleves TO app;</code> accorde un droit précis"]],
+["النسخ الاحتياطي|Sauvegarde",G,["<code>pg_dump ecole &gt; ecole.sql</code> ينشئ نسخة|<code>pg_dump ecole &gt; ecole.sql</code> crée une sauvegarde","<code>psql ecole &lt; ecole.sql</code> تستعيدها|<code>psql ecole &lt; ecole.sql</code> la restaure"]],
+["أخطاء أمنية|Failles courantes",R,["استعمال المستخدم postgres في التطبيق|Utiliser le superutilisateur postgres dans l’application","عدم اختبار استعادة النسخة|Ne jamais tester la restauration"]]],
+"مبدأ أقل صلاحية: امنح فقط ما يلزم.|Principe du moindre privilège : n’accordez que le nécessaire.","دور بصلاحيات محدودة + نسخ منتظم = قاعدة آمنة.|Rôle limité + sauvegardes régulières = base sûre.",
+["<code>pg_hba.conf</code> يحدد من يستطيع الاتصال وكيف.|<code>pg_hba.conf</code> définit qui peut se connecter et comment.","تُجدول النسخ الدورية بـ cron.|Les sauvegardes régulières se planifient avec cron."],
+[['👤','دور|Rôle'],['🔐','GRANT'],['💾','pg_dump'],['♻️','استعادة|Restauration']],
+["ما مبدأ أقل صلاحية؟|Que dit le moindre privilège ?",["منح كل الصلاحيات|Tout accorder","منح ما يلزم فقط|N’accorder que le nécessaire","منع الجميع|Tout interdire"],1]]
+];
+const HE=['🐘','📋','✏️','🔍','🔗','⚡','🔄','🛡️'],CL=['--blue','--green','--orange','--purple','--red'];
+const IC=[[/erreur|خطأ|danger|خطر|attention|تنبيه|failles|أخطاء/i,'⚠️'],[/join|jointure|جوين|relation|علاقات|étrang|أجنبي/i,'🔗'],[/index|فهرس|فهارس|explain|أداء|performance|analyser|التحليل/i,'⚡'],[/transaction|معاملة|acid|commit/i,'🔄'],[/rôle|role|دور|أدوار|grant|sauvegarde|نسخ|sécurité|أمان/i,'🛡️'],[/table|جدول|type|نوع|contrainte|قيود/i,'📋'],[/where|having|filtr|تصفية|trier|ترتيب|agrég|تجميع/i,'🔍'],[/insert|update|delete|crud|modifier|إدراج|تعديل/i,'✏️'],[/outil|أدوات/i,'🧰'],[/exemple|مثال|idée|الفكرة/i,'💡'],[/pourquoi|لماذا|définition|التعريف/i,'🐘']];
+const ic=t=>{for(const[r,e]of IC)if(r.test(t))return e;return null};
+const $=i=>document.getElementById(i),nav=$('nav'),main=$('main');
+document.documentElement.classList.add('js');
+const TX=(a,y,t,z=12)=>`<text x="${a}" y="${y}" text-anchor="middle" font-size="${z}" font-weight="600" fill="var(--ink)">${t}</text>`;
+function flow(it){const n=it.length,g=420/n;let o='';
+ it.forEach(([e,l],i)=>{const c=`var(${CL[i%5]})`,cx=L?g*(i+.5):420-g*(i+.5),d=L?1:-1;
+  o+=`<g class="fi" style="--d:${i*.25}s"><rect x="${cx-30}" y="18" width="60" height="60" rx="14" fill="${c}" fill-opacity=".15" stroke="${c}" stroke-width="2"/>${TX(cx,58,e,28)}${TX(cx,98,x(l),11)}</g>`;
+  if(i<n-1)o+=`<path class="fa" d="M${cx+d*36} 48H${cx+d*(g-36)}" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah)"/>`});
+ return `<svg viewBox="0 0 420 115" direction="ltr"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>${o}</svg>`}
+function qa(b,ok){b.classList.add(ok?'g':'x');b.parentNode.querySelector('.qf').textContent=ok?(L?'✔ Bravo !':'✔ أحسنت!'):(L?'✖ Réessayez':'✖ حاول مرة أخرى')}
+let io,so;
+function render(){
+ const H=document.documentElement;H.lang=L?'fr':'ar';H.dir=L?'ltr':'rtl';
+ document.title=L?'CodeLab – Formation PostgreSQL':'CodeLab – دورة PostgreSQL';
+ $('h1').textContent=L?'Apprendre PostgreSQL pas à pas':'تعلم PostgreSQL خطوة بخطوة';
+ $('lg').textContent=L?'ع':'FR';$('lg').setAttribute('aria-label',L?'العربية':'Français');
+ $('fl').innerHTML=['💻 App','📨 SQL','🐘 PostgreSQL','💾 Data'].map(s=>`<span style="direction:ltr">${s}</span>`).join(`<i>${L?'▶':'◀'}</i>`);
+ $('ft').textContent=L?'CodeLab — Apprenez, pratiquez, partagez':'CodeLab — تعلّم، تدرّب، وشارك';
+ nav.dataset.t=L?'Sommaire':'المواضيع';nav.innerHTML='';main.innerHTML='';
+ D.forEach((d,n)=>{const[t,s,bl,note,end,dg,fl,q]=d,id='p'+(n+1);
+  nav.insertAdjacentHTML('beforeend',`<a href="#${id}" title="${x(t)}"><b>${n+1}</b><span>${x(t)}</span></a>`);
+  const blocks=bl.map(([h,c,it,ol],k)=>{let body;
+   if(ol)body=`<div class="flow">${it.map((z,j)=>{const[a,...r]=x(z).split(/[:：]/);const d2=r.join(':').trim();return `<div class="st" style="--i:${j}"><span class="ico">${ic(z)||'⭐'}</span><span class="num">${j+1}</span><b>${d2?a:x(z)}</b>${d2?`<small>${d2}</small>`:''}</div>`}).join(`<i class="ar">${L?'▶':'◀'}</i>`)}</div>`;
+   else body=`<ul class="il">${it.map(z=>`<li><span class="ib">${ic(z)||'✦'}</span><span>${x(z)}</span></li>`).join('')}</ul>`;
+   return `<section class="blk" style="--c:var(--${c});--k:${k}"><h3>${ic(h)||''} ${x(h)}</h3>${body}</section>`}).join('');
+  const quiz=`<div class="qz"><b>🧠 ${x(q[0])}</b>${q[1].map((o,i)=>`<button onclick="qa(this,${i==q[2]})">${x(o)}</button>`).join('')}<div class="qf"></div></div>`;
+  main.insertAdjacentHTML('beforeend',`<article class="page" id="${id}"><span class="hero" aria-hidden="true">${HE[n]}</span><h2>${x(t)}</h2><p class="sub">${x(s)}</p><div class="grid">${blocks}</div><div class="note">💡 ${x(note)}</div><div class="end"><b>${L?'À retenir : ':'الخلاصة: '}</b>${x(end)}</div>${quiz}<details class="dig"><summary>🔎 ${L?'Aller plus loin':'تعمّق أكثر'}</summary><figure class="fg">${flow(fl)}</figure><ul>${dg.map(z=>`<li>${x(z)}</li>`).join('')}</ul></details></article>`)});
+ io&&io.disconnect();so&&so.disconnect();
+ const pages=document.querySelectorAll('.page');
+ if('IntersectionObserver' in window){io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});pages.forEach(p=>io.observe(p))}else pages.forEach(p=>p.classList.add('in'));
+ const links=[...nav.querySelectorAll('a')];
+ so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('on',on);if(on)a.scrollIntoView({block:'nearest',inline:'nearest'})})}),{rootMargin:'-30% 0px -60% 0px'});pages.forEach(p=>so.observe(p));
+}
+$('lg').onclick=()=>{L=1-L;try{localStorage.setItem('cl6',L?'fr':'ar')}catch(e){}render()};
+const tb=document.createElement('button');tb.id='top';tb.textContent='↑';tb.setAttribute('aria-label','Top');tb.onclick=()=>scrollTo({top:0});document.body.append(tb);addEventListener('scroll',()=>tb.classList.toggle('show',scrollY>600),{passive:true});
+const bar=document.createElement('div');bar.id='bar';document.body.prepend(bar);
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight||1)})`},{passive:true});
+render();
+</script>
+</body>
+</html>

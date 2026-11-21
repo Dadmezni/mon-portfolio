@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CodeLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+
+:root{--bg:#e9edf5;--paper:#fdfdfb;--line:#dbe3f2;--ink:#14235c;--txt:#2b3557;--blue:#1f3fa0;--green:#2e9e57;--orange:#ee8a1f;--purple:#6a3fb5;--red:#d6335b;--yel:#ffd93b;--note:#fff3a6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}}
+:root[data-theme="dark"]{--bg:#0c1226;--paper:#182142;--line:#26325c;--ink:#dfe7ff;--txt:#c3cdee;--note:#6b5f1c}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.7}
+header{text-align:center;padding:28px 16px 8px}
+header h1{margin:0;color:var(--ink);font-size:clamp(24px,5vw,38px);font-weight:800}
+header p{margin:4px 0 0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--bg)}
+nav a{flex:none;text-decoration:none;font-size:13px;font-weight:600;color:var(--ink);border:2px solid var(--blue);border-radius:99px;padding:2px 12px;background:var(--paper)}
+nav a:focus-visible,nav a:hover{background:var(--yel);color:#14235c}
+main{max-width:none;width:100%;margin:0;padding:8px 14px 40px;display:grid;gap:28px}
+.page{position:relative;background:var(--paper);border-radius:10px;padding:22px 22px 18px 20px;padding-right:44px;box-shadow:0 2px 0 var(--line),0 10px 24px rgba(20,35,92,.12);background-image:repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px)}
+.page:before{content:"";position:absolute;top:10px;bottom:10px;right:10px;width:16px;background:radial-gradient(circle at 50% 50%,var(--ink) 0 4px,transparent 5px) 0 0/16px 26px repeat-y}
+.brand{font-size:13px;font-weight:600;color:var(--blue)}
+.page h2{margin:2px 0 0;color:var(--ink);font-size:clamp(24px,5vw,34px);font-weight:800;line-height:1.35;display:inline;background:linear-gradient(transparent 62%,var(--yel) 62% 92%,transparent 92%)}
+.sub{margin:6px 0 14px;font-weight:600;color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.blk{background:var(--paper);border:2px dashed var(--c);border-radius:12px;padding:12px 14px}
+.blk h3{display:inline-block;margin:-26px 0 6px;padding:0 12px;background:var(--c);color:#fff;border-radius:6px;font-size:15px;font-weight:800;transform:rotate(-1deg)}
+.blk ul,.blk ol{margin:0;padding:0 18px 0 0}
+.blk li{margin:3px 0}
+.blk li::marker{color:var(--c);font-weight:800}
+.blk{margin-top:14px}
+.note,.end{margin-top:14px;padding:10px 14px;border-radius:6px;font-weight:600}
+.note{background:var(--note);color:var(--ink);transform:rotate(-.6deg);box-shadow:2px 3px 0 rgba(0,0,0,.12);width:fit-content;max-width:100%}
+.end{border:2px solid var(--blue);border-radius:12px;color:var(--ink)}
+.end b{color:var(--blue)}
+footer{text-align:center;padding:20px;font-weight:600;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:4px;z-index:9;background:linear-gradient(90deg,var(--blue),var(--yel));transform-origin:right;transform:scaleX(0)}
+.hero{position:absolute;top:14px;left:16px;font-size:clamp(42px,9vw,64px);animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+.il{list-style:none;padding:0!important}
+.il li{display:flex;gap:8px;align-items:flex-start}
+.ib{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,var(--paper));font-size:19px;transition:transform .25s}
+.il li:hover .ib{transform:scale(1.25) rotate(-8deg)}
+.flow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 2px;margin-top:6px}
+.st{flex:1 1 92px;min-width:92px;max-width:170px;text-align:center}
+.ico{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 4px;border-radius:16px;background:color-mix(in srgb,var(--c) 14%,var(--paper));border:2px solid var(--c);font-size:36px;transition:transform .25s}
+.st:hover .ico{transform:translateY(-4px) rotate(-6deg) scale(1.08)}
+.num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;font-size:12px;font-weight:800}
+.st b{display:block;font-size:13px;line-height:1.4;color:var(--ink)}
+.st small{display:block;font-size:11.5px;line-height:1.45}
+.ar{align-self:center;margin-top:-30px;color:var(--c);font-style:normal;font-size:14px;animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(-6px)}}
+.js .page{opacity:0;transform:translateY(36px) rotate(.5deg);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .page.in{opacity:1;transform:none}
+.js .page h2{background-repeat:no-repeat;background-size:0 100%;background-position:right;transition:background-size .9s .35s}
+.js .page.in h2{background-size:100% 100%}
+.js .blk{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .5s,transform .5s;transition-delay:calc(var(--k)*90ms + 250ms)}
+.js .in .blk{opacity:1;transform:none}
+.js .st{opacity:0;transform:scale(.6);transition:opacity .4s,transform .45s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i)*110ms + 500ms)}
+.js .in .st{opacity:1;transform:none}
+.js .in .note{animation:pop .8s 1s both}
+@keyframes pop{0%{transform:rotate(-6deg) scale(.7);opacity:0}60%{transform:rotate(2deg) scale(1.05)}100%{transform:rotate(-.6deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){.js .page,.js .blk,.js .st,.hero,.ar,.js .in .note{animation:none;transition:none;opacity:1;transform:none}.js .page h2{background-size:100% 100%}}
+#art svg{width:min(760px,100%);height:auto;display:block;margin:0 auto 12px;filter:drop-shadow(0 12px 24px rgba(20,35,92,.16))}
+.nd{transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.4)}}
+.flowline{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 10px;margin:8px 0 0;font-weight:600;color:var(--ink)}
+.flowline span{background:var(--paper);border:2px solid var(--blue);border-radius:99px;padding:0 12px}
+.flowline i{color:var(--orange);font-style:normal}
+nav a.on{background:var(--yel);color:#14235c;border-color:var(--orange)}
+@media (min-width:900px){
+html{scroll-padding-top:16px}
+body{padding-right:250px}
+nav{position:fixed;top:0;right:0;bottom:0;width:250px;flex-direction:column;align-items:stretch;overflow-y:auto;overflow-x:hidden;gap:6px;padding:20px 14px;background:var(--paper);border-left:2px solid var(--line);z-index:7}
+nav:before{content:attr(data-t);font-weight:800;color:var(--ink);font-size:18px;padding:0 4px 6px}
+nav a{border-radius:10px;padding:4px 12px;border-width:2px;font-size:14px;transition:transform .2s}
+nav a:hover{transform:translateX(-4px)}
+}
+@media (prefers-reduced-motion:reduce){.nd{animation:none}}
+
+nav a{display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav a b{display:inline-grid;place-items:center;flex:none;min-width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800}
+nav a.on b{background:var(--orange)}
+nav a.home{border-style:dashed;justify-content:center}
+@media (min-width:900px){
+nav a{white-space:normal;line-height:1.4;padding:7px 12px;border-color:transparent;background:transparent}
+nav a.on{border-color:var(--orange)}
+nav a.home{border-color:var(--blue);margin-bottom:6px}
+}
+#bar{background-size:200% 100%;animation:sh 3s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.dig{margin-top:14px;border:2px solid var(--purple);border-radius:12px;background:var(--paper);overflow:hidden}
+.dig summary{cursor:pointer;padding:8px 14px;font-weight:800;color:var(--purple);list-style:none;display:flex;align-items:center;gap:8px}
+.dig summary::-webkit-details-marker{display:none}
+.dig summary:after{content:"＋";margin-inline-start:auto;transition:transform .3s}
+.dig[open] summary:after{transform:rotate(45deg)}
+.dig p{margin:0;padding:4px 16px 12px;animation:dg .5s}
+@keyframes dg{from{opacity:0;transform:translateY(-8px)}}
+.js .in .blk:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 8px 18px rgba(20,35,92,.15)}
+.st .ico{animation:gl 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*.45s)}
+@keyframes gl{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}}
+.flowline span{animation:fl 3s ease-in-out infinite}
+.flowline span:nth-of-type(2){animation-delay:.5s}
+.flowline span:nth-of-type(3){animation-delay:1s}
+@keyframes fl{50%{background:var(--yel);color:#14235c;transform:translateY(-3px)}}
+#top{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);background:var(--yel);color:#14235c;font-size:20px;cursor:pointer;z-index:8;opacity:0;pointer-events:none;transform:scale(.6);transition:.3s}
+#top.show{opacity:1;pointer-events:auto;transform:none}
+@media (prefers-reduced-motion:reduce){.st .ico,.flowline span,#bar,.dig p{animation:none}}
+.dig ul{margin:0;padding:4px 34px 12px 16px;animation:dg .5s}
+.dig li{margin:4px 0}
+.dig li::marker{color:var(--purple)}
+@media (prefers-reduced-motion:reduce){.dig ul{animation:none}}
+.fg{margin:8px 16px 0}
+.fg svg{width:min(460px,100%);display:block;margin:0 auto;overflow:visible}
+.fi{animation:fi .6s both;animation-delay:var(--d)}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+.fa{stroke-dasharray:5 4;animation:da 1s linear infinite}
+@keyframes da{to{stroke-dashoffset:-9}}
+.sl{animation:sl 3s ease-in-out infinite}
+@keyframes sl{0%,10%{transform:translate(0,0)}50%{transform:translate(64px,0)}90%,100%{transform:translate(64px,64px)}}
+@media (prefers-reduced-motion:reduce){.fi,.fa,.sl{animation:none}}
+code{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Consolas,monospace;font-size:.85em;background:color-mix(in srgb,var(--blue) 12%,var(--paper));border-radius:6px;padding:1px 6px;word-break:break-word}
+
+header{position:relative}
+.lg{position:absolute;top:12px;left:12px;z-index:10;border:2px solid var(--blue);background:var(--yel);color:#14235c;border-radius:99px;padding:2px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+html[dir=ltr] .lg{left:auto;right:12px}
+.qz{margin-top:14px;border:2px solid var(--green);border-radius:12px;padding:10px 14px;background:var(--paper)}
+.qz b{color:var(--ink)}
+.qz button{font:inherit;display:block;width:100%;text-align:start;margin:6px 0;padding:4px 12px;border-radius:8px;border:2px solid var(--line);background:var(--paper);color:var(--txt);cursor:pointer}
+.qz button.g{background:#d7f5e0;border-color:var(--green);color:#14532d}.qz button.x{background:#fde1e7;border-color:var(--red);color:#7f1d1d}
+.qf{font-weight:800;color:var(--ink)}
+html[dir=ltr] .page{padding:22px 20px 18px 44px}
+html[dir=ltr] .page:before{right:auto;left:10px}
+html[dir=ltr] .hero{left:auto;right:16px}
+html[dir=ltr] .blk ul,html[dir=ltr] .blk ol{padding:0 0 0 18px}
+html[dir=ltr] #bar{transform-origin:left}
+html[dir=ltr] #top{left:auto;right:16px}
+html[dir=ltr] .js .page h2{background-position:left}
+html[dir=ltr] .dig ul{padding:4px 16px 12px 34px}
+@media (min-width:900px){html[dir=ltr] body{padding:0 0 0 250px}html[dir=ltr] nav{right:auto;left:0;border-left:0;border-right:2px solid var(--line)}html[dir=ltr] nav a:hover{transform:translateX(4px)}}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;right:14px;bottom:14px;z-index:9999;padding:8px 14px;border-radius:999px;background:#165dce;color:#fff;text-decoration:none;font:700 13px system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 8px 24px #142b5740">← Accueil</a>
+<header><button class="lg" id="lg"></button><div id="art"><svg viewBox="0 0 760 220" role="img" aria-label="HTML5" direction="ltr"><rect x="8" y="8" width="744" height="204" rx="30" fill="#1c2a58"/><circle cx="635" cy="110" r="80" fill="#fff" fill-opacity=".07"/><text x="635" y="142" text-anchor="middle" font-size="90" fill="#ffd93b" font-family="monospace" font-weight="800">&lt;/&gt;</text><text x="62" y="95" fill="#fff" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="3">CODE · LEARN · BUILD</text><text x="60" y="170" fill="#fff" font-family="Arial,sans-serif" font-size="72" font-weight="800">HTML<tspan fill="#ffd93b">5</tspan></text><path d="M62 190h280" stroke="#ffd93b" stroke-width="5" stroke-linecap="round"/></svg></div><h1 id="h1"></h1><p class="flowline" id="fl"></p></header>
+<nav id="nav"></nav>
+<main id="main"></main>
+<footer id="ft"></footer>
+<script>
+const B='blue',G='green',O='orange',P='purple',R='red';
+let L=0;try{L=localStorage.getItem('cl12')=='fr'?1:0}catch(e){}
+const x=s=>{const p=s.split('|');return p[L]??p[0]};
+const D=[
+["مدخل إلى HTML|Introduction à HTML","لغة هيكلة صفحات الويب|Le langage qui structure les pages web",[
+["ما هو HTML؟|C’est quoi HTML ?",B,["لغة ترميز تصف بنية الصفحة ومحتواها، وليست لغة برمجة|Un langage de balisage qui décrit la structure et le contenu d’une page, pas un langage de programmation","يعمل مع CSS للتنسيق وJavaScript للتفاعل|Il travaille avec CSS pour le style et JavaScript pour l’interactivité"]],
+["الهيكل الأساسي|La structure de base",G,["<code>&lt;!DOCTYPE html&gt;</code> ثم <code>&lt;html lang='ar'&gt;</code>|<code>&lt;!DOCTYPE html&gt;</code> puis <code>&lt;html lang='fr'&gt;</code>","<code>&lt;head&gt;</code> للبيانات الوصفية و<code>&lt;body&gt;</code> للمحتوى المرئي|<code>&lt;head&gt;</code> pour les métadonnées, <code>&lt;body&gt;</code> pour le contenu visible"]],
+["العناصر والسمات|Éléments et attributs",O,["عنصر = وسم فتح + محتوى + وسم إغلاق: <code>&lt;p&gt;نص&lt;/p&gt;</code>|Élément = balise ouvrante + contenu + balise fermante : <code>&lt;p&gt;texte&lt;/p&gt;</code>","السمة تعدّل العنصر: <code>&lt;a href='...'&gt;</code>|L’attribut modifie l’élément : <code>&lt;a href='...'&gt;</code>"]]],
+"احفظ الملف بامتداد <code>.html</code> وافتحه في المتصفح.|Enregistrez le fichier en <code>.html</code> et ouvrez-le dans le navigateur.","HTML = DOCTYPE + head + body وعناصر بسمات.|HTML = DOCTYPE + head + body, avec des éléments et des attributs.",
+["<code>&lt;meta charset='UTF-8'&gt;</code> ضرورية لعرض العربية والفرنسية جيدًا.|<code>&lt;meta charset='UTF-8'&gt;</code> est indispensable pour bien afficher l’arabe et le français.","<code>&lt;!-- تعليق --&gt;</code> لا يظهر في الصفحة.|<code>&lt;!-- commentaire --&gt;</code> n’apparaît pas dans la page."],
+[['📄','HTML'],['🎨','CSS'],['⚡','JavaScript'],['🌐','متصفح|Navigateur']],
+["ما دور HTML؟|Quel est le rôle de HTML ?",["هيكلة المحتوى|Structurer le contenu","تنسيق الألوان فقط|Seulement les couleurs","تشغيل الخادم|Faire tourner le serveur"],0]],
+["النصوص والقوائم|Textes et listes","نظّم المحتوى المكتوب|Organiser le contenu écrit",[
+["العناوين والفقرات|Titres et paragraphes",B,["<code>&lt;h1&gt;</code> إلى <code>&lt;h6&gt;</code> لعناوين مرتّبة، وعنوان <code>h1</code> واحد في الصفحة|<code>&lt;h1&gt;</code> à <code>&lt;h6&gt;</code> pour des titres hiérarchisés, avec un seul <code>h1</code> par page","<code>&lt;p&gt;</code> فقرة و<code>&lt;br&gt;</code> سطر جديد|<code>&lt;p&gt;</code> paragraphe et <code>&lt;br&gt;</code> saut de ligne"]],
+["التأكيد|La mise en valeur",G,["<code>&lt;strong&gt;</code> للأهمية و<code>&lt;em&gt;</code> للتشديد|<code>&lt;strong&gt;</code> pour l’importance, <code>&lt;em&gt;</code> pour l’emphase","لا تستعمل العناوين لتكبير الخط فقط|N’utilisez pas les titres juste pour agrandir le texte"]],
+["القوائم|Les listes",O,["<code>&lt;ul&gt;</code> غير مرتبة و<code>&lt;ol&gt;</code> مرتبة و<code>&lt;li&gt;</code> لكل عنصر|<code>&lt;ul&gt;</code> non ordonnée, <code>&lt;ol&gt;</code> ordonnée, <code>&lt;li&gt;</code> pour chaque élément","يمكن تداخل القوائم داخل <code>&lt;li&gt;</code>|Les listes peuvent s’imbriquer dans un <code>&lt;li&gt;</code>"]]],
+"يتجاهل المتصفح المسافات الزائدة بين الكلمات.|Le navigateur ignore les espaces en trop entre les mots.","h1-h6 للعناوين وp للفقرات وul/ol للقوائم.|h1-h6 pour les titres, p pour les paragraphes, ul/ol pour les listes.",
+["<code>&lt;blockquote&gt;</code> للاقتباسات و<code>&lt;code&gt;</code> للشيفرة.|<code>&lt;blockquote&gt;</code> pour les citations, <code>&lt;code&gt;</code> pour le code.","<code>&lt;dl&gt;</code> و<code>&lt;dt&gt;</code> و<code>&lt;dd&gt;</code> لقوائم التعريفات.|<code>&lt;dl&gt;</code>, <code>&lt;dt&gt;</code> et <code>&lt;dd&gt;</code> pour les listes de définitions."],
+[['🔠','h1'],['📝','p'],['💪','strong'],['📋','ul / li']],
+["أي وسم لقائمة مرتّبة؟|Quelle balise pour une liste ordonnée ?",["ol","ul","li"],0]],
+["الروابط والصور|Liens et images","اربط الصفحات وأضف الصور|Relier les pages et ajouter des images",[
+["الروابط|Les liens",B,["<code>&lt;a href='about.html'&gt;من نحن&lt;/a&gt;</code>|<code>&lt;a href='about.html'&gt;À propos&lt;/a&gt;</code>","<code>target='_blank'</code> تفتح تبويبًا جديدًا مع <code>rel='noopener'</code>|<code>target='_blank'</code> ouvre un nouvel onglet, avec <code>rel='noopener'</code>"]],
+["الصور|Les images",G,["<code>&lt;img src='logo.png' alt='شعار الموقع'&gt;</code>|<code>&lt;img src='logo.png' alt='Logo du site'&gt;</code>","<code>alt</code> إلزامية لسهولة الوصول ولتظهر عند تعذّر التحميل|<code>alt</code> est obligatoire pour l’accessibilité et en cas d’échec de chargement"]],
+["المسارات|Les chemins",O,["نسبي: <code>images/a.png</code> ومطلق: <code>https://site.com/a.png</code>|Relatif : <code>images/a.png</code>, absolu : <code>https://site.com/a.png</code>","<code>#section</code> ينتقل إلى جزء داخل الصفحة|<code>#section</code> mène à une partie de la page"]]],
+"حدّد <code>width</code> و<code>height</code> لتفادي اهتزاز التخطيط.|Indiquez <code>width</code> et <code>height</code> pour éviter les sauts de mise en page.","a + href للروابط وimg + src + alt للصور.|a + href pour les liens, img + src + alt pour les images.",
+["<code>&lt;figure&gt;</code> و<code>&lt;figcaption&gt;</code> للصورة مع تعليق.|<code>&lt;figure&gt;</code> et <code>&lt;figcaption&gt;</code> pour une image légendée.","<code>mailto:</code> و<code>tel:</code> روابط للبريد والهاتف.|<code>mailto:</code> et <code>tel:</code> pour e-mail et téléphone."],
+[['🔗','href'],['🖼️','src'],['📝','alt'],['📁','مسار|Chemin']],
+["أي سمة تصف الصورة نصيًا؟|Quel attribut décrit l’image par du texte ?",["alt","src","href"],0]],
+["الجداول|Les tableaux","اعرض بيانات منظمة|Présenter des données structurées",[
+["البنية|La structure",B,["<code>&lt;table&gt;</code> ثم <code>&lt;tr&gt;</code> للصف و<code>&lt;td&gt;</code> للخلية|<code>&lt;table&gt;</code> puis <code>&lt;tr&gt;</code> pour la ligne, <code>&lt;td&gt;</code> pour la cellule","<code>&lt;th&gt;</code> لخلية العنوان|<code>&lt;th&gt;</code> pour une cellule d’en-tête"]],
+["الأجزاء|Les sections",G,["<code>&lt;thead&gt;</code> و<code>&lt;tbody&gt;</code> و<code>&lt;tfoot&gt;</code>","<code>&lt;caption&gt;</code> تعطي الجدول عنوانًا|<code>&lt;caption&gt;</code> donne un titre au tableau"]],
+["دمج الخلايا|La fusion de cellules",O,["<code>colspan='2'</code> تدمج عمودين|<code>colspan='2'</code> fusionne deux colonnes","<code>rowspan='2'</code> تدمج صفين|<code>rowspan='2'</code> fusionne deux lignes"]]],
+"استعمل الجداول للبيانات لا لتخطيط الصفحة.|Utilisez les tableaux pour des données, pas pour la mise en page.","table وtr وth وtd هي أساس الجدول.|table, tr, th et td sont la base d’un tableau.",
+["السمة <code>scope='col'</code> تفيد قارئات الشاشة.|L’attribut <code>scope='col'</code> aide les lecteurs d’écran.","التنسيق (حدود وألوان) يتم بـ CSS.|Le style (bordures, couleurs) se fait en CSS."],
+[['📋','table'],['➖','tr'],['🏷️','th'],['🔲','td']],
+["أي وسم يمثل خلية عنوان؟|Quelle balise représente une cellule d’en-tête ?",["th","td","tr"],0]],
+["النماذج|Les formulaires","اجمع بيانات الزائر|Recueillir les données du visiteur",[
+["البنية|La structure",B,["<code>&lt;form action='/envoi' method='post'&gt;</code>","<code>&lt;label for='nom'&gt;</code> مرتبطة بـ <code>&lt;input id='nom'&gt;</code>|<code>&lt;label for='nom'&gt;</code> liée à <code>&lt;input id='nom'&gt;</code>"]],
+["أنواع الحقول|Types de champs",G,["<code>text</code> و<code>email</code> و<code>password</code> و<code>number</code> و<code>date</code>","<code>&lt;select&gt;</code> و<code>&lt;textarea&gt;</code> و<code>checkbox</code> و<code>radio</code>"]],
+["التحقق|La validation",O,["<code>required</code> و<code>minlength</code> و<code>pattern</code> تتحقق من المدخلات|<code>required</code>, <code>minlength</code> et <code>pattern</code> valident les saisies","<code>&lt;button type='submit'&gt;</code> للإرسال|<code>&lt;button type='submit'&gt;</code> pour envoyer"]]],
+"تحقق HTML لا يغني عن التحقق على الخادم.|La validation HTML ne remplace pas celle du serveur.","form + label + input + button = نموذج واضح.|form + label + input + button = formulaire clair.",
+["<code>placeholder</code> تلميح لا يغني عن <code>label</code>.|<code>placeholder</code> est un indice, il ne remplace pas <code>label</code>.","<code>name</code> ضرورية ليُرسَل الحقل.|<code>name</code> est nécessaire pour que le champ soit envoyé."],
+[['🏷️','label'],['⌨️','input'],['✅','required'],['📨','submit']],
+["أي سمة تجعل الحقل إلزاميًا؟|Quel attribut rend un champ obligatoire ?",["required","must","needed"],0]],
+["الوسوم الدلالية|HTML sémantique","أعطِ كل جزء معناه|Donner un sens à chaque partie",[
+["الفكرة|L’idée",B,["اختر الوسم حسب المعنى لا حسب الشكل|Choisissez la balise selon le sens, pas l’apparence","يفهمها محرك البحث وقارئ الشاشة|Les moteurs de recherche et les lecteurs d’écran la comprennent"]],
+["الوسوم|Les balises",G,["<code>&lt;header&gt;</code> و<code>&lt;nav&gt;</code> و<code>&lt;main&gt;</code> و<code>&lt;footer&gt;</code>","<code>&lt;section&gt;</code> و<code>&lt;article&gt;</code> و<code>&lt;aside&gt;</code>"]],
+["تجنّب|À éviter",R,["الإفراط في <code>&lt;div&gt;</code> حيث يوجد وسم دلالي|L’abus de <code>&lt;div&gt;</code> là où une balise sémantique existe","أكثر من <code>&lt;main&gt;</code> واحد في الصفحة|Plus d’un <code>&lt;main&gt;</code> par page"]]],
+"<code>&lt;div&gt;</code> و<code>&lt;span&gt;</code> للحالات التي لا وسم دلالي لها.|<code>&lt;div&gt;</code> et <code>&lt;span&gt;</code> pour les cas sans balise sémantique.","header وnav وmain وsection وarticle وfooter تبني صفحة مفهومة.|header, nav, main, section, article et footer construisent une page compréhensible.",
+["<code>&lt;article&gt;</code> محتوى مستقل و<code>&lt;section&gt;</code> قسم موضوعي.|<code>&lt;article&gt;</code> : contenu autonome, <code>&lt;section&gt;</code> : partie thématique.","<code>&lt;time datetime='2026-11-10'&gt;</code> للتواريخ.|<code>&lt;time datetime='2026-11-10'&gt;</code> pour les dates."],
+[['🔝','header'],['🧭','nav'],['📰','main'],['🔚','footer']],
+["أي وسم للمحتوى الرئيسي؟|Quelle balise pour le contenu principal ?",["main","div","span"],0]],
+["الوسائط والتضمين|Médias et intégrations","صوت وفيديو وإطارات|Audio, vidéo et cadres",[
+["الفيديو والصوت|Vidéo et audio",B,["<code>&lt;video src='a.mp4' controls&gt;&lt;/video&gt;</code>","<code>&lt;audio src='a.mp3' controls&gt;&lt;/audio&gt;</code>"]],
+["الصور المتجاوبة|Images responsives",G,["<code>&lt;picture&gt;</code> مع <code>&lt;source&gt;</code> لصيغ وأحجام مختلفة|<code>&lt;picture&gt;</code> avec <code>&lt;source&gt;</code> pour formats et tailles variés","<code>srcset</code> و<code>sizes</code> تختاران الصورة المناسبة للشاشة|<code>srcset</code> et <code>sizes</code> choisissent l’image adaptée à l’écran"]],
+["التضمين|L’intégration",O,["<code>&lt;iframe src='...' title='خريطة'&gt;&lt;/iframe&gt;</code>|<code>&lt;iframe src='...' title='Carte'&gt;&lt;/iframe&gt;</code>","<code>loading='lazy'</code> تؤخّر تحميل ما خارج الشاشة|<code>loading='lazy'</code> diffère le chargement de ce qui est hors écran"]]],
+"لا تشغّل الصوت أو الفيديو تلقائيًا دون داعٍ.|Ne lancez pas audio ou vidéo automatiquement sans raison.","video وaudio وpicture وiframe تضيف محتوى غنيًا.|video, audio, picture et iframe ajoutent du contenu riche.",
+["أضف <code>&lt;track&gt;</code> للترجمة النصية للفيديو.|Ajoutez <code>&lt;track&gt;</code> pour les sous-titres d’une vidéo.","تأكد من حقوق استخدام الوسائط.|Vérifiez les droits d’utilisation des médias."],
+[['🎬','video'],['🎵','audio'],['🖼️','picture'],['🧩','iframe']],
+["أي سمة تُظهر أزرار التحكم؟|Quel attribut affiche les boutons de contrôle ?",["controls","buttons","player"],0]],
+["الجودة وسهولة الوصول|Qualité et accessibilité","صفحة سريعة وللجميع|Une page rapide et accessible à tous",[
+["محركات البحث|Le SEO",B,["<code>&lt;title&gt;</code> فريد لكل صفحة|Un <code>&lt;title&gt;</code> unique par page","<code>&lt;meta name='description' content='...'&gt;</code> وصف مختصر|<code>&lt;meta name='description' content='...'&gt;</code> : un résumé court"]],
+["سهولة الوصول|L’accessibilité",G,["<code>alt</code> للصور و<code>label</code> للحقول و<code>lang</code> للصفحة|<code>alt</code> pour les images, <code>label</code> pour les champs, <code>lang</code> pour la page","تباين ألوان كافٍ وتنقّل ممكن بلوحة المفاتيح|Contraste suffisant et navigation possible au clavier"]],
+["التجاوب والتحقق|Responsive et validation",O,["<code>&lt;meta name='viewport' content='width=device-width, initial-scale=1'&gt;</code>","تحقق من الشيفرة في validator.w3.org|Validez le code sur validator.w3.org"]]],
+"اختبر صفحتك بلوحة المفاتيح فقط.|Testez votre page avec le clavier seulement.","title + alt + labels + viewport = صفحة محسَّنة ومتاحة.|title + alt + labels + viewport = page optimisée et accessible.",
+["ARIA تُستعمل فقط حين لا يكفي HTML الدلالي.|ARIA ne s’utilise que quand le HTML sémantique ne suffit pas.","Lighthouse في Chrome يقيس الأداء وسهولة الوصول.|Lighthouse dans Chrome mesure performances et accessibilité."],
+[['🔍','SEO'],['♿','a11y'],['📱','viewport'],['✅','W3C']],
+["أي وسم يحدد عنوان الصفحة في التبويب؟|Quelle balise définit le titre de la page dans l’onglet ?",["title","h1","header"],0]]
+];
+const HE=['📄','🔠','🔗','📋','📝','🏛️','🎬','♿'],CL=['--blue','--green','--orange','--purple','--red'];
+const IC=[[/à éviter|تجنّب|erreur|خطأ/i,'⚠️'],[/titre|العناوين|mise en valeur|التأكيد/i,'🔠'],[/lien|الروابط|chemin|المسارات|image|الصور/i,'🔗'],[/liste|القوائم|structure|البنية|sections|الأجزاء|fusion|دمج/i,'📋'],[/champ|أنواع|validation|التحقق/i,'📝'],[/balise|الوسوم|idée|الفكرة/i,'🏛️'],[/vidéo|الفيديو|responsives|المتجاوبة|intégration|التضمين/i,'🎬'],[/seo|محركات|accessibilité|وصول|responsive|التجاوب/i,'♿'],[/c’est quoi|ما هو|éléments|العناصر/i,'📄']];
+const ic=t=>{for(const[r,e]of IC)if(r.test(t))return e;return null};
+const $=i=>document.getElementById(i),nav=$('nav'),main=$('main');
+document.documentElement.classList.add('js');
+const TX=(a,y,t,z=12)=>`<text x="${a}" y="${y}" text-anchor="middle" font-size="${z}" font-weight="600" fill="var(--ink)">${t}</text>`;
+function flow(it){const n=it.length,g=420/n;let o='';
+ it.forEach(([e,l],i)=>{const c=`var(${CL[i%5]})`,cx=L?g*(i+.5):420-g*(i+.5),d=L?1:-1;
+  o+=`<g class="fi" style="--d:${i*.25}s"><rect x="${cx-30}" y="18" width="60" height="60" rx="14" fill="${c}" fill-opacity=".15" stroke="${c}" stroke-width="2"/>${TX(cx,58,e,28)}${TX(cx,98,x(l),11)}</g>`;
+  if(i<n-1)o+=`<path class="fa" d="M${cx+d*36} 48H${cx+d*(g-36)}" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah)"/>`});
+ return `<svg viewBox="0 0 420 115" direction="ltr"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>${o}</svg>`}
+function qa(b,ok){b.classList.add(ok?'g':'x');b.parentNode.querySelector('.qf').textContent=ok?(L?'✔ Bravo !':'✔ أحسنت!'):(L?'✖ Réessayez':'✖ حاول مرة أخرى')}
+let io,so;
+function render(){
+ const H=document.documentElement;H.lang=L?'fr':'ar';H.dir=L?'ltr':'rtl';
+ document.title=L?'CodeLab – Formation HTML':'CodeLab – دورة HTML';
+ $('h1').textContent=L?'Apprendre HTML pas à pas':'تعلم HTML خطوة بخطوة';
+ $('lg').textContent=L?'ع':'FR';$('lg').setAttribute('aria-label',L?'العربية':'Français');
+ $('fl').innerHTML=['📄 HTML','🎨 CSS','⚡ JS','🌐 Web'].map(s=>`<span style="direction:ltr">${s}</span>`).join(`<i>${L?'▶':'◀'}</i>`);
+ $('ft').textContent=L?'CodeLab — Apprenez, pratiquez, partagez':'CodeLab — تعلّم، تدرّب، وشارك';
+ nav.dataset.t=L?'Sommaire':'المواضيع';nav.innerHTML='';main.innerHTML='';
+ D.forEach((d,n)=>{const[t,s,bl,note,end,dg,fl,q]=d,id='p'+(n+1);
+  nav.insertAdjacentHTML('beforeend',`<a href="#${id}" title="${x(t)}"><b>${n+1}</b><span>${x(t)}</span></a>`);
+  const blocks=bl.map(([h,c,it,ol],k)=>{let body;
+   if(ol)body=`<div class="flow">${it.map((z,j)=>{const[a,...r]=x(z).split(/[:：]/);const d2=r.join(':').trim();return `<div class="st" style="--i:${j}"><span class="ico">${ic(z)||'⭐'}</span><span class="num">${j+1}</span><b>${d2?a:x(z)}</b>${d2?`<small>${d2}</small>`:''}</div>`}).join(`<i class="ar">${L?'▶':'◀'}</i>`)}</div>`;
+   else body=`<ul class="il">${it.map(z=>`<li><span class="ib">${ic(z)||'✦'}</span><span>${x(z)}</span></li>`).join('')}</ul>`;
+   return `<section class="blk" style="--c:var(--${c});--k:${k}"><h3>${ic(h)||''} ${x(h)}</h3>${body}</section>`}).join('');
+  const quiz=`<div class="qz"><b>🧠 ${x(q[0])}</b>${q[1].map((o,i)=>`<button onclick="qa(this,${i==q[2]})">${x(o)}</button>`).join('')}<div class="qf"></div></div>`;
+  main.insertAdjacentHTML('beforeend',`<article class="page" id="${id}"><span class="hero" aria-hidden="true">${HE[n]}</span><h2>${x(t)}</h2><p class="sub">${x(s)}</p><div class="grid">${blocks}</div><div class="note">💡 ${x(note)}</div><div class="end"><b>${L?'À retenir : ':'الخلاصة: '}</b>${x(end)}</div>${quiz}<details class="dig"><summary>🔎 ${L?'Aller plus loin':'تعمّق أكثر'}</summary><figure class="fg">${flow(fl)}</figure><ul>${dg.map(z=>`<li>${x(z)}</li>`).join('')}</ul></details></article>`)});
+ io&&io.disconnect();so&&so.disconnect();
+ const pages=document.querySelectorAll('.page');
+ if('IntersectionObserver' in window){io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});pages.forEach(p=>io.observe(p))}else pages.forEach(p=>p.classList.add('in'));
+ const links=[...nav.querySelectorAll('a')];
+ so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('on',on);if(on)a.scrollIntoView({block:'nearest',inline:'nearest'})})}),{rootMargin:'-30% 0px -60% 0px'});pages.forEach(p=>so.observe(p));
+}
+$('lg').onclick=()=>{L=1-L;try{localStorage.setItem('cl12',L?'fr':'ar')}catch(e){}render()};
+const tb=document.createElement('button');tb.id='top';tb.textContent='↑';tb.setAttribute('aria-label','Top');tb.onclick=()=>scrollTo({top:0});document.body.append(tb);addEventListener('scroll',()=>tb.classList.toggle('show',scrollY>600),{passive:true});
+const bar=document.createElement('div');bar.id='bar';document.body.prepend(bar);
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight||1)})`},{passive:true});
+render();
+</script>
+</body>
+</html>
