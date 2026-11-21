@@ -1,0 +1,78 @@
+/* ===== Cartes de formations : grande icône centrée, façon W3Schools ===== */
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.75rem 1.25rem 1.5rem;
+  border-radius: 16px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.course-card:hover,
+.course-card:focus-visible {
+  transform: translateY(-4px);
+}
+
+/* Icône SVG : même gabarit que les emoji, largeur automatique selon le logo */
+.course-icon.course-icon--svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  font-size: 1rem;
+}
+
+.course-icon--svg svg {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  overflow: visible;
+}
+
+@media (max-width: 480px) {
+  .course-icon.course-icon--svg { height: 4.5rem; }
+}
+
+/* La grande icône */
+.course-icon {
+  display: block;
+  font-size: 4.5rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+  transition: transform .25s ease;
+}
+
+.course-card:hover .course-icon,
+.course-card:focus-visible .course-icon {
+  transform: scale(1.12) rotate(-4deg);
+}
+
+.course-card h2 {
+  margin: .35rem 0 .5rem;
+}
+
+.course-card .course-open {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+@media (max-width: 480px) {
+  .course-grid { grid-template-columns: 1fr; }
+  .course-icon { font-size: 3.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .course-card,
+  .course-icon { transition: none; }
+  .course-card:hover,
+  .course-card:hover .course-icon { transform: none; }
+}
