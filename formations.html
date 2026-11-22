@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css?v=3" />
-  <link rel="stylesheet" href="css/formations-cards.css?v=3" />
+  <link rel="stylesheet" href="css/formations-cards.css?v=5" />
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
@@ -74,6 +74,26 @@
       </div>
     </section>
 
+    <!-- ===== FORMATEUR ===== -->
+    <section class="container trainer" aria-labelledby="trainer-title">
+      <div class="trainer-card">
+        <div class="trainer-avatar" aria-hidden="true">DM</div>
+        <div class="trainer-body">
+          <h2 id="trainer-title">Dhiaa Mezni, formateur</h2>
+          <p>Développeur Full Stack Laravel et enseignant en informatique à Smart Formation. Formateur en IA, Laravel et marketing digital avec le Bureau de l’emploi de Tabarka. Chaque cours ici vient de ce que j’enseigne et construis au quotidien.</p>
+          <ul class="trainer-facts">
+            <li><strong>25</strong> formations en accès libre</li>
+            <li><strong>Arabe et français</strong> selon les cours</li>
+            <li><strong>Quiz et TP</strong> pour pratiquer</li>
+          </ul>
+        </div>
+        <div class="trainer-cta">
+          <a class="btn btn-primary" href="index.html#contact">Demander une formation</a>
+          <a class="btn btn-outline" href="WA_LINK" data-wa>Écrire sur WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== RECHERCHE + FILTRES ===== -->
     <div class="toolbar">
       <div class="container toolbar-inner">
@@ -83,6 +103,7 @@
           <kbd aria-hidden="true">/</kbd>
         </div>
         <div class="chips" id="course-filters" role="group" aria-label="Filtrer par catégorie"></div>
+        <div class="chips chips--level" id="level-filters" role="group" aria-label="Filtrer par niveau"></div>
       </div>
     </div>
 
@@ -103,7 +124,24 @@
     </div>
   </footer>
 
+  <a class="wa-float" href="WA_LINK" data-wa aria-label="Écrire à Dhiaa sur WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/><path d="M9 9c0 3 3 6 6 6l1-1.5-2-1-1 .8c-.8-.4-1.600-1.200-2-2l.8-1-1-2z"/></svg>
+    <span>Une question ?</span>
+  </a>
+
   <script src="js/menu.js?v=3"></script>
-  <script src="js/formations.js?v=7"></script>
+  <script src="js/formations.js?v=8"></script>
+  <script>
+    /* Remplacez par votre numéro, format international sans + ni espaces */
+    (function () {
+      var phone = '21652829452';
+      var msg = encodeURIComponent('Bonjour Dhiaa, je suis intéressé(e) par vos formations.');
+      document.querySelectorAll('[data-wa]').forEach(function (a) {
+        a.href = 'https://wa.me/' + phone + '?text=' + msg;
+        a.target = '_blank';
+        a.rel = 'noopener';
+      });
+    })();
+  </script>
 </body>
 </html>

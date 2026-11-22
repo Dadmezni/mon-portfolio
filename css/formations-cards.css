@@ -76,3 +76,121 @@
   .course-card:hover,
   .course-card:hover .course-icon { transform: none; }
 }
+
+/* ===== Cartes : niveau, durée, langue, format, badge ===== */
+.course-card { position: relative; }
+
+.course-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .4rem;
+  margin: .25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.course-meta li {
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: .76rem;
+  font-weight: 600;
+}
+.course-meta .lv0 { color: #4ade80; border-color: rgba(74, 222, 128, .4); }
+.course-meta .lv1 { color: #fbbf24; border-color: rgba(251, 191, 36, .4); }
+.course-meta .lv2 { color: #fb7185; border-color: rgba(251, 113, 133, .4); }
+
+.course-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #0f172a;
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+.chips--level { margin-top: -4px; }
+.chip--level { padding: 6px 12px; font-size: .8rem; }
+
+/* ===== Bloc formateur ===== */
+.trainer { padding-top: 28px; }
+.trainer-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.trainer-avatar {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0f172a;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.trainer-body h2 { font-size: 1.2rem; margin-bottom: .4rem; }
+.trainer-body p { max-width: 62ch; color: var(--text-muted); font-size: .94rem; }
+.trainer-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.25rem;
+  margin: .9rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-muted);
+  font-size: .86rem;
+}
+.trainer-facts strong { color: var(--text); }
+.trainer-cta { display: flex; flex-direction: column; gap: .6rem; }
+
+@media (max-width: 860px) {
+  .trainer-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  .trainer-facts { justify-content: center; }
+  .trainer-cta { width: 100%; }
+}
+
+/* ===== Bouton WhatsApp flottant ===== */
+.wa-float {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #0b2b16;
+  font-weight: 700;
+  font-size: .9rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  transition: transform .2s ease;
+}
+.wa-float:hover, .wa-float:focus-visible { transform: translateY(-2px); }
+.wa-float svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (max-width: 480px) { .wa-float span { display: none; } .wa-float { padding: 13px; } }
+
+/* ===== Grille : 3 cartes par ligne ===== */
+.course-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 960px) { .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .course-grid { grid-template-columns: 1fr; } }

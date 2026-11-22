@@ -8,7 +8,7 @@
     { id: 'ia',        label: 'Intelligence artificielle' },
     { id: 'web',       label: 'Développement web' },
     { id: 'data',      label: 'Bases de données' },
-    { id: 'ateliers',  label: 'Ateliers & évaluations' },
+    { id: 'ateliers',  label: 'Pratique & certification' },
     { id: 'marketing', label: 'Marketing digital' }
   ];
 
@@ -33,6 +33,38 @@
     canva: "<svg viewBox=\"0 0 100 100\"><defs><linearGradient id=\"gcv\" x1=\".2\" y1=\"0\" x2=\".8\" y2=\"1\"><stop offset=\"0\" stop-color=\"#00c4cc\"/><stop offset=\".55\" stop-color=\"#2a9bd8\"/><stop offset=\"1\" stop-color=\"#7d2ae8\"/></linearGradient></defs><circle cx=\"50\" cy=\"50\" r=\"48\" fill=\"url(#gcv)\"/><path fill=\"#fff\" d=\"M6.03 49.47Q6.03 44.18 8.02 40.08Q10.02 35.97 13.44 33.72Q16.86 31.47 21.04 31.47Q24.93 31.47 26.94 33.47Q28.96 35.47 28.96 38.74Q28.96 40.94 28.18 42.27Q27.41 43.6 25.97 43.6Q24.96 43.6 24.39 43.14Q23.81 42.67 23.81 41.77Q23.81 41.44 23.95 40.58Q24.17 39.5 24.17 38.85Q24.17 35.58 20.68 35.58Q18.3 35.58 16.14 37.12Q13.98 38.67 12.65 41.68Q11.32 44.68 11.32 48.82Q11.32 53.14 13.73 55.5Q16.14 57.86 20.86 57.86Q23.2 57.86 25.59 57.27Q27.99 56.67 30.9 55.45Q31.44 55.23 31.8 55.23Q32.38 55.23 32.67 55.66Q32.95 56.1 32.95 56.78Q32.95 58.98 30.58 60.02Q28.02 61.14 25.27 61.66Q22.51 62.18 20.03 62.18Q15.75 62.18 12.58 60.61Q9.41 59.05 7.72 56.17Q6.03 53.29 6.03 49.47ZM29.68 56.31Q29.68 53.43 31.01 50.86Q32.34 48.28 34.56 46.72Q36.77 45.15 39.25 45.15Q40.05 45.15 40.32 45.46Q40.59 45.76 40.77 46.56Q41.52 46.41 42.35 46.41Q44.11 46.41 44.11 47.67Q44.11 48.43 43.57 51.27Q42.75 55.41 42.75 57.03Q42.75 57.57 43.02 57.9Q43.29 58.22 43.72 58.22Q44.4 58.22 45.37 57.34Q46.35 56.46 48 54.48Q48.43 53.97 48.97 53.97Q49.44 53.97 49.71 54.4Q49.98 54.84 49.98 55.59Q49.98 57.03 49.3 57.82Q47.82 59.66 46.17 60.92Q44.51 62.18 42.96 62.18Q41.77 62.18 40.78 61.37Q39.79 60.56 39.29 59.16Q37.42 62.18 34.57 62.18Q32.34 62.18 31.01 60.56Q29.68 58.94 29.68 56.31ZM38.43 55.12 39.76 48.5Q38.25 48.54 36.97 49.63Q35.69 50.73 34.93 52.53Q34.18 54.33 34.18 56.35Q34.18 57.46 34.63 58Q35.08 58.54 35.87 58.54Q36.66 58.54 37.38 57.61Q38.1 56.67 38.43 55.12ZM47.14 56.13Q47.14 51.45 48.47 47.24Q48.79 46.2 49.53 45.71Q50.27 45.22 51.6 45.22Q52.32 45.22 52.61 45.4Q52.9 45.58 52.9 46.09Q52.9 46.66 52.36 48.68Q52 50.12 51.78 51.2Q51.57 52.28 51.42 53.86Q52.61 50.77 54.09 48.82Q55.56 46.88 56.98 46.05Q58.41 45.22 59.59 45.22Q61.93 45.22 61.93 47.56Q61.93 48.97 61.14 52.64Q60.46 55.77 60.46 56.78Q60.46 58.22 61.5 58.22Q62.22 58.22 63.21 57.34Q64.2 56.46 65.86 54.48Q66.29 53.97 66.83 53.97Q67.3 53.97 67.57 54.4Q67.84 54.84 67.84 55.59Q67.84 57.03 67.15 57.82Q65.61 59.73 63.82 60.96Q62.04 62.18 59.77 62.18Q57.94 62.18 57 61.12Q56.07 60.06 56.07 58.04Q56.07 57.03 56.57 54.44Q57.04 52.17 57.04 51.31Q57.04 50.73 56.64 50.73Q56.17 50.73 55.33 51.94Q54.48 53.14 53.6 55.12Q52.72 57.1 52.18 59.3Q51.78 60.99 51.26 61.59Q50.74 62.18 49.62 62.18Q48.25 62.18 47.7 60.74Q47.14 59.3 47.14 56.13ZM83.1 51.02Q83.64 51.02 83.93 51.38Q84.22 51.74 84.22 52.35Q84.22 53.47 83.79 54.1Q83.35 54.73 82.49 55.02Q80.83 55.56 78.96 55.56Q77.38 55.56 75.97 55.12Q74.93 56.82 73.67 58.62Q72.23 60.67 71.19 61.42Q70.14 62.18 68.81 62.18Q67.33 62.18 66.49 61.03Q65.64 59.88 65.43 57.39Q64.99 52.35 64.99 48.57V47.31Q65.03 46.12 65.64 45.66Q66.25 45.19 67.48 45.19Q68.41 45.19 68.86 45.6Q69.31 46.02 69.31 46.99Q69.31 51.13 69.82 57.75Q71.98 54.55 73.06 52.64Q72.52 51.6 72.52 50.16Q72.52 48.93 73.06 47.78Q73.6 46.63 74.53 45.91Q75.47 45.19 76.66 45.19Q77.7 45.19 78.35 45.93Q79 46.66 79 48.07Q79 49.69 78.13 51.78Q79.5 51.7 81.77 51.24L82.74 51.06Q82.85 51.02 83.1 51.02ZM80.62 56.31Q80.62 53.43 81.95 50.86Q83.28 48.28 85.5 46.72Q87.71 45.15 90.19 45.15Q90.99 45.15 91.26 45.46Q91.53 45.76 91.71 46.56Q92.46 46.41 93.29 46.41Q95.05 46.41 95.05 47.67Q95.05 48.43 94.51 51.27Q93.69 55.41 93.69 57.03Q93.69 57.57 93.96 57.9Q94.23 58.22 94.66 58.22Q95.34 58.22 96.31 57.34Q97.29 56.46 98.94 54.48Q99.37 53.97 99.91 53.97Q100.38 53.97 100.65 54.4Q100.92 54.84 100.92 55.59Q100.92 57.03 100.24 57.82Q98.76 59.66 97.11 60.92Q95.45 62.18 93.9 62.18Q92.71 62.18 91.72 61.37Q90.73 60.56 90.23 59.16Q88.36 62.18 85.51 62.18Q83.28 62.18 81.95 60.56Q80.62 58.94 80.62 56.31ZM89.37 55.12 90.7 48.5Q89.19 48.54 87.91 49.63Q86.63 50.73 85.87 52.53Q85.12 54.33 85.12 56.35Q85.12 57.46 85.57 58Q86.02 58.54 86.81 58.54Q87.6 58.54 88.32 57.61Q89.04 56.67 89.37 55.12Z\"/></svg>"
   };
 
+
+  /* Infos affichées sur les cartes. À ajuster selon vos durées réelles. */
+  var LEVELS = ['Débutant', 'Intermédiaire', 'Avancé'];
+  var META = {
+    'ia.html': { level: 0, time: '3 h', lang: 'FR', fmt: 'Cours' },
+    'iaCours.html': { level: 0, time: '3 h', lang: 'AR', fmt: 'Cours' },
+    'rag.html': { level: 1, time: '4 h', lang: 'FR', fmt: 'Cours' },
+    'ragHistoire.html': { level: 0, time: '2 h', lang: 'FR', fmt: 'Cours' },
+    'embedding.html': { level: 1, time: '2 h', lang: 'FR', fmt: 'Cours' },
+    'prompts.html': { level: 0, time: '2 h', lang: 'FR', fmt: 'Cours' },
+    'laravelCours.html': { level: 1, time: '10 h', lang: 'FR', fmt: 'Cours' },
+    'devopsCours.html': { level: 1, time: '6 h', lang: 'FR', fmt: 'Cours' },
+    'Docker.html': { level: 1, time: '4 h', lang: 'AR / FR', fmt: 'Cours' },
+    'Next.js.html': { level: 1, time: '4 h', lang: 'AR / FR', fmt: 'Cours' },
+    'React.html': { level: 1, time: '5 h', lang: 'AR / FR', fmt: 'Cours' },
+    'HTML.html': { level: 0, time: '3 h', lang: 'AR / FR', fmt: 'Cours' },
+    'PHP.html': { level: 0, time: '5 h', lang: 'AR / FR', fmt: 'Cours' },
+    'Python.html': { level: 0, time: '4 h', lang: 'FR', fmt: 'Cours' },
+    'Apprendre la programmation.html': { level: 0, time: '4 h', lang: 'FR', fmt: 'Cours' },
+    'bootstrap-cours.html': { level: 0, time: '4 h', lang: 'FR', fmt: 'Cours' },
+    'guide-portfolio.html': { level: 0, time: '2 h', lang: 'FR', fmt: 'Guide' },
+    'Formation DevOps — Laravel 13, PostgreSQL, Docker & Render.html': { level: 2, time: '8 h', lang: 'FR', fmt: 'Projet', badge: 'Nouveau' },
+    'PostgreSQL.html': { level: 1, time: '4 h', lang: 'AR / FR', fmt: 'Cours' },
+    'mongodb.html': { level: 1, time: '3 h', lang: 'FR', fmt: 'Cours' },
+    'round3-vscode.html': { level: 0, time: '2 h', lang: 'FR', fmt: 'Atelier' },
+    'explication-code-round3.html': { level: 1, time: '1 h', lang: 'FR', fmt: 'Atelier' },
+    'quiz-ia-php.html': { level: 0, time: '15 min', lang: 'FR', fmt: 'Quiz' },
+    'qcm.html': { level: 1, time: '20 min', lang: 'FR', fmt: 'Examen', badge: 'Noté /20' },
+    'marketing-digital-visuel.html': { level: 0, time: '3 h', lang: 'FR', fmt: 'Cours' },
+    'tp-canva.html': { level: 0, time: '3 h 15', lang: 'FR', fmt: 'TP', badge: 'Nouveau' }
+  };
+
   var COURSES = [
     // Intelligence artificielle
     { cat: 'ia', title: "Comprendre l'IA", href: 'ia.html', slogan: "🤖 Robot : l'IA n'est plus un mystère, elle devient votre alliée.", desc: "Les concepts essentiels de l'intelligence artificielle, expliqués pas à pas." },
@@ -44,7 +76,7 @@
 
     // Développement web
     { cat: 'web', title: 'Cours Laravel', href: 'laravelCours.html', slogan: "Du code élégant, des applications solides.", icon: 'laravel', desc: "Les bases de Laravel et la structure d'une application, étape par étape." },
-    { cat: 'web', title: 'Formation DevOps', href: 'devopsCours.html', slogan: "Codez, livrez, recommencez, sans friction.", icon: 'devops', desc: "Initiation aux pratiques DevOps : automatisation, déploiement et CI/CD." },
+    { cat: 'web', title: 'DevOps : fondamentaux et CI/CD', href: 'devopsCours.html', slogan: "Codez, livrez, recommencez, sans friction.", icon: 'devops', desc: "Initiation aux pratiques DevOps : automatisation, déploiement et CI/CD." },
     { cat: 'web', title: 'Docker', href: 'Docker.html', slogan: "🐳 Baleine : construisez une fois, exécutez partout.", desc: "Conteneuriser une application et simplifier son déploiement." },
     { cat: 'web', title: 'Next.js', href: 'Next.js.html', slogan: "Des sites rapides, pensés pour le web moderne.", icon: 'nextjs', desc: "Construire des applications web modernes avec Next.js." },
     { cat: 'web', title: 'React', href: 'React.html', slogan: "⚛️ Atome : des interfaces vivantes, composant par composant.", desc: "Créer des interfaces dynamiques avec React." },
@@ -54,7 +86,7 @@
     { cat: 'web', title: 'Apprendre la programmation', href: 'Apprendre la programmation.html', slogan: "Passez de la logique à vos premiers programmes.", icon: 'programmation', desc: "Acquérir les notions essentielles pour comprendre et écrire du code." },
     { cat: 'web', title: 'Cours Bootstrap 5', href: 'bootstrap-cours.html', slogan: "Un design responsive en un clin d'œil.", icon: 'bootstrap', desc: "Concevoir des pages responsives avec Bootstrap 5." },
     { cat: 'web', title: 'Guide du portfolio', href: 'guide-portfolio.html', slogan: "Votre vitrine professionnelle, en ligne.", icon: 'portfolio', desc: "Créer et publier votre portfolio professionnel." },
-    { cat: 'web', title: 'Formation DevOps — Laravel, PostgreSQL, Docker & Render', href: 'Formation DevOps — Laravel 13, PostgreSQL, Docker & Render.html', slogan: "🐙 Pieuvre : plusieurs outils, un seul déploiement maîtrisé.", desc: "Déployer une application Laravel avec PostgreSQL, Docker, GitHub Actions et Render." },
+    { cat: 'web', title: 'Déployer Laravel : PostgreSQL, Docker & Render', href: 'Formation DevOps — Laravel 13, PostgreSQL, Docker & Render.html', slogan: "🐙 Pieuvre : plusieurs outils, un seul déploiement maîtrisé.", desc: "Déployer une application Laravel avec PostgreSQL, Docker, GitHub Actions et Render." },
 
     // Bases de données
     { cat: 'data', title: 'PostgreSQL', href: 'PostgreSQL.html', slogan: "Éléphant : une mémoire fiable pour vos données.", icon: 'postgresql', desc: "Modéliser et interroger une base de données relationnelle avec PostgreSQL." },
@@ -63,11 +95,11 @@
     // Ateliers et évaluations
     { cat: 'ateliers', title: 'Atelier pratique', href: 'round3-vscode.html', slogan: "🐝 Abeille : apprendre en pratiquant, une ligne à la fois.", desc: "Atelier guidé pour mettre en pratique les notions avec VS Code." },
     { cat: 'ateliers', title: 'Explication du code', href: 'explication-code-round3.html', slogan: "🦉 Hibou : comprendre chaque ligne, pas seulement la copier.", desc: "Lecture et explication détaillée du code de l'atelier." },
-    { cat: 'ateliers', title: 'Quiz récapitulatif IA + PHP', href: 'quiz-ia-php.html', slogan: "🦊 Renard : malin, testez-vous et progressez.", desc: "Testez vos connaissances en IA et en PHP." },
-    { cat: 'ateliers', title: 'QCM PHP et IA', href: 'qcm.html', slogan: "🐬 Dauphin : intelligent, mesurez ce que vous savez vraiment.", desc: "Questions à choix multiples pour vous évaluer." },
+    { cat: 'ateliers', title: 'Quiz rapide IA + PHP', href: 'quiz-ia-php.html', slogan: "🦊 Renard : malin, testez-vous et progressez.", desc: "Testez vos connaissances en IA et en PHP." },
+    { cat: 'ateliers', title: 'Examen noté PHP et IA (/20)', href: 'qcm.html', slogan: "🐬 Dauphin : intelligent, mesurez ce que vous savez vraiment.", desc: "Questions à choix multiples pour vous évaluer." },
 
     // Marketing digital
-    { cat: 'marketing', title: 'Cours illustré', href: 'marketing-digital-visuel.html', slogan: "🦋 Papillon : le marketing digital, expliqué en images.", desc: "Introduction visuelle au marketing digital." },
+    { cat: 'marketing', title: 'Marketing digital : cours illustré', href: 'marketing-digital-visuel.html', slogan: "🦋 Papillon : le marketing digital, expliqué en images.", desc: "Introduction visuelle au marketing digital." },
     { cat: 'marketing', title: 'TP Canva', href: 'tp-canva.html', slogan: "Créez des visuels qui se remarquent.", icon: 'canva', desc: "Travaux pratiques de création visuelle avec Canva." }
   ];
 
@@ -76,12 +108,13 @@
   var search = document.getElementById('course-search');
   var info = document.getElementById('results-info');
   var catSlogan = document.getElementById('cat-slogan');
+  var levelBox = document.getElementById('level-filters');
   if (!grid || !filters || !search || !catSlogan) return;
 
   var catLabel = {};
   CATEGORIES.forEach(function (c) { catLabel[c.id] = c.label; });
 
-  var state = { cat: 'all', q: '' };
+  var state = { cat: 'all', q: '', level: -1 };
 
   function norm(s) {
     return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -89,6 +122,8 @@
 
   function matches(course) {
     if (state.cat !== 'all' && course.cat !== state.cat) return false;
+    var m = META[course.href];
+    if (state.level >= 0 && (!m || m.level !== state.level)) return false;
     if (!state.q) return true;
     var hay = norm(course.title + ' ' + course.slogan + ' ' + course.desc + ' ' + catLabel[course.cat]);
     return state.q.split(/\s+/).every(function (w) { return hay.indexOf(w) !== -1; });
@@ -117,6 +152,22 @@
       btn.appendChild(count);
       btn.addEventListener('click', function () { setCategory(cat.id); });
       filters.appendChild(btn);
+    });
+  }
+
+  /* Filtre par niveau */
+  function buildLevelFilters() {
+    if (!levelBox) return;
+    var opts = [{ v: -1, t: 'Tous niveaux' }].concat(LEVELS.map(function (t, i) { return { v: i, t: t }; }));
+    opts.forEach(function (o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip chip--level';
+      b.dataset.level = o.v;
+      b.textContent = o.t;
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function () { state.level = o.v; render(); });
+      levelBox.appendChild(b);
     });
   }
 
@@ -176,6 +227,28 @@
     a.appendChild(h);
     a.appendChild(slogan);
     a.appendChild(p);
+    var m = META[course.href];
+    if (m) {
+      var row = document.createElement('ul');
+      row.className = 'course-meta';
+      row.setAttribute('aria-label', 'Informations sur la formation');
+      var lvl = document.createElement('li');
+      lvl.className = 'lv lv' + m.level;
+      lvl.textContent = LEVELS[m.level];
+      row.appendChild(lvl);
+      [m.time, m.lang, m.fmt].forEach(function (t) {
+        var li = document.createElement('li');
+        li.textContent = t;
+        row.appendChild(li);
+      });
+      a.appendChild(row);
+      if (m.badge) {
+        var badge = document.createElement('span');
+        badge.className = 'course-badge';
+        badge.textContent = m.badge;
+        a.appendChild(badge);
+      }
+    }
     a.appendChild(open);
     return a;
   }
@@ -195,6 +268,7 @@
       reset.addEventListener('click', function () {
         search.value = '';
         state.q = '';
+        state.level = -1;
         setCategory('all');
       });
       empty.appendChild(msg);
@@ -210,6 +284,11 @@
       btn.setAttribute('aria-pressed', String(btn.dataset.cat === state.cat));
     });
 
+    if (levelBox) {
+      Array.prototype.forEach.call(levelBox.children, function (btn) {
+        btn.setAttribute('aria-pressed', String(Number(btn.dataset.level) === state.level));
+      });
+    }
     catSlogan.textContent = CAT_SLOGANS[state.cat] || '';
     info.textContent = list.length + (list.length > 1 ? ' formations' : ' formation');
   }
@@ -247,6 +326,7 @@
   if (catLabel[hash]) state.cat = hash;
 
   buildFilters();
+  buildLevelFilters();
   render();
 
   window.addEventListener('hashchange', function () {

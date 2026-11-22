@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>تعلم Laravel خطوة بخطوة</title>
+<title>Laravel : formation complète</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#e9edf5;--paper:#fdfdfb;--line:#dbe3f2;--ink:#14235c;--txt:#2b3557;--blue:#1f3fa0;--green:#2e9e57;--orange:#ee8a1f;--purple:#6a3fb5;--red:#d6335b;--yel:#ffd93b;--note:#fff3a6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -12,263 +12,848 @@
 html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--txt);font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.7}
-header{text-align:center;padding:28px 16px 8px}
-header h1{margin:0;color:var(--ink);font-size:clamp(24px,5vw,38px);font-weight:800}
+header{text-align:center;padding:20px 16px 4px;position:relative}
+header h1{margin:6px 0 0;color:var(--ink);font-size:clamp(22px,5vw,34px);font-weight:800}
 header p{margin:4px 0 0}
 nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:var(--bg)}
-nav a{flex:none;text-decoration:none;font-size:13px;font-weight:600;color:var(--ink);border:2px solid var(--blue);border-radius:99px;padding:2px 12px;background:var(--paper)}
-nav a:focus-visible,nav a:hover{background:var(--yel);color:#14235c}
-main{max-width:none;width:100%;margin:0;padding:8px 14px 40px;display:grid;gap:28px}
-.page{position:relative;background:var(--paper);border-radius:10px;padding:22px 22px 18px 20px;padding-right:44px;box-shadow:0 2px 0 var(--line),0 10px 24px rgba(20,35,92,.12);background-image:repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px)}
+nav a{flex:none;text-decoration:none;font-size:13px;font-weight:600;color:var(--ink);border:2px solid var(--blue);border-radius:99px;padding:2px 12px;background:var(--paper);display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav a:hover,nav a:focus-visible,nav a.on{background:var(--yel);color:#14235c;border-color:var(--orange)}
+nav a b{display:inline-grid;place-items:center;flex:none;min-width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800}
+nav a.on b{background:var(--orange)}
+main{width:100%;margin:0;padding:8px 14px 40px;display:grid;gap:28px}
+.page{position:relative;background:var(--paper);border-radius:10px;padding:22px 44px 22px 20px;box-shadow:0 2px 0 var(--line),0 10px 24px rgba(20,35,92,.12);background-image:repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px)}
 .page:before{content:"";position:absolute;top:10px;bottom:10px;right:10px;width:16px;background:radial-gradient(circle at 50% 50%,var(--ink) 0 4px,transparent 5px) 0 0/16px 26px repeat-y}
-.brand{font-size:13px;font-weight:600;color:var(--blue)}
-.page h2{margin:2px 0 0;color:var(--ink);font-size:clamp(24px,5vw,34px);font-weight:800;line-height:1.35;display:inline;background:linear-gradient(transparent 62%,var(--yel) 62% 92%,transparent 92%)}
+.page h2{margin:2px 0 0;color:var(--ink);font-size:clamp(22px,5vw,30px);font-weight:800;line-height:1.35;display:inline;background:linear-gradient(transparent 62%,var(--yel) 62% 92%,transparent 92%)}
 .sub{margin:6px 0 14px;font-weight:600;color:var(--blue)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.blk{background:var(--paper);border:2px dashed var(--c);border-radius:12px;padding:12px 14px}
+.blk{background:var(--paper);border:2px dashed var(--c);border-radius:12px;padding:12px 14px;margin-top:14px}
 .blk h3{display:inline-block;margin:-26px 0 6px;padding:0 12px;background:var(--c);color:#fff;border-radius:6px;font-size:15px;font-weight:800;transform:rotate(-1deg)}
 .blk ul,.blk ol{margin:0;padding:0 18px 0 0}
 .blk li{margin:3px 0}
 .blk li::marker{color:var(--c);font-weight:800}
-.blk{margin-top:14px}
+.il{list-style:none;padding:0!important}
+.il li{display:flex;gap:8px;align-items:flex-start}
+.ib{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,var(--paper));font-size:18px;transition:transform .25s}
+.il li:hover .ib{transform:scale(1.2) rotate(-8deg)}
+.flow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 2px;margin-top:6px}
+.st{flex:1 1 92px;min-width:92px;max-width:170px;text-align:center}
+.ico{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 4px;border-radius:16px;background:color-mix(in srgb,var(--c) 14%,var(--paper));border:2px solid var(--c);font-size:30px;transition:transform .25s}
+.st:hover .ico{transform:translateY(-4px) rotate(-6deg) scale(1.08)}
+.num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;font-size:12px;font-weight:800}
+.st b{display:block;font-size:12.5px;line-height:1.4;color:var(--ink);margin-top:2px}
+.ar{align-self:center;margin-top:-30px;color:var(--c);font-style:normal;font-size:14px}
 .note,.end{margin-top:14px;padding:10px 14px;border-radius:6px;font-weight:600}
-.note{background:var(--note);color:var(--ink);transform:rotate(-.6deg);box-shadow:2px 3px 0 rgba(0,0,0,.12);width:fit-content;max-width:100%}
+.note{background:var(--note);color:var(--ink);box-shadow:2px 3px 0 rgba(0,0,0,.12);width:fit-content;max-width:100%}
 .end{border:2px solid var(--blue);border-radius:12px;color:var(--ink)}
 .end b{color:var(--blue)}
 footer{text-align:center;padding:20px;font-weight:600;color:var(--ink)}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:4px;z-index:9;background:linear-gradient(90deg,var(--blue),var(--yel));transform-origin:right;transform:scaleX(0)}
-.hero{position:absolute;top:14px;left:16px;font-size:clamp(42px,9vw,64px);animation:bob 3.2s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
-.il{list-style:none;padding:0!important}
-.il li{display:flex;gap:8px;align-items:flex-start}
-.ib{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,var(--paper));font-size:19px;transition:transform .25s}
-.il li:hover .ib{transform:scale(1.25) rotate(-8deg)}
-.flow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 2px;margin-top:6px}
-.st{flex:1 1 92px;min-width:92px;max-width:170px;text-align:center}
-.ico{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 4px;border-radius:16px;background:color-mix(in srgb,var(--c) 14%,var(--paper));border:2px solid var(--c);font-size:36px;transition:transform .25s}
-.st:hover .ico{transform:translateY(-4px) rotate(-6deg) scale(1.08)}
-.num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;font-size:12px;font-weight:800}
-.st b{display:block;font-size:13px;line-height:1.4;color:var(--ink)}
-.st small{display:block;font-size:11.5px;line-height:1.45}
-.ar{align-self:center;margin-top:-30px;color:var(--c);font-style:normal;font-size:14px;animation:nudge 1.4s ease-in-out infinite}
-@keyframes nudge{50%{transform:translateX(-6px)}}
-.js .page{opacity:0;transform:translateY(36px) rotate(.5deg);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
-.js .page.in{opacity:1;transform:none}
-.js .page h2{background-repeat:no-repeat;background-size:0 100%;background-position:right;transition:background-size .9s .35s}
-.js .page.in h2{background-size:100% 100%}
-.js .blk{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .5s,transform .5s;transition-delay:calc(var(--k)*90ms + 250ms)}
-.js .in .blk{opacity:1;transform:none}
-.js .st{opacity:0;transform:scale(.6);transition:opacity .4s,transform .45s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i)*110ms + 500ms)}
-.js .in .st{opacity:1;transform:none}
-.js .in .note{animation:pop .8s 1s both}
-@keyframes pop{0%{transform:rotate(-6deg) scale(.7);opacity:0}60%{transform:rotate(2deg) scale(1.05)}100%{transform:rotate(-.6deg);opacity:1}}
-@media (prefers-reduced-motion:reduce){.js .page,.js .blk,.js .st,.hero,.ar,.js .in .note{animation:none;transition:none;opacity:1;transform:none}.js .page h2{background-size:100% 100%}}
-#art svg{width:min(760px,100%);height:auto;display:block;margin:0 auto 12px;filter:drop-shadow(0 12px 24px rgba(20,35,92,.16))}
-.nd{transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-in-out infinite}
-@keyframes pl{50%{transform:scale(1.4)}}
-.flowline{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 10px;margin:8px 0 0;font-weight:600;color:var(--ink)}
-.flowline span{background:var(--paper);border:2px solid var(--blue);border-radius:99px;padding:0 12px}
-.flowline i{color:var(--orange);font-style:normal}
-nav a.on{background:var(--yel);color:#14235c;border-color:var(--orange)}
-@media (min-width:900px){
-html{scroll-padding-top:16px}
-body{padding-right:250px}
-nav{position:fixed;top:0;right:0;bottom:0;width:250px;flex-direction:column;align-items:stretch;overflow-y:auto;overflow-x:hidden;gap:6px;padding:20px 14px;background:var(--paper);border-left:2px solid var(--line);z-index:7}
-nav:before{content:"المواضيع";font-weight:800;color:var(--ink);font-size:18px;padding:0 4px 6px}
-nav a{border-radius:10px;padding:4px 12px;border-width:2px;font-size:14px;transition:transform .2s}
-nav a:hover{transform:translateX(-4px)}
-}
-@media (prefers-reduced-motion:reduce){.nd{animation:none}}
-.sig{width:150px;height:53px;margin-bottom:2px;background:var(--ink);-webkit-mask:url(data:image/png;base64,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) center/contain no-repeat;mask:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVUAAAB5CAYAAACJFbLXAAAACXBIWXMAAAsSAAALEgHS3X78AAATr0lEQVR42u2dCZBcVRWGqXLHpUDcEJe4KyKiuIuKUqKA4ooKbrgUggqIIIKoUK6ogOwQ0cQVIbJIKFHjMlpQCDEmCKGsiCFGICQz091vJjPd9547ej3nvtuZ7rd0v/d6nen/q3qVQmemu++7/b9z7tl22gkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAubsjanVLS5r0K0vFKrLcGKAABAUUE1Zr+KJlu/yoqWYlUAAKCoqCq6sFFU5cKqAABAQaKCClEFAICigkq0T4KobsLKAABAEVFVdHxUVEs1fQZWBgAAChAQ3RqzVImWY2UAAKCIpappXVRUt1v7WKwMAAAUEVWiMQSpAACgG4Jaq+2PyD8AAHRPVJdEBRWJ/wAAUFhU6ciYparUiVgZAAAoAFulF8VEtVbbHysDAABFLFVN66OiGmh9GFYGAACKiGo08q9oPLB2V6wMAADkFVRrd3Gt/pot1fVYGQAAKCKqCZF/1PwDAEBhUU2I/KM8FQAAijGl9eFIpwIAgG5ZqkR3ojtVi4cO0SddIE/RuEs9Q6oZAKClqGpa25RKRYawKiETs7O7y/lyU6WZ1qdhZQAArUR1c0UbG14iqi7xfwlWJuW8GUE8AEC6aCDy33J9Ejp3IYgHAMhlibF7ezlWJuWBo2icRfWDWB0AQCISkEKQKtVKXR7vh0BHYmUAAPncWwhH3UotRdz+MewYAEBr8YhEtuWSFCKsS9xKxW4BAGQRD5vQ8m/JKK/Jdm335HUoN6eZ0VHYLQCALC5uTFQDpZ4+yutS1vrbcPsBALlh62tfpFM1MzU3d3BZ6XuajkO0Phy7BQDQ3lJV6jNxUTUrR3tN6BzkpAIACrr/8RzVUU+narJSiX6HXQIAyCEgCXOpRtgy48+/DONkAACdWGXXxyxVpQ4cybXQ+gORyqlzsEMAALko1Wh1LPJvzAEjaaU2V09tkoAVdggAIBdBpGIo7E41etVUk1V6eVPvA6VvwO4AAOS3zhqrqdToJv5HA3ZTRC/F7gBgJN13aYYiU1DNSmvtQ3NZqck5qtKhau9RW8cpax/N63ELsh8AGGHKSh3EQnDzvMtKF+WyzhJzVMlKiWY/3r+8jn8orHBNXYZgRMl2ax+LnQXACCKpPiyA6xvFcHpu7i35XH8Ws7iorunPsUPia/Ol1y6G+7NlevoxItCYZQXAAiCs1zcrm2v1zUm5/05Sr9Ael6iydf3WwJhbkgW1XhJqrl+IDznxFAJNVyTk/Y7hSAGAIcV3T1oTKStdMWXtM3OLqqIbE0RtWe8ElS4qa6r69yzHFanCulDc8HiDb536mVDuCsAwWqlRQVU0ntftb7BUx/pRoioucKDNDa2s0wbhqad27TvUlinRUZk+T6z7F12MXQzAMFhESh3IgnNHN0WwH6Iqgp9ZdKgxrWv4cmW3bt368FLVvDLuKbSwVNX8gyIsezVGMg2wowEYvMtvY0n6GYNK5Rm9N7va58u/Eat3fSydKmcGQRvRPqGtkCr9r7LS/4mKUVHru1fI+2nMtMj1oIinrJ2CXQ3AgBCrJnGGVCisR7d0UbU+jH9mY1qz5RQR6LgZc9XaPaKBtNh711Qra3N9apPsqjppGNafxfTQIDVTIXat54fSUrH2S9XqK6aUOr5XawwAKGrtRXt7NtfovyHRMlXqTBbTDWm/VzLmVU50EyyvTi1VmRjAonIlW5+JVlpS2hb/3PbY+yC6YuDeAa89f477M4jpsjTLmv+/zb30BgAAORB3Pd3SM0216e68T9F5FTKlNLdzvgtV2H0pyQLu5Asf5s62turEkov9HtFf+PPIZ6pbsQOdBxUNQpVTP49Z0ao14MTs7O4BmUn0qwVgSGBL9B9NQQ4ydfdxR4K8i6zPzV1WUnom6znfDktV0z/iRwpmayGLmuhYyURIOaZo2Zs0eUR2/5Pmff3/moSjiuhnWifTZtv1SGDRvToxxYroLOxuAPr+Ba/tnxDg2BEZl7PWck39iS1TkytQQnT7vJiZ1Qm/86+87zWeqxkNRql7RVAnJiYeOYyi2urcOrr+k0qt3GLtzhms3aWNa9+Ukzvik2oBGJQLenSjpRS6xiKqek1Z6XuzR6B3WEqby7P0ichr/DnJKuumoLLlu6FdClFSFoK41v1YZ//+N7YVVEVLs3auSnogogAAgAGTMuak+XyP2qXzGBG11WlWX/01xD0P5v/W+kxi1DZfM7swpglzz72BFkHAxkh9nkIEd4RANJ0szHoLrFQABuX+uyCItzSV+0KmBaxSLES6OVDqmNzC3aZEtGrtk/m9faX+2jvOeSNVXuLuZyk1Dc8xzb3Rh4T7XD06AkhqRpNwlfP2U3AWasq5Mj8Ma9NKPRs7G4BBiSqZs7K499H6eRaMG6QlYA5xSRDqlICSc2vbRPe1uS9rdNudC+/oBdD8eZxYK3ViN9d02trdWPT+mMXVzyvoklLVNIU1/jcvwK4GYADIuR0Lyl8z15KLRUcmYCG9JO9rbZuZeXyK235NVExbnZ02HB2skbEkmS1Goo8nuMiN7+MXXTtOMebVlcjomCTrvki6U9tAXZ/OhwEADcxY+/iy1pe3z41sOu8LJqr68I5cYUpoVRe+/joW6zF+jX9WyNg2YiSR8TO7IkYUO0o4v2N3n+gTbR9OxpxatfZJ+Y5o5t5RnxbQQlBX4hwVgD7T3tJpis7PVSRq36UvatoRQOZLzhALnn02PkRaXCV5j3kFT3BNoonObWdFFnD1D+X78POW58rhw+YW7G4ABgB/8f/ePiUqPKvshdUj1mCCWLY8u/VW5Uc7eT9J1VwtrPKNLFIvyXyMotSz+HdWtSyCqOnfZn7wWfuoLBVjaRVvAIB+CWqrnMZ5i+djs9bu3sP3sITd/e0p56Sx/xYLrNM5VmU1d0jC59yXhXCflpF5fgC0s1r5bx/EP7uhxYNqC7/OedbaB2e5P07sU6L6KUUCZ2KMCgCDtVTHEs405/jL/9V+vQcWmIdkEIxN3epzylbfN1O7Z8mDpmWFk7mPRe5PrkY/Il4saEfwz/wv5Xdvl3EuSRVR/Pkf5Dpm8edz0f82XbbSrFPJ38WOBmAYrFUvIvKFlqj4oN5LWelv+bPOshNRRatYLL6WNQFexrqwQD0sw4Pkpqa5VAnVSixs17Y8foj3Zt2QVBrKn2mWP8M3JrV+nvxd3xv1qHDNWTzJfdZSB+fKW/NkPQAA+iiuC/a9a3N6w8iUEgvNZYFSz0j62VjT7Rb9RZ3rTbQ2v9jp/KNO8jegHstaugoAABkfBK6zE1u0ZlvWJtruzDFDsUEdOUPl3zmVLdG7OspU6MLlihUUnTM1N3cw7j4AoGsEQbBruUZXtrEWr4n+npzdstj+rSHZ/56sryldrkTMsnSUCooM5WuTeiXHMpgvBQDolbu/oq0YER0bd+fVQZFI+cl5Xlci9mzZvsuf+fqsBF1vIDPDf286n+uvN/Dv3M9/81b+7/9IFylJXRNrut4zFcn7AICeInXs7aqs5EoK3ohoNQ34U+o5ucSc6OyE15KCiHNZcB/Y+LMijk4Y5QEgrxtex7p8Uzm2QNoTAGA4rFTS3iWOuc9s4d3B13dkpHaKKI4VGYC31dqHu7PbuFt+L1ubb8NdAQAsSAKlr06qugpCkbyppRhHCh3yNC/xCf1RQb1q+3b7ONwVAMBCtlJjTU/CTll0mwSv2opyQwOSPK/rRp7MJ/XPSSoTu/sPwB0BACxcKzUyZbTBSlV5GjAXnSY6pdQzy4o+Lf/ibgDQgvHx8UfIF23c2kdgNYZZVP97TLRNn0TfS7XBVYCBwTJh7SMrtdpT5RgGRzFD406a0yMlgsuwKkMqqpquSJyLpdSxWJ3FSVnrFwRav0dydNlL+JRc0jyc/7dfJzaZUYS90PcvplLPkI5Lvo9nYr11px2QQI8egGH11HyQygts1do9sDoLTyynlHlTRZkT5SprcxqL5XWuu1colhW+ZgsUUNyM1e2L2+g6ry+rKH13lhtT9MwN9MOzoDsjE1tXY1WGh5LWe0qxQqDMgSySX+Lriyyg3+brt3y/JmUAYU9LeYnOxl3ogSUqvTKDsOHwZK4uQw19NbGSw/yQNOP1e4rV6Kt1uZfrN0v0IWlxyN7eN8QV53vxU77W9rEHQtW1XpQhk1p/q6JlcoU+QyrdcJe6gASXXAf48OZmnvqZ8pT7O550C+DLPaP3lsT9LCOoQbbv0KTWz5UjsfDMUn+FLcorfSmwNNve3KdmMWLF3ir3NrRs9VcDbT7vcoRrZv+KMa/dZO1Dcce67V5Uq08qa3MqL/j19frrAu3YNsmN4430Tjk/lVJFlAyCxYiMdRELU6a5lok+yW75SWUJ+Glzja8G29In63KKrcubXEWbou/L0QC/r/fVxRJ3qp9naIqO4yfor/imBMVvqLlHOr2Le7CdNxhWFSwGZmbcBNy9Ssa80kXGnbFhrmLh+j1/byb63JZwtQSa+Dv2dXHFZcKBCCaL+WtwpwZ/bvN+vkE/EiHs4AbfxteP5WmYt2EGAEP0XdhL0olYII/n/byc9/PV8xZm80yvHl5/9f0SfhqeXZovuiAUC2ZaE3AwyLOcGfsEvmEfCUU0qVlF5utucWnkST0xO/tErCwYZiar1T1KWj9fAqLiknsL8xcNFmapT4K51p1fKvqesy6JjhaxnCKMZllQsKvyqrDzustJK7oZ1vNmuICf4u8WYcaqgmGCLbinOyszTFj/NO/Xn4SBVHNf/jhAoYDPLc66JPpDOODQfLmkzJv9+eXrpOMW7tJCdmGMeQ3f2K/JDfZued5NMhMKsGvc+wGIKBgkUhJZqlafXFHqUPGy5Awx0HS5299EW11ApmeCyaIciqVcF9ZTiVx0nMUSd2exWqLWPopdm/eGET5XFZFbRCUwFWhzMm+cF2FFQb+QdB22Ll/Ce/cEiZKLN8QP8t+IW97rpPW6delTic6QI4GgZt4g1iXiAqPm6li7K2+GD0tOmcw1L5TIK7W8vIllQ2NFQY/Ecl/epy/k60i+zvIZJT9wgR+ibf4cc7YHgnmrtyzPrluW0tTaueJ8oYkP2Ek2BD9FT/GW6LoCZ0STvJF/KZF5fhIfMG3tblhVUBTpUsSC+WLXeEOZA/n6nHPHWSyl4sYLZi+sy3U+Kv4TV80jlq0XSqQRgVTKtdpTXMMDba7iDXp/R09rbVbI2c8Wa3fGyoKsSJ9UEU1JK/LpRZ9x0Wqi33WWu5x4bai74GEwlcWS6OMilJILimoeUExEpRVeGFTq4HxIopx6pZS9IdIIUveb1nuJaIpQBoqOcR4M0bmhJ0NrCp7JN16zOwI7rgLPB3bclFJvVbKFizsBuoYv+fwCb7pVXegOs4qt2s/CnQcSYJR8YRk5IpU+zjUWoZQyxTAP826fwN4Y2Z7MuNck6f1vfN3hI+7nhKWX+nBppFMxoVhiH4K+Ips9rMzoQEQV3SgRenR0Gg184xrpUPQiqXpzieLOJaef+bPFwM2tdylwRfaUvpb/3Rj+LbPSNfWQWnV2+VksD5ZzSgR1wHBZpVo/nzfs+UUrllyZGn+JUG2xOJFzyxLRKySdiMXsGHbHLw7Fja+kDus5gzrSqb1eF+5zjo+Q3MqKtbtg9cGCYmLWdbn/eo4vwEaJ7EuiPfJEF8XDdE92h18vxzzSRs13KboyPGN0Lni1o1Zt7NKzi39po1hK1RxWHiw6XEPZsB9ili/IvyXaOan187ByCwOx8Jyl54It5gtO1CQiLpeiG7twRr7NB3l+z3vjO86y9OlCCD6C0fqysXUph/cZvji3+y5Oz8aqDZcbzsK1n7QplI5AbhyFoqV8T//YpWbBd9Yj4t5iPcPldtbMAdLXUvI+cRcAqAtqrbakQmZba5dN/0aipFit/t4X8QL8A++D4obzv+dJcrqbCint1bqYZxmOktlRvfNORMMBKG6lLm/RjGFFUKs9DavUPY9AchxdyaGi4yTX0kXDFV3iR7us9s01pjsVS5kQ6cTSlVZKOTCLpbyeJKVrjcmvAPTMSo1/Iacl6CSRf6xQOlL04Hu77iNjJ2R2uMy98vmV14r77adB1tOGOrUo5b782bvhq8L2bK4B8Jfq6UOoPANgwMhY5YaobCVQc5dKad2orseUtY92s6fY3WbBeoekCbmZONI9negsEUtXsNDN2nAJEIU5mz/ynYZOq3dJR6d0ABaapepyChfv3HoWxL2dNS4R79CS/IgEWOqWpJvNE1br3ObLG6fibrTJ2r+gLCNwvcv9a9cPtt6OTZk3+u7oL8OuA2Bxi2o9fWrTgrKww6KEfSSQ4yxJRceJhSdiGWj6ediMpWCUO5wUebubV0V0fknPHeb+vpo7SKqCZMSxe31rd0GaEACgWVTDrj3h+OUhGLcslVd+dMr7pVWgbzp9ge9jubqD3pVS3XWXJJyH+ZPmVBbJt8hoFUkJEnGUM1LsCABAh6JqvhuJ9ld8r9Oyq5LSNO26i4dTGa/zluDPfG/TX/rjgx+6Vn/+cvmLEqyRMdHSRFrT5ZIG5NKyJHBDtMoHcP7ZpXPJ23zt94qGURGHSHNhGWGBuwwA6Le1OtbnWd/Z50z5aLezVBWd4KYFoKEvAGCYkflQbN293fePPD3szu/GRYw1XeE46LtyCuPm2N+J5E66rlVSmeOj3dINC3cFAAAAAAAAAAAAAAAAAAAAAADASPN/VwJDUKDlkrMAAAAASUVORK5CYII=) center/contain no-repeat}
-nav a{display:flex;align-items:center;gap:8px;white-space:nowrap}
-nav a b{display:inline-grid;place-items:center;flex:none;min-width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800}
-nav a.on b{background:var(--orange)}
-nav a.home{border-style:dashed;justify-content:center}
-@media (min-width:900px){
-nav a{white-space:normal;line-height:1.4;padding:7px 12px;border-color:transparent;background:transparent}
-nav a.on{border-color:var(--orange)}
-nav a.home{border-color:var(--blue);margin-bottom:6px}
-}
-#bar{background-size:200% 100%;animation:sh 3s linear infinite}
-@keyframes sh{to{background-position:-200% 0}}
+.cap{font-weight:700;margin:18px 0 6px;color:var(--ink);border-inline-start:4px solid var(--green);padding-inline-start:10px}
+.ex{border-inline-start:5px solid var(--green);padding:8px 14px;background:var(--paper);border-radius:8px;margin:10px 0}
+.win{background:#0f1424;border-radius:12px;margin:8px 0;overflow:hidden;direction:ltr;text-align:left}
+.wh{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 8px 5px 12px;background:rgba(255,255,255,.08);color:#9aa3c7;font:600 12px ui-monospace,Consolas,monospace}
+.wh button{font:700 12px Cairo,sans-serif;border:0;border-radius:8px;padding:3px 12px;background:var(--yel);color:#14235c;cursor:pointer}
+.win pre{margin:0;padding:12px 14px;color:#e6eaff;overflow-x:auto;font:13px/1.65 ui-monospace,Consolas,monospace;white-space:pre}
 .dig{margin-top:14px;border:2px solid var(--purple);border-radius:12px;background:var(--paper);overflow:hidden}
 .dig summary{cursor:pointer;padding:8px 14px;font-weight:800;color:var(--purple);list-style:none;display:flex;align-items:center;gap:8px}
 .dig summary::-webkit-details-marker{display:none}
 .dig summary:after{content:"＋";margin-inline-start:auto;transition:transform .3s}
 .dig[open] summary:after{transform:rotate(45deg)}
-.dig p{margin:0;padding:4px 16px 12px;animation:dg .5s}
-@keyframes dg{from{opacity:0;transform:translateY(-8px)}}
-.js .in .blk:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 8px 18px rgba(20,35,92,.15)}
-.st .ico{animation:gl 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*.45s)}
-@keyframes gl{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}}
-.flowline span{animation:fl 3s ease-in-out infinite}
-.flowline span:nth-of-type(2){animation-delay:.5s}
-.flowline span:nth-of-type(3){animation-delay:1s}
-@keyframes fl{50%{background:var(--yel);color:#14235c;transform:translateY(-3px)}}
-#top{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);background:var(--yel);color:#14235c;font-size:20px;cursor:pointer;z-index:8;opacity:0;pointer-events:none;transform:scale(.6);transition:.3s}
-#top.show{opacity:1;pointer-events:auto;transform:none}
-@media (prefers-reduced-motion:reduce){.st .ico,.flowline span,#bar,.dig p{animation:none}}
-.dig ul{margin:0;padding:4px 34px 12px 16px;animation:dg .5s}
+.dig>div,.dig>ul,.dig>p{padding:4px 16px 12px}
+.dig ul{margin:0;padding:4px 34px 12px 16px}
 .dig li{margin:4px 0}
 .dig li::marker{color:var(--purple)}
-@media (prefers-reduced-motion:reduce){.dig ul{animation:none}}
-.fg{margin:8px 16px 0}
-.fg svg{width:min(460px,100%);display:block;margin:0 auto;overflow:visible}
-.fi{animation:fi .6s both;animation-delay:var(--d)}
-@keyframes fi{from{opacity:0;transform:translateY(8px)}}
-.fa{stroke-dasharray:5 4;animation:da 1s linear infinite}
-@keyframes da{to{stroke-dashoffset:-9}}
-.sl{animation:sl 3s ease-in-out infinite}
-@keyframes sl{0%,10%{transform:translate(0,0)}50%{transform:translate(64px,0)}90%,100%{transform:translate(64px,64px)}}
-@media (prefers-reduced-motion:reduce){.fi,.fa,.sl{animation:none}}
+.dig svg{width:min(460px,100%);display:block;margin:6px auto}
+.qz{margin-top:14px;border:2px solid var(--green);border-radius:12px;padding:10px 14px;background:var(--paper)}
+.qz b{color:var(--ink)}
+.qz button{font:inherit;display:block;width:100%;text-align:start;margin:6px 0;padding:4px 12px;border-radius:8px;border:2px solid var(--line);background:var(--paper);color:var(--txt);cursor:pointer}
+.qz button.g{background:#d7f5e0;border-color:var(--green);color:#14532d}
+.qz button.x{background:#fde1e7;border-color:var(--red);color:#7f1d1d}
+.qf{font-weight:800;color:var(--ink)}
 code{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Consolas,monospace;font-size:.85em;background:color-mix(in srgb,var(--blue) 12%,var(--paper));border-radius:6px;padding:1px 6px;word-break:break-word}
+.pgl{margin:8px auto 0;max-width:420px;height:10px;border-radius:9px;background:var(--line);overflow:hidden}
+.pgl i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));transition:width .5s}
+.lg{position:absolute;top:12px;left:12px;z-index:10;border:2px solid var(--blue);background:var(--yel);color:#14235c;border-radius:99px;padding:2px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+html[dir=ltr] .lg{left:auto;right:12px}
+html[dir=ltr] .page{padding:22px 20px 22px 44px}
+html[dir=ltr] .page:before{right:auto;left:10px}
+html[dir=ltr] .blk ul,html[dir=ltr] .blk ol{padding:0 0 0 18px}
+html[dir=ltr] .dig ul{padding:4px 16px 12px 34px}
+html[dir=ltr] #top{left:auto;right:16px}
+#art svg{width:min(760px,100%);height:auto;display:block;margin:0 auto 8px;filter:drop-shadow(0 12px 24px rgba(20,35,92,.16))}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:4px;z-index:9;background:linear-gradient(90deg,var(--blue),var(--yel));transform-origin:right;transform:scaleX(0);background-size:200% 100%;animation:sh 3s linear infinite}
+html[dir=ltr] #bar{transform-origin:left}
+@keyframes sh{to{background-position:-200% 0}}
+#top{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);background:var(--yel);color:#14235c;font-size:20px;cursor:pointer;z-index:8;opacity:0;pointer-events:none;transform:scale(.6);transition:.3s}
+#top.show{opacity:1;pointer-events:auto;transform:none}
+.js .page{opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .page.in{opacity:1;transform:none}
+.js .blk{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .5s,transform .5s;transition-delay:calc(var(--k)*90ms + 250ms)}
+.js .in .blk{opacity:1;transform:none}
+.js .in .blk:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 8px 18px rgba(20,35,92,.15)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .page,.js .blk,#bar{animation:none;transition:none;opacity:1;transform:none}}
+@media (min-width:900px){
+  html{scroll-padding-top:16px}
+  body{padding-right:250px}
+  nav{position:fixed;top:0;right:0;bottom:0;width:250px;flex-direction:column;align-items:stretch;overflow-y:auto;overflow-x:hidden;gap:6px;padding:20px 14px;background:var(--paper);border-left:2px solid var(--line);z-index:7}
+  nav:before{content:attr(data-t);font-weight:800;color:var(--ink);font-size:18px;padding:0 4px 6px}
+  nav a{border-radius:10px;padding:7px 12px;border-color:transparent;background:transparent;white-space:normal;line-height:1.4}
+  nav a.on{border-color:var(--orange);background:var(--paper)}
+  nav a:hover{transform:translateX(-4px)}
+  html[dir=ltr] body{padding:0 0 0 250px}
+  html[dir=ltr] nav{right:auto;left:0;border-left:0;border-right:2px solid var(--line)}
+  html[dir=ltr] nav a:hover{transform:translateX(4px)}
+}
 </style>
 </head>
 <body>
-<header><div id="art"></div><h1>تعلم Laravel خطوة بخطوة</h1><p class="flowline"><span>🛣️ Route</span><i>◀</i><span>🎮 Controller</span><i>◀</i><span>🖼️ View</span></p></header>
-<nav id="nav" aria-label="المواضيع"><a href="index.html" title="Accueil"><b>⌂</b><span>الرئيسية</span></a></nav>
+<button class="lg" id="lg"></button>
+<header>
+  <div id="art"></div>
+  <h1 id="h1"></h1>
+  <p id="sb" style="font-weight:600"></p>
+  <div class="pgl"><i id="pb"></i></div>
+  <p id="pt" style="font-size:14px"></p>
+</header>
+<nav id="nav"></nav>
 <main id="main"></main>
-<footer>Mezni Dhiaa | Smart Formation — احفظ المنشور وشاركه مع من يهمه الأمر</footer>
+<footer id="ft"></footer>
+<button id="top" aria-label="Top">↑</button>
+<div id="bar"></div>
 <script>
-const B='blue',G='green',O='orange',P='purple',R='red';
-const D=[
-["ما هو Laravel؟","Laravel Framework — إطار عمل PHP للويب",[
-["تعريف Laravel",B,["إطار عمل مفتوح المصدر مبني على PHP لبناء مواقع وتطبيقات ويب منظمة وسريعة","يعتمد نمط MVC ويوفر أدوات جاهزة: توجيه، قواعد بيانات، مصادقة، طوابير"]],
-["لماذا يحبه المطورون؟",G,["صياغة واضحة ومقروءة","توثيق ممتاز ومجتمع كبير","أداة Artisan توفر الوقت","منظومة متكاملة: Livewire وInertia وSanctum"]],
-["ماذا تبني به؟",O,["مواقع ومتاجر إلكترونية","لوحات تحكم وأنظمة إدارة","واجهات API للتطبيقات","أنظمة حجز وخدمات SaaS"]],
-["كيف يخدم الطلب؟",P,["الطلب (Request) يصل","المسار (Route) يحدد الوجهة","المتحكم (Controller) ينفذ المنطق","النموذج (Model) يجلب البيانات","العرض (View) ينتج الصفحة"],1]],
-"Laravel لا يغني عن PHP جيد: كلما أتقنت الأساسيات فهمت الإطار أسرع.","يمنحك Laravel هيكلًا جاهزًا لتركز على فكرة مشروعك لا على التفاصيل المتكررة."],
-["التثبيت وبنية المشروع","من الصفر إلى أول صفحة",[
-["المتطلبات",B,["PHP وComposer (مدير الحزم)","قاعدة بيانات مثل MySQL أو SQLite","بديل سهل: Laravel Herd أو Sail"]],
-["خطوات التثبيت",G,["أنشئ المشروع: <code>composer create-project laravel/laravel app</code>","ادخل المجلد: <code>cd app</code>","شغّل الخادم: <code>php artisan serve</code>","افتح المتصفح: <code>localhost:8000</code>"],1],
-["أهم المجلدات",P,["<code>app/</code> النماذج والمتحكمات","<code>routes/</code> ملفات المسارات","<code>resources/views/</code> قوالب Blade","<code>database/</code> الهجرات والبيانات التجريبية"]],
-["ملف .env",O,["يحوي إعدادات قاعدة البيانات وكلمات السر","لا ترفعه إلى GitHub أبدًا"]]],
-"استخدم Git من اليوم الأول ليسهل الرجوع لأي نسخة.","بعد التثبيت تظهر صفحة ترحيب جاهزة تؤكد أن كل شيء يعمل."],
-["المسارات والمتحكمات","Routing & Controllers",[
-["المسارات (Routes)",B,["ملف <code>routes/web.php</code> يربط الرابط بالكود الذي يعالجه","<code>Route::get('/about', fn() => view('about'));</code>"]],
-["المتحكمات",G,["تجمع منطق الطلبات في مكان واحد","<code>php artisan make:controller PostController</code>","<code>Route::get('/posts', [PostController::class, 'index']);</code>"]],
-["مسارات الموارد",O,["<code>Route::resource('posts', PostController::class);</code> تنشئ مسارات CRUD بسطر واحد","الدوال: index , create , store , show , edit , update , destroy"]],
-["التحقق من البيانات",R,["<code>$request->validate(['title' => 'required|max:100']);</code>","عند الفشل يعود المستخدم للنموذج مع رسائل الأخطاء تلقائيًا"]]],
-"اجعل المتحكم رفيعًا: انقل المنطق المعقد إلى كلاسات وخدمات مستقلة.","المسار يحدد الوجهة، والمتحكم ينفذ، والتحقق يحمي بياناتك."],
-["قوالب Blade","العرض (Views)",[
-["ما هو Blade؟",B,["محرك قوالب يحوّل ملفات <code>.blade.php</code> إلى HTML","أنظف من PHP الخام ويهرّب المخرجات تلقائيًا"]],
-["أهم التعليمات",G,["<code>{{ $name }}</code> عرض متغير بأمان","<code>@if</code> و<code>@foreach</code> للشروط والحلقات","<code>@csrf</code> داخل كل نموذج POST","<code>@auth</code> لمحتوى المسجّلين فقط"]],
-["التخطيطات",O,["الملف الرئيسي فيه الهيكل و<code>@yield('content')</code>","الصفحة الفرعية تبدأ بـ <code>@extends('layouts.app')</code>","ثم تضع محتواها في <code>@section('content')</code>"]],
-["المكوّنات",P,["مكوّنات قابلة لإعادة الاستخدام مثل &lt;x-button /&gt;","<code>php artisan make:component Alert</code>"]]],
-"لا تستخدم <code>{!! !!}</code> إلا مع محتوى موثوق، فهي تعطّل الحماية من XSS.","Blade يجعل الواجهة نظيفة وقابلة للصيانة."],
-["Eloquent وقواعد البيانات","Migrations • Models • Relations",[
-["الهجرات (Migrations)",B,["نسخ إصدارات لقاعدة البيانات داخل الكود","<code>php artisan make:model Post -mcr</code> تنشئ النموذج والهجرة والمتحكم","<code>php artisan migrate</code> تنفذ الهجرات"]],
-["نموذج Eloquent",G,["<code>Post::all()</code> و<code>Post::find(1)</code> و<code>Post::create([...])</code>","حدد <code>$fillable</code> لحماية الحقول من التعبئة الجماعية"]],
-["العلاقات",P,["<code>hasMany</code>: مستخدم لديه عدة مقالات","<code>belongsTo</code>: المقال ينتمي لمستخدم","<code>belongsToMany</code>: كثير لكثير عبر جدول وسيط"]],
-["الاستعلامات",O,["<code>Post::where('published', true)->latest()->paginate(10)</code>","Seeders وFactories لتوليد بيانات تجريبية"]],
-["مشكلة N+1",R,["جلب العلاقة داخل حلقة يرسل استعلامًا لكل صف فيبطئ التطبيق","الحل: <code>Post::with('user')->get()</code>"]]],
-"لا تعدّل جدولًا في الإنتاج مباشرة؛ أنشئ هجرة جديدة دائمًا.","Eloquent يحوّل الجداول إلى كائنات تتعامل معها بسهولة."],
-["المصادقة والأمان","Auth • Middleware • Security",[
-["المصادقة الجاهزة",B,["Starter Kits (مثل Breeze) تنشئ التسجيل والدخول واستعادة كلمة المرور","لا تكتب نظام مصادقة من الصفر"]],
-["Middleware",G,["طبقة تفحص الطلب قبل وصوله للمتحكم","<code>->middleware('auth')</code> على أي مسار","<code>php artisan make:middleware IsAdmin</code>"]],
-["الحماية المدمجة",O,["CSRF عبر <code>@csrf</code>","XSS بتهريب المخرجات في Blade","SQL Injection بالاستعلامات المحضّرة","كلمات المرور مُجزّأة بـ Hash"]],
-["الصلاحيات",P,["Gates وPolicies تحدد من يفعل ماذا","مثال: يعدّل المستخدم مقالاته فقط"]],
-["أخطاء أمنية شائعة",R,["ترك <code>APP_DEBUG=true</code> في الإنتاج","فتح التعبئة الجماعية لكل الحقول","الثقة بمدخلات المستخدم دون تحقق"]]],
-"الأمان عادة تبدأ من أول سطر لا ميزة تضاف في النهاية.","استخدم أدوات Laravel المدمجة ولا تخترع حماية بنفسك."],
-["بناء API","REST API مع Sanctum",[
-["مسارات API",B,["ملف <code>routes/api.php</code> لمسارات تعيد JSON","في الإصدارات الحديثة: <code>php artisan install:api</code>"]],
-["API Resources",G,["<code>php artisan make:resource PostResource</code>","تتحكم بالحقول التي تظهر للعميل"]],
-["المصادقة بالتوكن",O,["Sanctum يصدر رموز وصول للتطبيقات","ترسل الرمز في ترويسة <code>Authorization: Bearer</code>"]],
-["أفضل الممارسات",P,["رموز HTTP الصحيحة: 200 و201 و404 و422","قسّم النتائج بـ paginate","أضف إصدارًا للمسار مثل <code>/api/v1</code>"]]],
-"لا تُرجع حقولًا حساسة مثل كلمة المرور في JSON.","API جيد التصميم يخدم الموقع والتطبيق معًا."],
-["الاختبار والنشر","Testing & Deployment",[
-["الاختبار",B,["يمنع كسر ميزة قديمة عند إضافة جديدة","Pest وPHPUnit جاهزان: <code>php artisan test</code>","Feature لمسار كامل، وUnit لدالة أو كلاس"]],
-["خطوات النشر",G,["جهّز البيئة: <code>APP_DEBUG=false</code>","ثبّت الحزم: <code>composer install --no-dev</code>","شغّل الهجرات: <code>php artisan migrate --force</code>","خزّن الإعدادات: <code>php artisan optimize</code>"],1],
-["خيارات الاستضافة",O,["VPS مع Nginx","Laravel Forge لإدارة الخوادم","Laravel Cloud أو منصات PaaS"]]],
-"لا تنشر أبدًا وAPP_DEBUG=true، فهي تكشف تفاصيل حساسة.","اختبر ثم انشر بثقة."],
-["خريطة طريق تعلم Laravel","من المبتدئ إلى مشروع احترافي",[
-["1. أساسيات PHP",B,["الدوال والمصفوفات وOOP , Namespaces","المدة: 3 - 4 أسابيع"]],
-["2. SQL , HTML , CSS",B,["استعلامات أساسية وتصميم بسيط","المدة: 2 - 3 أسابيع"]],
-["3. أساسيات Laravel",G,["Routes وControllers ,Blade","المدة: 3 - 4 أسابيع"]],
-["4. Eloquent",G,["Migrations والعلاقات والاستعلامات","المدة: 2 - 3 أسابيع"]],
-["5. المصادقة والصلاحيات",P,["Breeze , Middleware , Policies","المدة: 2 أسابيع"]],
-["6. API , Sanctum",P,["JSON , Resources والتوكن","المدة: 2 أسابيع"]],
-["7. الاختبار والطوابير",O,["Pest , Queues , Events","المدة: 2 - 3 أسابيع"]],
-["8. مشاريع حقيقية",O,["مدونة، متجر مصغر، نظام حجز، إدارة مهام"]],
-["9. انشر وابنِ معرض أعمالك",R,["GitHub , README واستضافة تجريبية"]]],
-"المدد تقريبية وتختلف حسب وقتك ومستواك.","ابدأ بمشروع صغير ثم طوّره كل أسبوع."]
-];
-document.documentElement.classList.add('js');
-const IC=[[/صور|الصور/,'🖼️'],[/بيانات|Dataset|Kaggle|UCI|Hugging/,'🗄️'],[/شبكة|شبكات|عصب|Neural/,'🕸️'],[/نتيج|إخراج|Output|تقرير/,'📊'],[/سؤال|يقرأ/,'❓'],[/كلمات|كلمة|نص/,'📝'],[/يبحث|بحث|اكتشاف/,'🔍'],[/تدريب|درّب|درب|Train/,'🏋️'],[/خطأ/,'🎯'],[/تحسين|حسّن|طور|طوّر/,'⚙️'],[/إعادة|تكرر|كرر|راجع/,'🔄'],[/تخطيط|فكرة|أفكار|هدف|الهدف/,'💡'],[/أدوات|Python|Pandas|NumPy/,'🛠️'],[/نشر|انشر|GitHub|Streamlit/,'🚀'],[/وجه|الوجوه/,'🙂'],[/سيارة|السيارات/,'🚗'],[/طبي|الأشعة|تشخيص|الأمراض|مرض/,'🩺'],[/صوت/,'🎙️'],[/ترجمة/,'🌐'],[/روبوت/,'🤖'],[/برمج|كود/,'💻'],[/تقييم|قيّم|اختبر|Accuracy|اختبار/,'✅'],[/تنبؤ|توقع|التوقع/,'📈'],[/مشاعر/,'❤️'],[/وظيف|Portfolio/,'💼'],[/بريد/,'✉️'],[/تحليل|تحلل|يحلل/,'🔬'],[/توصية|منتجات|Netflix/,'🛒'],[/ذكاء|Claude|ChatGPT|Gemini|AI/,'🧠'],[/الجبر|إحصاء|رياضيات/,'📐'],[/Prompt|الدور|تصرف/,'💬'],[/تنسيق|جدول|نقاط/,'📋']];
-IC.unshift([/Route|مسار/i,'🛣️'],[/Controller|متحكم/i,'🎮'],[/Blade|View|قالب/i,'🖼️'],[/Eloquent|Migration|Model|نموذج|جدول|قاعدة/i,'🗄️'],[/artisan|Composer/i,'⌨️'],[/CSRF|أمان|مصادقة|Auth|Sanctum|Breeze/i,'🔐'],[/API/,'🔌'],[/اختبار|Test|Pest/i,'✅'],[/نشر|Deploy/i,'🚀']);
-const ic=t=>{for(const[r,e]of IC)if(r.test(t))return e;return null};
-const HE=['🐘','🧰','🛣️','🖼️','🗄️','🔐','🔌','🚀','🗺️'];
-const NL=['ما هو Laravel؟','التثبيت والبنية','المسارات والمتحكمات','قوالب Blade','Eloquent وقواعد البيانات','المصادقة والأمان','بناء API','الاختبار والنشر','خريطة الطريق'];
-const DG=[
-["الإطار يفرض هيكلًا ويستدعي كودك، أما المكتبة فتستدعيها أنت متى شئت.","المكونات تعمل معًا عبر حاوية الخدمات (Service Container) التي تدير الاعتمادات تلقائيًا.","اختره حين تحتاج مشروعًا متكاملًا بسرعة، وفكّر في أدوات أخف للمهام الصغيرة جدًا."],
-["<code>public/index.php</code> نقطة دخول كل طلب؛ اجعل جذر الخادم يشير إلى مجلد public فقط.","<code>composer.json</code> يسرد الحزم و<code>composer install</code> يعيد تثبيتها.","راجع متطلبات الإصدار الحالي في التوثيق الرسمي قبل التثبيت."],
-["<code>php artisan route:list</code> تعرض كل المسارات وهي أسرع وسيلة لتشخيص خطأ 404.","Form Request (<code>make:request</code>) ينقل قواعد التحقق خارج المتحكم.","Route Model Binding يجلب النموذج تلقائيًا: اكتب <code>show(Post $post)</code>."],
-["<code>{{ }}</code> تمرّر القيمة عبر htmlspecialchars لمنع XSS، أما <code>{!! !!}</code> فتطبع HTML كما هو.","استخدم <code>@include</code> للأجزاء الصغيرة و<code>@stack</code> لإضافة سكربتات من الصفحات الفرعية.","للواجهات التفاعلية انظر إلى Livewire، ولتطبيقات Vue أو React انظر إلى Inertia."],
-["<code>php artisan migrate:rollback</code> تتراجع عن آخر دفعة، فجرّبها على بيانات تجريبية.","الحذف الناعم (SoftDeletes) يخفي السجل بدل حذفه نهائيًا فيمكن استرجاعه.","أضف فهارس للأعمدة كثيرة البحث وراقب الاستعلامات البطيئة بـ Debugbar أو Telescope."],
-["كلمات المرور تُخزَّن مُجزّأة (Hash) ولا تُسترجع، بل يُعاد تعيينها.","Rate Limiting يحد محاولات الدخول لصد التخمين الآلي.","حدّث الحزم بانتظام بعد قراءة سجل التغييرات، وفعّل HTTPS في الإنتاج."],
-["الرمز 422 يعني فشل التحقق، وLaravel يعيده مع تفاصيل الأخطاء لطلبات JSON.","حدد سقفًا للطلبات بـ throttle لحماية الخادم.","وثّق واجهتك بـ OpenAPI أو أداة مثل Scribe ليسهل استخدامها."],
-["اربط الاختبارات بـ CI مثل GitHub Actions لتعمل عند كل Push.","الطوابير (Queues) تؤجل المهام الثقيلة كالبريد؛ تحتاج عاملًا دائمًا عبر Supervisor.","المهام المجدولة تعمل بسطر Cron واحد يستدعي <code>schedule:run</code> كل دقيقة."],
-["مشروع أول مقترح: مدونة بمصادقة وتعليقات وترقيم صفحات.","بعد الأساسيات اختر مسارًا: Livewire، أو Inertia مع Vue/React، أو API لتطبيقات الجوال.","تابع التوثيق الرسمي ودروس Laracasts (بعضها مجاني)."]];
+/* ==== helpers ==== */
+const R=String.raw;
+const $=i=>document.getElementById(i);
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+let L=0; try{L=localStorage.getItem('lrv')=='fr'?1:0}catch(e){}
+let done={}; try{done=JSON.parse(localStorage.getItem('lrvd')||'{}')}catch(e){}
+const x=s=>{const i=s.indexOf('§');return i<0?s:(L?s.slice(i+1):s.slice(0,i))};
+const codes=[];
+const reg=c=>{codes.push(c);return codes.length-1};
+const win=(n,c,i)=>`<div class="win"><div class="wh"><span>${n}</span><button type="button" data-cp="${i}">${L?'Copier':'نسخ'}</button></div><pre>${esc(c)}</pre></div>`;
 const CL=['--blue','--green','--orange','--purple','--red'];
-const TX=(x,y,t,z=12)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${z}" font-weight="600" fill="var(--ink)">${t}</text>`;
-const SV=(b,h=140)=>`<svg viewBox="0 0 420 ${h}" role="img"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>${b}</svg>`;
-function flow(it,loop,noar){const n=it.length,g=420/n;let o='';
- it.forEach(([e,l],i)=>{const x=420-g*(i+.5),c=`var(${CL[i%5]})`;
-  o+=`<g class="fi" style="--d:${i*.25}s"><rect x="${x-30}" y="18" width="60" height="60" rx="14" fill="${c}" fill-opacity=".15" stroke="${c}" stroke-width="2"/>${TX(x,58,e,28)}${TX(x,98,l,11)}</g>`;
-  if(i<n-1&&!noar)o+=`<path class="fa" d="M${x-36} 48H${x-g+36}" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah)"/>`});
- if(loop)o+=`<path class="fa" d="M${g*.5} 108v14H${420-g*.5}V108" fill="none" stroke="var(--orange)" stroke-width="2" marker-end="url(#ah)"/>`;
- return SV(o)}
-function net(L,lb){let o='',X=L.map((_,i)=>360-i*100),Y=(i,j)=>65+(j-(L[i]-1)/2)*30;
- for(let i=0;i<L.length-1;i++)for(let a=0;a<L[i];a++)for(let b=0;b<L[i+1];b++)o+=`<line x1="${X[i]}" y1="${Y(i,a)}" x2="${X[i+1]}" y2="${Y(i+1,b)}" stroke="var(--blue)" stroke-opacity=".3"/>`;
- L.forEach((k,i)=>{for(let j=0;j<k;j++)o+=`<circle class="nd" style="animation-delay:${(i*.3+j*.15).toFixed(2)}s" cx="${X[i]}" cy="${Y(i,j)}" r="9" fill="var(${CL[i%5]})"/>`;o+=TX(X[i],135,lb[i],11)});
- return SV(o)}
-function grid(){let o='';
- for(let i=0;i<7;i++)for(let j=0;j<7;j++)o+=`<rect x="${230+j*16}" y="${14+i*16}" width="16" height="16" fill="var(--blue)" fill-opacity="${j>=3?.75:.12}" stroke="var(--paper)"/>`;
- o+=`<rect class="sl" x="230" y="14" width="48" height="48" fill="none" stroke="var(--orange)" stroke-width="3"/>`;
- for(let i=0;i<5;i++)for(let j=0;j<5;j++)o+=`<rect x="${50+j*16}" y="${30+i*16}" width="16" height="16" fill="var(--orange)" fill-opacity="${j==2?.8:.12}" stroke="var(--paper)"/>`;
- o+=`<path class="fa" d="M215 70H150" stroke="var(--ink)" stroke-width="2" marker-end="url(#ah)"/>`+TX(286,136,'الصورة + المرشح',11)+TX(90,136,'خريطة الملامح (حافة)',11);
- return SV(o)}
-function curve(){return SV(`<path d="M40 15V115H390" fill="none" stroke="var(--ink)"/><path d="M40 30Q120 100 380 110" fill="none" stroke="var(--blue)" stroke-width="3"/><path d="M40 32Q120 92 200 100T380 40" fill="none" stroke="var(--red)" stroke-width="3"/><circle class="nd" cx="200" cy="100" r="6" fill="var(--orange)"/>${TX(200,132,'بداية الإفراط في التعلم',11)}${TX(330,105,'تدريب',12)}${TX(330,30,'اختبار',12)}${TX(215,12,'الخسارة',11)}`)}
-function split(){return SV(`<rect x="108" y="30" width="272" height="40" rx="8" fill="var(--blue)"/><rect x="40" y="30" width="68" height="40" rx="8" fill="var(--orange)"/>${TX(244,56,'تدريب 80%',14).replace('var(--ink)','#fff')}${TX(74,56,'اختبار 20%',12).replace('var(--ink)','#fff')}${TX(210,100,'قيّم دائمًا على بيانات لم يرها النموذج',12)}`,120)}
-const IM=[
-flow([['🌐','طلب'],['🛣️','Route'],['🎮','Controller'],['🗄️','Model'],['🖼️','View']]),
-flow([['📦','Composer'],['🏗️','create-project'],['⚙️','.env'],['🚀','artisan serve']]),
-flow([['🛣️','Route'],['🛡️','Validation'],['🎮','Controller'],['↩️','Response']]),
-flow([['📄','ملف Blade'],['⚙️','Compile'],['🌐','HTML'],['👤','المتصفح']]),
-flow([['📐','Migration'],['🗄️','جدول'],['🧩','Model'],['🔗','علاقات']]),
-flow([['🌐','طلب'],['🔐','auth'],['🛂','Policy'],['🎮','Controller']]),
-flow([['📱','تطبيق'],['🔑','Token'],['🛣️','api.php'],['🧾','JSON']]),
-flow([['✅','اختبار'],['🧪','CI'],['⚙️','optimize'],['🚀','إنتاج']]),
-flow([['🐘','PHP'],['🛣️','Laravel'],['🗄️','Eloquent'],['🔐','Auth'],['🚀','نشر']])];
-D.forEach((d,n)=>{
- const [t,s,bl,note,end]=d, id='p'+(n+1);
- nav.insertAdjacentHTML('beforeend',`<a href="#${id}" title="${t}"><b>${n+1}</b><span>${NL[n]}</span></a>`);
- const blocks=bl.map(([h,c,it,ol],k)=>{let body;
-  if(ol){body=`<div class="flow">${it.map((x,j)=>{const[a,...r]=x.split(/[:：]/);const d2=r.join(':').trim();return `<div class="st" style="--i:${j}"><span class="ico">${ic(x)||'⭐'}</span><span class="num">${j+1}</span><b>${d2?a:x}</b>${d2?`<small>${d2}</small>`:''}</div>`}).join('<i class="ar">◀</i>')}</div>`}
-  else body=`<ul class="il">${it.map(x=>`<li><span class="ib">${ic(x)||'✦'}</span><span>${x}</span></li>`).join('')}</ul>`;
-  const hi=ic(h);return `<section class="blk" style="--c:var(--${c});--k:${k}"><h3>${hi?hi+' ':''}${h}</h3>${body}</section>`}).join('');
- main.insertAdjacentHTML('beforeend',`<article class="page" id="${id}"><span class="hero" aria-hidden="true">${HE[n]}</span><div class="sig" role="img" aria-label="التوقيع"></div><h2>${t}</h2><p class="sub">${s}</p><div class="grid">${blocks}</div><div class="note">💡 ${note}</div><div class="end"><b>الخلاصة: </b>${end}</div><details class="dig"><summary>🔎 تعمّق أكثر</summary><figure class="fg">${IM[n]}</figure><ul>${DG[n].map(x=>`<li>${x}</li>`).join('')}</ul></details></article>`);
-});
-const pages=document.querySelectorAll('.page');
-if('IntersectionObserver' in window){const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}}),{threshold:.08});pages.forEach(p=>o.observe(p))}else pages.forEach(p=>p.classList.add('in'));
-const tb=document.createElement('button');tb.id='top';tb.textContent='↑';tb.setAttribute('aria-label','للأعلى');tb.onclick=()=>scrollTo({top:0});document.body.append(tb);addEventListener('scroll',()=>tb.classList.toggle('show',scrollY>600),{passive:true});
-const bar=document.createElement('div');bar.id='bar';document.body.prepend(bar);
-addEventListener('scroll',()=>{const h=document.documentElement;bar.style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight||1)})`},{passive:true});
 
-(()=>{const L=[[40,[35,75,115],'--purple'],[130,[20,55,95,130],'--blue'],[220,[20,55,95,130],'--green'],[310,[55,95],'--orange']];let l='',c='';
-L.forEach(([x,ys,col],i)=>{ys.forEach((y,j)=>{c+=`<circle class="nd" style="animation-delay:${(i*.3+j*.15).toFixed(2)}s" cx="${x}" cy="${y}" r="9" fill="var(${col})"/>`;if(i<3)L[i+1][1].forEach(y2=>{l+=`<line x1="${x}" y1="${y}" x2="${L[i+1][0]}" y2="${y2}"/>`})})});
-document.getElementById('art').innerHTML=`<svg viewBox="0 0 760 250" role="img" aria-label="Laravel 13 — إطار PHP لتطوير الويب" direction="ltr">
-<defs><linearGradient id="laravel-bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#182142"/><stop offset="1" stop-color="#263b74"/></linearGradient><linearGradient id="laravel-red" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff756b"/><stop offset="1" stop-color="#f9322c"/></linearGradient></defs>
-<rect x="8" y="8" width="744" height="234" rx="30" fill="url(#laravel-bg)"/>
-<circle cx="635" cy="125" r="88" fill="#fff" fill-opacity=".07"/><circle cx="635" cy="125" r="69" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
-<g transform="translate(577 67)" fill="none" stroke="url(#laravel-red)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12v92l41 24 40-24V12L51 36 10 12Z"/><path d="m10 58 41 24 40-24M51 36v46m0 46V82l40-24"/><path d="m91 12 40 24v47l-40 24"/></g>
-<text x="62" y="105" fill="#fff" font-family="Arial,sans-serif" font-size="28" font-weight="700" letter-spacing="3">THE PHP FRAMEWORK</text>
+/* ==== SVG flow ==== */
+const flow=items=>{
+  const n=items.length, g=420/n;
+  let o=`<svg viewBox="0 0 420 128" role="img" aria-hidden="true">`;
+  items.forEach(([e,l],i)=>{
+    const px=420-g*(i+.5), c=`var(${CL[i%5]})`;
+    o+=`<rect x="${px-30}" y="14" width="60" height="60" rx="14" fill="${c}" fill-opacity=".15" stroke="${c}" stroke-width="2"/>`;
+    o+=`<text x="${px}" y="54" text-anchor="middle" font-size="28">${e}</text>`;
+    o+=`<text x="${px}" y="96" text-anchor="middle" font-size="11" font-weight="600" fill="var(--ink)">${l}</text>`;
+    if(i<n-1){
+      const x2=px-g+36;
+      o+=`<line x1="${px-36}" y1="44" x2="${x2}" y2="44" stroke="var(--ink)" stroke-width="2"/>`;
+      o+=`<polygon points="${x2},40 ${x2+6},44 ${x2},48" fill="var(--ink)"/>`;
+    }
+  });
+  return o+'</svg>';
+};
+const SVGS=[
+  flow([['🌐','Req'],['🛣️','Route'],['🎮','Ctrl'],['🗄️','Model'],['🖼️','View']]),
+  flow([['📦','Composer'],['🏗️','create'],['⚙️','.env'],['🚀','serve']]),
+  flow([['🛣️','Route'],['🛡️','Valid'],['🎮','Ctrl'],['↩️','Resp']]),
+  flow([['📄','Blade'],['⚙️','Compile'],['🌐','HTML'],['👤','Browser']]),
+  flow([['📐','Migration'],['🗄️','Table'],['🧩','Model'],['🔗','Rel']]),
+  flow([['🧩','Model'],['🔍','Query'],['🔗','Relations'],['📊','Result']]),
+  flow([['🌐','Req'],['🔐','auth'],['🛂','Policy'],['🎮','Ctrl']]),
+  flow([['📱','App'],['🔑','Token'],['🛣️','api.php'],['🧾','JSON']]),
+  flow([['✅','Test'],['🧪','CI'],['⚙️','optimize'],['🚀','Prod']]),
+  flow([['🐘','PHP'],['🛣️','Laravel'],['🗄️','Eloquent'],['🔐','Auth'],['🚀','Deploy']])
+];
+
+/* ==== hero ==== */
+const HERO=`<svg viewBox="0 0 760 250" role="img" aria-label="Laravel" direction="ltr">
+<defs>
+  <linearGradient id="lbg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#182142"/><stop offset="1" stop-color="#263b74"/></linearGradient>
+  <linearGradient id="lred" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff756b"/><stop offset="1" stop-color="#f9322c"/></linearGradient>
+</defs>
+<rect x="8" y="8" width="744" height="234" rx="30" fill="url(#lbg)"/>
+<circle cx="635" cy="125" r="88" fill="#fff" fill-opacity=".07"/>
+<circle cx="635" cy="125" r="69" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
+<g transform="translate(577 67)" fill="none" stroke="url(#lred)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10 12v92l41 24 40-24V12L51 36 10 12Z"/>
+  <path d="m10 58 41 24 40-24M51 36v46m0 46V82l40-24"/>
+  <path d="m91 12 40 24v47l-40 24"/>
+</g>
+<text x="62" y="105" fill="#fff" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="3">THE PHP FRAMEWORK</text>
 <text x="60" y="181" fill="#fff" font-family="Arial,sans-serif" font-size="72" font-weight="800">Laravel <tspan fill="#ff5a52">13</tspan></text>
-<path d="M62 204h280" stroke="#ff5a52" stroke-width="5" stroke-linecap="round"/><circle cx="360" cy="204" r="5" fill="#ff5a52"/>
+<path d="M62 204h280" stroke="#ff5a52" stroke-width="5" stroke-linecap="round"/>
+<circle cx="360" cy="204" r="5" fill="#ff5a52"/>
 </svg>`;
-const links=[...nav.querySelectorAll('a')];const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('on',on);if(on)a.scrollIntoView({block:'nearest',inline:'nearest'})})}),{rootMargin:'-30% 0px -60% 0px'});pages.forEach(x=>so.observe(x));})();
-</script>
 
+/* ==== data ==== */
+const CH=[
+/* 1 — Intro */
+{
+  t:"ما هو Laravel؟§Qu'est-ce que Laravel ?",
+  s:"Laravel Framework — إطار عمل PHP للويب§Laravel Framework — le framework PHP du web",
+  b:[
+    ["تعريف Laravel§Définition","blue",[
+      "إطار عمل مفتوح المصدر مبني على PHP لبناء مواقع وتطبيقات ويب منظمة وسريعة§Framework open-source basé sur PHP pour des sites et applications web organisés et rapides",
+      "يعتمد نمط MVC ويوفر أدوات جاهزة: توجيه، قواعد بيانات، مصادقة، طوابير§Suit le pattern MVC et fournit routing, base de données, auth, queues prêts à l'emploi"
+    ]],
+    ["لماذا يحبه المطورون؟§Pourquoi les devs l'adorent","green",[
+      "صياغة واضحة ومقروءة§Syntaxe claire et lisible",
+      "توثيق ممتاز ومجتمع كبير§Documentation excellente et grande communauté",
+      "أداة Artisan توفر الوقت§Artisan fait gagner du temps",
+      "منظومة متكاملة: Livewire وInertia وSanctum§Écosystème : Livewire, Inertia, Sanctum"
+    ]],
+    ["ماذا تبني به؟§Que construire avec ?","orange",[
+      "مواقع ومتاجر إلكترونية§Sites et e-commerce",
+      "لوحات تحكم وأنظمة إدارة§Backoffices et systèmes de gestion",
+      "واجهات API للتطبيقات§APIs pour applications",
+      "أنظمة حجز وخدمات SaaS§Systèmes de réservation et SaaS"
+    ]],
+    ["دورة الطلب§Cycle d'une requête","purple",[
+      "الطلب يصل§La requête arrive",
+      "المسار يحدد الوجهة§La route choisit la destination",
+      "المتحكم ينفذ المنطق§Le controller exécute la logique",
+      "النموذج يجلب البيانات§Le model récupère les données",
+      "العرض ينتج الصفحة§La view produit la page"
+    ],true]
+  ],
+  n:"Laravel لا يغني عن PHP جيد: كلما أتقنت الأساسيات فهمت الإطار أسرع.§Laravel ne remplace pas un bon PHP : maîtrisez les bases et vous comprendrez le framework plus vite.",
+  e:"يمنحك Laravel هيكلًا جاهزًا لتركز على فكرة مشروعك لا على التفاصيل المتكررة.§Laravel vous donne une structure prête pour vous concentrer sur l'idée, pas le boilerplate.",
+  d:[
+    "الإطار يفرض هيكلًا ويستدعي كودك، أما المكتبة فتستدعيها أنت متى شئت.§Le framework impose une structure et appelle votre code ; une bibliothèque s'appelle quand vous voulez.",
+    "المكونات تعمل معًا عبر حاوية الخدمات التي تدير الاعتمادات تلقائيًا.§Les composants coopèrent via le Service Container qui gère les dépendances automatiquement.",
+    "اختره لمشروع متكامل بسرعة؛ للمهام الصغيرة جدًا فكّر في أدوات أخف.§Choisissez-le pour un projet complet rapidement ; pour de petites tâches, considérez plus léger."
+  ],
+  v:0
+},
+/* 2 — Installation + pratique 1 */
+{
+  t:"التثبيت وبنية المشروع§Installation et structure",
+  s:"من الصفر إلى أول صفحة§De zéro à votre première page",
+  b:[
+    ["المتطلبات§Prérequis","blue",[
+      "PHP وComposer (مدير الحزم)§PHP et Composer (gestionnaire de paquets)",
+      "قاعدة بيانات مثل MySQL أو SQLite§Une base de données comme MySQL ou SQLite",
+      "بديل سهل: Laravel Herd أو Sail§Alternatives simples : Laravel Herd ou Sail"
+    ]],
+    ["خطوات التثبيت§Étapes d'installation","green",[
+      "أنشئ المشروع بـ <code>composer create-project laravel/laravel app</code>§Créez le projet avec <code>composer create-project laravel/laravel app</code>",
+      "ادخل المجلد: <code>cd app</code>§Entrez dans le dossier : <code>cd app</code>",
+      "شغّل الخادم: <code>php artisan serve</code>§Lancez le serveur : <code>php artisan serve</code>",
+      "افتح المتصفح على <code>localhost:8000</code>§Ouvrez <code>localhost:8000</code>"
+    ],true],
+    ["أهم المجلدات§Dossiers importants","purple",[
+      "<code>app/</code> النماذج والمتحكمات§<code>app/</code> modèles et controllers",
+      "<code>routes/</code> ملفات المسارات§<code>routes/</code> fichiers de routes",
+      "<code>resources/views/</code> قوالب Blade§<code>resources/views/</code> vues Blade",
+      "<code>database/</code> الهجرات والبيانات§<code>database/</code> migrations et seeders"
+    ]],
+    ["ملف .env§Fichier .env","orange",[
+      "يحوي إعدادات قاعدة البيانات وكلمات السر§Contient la config BDD et les secrets",
+      "لا ترفعه إلى GitHub أبدًا§Ne le committez jamais sur GitHub"
+    ]]
+  ],
+  n:"استخدم Git من اليوم الأول ليسهل الرجوع لأي نسخة.§Utilisez Git dès le premier jour pour pouvoir revenir à toute version.",
+  e:"بعد التثبيت تظهر صفحة ترحيب جاهزة تؤكد أن كل شيء يعمل.§Après l'installation, une page d'accueil confirme que tout fonctionne.",
+  d:[
+    "<code>public/index.php</code> نقطة الدخول؛ اجعل جذر الخادم يشير إلى public فقط.§<code>public/index.php</code> est le point d'entrée ; le root du serveur doit pointer uniquement vers public.",
+    "<code>composer.json</code> يسرد الحزم و<code>composer install</code> يعيد تثبيتها.§<code>composer.json</code> liste les paquets et <code>composer install</code> les réinstalle.",
+    "راجع متطلبات الإصدار الحالي في التوثيق قبل التثبيت.§Vérifiez les prérequis de la version actuelle dans la doc avant d'installer."
+  ],
+  v:1,
+  pr:{
+    p:"تحتاج PHP وComposer؛ تحقق من الإصدار المطلوب في التوثيق الرسمي.§Il vous faut PHP et Composer ; vérifiez la version requise dans la documentation officielle.",
+    c:R`composer create-project laravel/laravel blog
+cd blog
+php artisan serve`,
+    f:[["routes/web.php",R`<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});`]],
+    x:"افتح http://localhost:8000 فتظهر صفحة ترحيب Laravel.§Ouvrez http://localhost:8000 : la page d'accueil de Laravel s'affiche.",
+    ch:["غيّر المسار '/' ليعرض النص «Bonjour Laravel».§Modifiez la route '/' pour afficher le texte « Bonjour Laravel ».",R`Route::get('/', function () {
+    return 'Bonjour Laravel';
+});`],
+    qz:["أي أمر يشغّل خادم التطوير؟§Quelle commande lance le serveur de développement ?",["php artisan serve","composer serve","npm start"],0],
+    er:[
+      ["رسالة No application encryption key§Message « No application encryption key »","<code>php artisan key:generate</code>"],
+      ["المنفذ 8000 مستعمل§Le port 8000 est déjà utilisé","<code>php artisan serve --port=8001</code>"]
+    ]
+  }
+},
+/* 3 — Routes + pratique 2 */
+{
+  t:"المسارات والمتحكمات§Routes et contrôleurs",
+  s:"اربط الرابط بدالة تعالج الطلب§Relier une URL à une fonction qui traite la requête",
+  b:[
+    ["المسارات§Routes","blue",[
+      "ملف <code>routes/web.php</code> يربط الرابط بالكود الذي يعالجه§<code>routes/web.php</code> relie l'URL au code qui le traite",
+      "<code>Route::get('/about', fn() => view('about'));</code>§<code>Route::get('/about', fn() => view('about'));</code>"
+    ]],
+    ["المتحكمات§Controllers","green",[
+      "تجمع منطق الطلبات في مكان واحد§Regroupent la logique de requête au même endroit",
+      "<code>php artisan make:controller PostController</code>§<code>php artisan make:controller PostController</code>",
+      "<code>Route::get('/posts', [PostController::class, 'index']);</code>§<code>Route::get('/posts', [PostController::class, 'index']);</code>"
+    ]],
+    ["مسارات الموارد§Routes resource","orange",[
+      "<code>Route::resource('posts', PostController::class);</code> بسطر واحد§<code>Route::resource('posts', PostController::class);</code> en une ligne",
+      "الدوال: index , create , store , show , edit , update , destroy§Méthodes : index, create, store, show, edit, update, destroy"
+    ]],
+    ["التحقق من البيانات§Validation","red",[
+      "<code>$request->validate(['title' => 'required|max:100']);</code>§<code>$request->validate(['title' => 'required|max:100']);</code>",
+      "عند الفشل يعود المستخدم للنموذج مع رسائل الأخطاء§En cas d'échec, l'utilisateur revient au formulaire avec les erreurs"
+    ]]
+  ],
+  n:"اجعل المتحكم رفيعًا: انقل المنطق المعقد إلى كلاسات وخدمات مستقلة.§Gardez le controller fin : déplacez la logique complexe dans des classes et services dédiés.",
+  e:"المسار يحدد الوجهة، والمتحكم ينفذ، والتحقق يحمي بياناتك.§La route dirige, le controller exécute, la validation protège vos données.",
+  d:[
+    "<code>php artisan route:list</code> تعرض كل المسارات وهي أسرع وسيلة لتشخيص 404.§<code>php artisan route:list</code> liste toutes les routes — le moyen le plus rapide de diagnostiquer un 404.",
+    "Form Request (<code>make:request</code>) ينقل التحقق خارج المتحكم.§Form Request (<code>make:request</code>) sort les règles de validation du controller.",
+    "Route Model Binding يجلب النموذج تلقائيًا: اكتب <code>show(Post $post)</code>.§Route Model Binding charge le modèle automatiquement : écrivez <code>show(Post $post)</code>."
+  ],
+  v:2,
+  pr:{
+    p:"أكملت الخطوة 1 والموقع يعمل.§Étape 1 terminée, le site fonctionne.",
+    c:"php artisan make:controller PostController",
+    f:[
+      ["routes/web.php",R`<?php
+
+use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/{id}', [PostController::class, 'show']);`],
+      ["app/Http/Controllers/PostController.php",R`<?php
+
+namespace App\Http\Controllers;
+
+class PostController extends Controller
+{
+    private function all(): array
+    {
+        return [
+            ['id' => 1, 'title' => 'Premier article'],
+            ['id' => 2, 'title' => 'Deuxième article'],
+        ];
+    }
+
+    public function index()
+    {
+        return response()->json($this->all());
+    }
+
+    public function show($id)
+    {
+        $post = collect($this->all())->firstWhere('id', (int) $id);
+        abort_if(! $post, 404);
+        return response()->json($post);
+    }
+}`]
+    ],
+    x:"/posts تعرض JSON للمقالين، و/posts/1 تعرض الأول، و/posts/9 تعطي 404.§/posts affiche le JSON des deux articles, /posts/1 le premier, /posts/9 renvoie une 404.",
+    ch:["أضف مسارًا /posts/count يعيد عدد المقالات (ضعه قبل /posts/{id}).§Ajoutez une route /posts/count qui renvoie le nombre d'articles (placez-la avant /posts/{id}).",R`Route::get('/posts/count', [PostController::class, 'count']);
+
+// dans PostController
+public function count()
+{
+    return response()->json(['count' => count($this->all())]);
+}`],
+    qz:["أي أمر يعرض كل المسارات المسجّلة؟§Quelle commande liste toutes les routes ?",["php artisan route:list","php artisan routes","php artisan serve --routes"],0],
+    er:[
+      ["خطأ 404 رغم وجود المسار§404 alors que la route existe","<code>php artisan route:list</code> ؛ تأكد من الترتيب والاسم§vérifiez l'ordre et le nom avec <code>php artisan route:list</code>"],
+      ["Target class does not exist§Target class does not exist","أضف <code>use App\\Http\\Controllers\\PostController;</code>§Ajoutez le <code>use App\\Http\\Controllers\\PostController;</code>"]
+    ]
+  }
+},
+/* 4 — Blade + pratique 3 */
+{
+  t:"قوالب Blade§Vues Blade",
+  s:"حوّل البيانات إلى صفحة HTML§Transformer les données en page HTML",
+  b:[
+    ["ما هو Blade؟§Qu'est-ce que Blade ?","blue",[
+      "محرك قوالب يحوّل ملفات <code>.blade.php</code> إلى HTML§Un moteur de templates qui compile les <code>.blade.php</code> en HTML",
+      "أنظف من PHP الخام ويهرّب المخرجات تلقائيًا§Plus propre que PHP brut et échappe automatiquement la sortie"
+    ]],
+    ["أهم التعليمات§Directives clés","green",[
+      "<code>{{ $name }}</code> عرض متغير بأمان§<code>{{ $name }}</code> afficher une variable en sécurité",
+      "<code>@if</code> و<code>@foreach</code> للشروط والحلقات§<code>@if</code> et <code>@foreach</code> pour conditions et boucles",
+      "<code>@csrf</code> داخل كل نموذج POST§<code>@csrf</code> dans chaque formulaire POST",
+      "<code>@auth</code> لمحتوى المسجّلين فقط§<code>@auth</code> pour le contenu réservé aux connectés"
+    ]],
+    ["التخطيطات§Layouts","orange",[
+      "الملف الرئيسي فيه الهيكل و<code>@yield('content')</code>§Le layout contient la structure et <code>@yield('content')</code>",
+      "الصفحة الفرعية تبدأ بـ <code>@extends('layouts.app')</code>§La vue enfant commence par <code>@extends('layouts.app')</code>",
+      "ثم محتواها في <code>@section('content')</code>§Puis son contenu dans <code>@section('content')</code>"
+    ]],
+    ["المكوّنات§Composants","purple",[
+      "مكوّنات قابلة لإعادة الاستخدام مثل <code>&lt;x-button /&gt;</code>§Composants réutilisables comme <code>&lt;x-button /&gt;</code>",
+      "<code>php artisan make:component Alert</code>§<code>php artisan make:component Alert</code>"
+    ]]
+  ],
+  n:"لا تستخدم <code>{!! !!}</code> إلا مع محتوى موثوق، فهي تعطّل الحماية من XSS.§N'utilisez <code>{!! !!}</code> qu'avec du contenu de confiance : cela désactive la protection XSS.",
+  e:"Blade يجعل الواجهة نظيفة وقابلة للصيانة.§Blade rend la vue propre et maintenable.",
+  d:[
+    "<code>{{ }}</code> تمرّر القيمة عبر htmlspecialchars لمنع XSS، أما <code>{!! !!}</code> فتطبع HTML كما هو.§<code>{{ }}</code> échappe via htmlspecialchars contre XSS ; <code>{!! !!}</code> affiche le HTML brut.",
+    "استخدم <code>@include</code> للأجزاء الصغيرة و<code>@stack</code> لإضافة سكربتات من الصفحات الفرعية.§Utilisez <code>@include</code> pour les fragments et <code>@stack</code> pour injecter des scripts depuis les vues enfants.",
+    "للواجهات التفاعلية انظر Livewire، ولتطبيقات Vue/React انظر Inertia.§Pour du dynamique voyez Livewire ; pour Vue/React voyez Inertia."
+  ],
+  v:3,
+  pr:{
+    p:"المتحكم يعيد قائمة المقالات (الخطوة 2).§Le contrôleur renvoie la liste des articles (étape 2).",
+    c:"mkdir -p resources/views/layouts resources/views/posts",
+    f:[
+      ["resources/views/layouts/app.blade.php",R`<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>@yield('title', 'Mon blog')</title>
+</head>
+<body>
+    <nav><a href="/posts">Articles</a></nav>
+    <main>
+        @yield('content')
+    </main>
+</body>
+</html>`],
+      ["resources/views/posts/index.blade.php",R`@extends('layouts.app')
+
+@section('title', 'Articles')
+
+@section('content')
+    <h1>Articles</h1>
+    @forelse ($posts as $post)
+        <h2><a href="/posts/{{ $post['id'] }}">{{ $post['title'] }}</a></h2>
+    @empty
+        <p>Aucun article.</p>
+    @endforelse
+@endsection`],
+      ["PostController.php (méthode index)",R`public function index()
+{
+    $posts = $this->all();
+    return view('posts.index', compact('posts'));
+}`]
+    ],
+    x:"/posts تعرض صفحة HTML فيها عنوان وروابط المقالات.§/posts affiche une page HTML avec titre et liens vers les articles.",
+    ch:["أضف تذييلًا «© 2026» في القالب الرئيسي ليظهر في كل الصفحات.§Ajoutez un pied de page « © 2026 » dans le layout pour qu'il apparaisse partout.",R`<footer>© 2026 Mon blog</footer>
+{{-- à placer dans app.blade.php, après </main> --}}`],
+    qz:["ما الفرق بين {{ $x }} و{!! $x !!}؟§Quelle différence entre {{ $x }} et {!! $x !!} ?",["الأولى تهرّب HTML (آمنة) والثانية تطبعه كما هو§La première échappe le HTML (sûr), la seconde l'affiche tel quel","لا فرق§Aucune","الثانية أسرع فقط§La seconde est juste plus rapide"],0],
+    er:[
+      ["View [posts.index] not found","الملف يجب أن يكون في <code>resources/views/posts/index.blade.php</code>§Le fichier doit être dans <code>resources/views/posts/index.blade.php</code>"],
+      ["Undefined variable $posts","مرّرها بـ <code>compact('posts')</code>§Passez-la avec <code>compact('posts')</code>"]
+    ]
+  }
+},
+/* 5 — BDD & Migrations + pratique 4 */
+{
+  t:"قاعدة البيانات والهجرات§Base de données et migrations",
+  s:"أنشئ جدول المقالات بالكود لا باليد§Créer la table des articles par le code, pas à la main",
+  b:[
+    ["الهجرات§Migrations","blue",[
+      "نسخ إصدارات لقاعدة البيانات داخل الكود§Versionner la base de données dans le code",
+      "<code>php artisan make:model Post -mcr</code> تنشئ النموذج والهجرة والمتحكم§<code>php artisan make:model Post -mcr</code> crée le modèle, la migration et le controller",
+      "<code>php artisan migrate</code> تنفذ الهجرات§<code>php artisan migrate</code> exécute les migrations"
+    ]],
+    ["SQLite افتراضيًا§SQLite par défaut","green",[
+      "Laravel الجديد يستعمل SQLite افتراضيًا ولا يحتاج إعدادًا§Un Laravel récent utilise SQLite sans réglage",
+      "لـ MySQL عدّل ملف <code>.env</code> (DB_CONNECTION وDB_DATABASE...)§Pour MySQL, modifiez <code>.env</code> (DB_CONNECTION, DB_DATABASE...)"
+    ]],
+    ["الحذف والتراجع§Rollback","orange",[
+      "<code>php artisan migrate:rollback</code> يتراجع عن آخر دفعة§<code>php artisan migrate:rollback</code> annule le dernier batch",
+      "لا تعدّل هجرة نُفّذت؛ أنشئ هجرة جديدة§Ne modifiez pas une migration déjà jouée ; créez-en une nouvelle"
+    ]],
+    ["الفهارس§Index","purple",[
+      "أضف فهارس للأعمدة كثيرة البحث (email، slug...)§Ajoutez des index sur les colonnes souvent filtrées (email, slug...)",
+      "راقب الاستعلامات البطيئة بـ Debugbar أو Telescope§Surveillez les requêtes lentes (Debugbar, Telescope)"
+    ]]
+  ],
+  n:"لا تعدّل جدولًا في الإنتاج مباشرة؛ أنشئ هجرة جديدة دائمًا.§Ne modifiez jamais une table en production directement ; créez toujours une nouvelle migration.",
+  e:"الهجرات تجعل بنية قاعدة البيانات قابلة للتكرار والنقل بين البيئات.§Les migrations rendent le schéma de la BDD reproductible et transférable.",
+  d:[
+    "<code>php artisan migrate:rollback</code> يتراجع عن آخر دفعة، فجرّبها على بيانات تجريبية.§<code>php artisan migrate:rollback</code> annule le dernier batch — testez sur des données de test.",
+    "الحذف الناعم (SoftDeletes) يخفي السجل بدل حذفه نهائيًا فيمكن استرجاعه.§SoftDeletes cache l'enregistrement au lieu de le supprimer pour pouvoir le restaurer.",
+    "أضف فهارس للأعمدة كثيرة البحث وراقب الاستعلامات البطيئة.§Ajoutez des index sur les colonnes souvent filtrées et surveillez les requêtes lentes."
+  ],
+  v:4,
+  pr:{
+    p:"Laravel الجديد يستعمل SQLite افتراضيًا ولا يحتاج إعدادًا.§Un Laravel récent utilise SQLite par défaut, sans réglage.",
+    c:R`php artisan make:model Post -m
+php artisan migrate`,
+    f:[["database/migrations/..._create_posts_table.php",R`public function up(): void
+{
+    Schema::create('posts', function (Blueprint $table) {
+        $table->id();
+        $table->string('title');
+        $table->text('body');
+        $table->timestamps();
+    });
+}`]],
+    x:"بعد migrate يظهر جدول posts في قاعدة البيانات.§Après migrate, la table posts existe dans la base.",
+    ch:["أضف عمودًا published (منطقي، افتراضيًا false) بهجرة جديدة.§Ajoutez une colonne published (booléen, false par défaut) avec une nouvelle migration.",R`php artisan make:migration add_published_to_posts_table --table=posts
+
+// dans la méthode up()
+$table->boolean('published')->default(false);
+
+php artisan migrate`],
+    qz:["أردت إضافة عمود لجدول نُفّذت هجرته. ماذا تفعل؟§Vous voulez ajouter une colonne à une table déjà migrée. Que faites-vous ?",["أنشئ هجرة جديدة§Créer une nouvelle migration","أعدّل القديمة وأنفذها ثانية§Modifier l'ancienne et la relancer","أضيف العمود يدويًا§L'ajouter à la main"],0],
+    er:[
+      ["no such table: posts§no such table: posts","نسيت <code>php artisan migrate</code>§Vous avez oublié <code>php artisan migrate</code>"],
+      ["Connection refused§Connection refused","خادم قاعدة البيانات متوقف أو .env خاطئ§Serveur de BDD arrêté ou .env incorrect"]
+    ]
+  }
+},
+/* 6 — Eloquent + pratique 5 */
+{
+  t:"Eloquent: القراءة والإنشاء§Eloquent : lire et créer",
+  s:"تعامل مع الجداول ككائنات§Manipuler les tables comme des objets",
+  b:[
+    ["نموذج Eloquent§Modèle Eloquent","blue",[
+      "<code>Post::all()</code> و<code>Post::find(1)</code> و<code>Post::create([...])</code>§<code>Post::all()</code>, <code>Post::find(1)</code>, <code>Post::create([...])</code>",
+      "حدد <code>$fillable</code> لحماية الحقول من التعبئة الجماعية§Définissez <code>$fillable</code> contre l'assignation de masse"
+    ]],
+    ["العلاقات§Relations","purple",[
+      "<code>hasMany</code>: مستخدم لديه عدة مقالات§<code>hasMany</code> : un user a plusieurs posts",
+      "<code>belongsTo</code>: المقال ينتمي لمستخدم§<code>belongsTo</code> : un post appartient à un user",
+      "<code>belongsToMany</code>: كثير لكثير عبر جدول وسيط§<code>belongsToMany</code> : plusieurs-à-plusieurs via table pivot"
+    ]],
+    ["الاستعلامات§Requêtes","orange",[
+      "<code>Post::where('published', true)->latest()->paginate(10)</code>§<code>Post::where('published', true)->latest()->paginate(10)</code>",
+      "Seeders وFactories لتوليد بيانات تجريبية§Seeders et Factories pour générer des données de test"
+    ]],
+    ["مشكلة N+1§Problème N+1","red",[
+      "جلب العلاقة داخل حلقة يرسل استعلامًا لكل صف§Charger une relation dans une boucle = une requête par ligne",
+      "الحل: <code>Post::with('user')->get()</code>§Solution : <code>Post::with('user')->get()</code>"
+    ]]
+  ],
+  n:"Eloquent يحوّل الجداول إلى كائنات تتعامل معها بسهولة.§Eloquent transforme les tables en objets faciles à manipuler.",
+  e:"مع <code>$fillable</code> و<code>with()</code> تكتب استعلامات آمنة وسريعة.§Avec <code>$fillable</code> et <code>with()</code> vous écrivez des requêtes sûres et rapides.",
+  d:[
+    "استعمل <code>select()</code> لاختيار أعمدة محددة بدل <code>select *</code>.§Utilisez <code>select()</code> pour choisir des colonnes précises au lieu de <code>select *</code>.",
+    "استعلم بذكاء: <code>latest()->take(10)</code> أسرع من جلب الكل ثم الفرز.§Requêtez intelligemment : <code>latest()->take(10)</code> est plus rapide que tout charger puis trier.",
+    "الـ Seeders وFactories تولد بيانات واقعية للاختبار.§Seeders et Factories génèrent des données réalistes pour les tests."
+  ],
+  v:5,
+  pr:{
+    p:"جدول posts موجود (الخطوة 4).§La table posts existe (étape 4).",
+    c:R`php artisan tinker
+>>> App\Models\Post::create(['title' => 'Mon premier article', 'body' => 'Bonjour']);
+>>> App\Models\Post::count();`,
+    f:[
+      ["app/Models/Post.php",R`<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    protected $fillable = ['title', 'body'];
+}`],
+      ["PostController.php",R`use App\Models\Post;
+
+public function index()
+{
+    $posts = Post::latest()->get();
+    return view('posts.index', compact('posts'));
+}
+
+public function show(Post $post)
+{
+    return view('posts.show', compact('post'));
+}`],
+      ["resources/views/posts/show.blade.php",R`@extends('layouts.app')
+
+@section('title', $post->title)
+
+@section('content')
+    <h1>{{ $post->title }}</h1>
+    <p>{{ $post->body }}</p>
+@endsection`]
+    ],
+    x:"في index.blade.php استبدل $post['id'] بـ $post->id و$post['title'] بـ $post->title، فتظهر مقالاتك الحقيقية.§Dans index.blade.php, remplacez $post['id'] par $post->id et $post['title'] par $post->title : vos vrais articles s'affichent.",
+    ch:["اعرض آخر 3 مقالات فقط في الصفحة الرئيسية للمقالات.§N'affichez que les 3 derniers articles sur la liste.",R`$posts = Post::latest()->take(3)->get();`],
+    qz:["ما دور <code>$fillable</code>؟§À quoi sert <code>$fillable</code> ?",["تحديد الحقول المسموح تعبئتها بـ create()§Autoriser les champs remplis par create()","تحديد الحقول الإلزامية§Définir les champs obligatoires","إخفاء الحقول من JSON§Masquer les champs du JSON"],0],
+    er:[
+      ["MassAssignmentException§MassAssignmentException","أضف الحقل إلى <code>$fillable</code>§Ajoutez le champ à <code>$fillable</code>"],
+      ["No query results for model§No query results for model","المقال غير موجود: تأكد من رقم المعرّف§L'article n'existe pas : vérifiez l'identifiant"]
+    ]
+  }
+},
+/* 7 — Auth & Sécurité (concept) */
+{
+  t:"المصادقة والأمان§Authentification et sécurité",
+  s:"Auth • Middleware • Sécurité§Auth • Middleware • Sécurité",
+  b:[
+    ["المصادقة الجاهزة§Auth prête à l'emploi","blue",[
+      "Starter Kits (Breeze) تنشئ التسجيل والدخول واستعادة كلمة المرور§Les Starter Kits (Breeze) créent inscription, login et reset password",
+      "لا تكتب نظام مصادقة من الصفر§N'écrivez jamais un système d'auth depuis zéro"
+    ]],
+    ["Middleware","green",[
+      "طبقة تفحص الطلب قبل المتحكم§Une couche qui inspecte la requête avant le controller",
+      "<code>->middleware('auth')</code> على أي مسار§<code>->middleware('auth')</code> sur toute route",
+      "<code>php artisan make:middleware IsAdmin</code>§<code>php artisan make:middleware IsAdmin</code>"
+    ]],
+    ["الحماية المدمجة§Protections intégrées","orange",[
+      "CSRF عبر <code>@csrf</code>§CSRF via <code>@csrf</code>",
+      "XSS بتهريب المخرجات في Blade§XSS géré par l'échappement Blade",
+      "SQL Injection بالاستعلامات المحضّرة§SQL Injection évitée via requêtes préparées",
+      "كلمات المرور مُجزّأة بـ Hash§Mots de passe hachés"
+    ]],
+    ["الصلاحيات§Autorisations","purple",[
+      "Gates وPolicies تحدد من يفعل ماذا§Gates et Policies définissent qui peut quoi",
+      "مثال: يعدّل المستخدم مقالاته فقط§Ex : un user ne modifie que ses propres posts"
+    ]],
+    ["أخطاء أمنية شائعة§Erreurs fréquentes","red",[
+      "ترك <code>APP_DEBUG=true</code> في الإنتاج§<code>APP_DEBUG=true</code> en production",
+      "فتح التعبئة الجماعية لكل الحقول§Ouvrir l'assignation de masse à tous les champs",
+      "الثقة بمدخلات المستخدم دون تحقق§Faire confiance aux inputs sans validation"
+    ]]
+  ],
+  n:"الأمان عادة تبدأ من أول سطر لا ميزة تضاف في النهاية.§La sécurité se construit dès la première ligne, pas ajoutée à la fin.",
+  e:"استخدم أدوات Laravel المدمجة ولا تخترع حماية بنفسك.§Utilisez les outils natifs de Laravel, n'inventez pas votre propre sécurité.",
+  d:[
+    "كلمات المرور تُخزَّن مُجزّأة ولا تُسترجع، بل يُعاد تعيينها.§Les mots de passe sont hachés et jamais récupérables — on les réinitialise.",
+    "Rate Limiting يحد محاولات الدخول لصد التخمين الآلي.§Rate Limiting limite les tentatives de connexion contre le brute-force.",
+    "حدّث الحزم بانتظام بعد قراءة سجل التغييرات، وفعّل HTTPS في الإنتاج.§Mettez à jour les paquets après lecture du changelog et activez HTTPS en production."
+  ],
+  v:6
+},
+/* 8 — API (concept) */
+{
+  t:"بناء API§Construire une API",
+  s:"REST API مع Sanctum§REST API avec Sanctum",
+  b:[
+    ["مسارات API§Routes API","blue",[
+      "ملف <code>routes/api.php</code> لمسارات تعيد JSON§<code>routes/api.php</code> pour des routes qui renvoient du JSON",
+      "في الإصدارات الحديثة: <code>php artisan install:api</code>§Dans les versions récentes : <code>php artisan install:api</code>"
+    ]],
+    ["API Resources","green",[
+      "<code>php artisan make:resource PostResource</code>§<code>php artisan make:resource PostResource</code>",
+      "تتحكم بالحقول التي تظهر للعميل§Contrôlez les champs exposés au client"
+    ]],
+    ["المصادقة بالتوكن§Auth par token","orange",[
+      "Sanctum يصدر رموز وصول للتطبيقات§Sanctum émet des tokens d'accès",
+      "ترسل الرمز في ترويسة <code>Authorization: Bearer</code>§Le token est envoyé via <code>Authorization: Bearer</code>"
+    ]],
+    ["أفضل الممارسات§Bonnes pratiques","purple",[
+      "رموز HTTP الصحيحة: 200 و201 و404 و422§Codes HTTP corrects : 200, 201, 404, 422",
+      "قسّم النتائج بـ paginate§Paginer les résultats",
+      "أضف إصدارًا للمسار مثل <code>/api/v1</code>§Versionner le chemin : <code>/api/v1</code>"
+    ]]
+  ],
+  n:"لا تُرجع حقولًا حساسة مثل كلمة المرور في JSON.§Ne renvoyez jamais de champs sensibles (mot de passe) en JSON.",
+  e:"API جيد التصميم يخدم الموقع والتطبيق معًا.§Une API bien conçue sert le site et l'application mobile.",
+  d:[
+    "الرمز 422 يعني فشل التحقق، وLaravel يعيده مع تفاصيل الأخطاء لطلبات JSON.§Le code 422 signifie échec de validation ; Laravel le renvoie avec le détail pour les requêtes JSON.",
+    "حدد سقفًا للطلبات بـ throttle لحماية الخادم.§Définissez un throttle pour protéger le serveur.",
+    "وثّق واجهتك بـ OpenAPI أو Scribe ليسهل استخدامها.§Documentez votre API avec OpenAPI ou Scribe."
+  ],
+  v:7
+},
+/* 9 — Tests & Déploiement (concept) */
+{
+  t:"الاختبار والنشر§Tests et déploiement",
+  s:"Testing & Deployment§Testing & Deployment",
+  b:[
+    ["الاختبار§Tests","blue",[
+      "يمنع كسر ميزة قديمة عند إضافة جديدة§Empêche de casser une ancienne fonctionnalité en en ajoutant une",
+      "Pest وPHPUnit جاهزان: <code>php artisan test</code>§Pest et PHPUnit prêts : <code>php artisan test</code>",
+      "Feature لمسار كامل، وUnit لدالة أو كلاس§Feature pour un parcours complet, Unit pour une classe"
+    ]],
+    ["خطوات النشر§Étapes de déploiement","green",[
+      "جهّز البيئة: <code>APP_DEBUG=false</code>§Configurez l'environnement : <code>APP_DEBUG=false</code>",
+      "ثبّت الحزم: <code>composer install --no-dev</code>§Installez les paquets : <code>composer install --no-dev</code>",
+      "شغّل الهجرات: <code>php artisan migrate --force</code>§Jouez les migrations : <code>php artisan migrate --force</code>",
+      "خزّن الإعدادات: <code>php artisan optimize</code>§Mettez en cache : <code>php artisan optimize</code>"
+    ],true],
+    ["خيارات الاستضافة§Hébergement","orange",[
+      "VPS مع Nginx§VPS avec Nginx",
+      "Laravel Forge لإدارة الخوادم§Laravel Forge pour gérer les serveurs",
+      "Laravel Cloud أو منصات PaaS§Laravel Cloud ou plateformes PaaS"
+    ]]
+  ],
+  n:"لا تنشر أبدًا وAPP_DEBUG=true، فهي تكشف تفاصيل حساسة.§Ne déployez jamais avec APP_DEBUG=true : cela expose des détails sensibles.",
+  e:"اختبر ثم انشر بثقة.§Testez, puis déployez en confiance.",
+  d:[
+    "اربط الاختبارات بـ CI مثل GitHub Actions لتعمل عند كل Push.§Liez les tests à un CI comme GitHub Actions pour qu'ils tournent à chaque push.",
+    "الطوابير (Queues) تؤجل المهام الثقيلة؛ تحتاج عاملًا دائمًا عبر Supervisor.§Les Queues diffèrent les tâches lourdes ; il faut un worker persistant via Supervisor.",
+    "المهام المجدولة تعمل بسطر Cron واحد يستدعي <code>schedule:run</code> كل دقيقة.§Les tâches planifiées tournent avec une ligne cron qui appelle <code>schedule:run</code> chaque minute."
+  ],
+  v:8
+},
+/* 10 — Roadmap (concept) */
+{
+  t:"خريطة طريق تعلم Laravel§Feuille de route d'apprentissage",
+  s:"من المبتدئ إلى مشروع احترافي§Du débutant au projet professionnel",
+  b:[
+    ["الأساسيات§Fondations","blue",[
+      "1. أساسيات PHP: الدوال وOOP , Namespaces — 3-4 أسابيع§1. Bases PHP : fonctions, OOP, namespaces — 3-4 semaines",
+      "2. SQL وHTML/CSS — 2-3 أسابيع§2. SQL et HTML/CSS — 2-3 semaines"
+    ]],
+    ["Laravel وEloquent§Laravel et Eloquent","green",[
+      "3. Routes/Controllers/Blade — 3-4 أسابيع§3. Routes/Controllers/Blade — 3-4 semaines",
+      "4. Migrations/Relations/Requêtes — 2-3 أسابيع§4. Migrations/Relations/Requêtes — 2-3 semaines"
+    ]],
+    ["المصادقة وAPI§Auth et API","purple",[
+      "5. Breeze/Middleware/Policies — أسبوعان§5. Breeze/Middleware/Policies — 2 semaines",
+      "6. JSON/Resources/Tokens — أسبوعان§6. JSON/Resources/Tokens — 2 semaines"
+    ]],
+    ["المستوى المتقدم§Avancé","orange",[
+      "7. Pest/Queues/Events — 2-3 أسابيع§7. Pest/Queues/Events — 2-3 semaines",
+      "8. مشاريع حقيقية: مدونة، متجر مصغر، نظام حجز§8. Projets réels : blog, mini-boutique, réservation"
+    ]],
+    ["انشر وابنِ معرض أعمالك§Publiez et créez votre portfolio","red",[
+      "9. GitHub + README + استضافة تجريبية§9. GitHub + README + hébergement de démo"
+    ]]
+  ],
+  n:"المدد تقريبية وتختلف حسب وقتك ومستواك.§Les durées sont indicatives et varient selon votre temps et niveau.",
+  e:"ابدأ بمشروع صغير ثم طوّره كل أسبوع.§Commencez par un petit projet puis améliorez-le chaque semaine.",
+  d:[
+    "مشروع أول مقترح: مدونة بمصادقة وتعليقات وترقيم صفحات.§Premier projet proposé : un blog avec auth, commentaires et pagination.",
+    "بعد الأساسيات اختر مسارًا: Livewire، أو Inertia مع Vue/React، أو API للجوال.§Après les bases, choisissez : Livewire, Inertia avec Vue/React, ou API pour mobile.",
+    "تابع التوثيق الرسمي ودروس Laracasts (بعضها مجاني).§Suivez la doc officielle et les cours Laracasts (certains gratuits)."
+  ],
+  v:9
+}
+];
+
+/* ==== icon matcher ==== */
+const IC=[[/Route|مسار/i,'🛣️'],[/Controller|متحكم/i,'🎮'],[/Blade|View|قالب|vue/i,'🖼️'],[/Eloquent|Migration|Model|نموذج|جدول|قاعدة/i,'🗄️'],[/artisan|Composer/i,'⌨️'],[/CSRF|أمان|مصادقة|Auth|Sanctum|Breeze/i,'🔐'],[/API/,'🔌'],[/اختبار|Test|Pest/i,'✅'],[/نشر|Deploy/i,'🚀'],[/طلب|Req/i,'🌐'],[/تحقق|Valid/i,'🛡️'],[/علاق|Relation/i,'🔗'],[/استعلام|Query/i,'🔍']];
+const ic=t=>{for(const[r,e]of IC)if(r.test(t))return e;return null};
+
+/* ==== progress / quiz ==== */
+const TQ=CH.filter(c=>c.pr).length;
+function prog(){
+  const n=Object.keys(done).length;
+  $('pb').style.width=Math.min(n/TQ,1)*100+'%';
+  $('pt').textContent=(L?'Étapes validées : ':'الخطوات المنجزة: ')+n+'/'+TQ;
+}
+function qa(b,ok,n){
+  b.classList.add(ok?'g':'x');
+  b.parentNode.querySelector('.qf').textContent=ok?(L?'✔ Bravo !':'✔ أحسنت!'):(L?'✖ Réessayez':'✖ حاول مرة أخرى');
+  if(ok){done[n+1]=1;try{localStorage.setItem('lrvd',JSON.stringify(done))}catch(e){}prog()}
+}
+window.qa=qa;
+
+/* ==== render ==== */
+function render(){
+  codes.length=0;
+  const H=document.documentElement;
+  H.lang=L?'fr':'ar'; H.dir=L?'ltr':'rtl';
+  document.title=L?'Laravel : formation complète':'Laravel: تكوين شامل';
+  $('h1').textContent=x('تعلّم Laravel: من الفكرة إلى أول تطبيق§Apprenez Laravel : de l\'idée à votre première application');
+  $('sb').textContent=x('مسار متكامل: مفاهيم، أوامر، كود كامل، تحديات مصححة§Un parcours complet : concepts, commandes, code complet, défis corrigés');
+  $('lg').textContent=L?'ع':'FR';
+  $('ft').textContent='Mezni Dhiaa | Smart Formation';
+  $('art').innerHTML=HERO;
+
+  const nav=$('nav'),main=$('main');
+  nav.dataset.t=x('المواضيع§Sommaire');
+  nav.innerHTML='';main.innerHTML='';
+
+  CH.forEach((c,n)=>{
+    const id='p'+(n+1);
+    nav.insertAdjacentHTML('beforeend',`<a href="#${id}"><b>${n+1}</b><span>${x(c.t)}</span></a>`);
+
+    // concept blocks
+    const blocks=c.b.map(([h,col,items,isFlow],k)=>{
+      let body;
+      if(isFlow){
+        body=`<div class="flow">${items.map((it,j)=>{
+          const label=x(it);
+          return `<div class="st" style="--i:${j}"><span class="ico">${ic(label)||'⭐'}</span><span class="num">${j+1}</span><b>${label}</b></div>`;
+        }).join('<i class="ar">◀</i>')}</div>`;
+      } else {
+        body=`<ul class="il">${items.map(it=>{
+          const label=x(it);
+          return `<li><span class="ib">${ic(label)||'✦'}</span><span>${label}</span></li>`;
+        }).join('')}</ul>`;
+      }
+      const hi=ic(x(h));
+      return `<section class="blk" style="--c:var(--${col});--k:${k}"><h3>${hi?hi+' ':''}${x(h)}</h3>${body}</section>`;
+    }).join('');
+
+    // deep dive
+    let deep='';
+    if(c.d){
+      deep=`<details class="dig"><summary>🔎 ${L?'Pour aller plus loin':'تعمّق أكثر'}</summary><div>${SVGS[c.v]||''}<ul>${c.d.map(d=>`<li>${x(d)}</li>`).join('')}</ul></div></details>`;
+    }
+
+    // practice
+    let prac='';
+    if(c.pr){
+      const p=c.pr;
+      const files=p.f.map(([nm,cd])=>win(nm,cd,reg(cd))).join('');
+      prac=`
+        <div class="cap">${L?'🧪 Atelier pratique':'🧪 ورشة تطبيقية'}</div>
+        <div class="note">📌 ${x(p.p)}</div>
+        <div class="cap">${L?'⌨️ Commandes':'⌨️ الأوامر'}</div>${win('terminal',p.c,reg(p.c))}
+        <div class="cap">${L?'📄 Code complet':'📄 الكود الكامل'}</div>${files}
+        <div class="ex">👀 <b>${L?'Résultat attendu : ':'النتيجة المتوقعة: '}</b>${x(p.x)}</div>
+        <details class="dig"><summary>🎯 ${L?'Défi à faire seul':'تحدٍّ بمفردك'}</summary><div><p>${x(p.ch[0])}</p><details class="dig"><summary>✅ ${L?'Voir la correction':'عرض الحل'}</summary><div>${win('solution',p.ch[1],reg(p.ch[1]))}</div></details></div></details>
+        <div class="qz"><b>🧠 ${x(p.qz[0])}</b>${p.qz[1].map((o,i)=>`<button onclick="qa(this,${i==p.qz[2]},${n})">${x(o)}</button>`).join('')}<div class="qf"></div></div>
+        <section class="blk" style="--c:var(--red)"><h3>⚠️ ${L?'Erreurs fréquentes':'أخطاء شائعة'}</h3><ul class="er">${p.er.map(e=>`<li><b>${x(e[0])}</b> ← ${x(e[1])}</li>`).join('')}</ul></section>
+      `;
+    }
+
+    main.insertAdjacentHTML('beforeend',`
+      <article class="page" id="${id}">
+        <h2>${n+1}. ${x(c.t)}</h2>
+        <p class="sub">${x(c.s)}</p>
+        <div class="grid">${blocks}</div>
+        ${c.n?`<div class="note">💡 ${x(c.n)}</div>`:''}
+        ${c.e?`<div class="end"><b>${L?'En résumé : ':'الخلاصة: '}</b>${x(c.e)}</div>`:''}
+        ${deep}
+        ${prac}
+      </article>
+    `);
+  });
+
+  // copy
+  main.querySelectorAll('[data-cp]').forEach(b=>{
+    b.onclick=()=>{
+      try{
+        navigator.clipboard.writeText(codes[+b.dataset.cp]);
+        const t=b.textContent;
+        b.textContent=L?'Copié':'تم';
+        setTimeout(()=>b.textContent=t,1200);
+      }catch(e){}
+    };
+  });
+
+  // observers
+  const pages=main.querySelectorAll('.page');
+  if('IntersectionObserver' in window){
+    const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}}),{threshold:.06});
+    pages.forEach(p=>o.observe(p));
+    const links=[...nav.querySelectorAll('a')];
+    const so=new IntersectionObserver(es=>es.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(a=>{
+          const on=a.getAttribute('href')==='#'+e.target.id;
+          a.classList.toggle('on',on);
+          if(on)a.scrollIntoView({block:'nearest',inline:'nearest'});
+        });
+      }
+    }),{rootMargin:'-30% 0px -60% 0px'});
+    pages.forEach(p=>so.observe(p));
+  } else pages.forEach(p=>p.classList.add('in'));
+
+  prog();
+}
+
+/* ==== chrome ==== */
+$('lg').onclick=()=>{L=1-L;try{localStorage.setItem('lrv',L?'fr':'ar')}catch(e){}render()};
+document.documentElement.classList.add('js');
+
+/* scroll UI */
+const tb=$('top');
+tb.onclick=()=>scrollTo({top:0});
+addEventListener('scroll',()=>{
+  tb.classList.toggle('show',scrollY>600);
+  const h=document.documentElement;
+  $('bar').style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight||1)})`;
+},{passive:true});
+
+render();
+</script>
 </body>
 </html>
