@@ -748,6 +748,7 @@ function render(){
   const nav=$('nav'),main=$('main');
   nav.dataset.t=x('المواضيع§Sommaire');
   nav.innerHTML='';main.innerHTML='';
+  nav.insertAdjacentHTML('beforeend',`<a href="index.html"><span>${x('العودة إلى الصفحة الرئيسية§Retour à l’accueil')}</span></a>`);
 
   CH.forEach((c,n)=>{
     const id='p'+(n+1);
