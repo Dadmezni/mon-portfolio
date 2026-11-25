@@ -37,6 +37,7 @@
   /* Infos affichées sur les cartes. À ajuster selon vos durées réelles. */
   var LEVELS = ['Débutant', 'Intermédiaire', 'Avancé'];
   var META = {
+    'Prompt Engineering.html': { level: 0, time: '40 h', lang: 'FR', fmt: 'Cours' },
     'ia.html': { level: 0, time: '3 h', lang: 'FR', fmt: 'Cours' },
     'iaCours.html': { level: 0, time: '3 h', lang: 'AR', fmt: 'Cours' },
     'rag.html': { level: 1, time: '4 h', lang: 'FR', fmt: 'Cours' },
@@ -69,6 +70,7 @@
     // Intelligence artificielle
     { cat: 'ia', title: "Comprendre l'IA", href: 'ia.html', slogan: "🤖 Robot : l'IA n'est plus un mystère, elle devient votre alliée.", desc: "Les concepts essentiels de l'intelligence artificielle, expliqués pas à pas." },
     { cat: 'ia', title: "Cours d'IA en arabe", href: 'iaCours.html', slogan: "🤖 الذكاء الاصطناعي بلغتك، خطوة بخطوة", lang: 'ar', desc: "Cours d'introduction à l'intelligence artificielle, en langue arabe." },
+    { cat: 'ia', title: 'Prompt Engineering', href: 'Prompt Engineering.html', slogan: "🧠 Concevoir des prompts clairs, tester et améliorer les réponses de l’IA.", desc: "Cours complet de 40 heures pour structurer, évaluer et optimiser des prompts." },
     { cat: 'ia', title: 'Machine Learning et RAG', href: 'rag.html', slogan: "🐘 Éléphant : n'oubliez jamais, donnez une mémoire à vos modèles.", desc: "Principes du Machine Learning et de la génération augmentée par récupération (RAG)." },
     { cat: 'ia', title: "Histoire de l'IA et du RAG", href: 'ragHistoire.html', slogan: "🦕 Dinosaure : pour comprendre demain, remontez le fil d'hier.", desc: "Les grandes étapes qui ont mené de l'IA classique au RAG." },
     { cat: 'ia', title: 'Embeddings', href: 'embedding.html', slogan: "🧭 Boussole : quand les mots deviennent des coordonnées.", desc: "Comprendre les représentations vectorielles et leur rôle dans la recherche sémantique." },
