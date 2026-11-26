@@ -1690,11 +1690,18 @@ summary:focus-visible {
 
 /* Mobile / tablette : menu plein écran en accordéon */
 @media (max-width: 960px) {
+  /* backdrop-filter on the sticky header makes fixed descendants use the
+     header as their containing block, collapsing the full-screen drawer. */
+  .navbar { backdrop-filter: none; -webkit-backdrop-filter: none; }
+
   .burger { display: flex; }
 
   .main-nav {
     position: fixed;
-    inset: var(--nav-h) 0 0 0;
+    top: var(--nav-h);
+    right: 0;
+    bottom: 0;
+    left: 0;
     margin: 0;
     padding: 16px 20px 40px;
     overflow-y: auto;
